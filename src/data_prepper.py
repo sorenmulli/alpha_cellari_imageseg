@@ -34,10 +34,29 @@ def _load_image(path: str):
 
 	return pixels
 
+def _standardize(image):
+
+	"""
+	Standardizes the pixel values of non-void pixels channelwise
+	"""
+
+	# Detects void pixels
+	void_pixels = (image==0).all(axis=2)
+	for i in range(image.shape[2]):
+		# Singles out channel
+		# Changing this will also change image, as they point to the same object
+		im_channel = image[:, :, i]
+		# Standardizes non-void pixels
+		mean = im_channel[~void_pixels].mean()
+		std = im_channel[~void_pixels].std() + EPS
+		im_channel[~void_pixels] = (im_channel[~void_pixels] - mean) / std
+
+	return image
+
 def _pad(image):
 
 	"""
-	Pads an m x n x 3 array on the right and bottom such that an images of shape IMAGE_SHAPE fits nicely
+	Pads an m x n x 3 array on the right and bottom such that images of shape IMAGE_SHAPE fit nicely
 	"""
 
 	extra_height = IMAGE_SHAPE[0] - image.shape[0] % IMAGE_SHAPE[0]
@@ -77,18 +96,6 @@ def _find_voids(images):
 
 	return voids
 
-def _standardize(images, voids):
-
-	"""
-	Standardizes the pixel values of non-void images channelwise
-	"""
-
-	for i in range(images.shape[3]):
-		images[~voids, :, :, i] = (images[~voids, :, :, i] - images[~voids, :, :, i].mean()) /\
-									(images[~voids, :, :, i].std() + EPS)
-
-	return images
-
 def _split_data(voids):
 
 	"""
@@ -121,6 +128,10 @@ def _prepare_data():
 	aerial, target = [_load_image(x) for x in IMAGE_PATHS]
 	LOG.log("Done loading images\nShapes: %s\nSplit: %s\n" % (aerial.shape, SPLIT))
 
+	LOG.log("Standardizing images...")
+	aerial, target = _standardize(aerial), _standardize(target)
+	LOG.log("Done standardizing images\n")
+
 	LOG.log("Padding images...")
 	aerial, target = _pad(aerial), _pad(target)
 	LOG.log("Done padding images\nShapes: %s\n" % (aerial.shape,))
@@ -133,32 +144,28 @@ def _prepare_data():
 	voids = _find_voids(aerial)
 	LOG.log("Done finding voids\n2 x %i images where voids\n" % voids.sum())
 
-	LOG.log("Standardizing images...")
-	aerial, target = _standardize(aerial, voids), _standardize(target, voids)
-	LOG.log("Done standardizing images\n")
-
 	LOG.log("Saving images...")
-	aerial_path = "data/aerial_prepared"
-	target_path = "data/target_prepared"
+	aerial_path = "data/aerial_prepared.npz"
+	target_path = "data/target_prepared.npz"
 	np.savez_compressed(aerial_path, aerial.astype(np.float64))
 	np.savez_compressed(target_path, target.astype(np.float64))
-	LOG.log("Saved aerial images to '%s.npy' and target images to '%s.npy'\n" % (aerial_path, target_path))
+	LOG.log("Saved aerial images to '%s' and target images to '%s'\n" % (aerial_path, target_path))
 
 	LOG.log("Splitting images into train, validation, test, and voids...")
 	train_idcs, val_idcs, test_idcs, void_idcs = _split_data(voids)
 	LOG.log("Done splitting images.\nTrain: %i images\nValidation: %i images\nTest: %i images\nVoid: %i images\n"
-			% (len(train_idcs), len(val_idcs), len(test_idcs), len(void_idcs)))
+		% (len(train_idcs), len(val_idcs), len(test_idcs), len(void_idcs)))
 
 	LOG.log("Saving data preparation output...")
 	prep_out = {
-	"image_shape": IMAGE_SHAPE,
-	"split": SPLIT,
-	"aerial_path": aerial_path,
-	"target_path": target_path,
-	"train_idcs": train_idcs,
-	"val_idcs": val_idcs,
-	"test_idcs": test_idcs,
-	"void_idcs": void_idcs,
+		"image_shape": IMAGE_SHAPE,
+		"split": SPLIT,
+		"aerial_path": aerial_path,
+		"target_path": target_path,
+		"train_idcs": train_idcs,
+		"val_idcs": val_idcs,
+		"test_idcs": test_idcs,
+		"void_idcs": void_idcs,
 	}
 	json_path = "data/prep_out.json"
 	with open(json_path, "w", encoding="utf-8") as f:

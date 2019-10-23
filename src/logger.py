@@ -36,6 +36,8 @@ class Logger:
       logs[0] = time + "\t\t" + logs[0]
       for i in range(1, len(logs)):
         logs[i] = n_spaces * " " + "\t\t" + logs[i]
+        if logs[i].strip() == "":
+          logs[i] = ""
       tolog = "\n".join(logs)
       logfile.write(tolog+"\n")
       print(tolog)
