@@ -190,7 +190,7 @@ def _prepare_data():
 		"test_idcs": test_idcs,
 		"void_idcs": void_idcs,
 	}
-	json_path = "prep_out.json"
+	json_path = "local_data/prep_out.json"
 	with open(json_path, "w", encoding="utf-8") as f:
 		json.dump(prep_out, f, indent=4)
 	LOG.log("Done saving output to '%s'\n" % json_path)
