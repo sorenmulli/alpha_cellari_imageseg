@@ -1,6 +1,5 @@
 from datetime import datetime
-import os, sys
-os.chdir(sys.path[0])
+import os
 
 def get_timestamp(for_file=False):
   # Returns a timestamp
@@ -12,13 +11,11 @@ def get_timestamp(for_file=False):
 
 class Logger:
 
-  def __init__(self, fpath: str, title: str, include_time_stamp=False):
+  def __init__(self, fpath: str, title: str):
     dirs = "".join(fpath.split('/')[:-1])
     if not os.path.exists(dirs):
       os.makedirs(dirs)
 
-    if include_time_stamp:
-      fpath += get_timestamp(True)
     self.fpath = fpath
     
     with open(self.fpath, "w+", encoding="utf-8") as logfile:
@@ -33,9 +30,9 @@ class Logger:
       tolog = " ".join([str(x) for x in tolog])
       n_spaces = len(time)
       logs = tolog.split("\n")
-      logs[0] = time + "\t\t" + logs[0]
+      logs[0] = time + "\t" + logs[0]
       for i in range(1, len(logs)):
-        logs[i] = n_spaces * " " + "\t\t" + logs[i]
+        logs[i] = n_spaces * " " + "\t" + logs[i]
         if logs[i].strip() == "":
           logs[i] = ""
       tolog = "\n".join(logs)
