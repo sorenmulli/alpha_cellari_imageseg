@@ -37,7 +37,7 @@ def batch_generator(batch_size, data, target, train = True, classes = 3):
 	batch_target = batch_target // 255
 	yellow_value = np.array([0,0,1])
 	
-	#Yellow = red + green :-)
+	#Yellow = red + green :-) <3 
 	yellows = batch_target[(batch_target[:,:,0] == 1) & (batch_target[:,:,1] == 1)]
 	batch_data[yellows] = yellow_value
 	
