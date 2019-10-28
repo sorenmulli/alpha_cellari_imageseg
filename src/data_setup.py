@@ -14,8 +14,8 @@ os.chdir(sys.path[0])
 # This is changed:
 ####################################
 SAVE_PATH = "local_data/"
-raw_img_location = "local_data/"
-anno_img_location = "local_data/"
+raw_img_location = SAVE_PATH
+anno_img_location = SAVE_PATH
 #####################################
 
 raw_image_url = 'http://www.lapix.ufsc.br/wp-content/uploads/2019/05/sugarcane2.png'
