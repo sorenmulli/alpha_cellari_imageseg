@@ -21,6 +21,12 @@ IMAGE_SHAPE = (512, 512, 3)  # Height, width, channel
 IMAGE_PATHS = ("local_data/raw.png", "local_data/target.png")
 SPLIT = (.8, .2,)
 
+MR_COOL_IDCS = np.array([0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,
+	1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+	0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0,
+	0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0,
+	0, 1, 0, 0, 0, 1], dtype=np.bool)
+
 LOG = Logger("logs/data_prepper.log", "Preparation of data with image shape %s" % ((IMAGE_SHAPE,)))
 
 def _save_images():
@@ -117,14 +123,8 @@ def _split_data(voids):
 	Returns four integer lists, each containing indices of images that belong to the respective category
 	"""
 
-	misterCool_idcs = np.array([0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,
-		1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
-		0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0,
-		0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0,
-		0, 1, 0, 0, 0, 1], dtype=np.bool)
-
-	train_val_idcs = np.where(~misterCool_idcs)[0]
-	test_idcs = np.where(misterCool_idcs)[0]
+	train_val_idcs = np.where(~MR_COOL_IDCS)[0]
+	test_idcs = np.where(MR_COOL_IDCS)[0]
 
 	# Calculates size of different sets
 	n_train = int(SPLIT[0] * train_val_idcs.size)
