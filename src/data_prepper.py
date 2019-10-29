@@ -62,6 +62,8 @@ def _standardize(image):
 
 	# Detects void pixels
 	void_pixels = (image==0).all(axis=2)
+	means = list()
+	stds = list()
 	for i in range(image.shape[2]):
 		# Singles out channel
 		# Changing this will also change image, as they point to the same object
@@ -69,9 +71,11 @@ def _standardize(image):
 		# Standardizes non-void pixels
 		mean = im_channel[~void_pixels].mean()
 		std = im_channel[~void_pixels].std() + EPS
+		means.append(mean)
+		stds.append(std)
 		im_channel[~void_pixels] = (im_channel[~void_pixels] - mean) / std
 
-	return image
+	return image, means, stds
 
 def _create_one_hot(image):
 
@@ -178,12 +182,12 @@ def _prepare_data():
 	LOG.log("Done loading images\nShapes: %s\nSplit: %s\n" % (aerial.shape, SPLIT))
 
 	LOG.log("Standardizing aerial image...")
-	aerial = _standardize(aerial)
+	aerial, means, stds = _standardize(aerial)
 	LOG.log("Done standardizing image\n")
 
 	LOG.log("Creating one-hot representation of target image...")
-	target = _create_one_hot(target)
-	LOG.log("Done creating one-hot. Shape: %s\n" % target.shape)
+	# target = _create_one_hot(target)
+	LOG.log("Done creating one-hot. Shape: %s\n" % (target.shape,))
 
 	LOG.log("Padding images...")
 	aerial, target = _pad(aerial), _pad(target)
@@ -213,8 +217,8 @@ def _prepare_data():
 	prep_out = {
 		"image_shape": IMAGE_SHAPE,
 		"split": SPLIT,
-		# "mean": mean,  TODO
-		# "std": std,
+		"means": means,
+		"stds": stds,
 		"aerial_path": aerial_path,
 		"target_path": target_path,
 		"train_idcs": train_idcs,
