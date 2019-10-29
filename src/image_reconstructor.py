@@ -14,21 +14,33 @@ MEANS = PREPOUT["means"]
 STDS = PREPOUT["stds"]
 PATHS = ("local_data/aerial_prepared.npz", "local_data/target_prepared.npz")
 
-def _load(paths):
+def _load_npz(path: str):
 
 	"""
-	Loads numpy arrays with aerial and target values
+	Loads a numpy array saved as a .npz file
 	"""
 
-	aerial = np.load(paths[0])["arr_0"]
-	target = np.load(paths[1])["arr_0"]
+	arr = np.load(path)["arr_0"]
 
-	return aerial, target
+	return arr
+
+def _ensure_shape(arr: np.ndarray):
+
+	"""
+	Ensures an array has four axes. If it has three, a fourth axis is added as the first, so the shape is 1 x m x n x o
+	"""
+
+	if len(arr.shape) == 3:
+		arr = arr.reshape((1, *arr.shape))
+	
+	return arr
 
 def _reconstruct_aerial(standardized: np.ndarray):
 
-	if len(standardized.shape) == 3:
-		standardized = standardized.reshape((1, *standardized.shape))
+	"""
+	Reconstructs standardized images from saved mean and stds
+	standardized should have shape n_imgs x width x height x channels
+	"""
 
 	void_pixels = (standardized==0).all(axis=3)
 	for i in range(standardized.shape[3]):
@@ -38,33 +50,55 @@ def _reconstruct_aerial(standardized: np.ndarray):
 
 	return images
 
+def reconstruct_aerial(standardized: np.ndarray, idcs=None, *show):
 
-def reconstruct_from_files(paths, idcs=None, show=0):
+	"""
+	Reconstructs images from standardized images
+	Should be of shape width x height x channels for single image or n x width x height x channels for n images
+	idcs: None for all, else iterable of specific indices in standardized
+	to_show: Indices of images that should be showed when reconstructed if show
+	"""
+
+	# Makes sure the standardized array has four axes
+	standardized = _ensure_shape(standardized)
+	
+	# Checks if idcs is None or not iterable
+	# If None: All idcs are used
+	# If int (read not iterable): Changed to iterable with single element
+	idcs = idcs if idcs is not None else np.arange(len(standardized))
+	idcs = (idcs,) if not hasattr(idcs, "__iter__") else idcs
+
+	# Does the actual image reconstruction
+	LOG.log("Starting reconstruction of %i aerial image(s)..." % len(idcs))
+	aerial = _reconstruct_aerial(standardized[idcs])
+	LOG.log("Done reconstructing %i aerial images\n" % len(idcs))
+
+	# Shows demanded reconstructions
+	if len(show) != 0:
+		LOG.log("Showing reconstructed %i image(s)\n" % len(idcs))
+	else:
+		LOG.log("Not showing any images\n")
+	for i in show:
+		im = Image.fromarray(aerial[i])
+		im.show()
+	
+	return aerial
+
+
+def reconstruct_aerial_from_file(path, *show):
 
 	"""
 	Reconstructs images from saved npz's
 	"""
 
-	LOG.log("Loading images...")
-	aerial, target = _load(paths)
-	LOG.log("Done loading images\n")
+	LOG.log("Loading standardized image...")
+	aerial = _load_npz(path)
+	LOG.log("Done loading image\n")
 
-	LOG.log("Reconstructing aerial images...")
-	# Checks if idcs is None or not iterable
-	idcs = idcs if idcs is not None else np.arange(len(aerial))
-	idcs = (idcs,) if not hasattr(idcs, "__iter__") else idcs
-	aerial = _reconstruct_aerial(aerial[idcs])
-	LOG.log("Done reconstructing aerial images\n")
+	aerial = reconstruct_aerial(aerial, None, *show)
 
-	LOG.log("Showing reconstructed images...")
-	if show == -1:
-		show = len(idcs)
-	for i in range(min(len(idcs), show)):
-		print(aerial[i].dtype, aerial[i].shape)
-		im = Image.fromarray(aerial[i])
-		im.show()
-
+	return aerial
 
 if __name__ == "__main__":
 
-	reconstruct_from_files(PATHS, 12, show=2)
+	reconstruct_aerial_from_file(PATHS[0], 94)

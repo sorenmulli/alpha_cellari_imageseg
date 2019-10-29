@@ -27,7 +27,7 @@ MR_COOL_IDCS = np.array([0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0
 	0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0,
 	0, 1, 0, 0, 0, 1], dtype=np.bool)
 
-LOG = Logger("logs/data_prepper.log", "Preparation of data with image shape %s" % ((IMAGE_SHAPE,)))
+LOG = Logger("logs/data_prepper.log", "Preparation of data with images of shape %s" % ((IMAGE_SHAPE,)))
 
 def _save_images():
 
@@ -87,10 +87,10 @@ def _create_one_hot(image):
 
 	yellow_value = np.array([0,0,1])
 	# Yellow = red + green
-	yellows = (image[:,:,0] == 1) & (image[:,:,1] == 1)
+	yellows = (image[:, :, 0] == 1) & (image[:, :, 1] == 1)
 	image[yellows] = yellow_value
 
-	return image
+	return image.astype(np.bool)
 	
 
 def _pad(image):
