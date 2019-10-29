@@ -101,4 +101,4 @@ def reconstruct_aerial_from_file(path, *show):
 
 if __name__ == "__main__":
 
-	reconstruct_aerial_from_file(PATHS[0], 94)
+	reconstruct_aerial_from_file(PATHS[0])

@@ -2,7 +2,7 @@
 # My job:												#
 # Cut raw image/GT into a suitable number of images. 	#
 # Standardize images 				 					#
-# Divide images into train/eval and test.				#
+# Divide images into train, eval, test, and voids.				#
 # Save images in efficient format						#
 #########################################################
 import os, sys
