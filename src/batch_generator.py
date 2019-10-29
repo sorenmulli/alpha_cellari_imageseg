@@ -8,9 +8,14 @@ os.chdir(sys.path[0])
 
 def load_data(path):
 	# I should: Receive path and load the data in using np.load and save it as two matrices
-	data = np.load(path + 'aerial_prepared.npz')
-	target = np.load(path + 'target_prepared.npz')
-	info = json.load(path + 'prep_out.json')
+	with np.load(path + 'aerial_prepared.npz') as datafile:
+		data = datafile.f.arr_0
+	
+	with np.load(path + 'target_prepared.npz') as targetfile:
+		target = targetfile.f.arr_0
+	
+	with open(path + 'prep_out.json') as infofile:
+		info = json.load(infofile)
 	
 	print(data.shape)
 	print(target.shape)
@@ -35,10 +40,10 @@ def batch_generator(batch_size, data, target, train = True, classes = 3):
 
 	#Normalize and one-hot-encode target
 	batch_target = batch_target // 255
-	yellow_value = np.array([0,0,1])
+	yellow_value = np.array([0,0,0,1])
 	
 	#Yellow = red + green :-) <3 
-	yellows = batch_target[(batch_target[:,:,0] == 1) & (batch_target[:,:,1] == 1)]
+	yellows = batch_target[(batch_target[:,:,:,0] == 1) & (batch_target[:,:, :,1] == 1)]
 	batch_data[yellows] = yellow_value
 	
 	pass
@@ -46,3 +51,4 @@ def batch_generator(batch_size, data, target, train = True, classes = 3):
 if __name__ == "__main__":
 	
 	train_data, train_target, val_data, val_target, test_data, test_target = load_data('local_data/')
+	batch_generator(10, train_data, train_target)
