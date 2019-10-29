@@ -6,6 +6,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
+*.cpython-37.pyc
 # C extensions
 *.so
 
