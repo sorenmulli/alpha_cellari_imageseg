@@ -5,7 +5,10 @@ import json
 import os, sys
 os.chdir(sys.path[0])
 
+from logger import Logger
 
+LOG = Logger("logs/batch_generator.log", "Loading and generating batches from data." )
+DATA_PATH = 'local_data/'
 def load_data(path):
 	# I should: Receive path and load the data in using np.load and save it as two matrices
 	with np.load(path + 'aerial_prepared.npz') as datafile:
@@ -17,9 +20,6 @@ def load_data(path):
 	with open(path + 'prep_out.json') as infofile:
 		info = json.load(infofile)
 	
-	print(data.shape)
-	print(target.shape)
-
 	train_idcs, val_idcs, test_idcs = info["train_idcs"], info["val_idcs"], info["test_idcs"]
 
 
@@ -49,6 +49,13 @@ def batch_generator(batch_size, data, target, train = True, classes = 3):
 	pass
 
 if __name__ == "__main__":
+	LOG.log(f"Loading data from {DATA_PATH}.")
+	train_data, train_target, val_data, val_target, test_data, test_target = load_data(DATA_PATH)
+	LOG.log(f"Data loaded. Dimensions are (data and target): \
+	\n\tTrain: {train_data.shape} and {train_target.shape}   \
+	\n\tValidation: {val_data.shape} and {val_target.shape}  \
+	\n\tTest: {test_data.shape} and {test_target.shape} ")
 	
-	train_data, train_target, val_data, val_target, test_data, test_target = load_data('local_data/')
-	batch_generator(10, train_data, train_target)
+	test_batch_size = 10
+	LOG.log(f"Attempting to generate batch of size {test_batch_size}")
+	batch_generator(test_batch_size, train_data, train_target)
