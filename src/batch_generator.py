@@ -40,15 +40,6 @@ def batch_generator(batch_size, data, target, train = True, classes = 3):
 
 
 
-	#Normalize and one-hot-encode target
-
-	#batch_target = batch_target // 255
-
-	# yellow_value = np.array([0,0,1])
-
-
-	# yellows = target_image[(target_image[:,:,0] == 1) & (target_image[:,:,1] == 1)]
-	# target_image[yellows] = yellow_value
 
 	
 	
