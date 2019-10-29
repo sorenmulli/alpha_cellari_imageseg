@@ -7,7 +7,7 @@ from PIL import Image
 
 from logger import Logger
 
-LOG = Logger("local_data/reconstruct.log", "Image reconstruction")
+LOG = Logger("logs/reconstruction.log", "Image reconstruction")
 with open("local_data/prep_out.json", encoding="utf-8") as f:
 	PREPOUT = json.load(f)
 MEANS = PREPOUT["means"]
