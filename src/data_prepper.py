@@ -221,10 +221,10 @@ def _prepare_data():
 		"stds": stds,
 		"aerial_path": aerial_path,
 		"target_path": target_path,
-		"train_idcs": train_idcs,
-		"val_idcs": val_idcs,
-		"test_idcs": test_idcs,
-		"void_idcs": void_idcs,
+		"train_idcs": sorted(train_idcs),
+		"val_idcs": sorted(val_idcs),
+		"test_idcs": sorted(test_idcs),
+		"void_idcs": sorted(void_idcs),
 	}
 	json_path = "local_data/prep_out.json"
 	with open(json_path, "w", encoding="utf-8") as f:
