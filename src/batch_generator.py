@@ -38,14 +38,21 @@ def batch_generator(batch_size, data, target, train = True, classes = 3):
 #	if train:
 #	
 
+
+
 	#Normalize and one-hot-encode target
-	batch_target = batch_target // 255
-	yellow_value = np.array([0,0,0,1])
+
+	#batch_target = batch_target // 255
+
+	# yellow_value = np.array([0,0,1])
+
+
+	# yellows = target_image[(target_image[:,:,0] == 1) & (target_image[:,:,1] == 1)]
+	# target_image[yellows] = yellow_value
+
 	
-	#Yellow = red + green :-) <3 
-	yellows = batch_target[(batch_target[:,:,:,0] == 1) & (batch_target[:,:, :,1] == 1)]
-	batch_data[yellows] = yellow_value
 	
+
 	pass
 
 if __name__ == "__main__":

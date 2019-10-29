@@ -150,7 +150,7 @@ def _prepare_data():
 	LOG.log("Done loading images\nShapes: %s\nSplit: %s\n" % (aerial.shape, SPLIT))
 
 	LOG.log("Standardizing images...")
-	aerial, target = _standardize(aerial), _standardize(target)
+	aerial = _standardize(aerial)
 	LOG.log("Done standardizing images\n")
 
 	LOG.log("Padding images...")
