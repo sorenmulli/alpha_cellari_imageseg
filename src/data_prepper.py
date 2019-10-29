@@ -73,6 +73,34 @@ def _standardize(image):
 
 	return image
 
+def _create_one_hot(image):
+
+	"""
+	Returns a one hot representation of the target image
+	"""
+
+	red = np.array([1, 0, 0], dtype=np.bool)
+	green = np.array([0, 1, 0], dtype=np.bool)
+	yellow = np.array([0, 0, 1], dtype=np.bool)
+	black = np.array([0, 0, 0], dtype=np.bool)
+
+	def check_class(pixel):
+
+		if (pixel == np.array([1, 0, 0], dtype=np.bool)).all():
+			return red
+		elif (pixel == np.array([0, 1, 0], dtype=np.bool)).all():
+			return green
+		elif (pixel == np.array([1, 1, 0], dtype=np.bool)).all():
+			return yellow
+		else:
+			return black
+
+	# Normalize and one-hot-encode target
+	image = (image // 255).astype(np.bool)
+	oh = np.apply_along_axis(check_class, 2, image)
+	
+	return oh
+
 def _pad(image):
 
 	"""
@@ -149,9 +177,13 @@ def _prepare_data():
 	aerial, target = [_load_image(x) for x in IMAGE_PATHS]
 	LOG.log("Done loading images\nShapes: %s\nSplit: %s\n" % (aerial.shape, SPLIT))
 
-	LOG.log("Standardizing images...")
-	aerial, target = _standardize(aerial), _standardize(target)
-	LOG.log("Done standardizing images\n")
+	LOG.log("Standardizing aerial image...")
+	aerial = _standardize(aerial)
+	LOG.log("Done standardizing image\n")
+
+	LOG.log("Creating one-hot representation of target image...")
+	target = _create_one_hot(target)
+	LOG.log("Done creating one-hot. Shape: %s\n" % target.shape)
 
 	LOG.log("Padding images...")
 	aerial, target = _pad(aerial), _pad(target)
