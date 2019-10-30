@@ -6,9 +6,12 @@ import os, sys
 os.chdir(sys.path[0])
 
 from logger import Logger
-
+from augmentations import data_augment
 LOG = Logger("logs/batch_generator.log", "Loading and generating batches from data." )
 DATA_PATH = 'local_data/'
+
+
+
 def load_data(path):
 	# I should: Receive path and load the data in using np.load and save it as two matrices
 	with np.load(path + 'aerial_prepared.npz') as datafile:
@@ -29,22 +32,18 @@ def load_data(path):
 
 	return train_data, train_target, val_data, val_target, test_data, test_target
 
-def batch_generator(batch_size, data, target, train = True, classes = 3):
+
+def batch_generator(batch_size, data, target, train = True):
 	num_imgs = data.shape[0]
 	chosen_idcs = np.random.choice(num_imgs, batch_size, replace = False)
 	
 	batch_data = data[chosen_idcs]
 	batch_target = target[chosen_idcs]
-#	if train:
-#	
-
-
-
-
 	
+	if train:
+		batch_data, batch_target = data_augment(batch_data, batch_target)
 	
-
-	pass
+	return batch_data, batch_target
 
 if __name__ == "__main__":
 	LOG.log(f"Loading data from {DATA_PATH}.")
