@@ -2,25 +2,13 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from layers import Encoder_block, Decoder_block
+from layers import EncoderBlock, DecoderBlock
 
 example_architecture = {
 	"kernel_size":  3,
 	"padding": 1, 
 	"stride": 1,
 	"pool_dims": (2,2), 
-	"encoder_blocks":
-	[
-		(3, 17, 2), #<- Data structure: (input channels, output channels, number of layers) as you please, Master
-		(29, 37, 2),
-		(37, 37, 3),
-	],
-	"decoder_blocks":
-	[	
-		(37, 37, 2),
-		(37, 29, 2),
-		(17, 3, 3)
-	],
 }
 
 
@@ -33,27 +21,24 @@ class Net(nn.Module):
 		self.stride = architecture_dict["stride"]
 		self.pool_dims = architecture_dict["pool_dims"]
 
-		
-		encoder_layers = []
-		decoder_layers = []
+		self.encoder1 = EncoderBlock(3, 17, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.encoder2 = EncoderBlock(17, 29, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.encoder3 = EncoderBlock(29, 31, 3, self.kernel_size, self.padding, self.stride, self.pool_dims)
 
-		for encoder_sizes in architecture_dict["encoder_blocks"]:
-			encoder_layers.append(
-				Encoder_block(*encoder_sizes, self.kernel_size, self.padding, self.stride, self.pool_dims)
-			)
-			
-		for decoder_sizes in architecture_dict["decoder_blocks"]:
-			decoder_layers.append(
-				Decoder_block(*decoder_sizes, self.kernel_size, self.padding, self.stride, self.pool_dims)
-			)
-
-		self.encoder = nn.Sequential(*encoder_layers)
-		self.decoder = nn.Sequential(*decoder_layers)
+		self.decoder1 = DecoderBlock(31, 29,  3, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.decoder2 = DecoderBlock(29, 17, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.decoder3 = DecoderBlock(17, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
 
 
 	def forward(self, x):
-		x = self.encoder(x)
-		x = self.decoder(x)
+		x, ind1, size1 = self.encoder1(x)
+		x, ind2, size2 = self.encoder2(x)
+		x, ind3, size3 = self.encoder3(x)
+
+		x = self.decoder1(x, ind1, size1)
+		x = self.decoder2(x, ind2, size2)
+		x = self.decoder3(x, ind3, size3)
+
 		return F.softmax(x)
 
 
