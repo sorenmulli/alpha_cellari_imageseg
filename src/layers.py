@@ -32,7 +32,7 @@ class Encoder_block(nn.Module):
 			BlueLayer(in_size, out_size, kernel_size, padding, stride)
 		)
 		
-		for i in range(n_layers-1):
+		for _ in range(n_layers-1):
 			layers.append(
 				BlueLayer(out_size, out_size, kernel_size, padding, stride)
 			)
@@ -56,7 +56,7 @@ class Decoder_block(nn.Module):
 		layers = []
 
 		
-		for i in range(n_layers-1):
+		for _ in range(n_layers-1):
 			layers.append(
 				BlueLayer(in_size, in_size, kernel_size, padding, stride)
 			)
