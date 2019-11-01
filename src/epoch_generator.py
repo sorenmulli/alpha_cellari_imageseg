@@ -1,4 +1,5 @@
 import numpy as np
+import torch
 
 import json
 
@@ -10,9 +11,10 @@ from augmentations import data_augment
 LOG = Logger("logs/batch_generator.log", "Loading and generating batches from data." )
 DATA_PATH = 'local_data/'
 
+CPU = torch.device("cpu")
+GPU = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-
-def load_data(path):
+def _load_data(path: str):
 	# I should: Receive path and load the data in using np.load and save it as two matrices
 	with np.load(path + 'aerial_prepared.npz') as datafile:
 		data = datafile.f.arr_0
