@@ -50,32 +50,25 @@ def _reconstruct_aerial(standardized: np.ndarray):
 
 	return images
 
-def reconstruct_aerial(standardized: np.ndarray, idcs=None, *show):
+def reconstruct_aerial(standardized: np.ndarray, *show):
 
 	"""
 	Reconstructs images from standardized images
 	Should be of shape width x height x channels for single image or n x width x height x channels for n images
-	idcs: None for all, else iterable of specific indices in standardized
 	to_show: Indices of images that should be showed when reconstructed if show
 	"""
 
 	# Makes sure the standardized array has four axes
 	standardized = _ensure_shape(standardized)
-	
-	# Checks if idcs is None or not iterable
-	# If None: All idcs are used
-	# If int (read not iterable): Changed to iterable with single element
-	idcs = idcs if idcs is not None else np.arange(len(standardized))
-	idcs = (idcs,) if not hasattr(idcs, "__iter__") else idcs
 
 	# Does the actual image reconstruction
-	LOG.log("Starting reconstruction of %i aerial image(s)..." % len(idcs))
-	aerial = _reconstruct_aerial(standardized[idcs])
-	LOG.log("Done reconstructing %i aerial images\n" % len(idcs))
+	LOG.log("Starting reconstruction of %i aerial image(s)..." % len(standardized))
+	aerial = _reconstruct_aerial(standardized)
+	LOG.log("Done reconstructing %i aerial images\n" % len(standardized))
 
 	# Shows demanded reconstructions
 	if len(show) != 0:
-		LOG.log("Showing reconstructed %i image(s)\n" % len(idcs))
+		LOG.log("Showing reconstructed %i image(s)\n" % len(show))
 	else:
 		LOG.log("Not showing any images\n")
 	for i in show:
@@ -95,7 +88,7 @@ def reconstruct_aerial_from_file(path, *show):
 	aerial = _load_npz(path)
 	LOG.log("Done loading image\n")
 
-	aerial = reconstruct_aerial(aerial, None, *show)
+	aerial = reconstruct_aerial(aerial, *show)
 
 	return aerial
 
