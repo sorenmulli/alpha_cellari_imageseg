@@ -23,6 +23,10 @@ class Logger:
     
     self.log(title + "\n")
   
+  def __call__(self, *tolog):
+
+    self.log(*tolog)
+  
   def log(self, *tolog):
 
     time = get_timestamp()

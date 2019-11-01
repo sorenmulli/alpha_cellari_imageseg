@@ -14,7 +14,7 @@ MEANS = PREPOUT["means"]
 STDS = PREPOUT["stds"]
 PATHS = ("local_data/aerial_prepared.npz", "local_data/target_prepared.npz")
 
-def _load_npz(path: str):
+def load_npz(path: str):
 
 	"""
 	Loads a numpy array saved as a .npz file
