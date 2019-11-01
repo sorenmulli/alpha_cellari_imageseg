@@ -54,9 +54,9 @@ class Net(nn.Module):
 	def forward(self, x):
 		x = self.encoder(x)
 		x = self.decoder(x)
-		return F.softmax(x)
+		return F.softmax(x,dim=3)
 
-
+	
 
 
 #net = Net(example_architecture)
