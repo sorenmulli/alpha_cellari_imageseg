@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 from layers import Encoder_block, Decoder_block
 
-example_input = {
+example_architecture = {
 	"kernel_size":  3,
 	"padding": 1, 
 	"stride": 1,
@@ -25,24 +25,24 @@ example_input = {
 
 
 class Net(nn.Module):
-	def __init__(self, recipe):
+	def __init__(self, architecture_dict):
 		super().__init__()
 
-		self.kernel_size = recipe["kernel_size"]
-		self.padding = recipe["padding"]
-		self.stride = recipe["stride"]
-		self.pool_dims = recipe["pool_dims"]
+		self.kernel_size = architecture_dict["kernel_size"]
+		self.padding = architecture_dict["padding"]
+		self.stride = architecture_dict["stride"]
+		self.pool_dims = architecture_dict["pool_dims"]
 
 		
 		encoder_layers = []
 		decoder_layers = []
 
-		for encoder_sizes in recipe["encoder_blocks"]:
+		for encoder_sizes in architecture_dict["encoder_blocks"]:
 			encoder_layers.append(
 				Encoder_block(*encoder_sizes, self.kernel_size, self.padding, self.stride, self.pool_dims)
 			)
 			
-		for decoder_sizes in recipe["decoder_blocks"]:
+		for decoder_sizes in architecture_dict["decoder_blocks"]:
 			decoder_layers.append(
 				Decoder_block(*decoder_sizes, self.kernel_size, self.padding, self.stride, self.pool_dims)
 			)
@@ -57,7 +57,7 @@ class Net(nn.Module):
 		return F.softmax(x)
 
 
-#https://stackoverflow.com/questions/49433936/how-to-initialize-weights-in-pytorch
 
-#net = Net(example_input)
+
+#net = Net(example_architecture)
 #print(net)
