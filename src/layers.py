@@ -21,7 +21,7 @@ class BlueLayer(nn.Module):
 		x = self.relu(x)
 
 		return x
-
+#https://stackoverflow.com/questions/49433936/how-to-initialize-weights-in-pytorch
 class Encoder_block(nn.Module):
 	def __init__(self, in_size, out_size, n_layers, kernel_size, padding, stride, mpool_dim):
 		super().__init__()
