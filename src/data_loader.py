@@ -51,7 +51,6 @@ class DataLoader:
 		idcs = np.arange(len(self.train_x))
 		np.random.shuffle(idcs)
 		for batch in range(self.n_batches):
-			self.log("Yielding batch %i" % batch)
 			yield self._generate_batch(
 				idcs[batch*self.batch_size:(batch+1)*self.batch_size]
 			)
@@ -65,13 +64,19 @@ class DataLoader:
 		return self.augment(self.test_x, self.test_y)
 
 if __name__ == "__main__":
+	# Testing
+	logger = Logger("logs/data_loader_test.log", "Testing DataLoader")
 	data_loader = DataLoader(
 		11,
 		lambda x, y: (x, y),
-		Logger("logs/data_loader_test.log", "Testing DataLoader")
+		logger
 	)
+	logger("Epoch")
 	for i, (train, test) in enumerate(data_loader.generate_epoch()):
-		print(i, train.shape, test.shape)
-	print(data_loader.get_validation()[0].shape)
-	print(data_loader.get_test()[0].shape)
+		logger(i, train.shape, test.shape, with_timestamp=False)
+	logger.newline()
+
+	logger("Validation\n%s\n" % (data_loader.get_validation()[0].cpu().numpy().shape,))
+
+	logger("Test\n%s\n" % (data_loader.get_test()[0].cpu().numpy().shape,))
 
