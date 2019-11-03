@@ -15,9 +15,11 @@ GPU = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class DataLoader:
 
-	def __init__(self, batch_size: int, augment: callable, logger: Logger=None):
+	def __init__(self, batch_size: int, augment: callable=None, logger: Logger=None):
 		
-		self.augment = augment
+		self.augment = augment if augment else lambda x, y: (x, y)
+			
+		
 		if logger:
 			self.log = logger
 		else:
