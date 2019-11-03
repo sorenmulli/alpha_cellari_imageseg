@@ -11,8 +11,9 @@ from augmentations import data_augment
 JSON_PATH = "local_data/prep_out.json"
 with open(JSON_PATH, encoding="utf-8") as f:
 	CFG = json.load(f)
-CPU = torch.device("cpu")
-GPU = torch.device("cpu")
+
+DEVICE = torch.device("gpu") if torch.cuda.is_available() else torch.device("cpu")
+#DEVICE = torch.device("cpu")
 
 class DataLoader:
 
@@ -26,10 +27,10 @@ class DataLoader:
 		aerial = torch.from_numpy(self.load(CFG["aerial_path"]))
 		target = torch.from_numpy(self.load(CFG["target_path"]))
 
-		self.train_x = aerial[CFG["train_idcs"]].float().to(GPU)
-		self.train_y = target[CFG["train_idcs"]].bool().to(GPU)
-		self.val_x = aerial[CFG["val_idcs"]].float().to(GPU)
-		self.val_y = target[CFG["val_idcs"]].bool().to(GPU)
+		self.train_x = aerial[CFG["train_idcs"]].float().to(DEVICE)
+		self.train_y = target[CFG["train_idcs"]].bool().to(DEVICE)
+		self.val_x = aerial[CFG["val_idcs"]].float().to(DEVICE)
+		self.val_y = target[CFG["val_idcs"]].bool().to(DEVICE)
 		self.log("Done loading %i images\n" % len(aerial))
 	
 		self.batch_size = batch_size
@@ -47,7 +48,7 @@ class DataLoader:
 		if os.path.isfile(path+".npy"):
 			arr = np.load(path+".npy")
 		else:
-			arr = np.load(path)["arr_0"]
+			arr = np.load(path+".npz")["arr_0"]
 
 		return arr
 
@@ -74,8 +75,8 @@ class DataLoader:
 		# Returns test data
 		# This is not stored in the class instance, as takes up unnecessary memory
 
-		aerial = torch.from_numpy(self.load(CFG["aerial_path"]))[CFG["test_idcs"]].float().to(GPU)
-		target = torch.from_numpy(self.load(CFG["target_path"]))[CFG["test_idcs"]].bool().to(GPU)
+		aerial = torch.from_numpy(self.load(CFG["aerial_path"]))[CFG["test_idcs"]].float().to(DEVICE)
+		target = torch.from_numpy(self.load(CFG["target_path"]))[CFG["test_idcs"]].bool().to(DEVICE)
 
 		return self.augment(aerial, target)
 

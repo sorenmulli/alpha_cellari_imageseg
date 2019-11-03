@@ -8,8 +8,8 @@ from time import sleep
 
 JSON_PATH = "local_data/prep_out.json"
 
-CPU = torch.device("cpu")
-GPU = torch.device("cpu")
+DEVICE = torch.device("gpu") if torch.cuda.is_available() else torch.device("cpu")
+#DEVICE = torch.device("cpu")
 
 ARCHITECTURE = {
 	"kernel_size":  3,
@@ -25,7 +25,7 @@ data_loader = DataLoader(
 	BATCH_SIZE,
 	logger = LOG
 )
-net = Net(ARCHITECTURE).to(GPU)
+net = Net(ARCHITECTURE).to(DEVICE)
 #####################
 
 for batch_data, batch_target in data_loader.generate_epoch():
