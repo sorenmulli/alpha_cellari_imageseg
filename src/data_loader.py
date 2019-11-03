@@ -47,7 +47,7 @@ class DataLoader:
 		if os.path.isfile(path+".npy"):
 			arr = np.load(path+".npy")
 		else:
-			arr = np.load(path+".npz")["arr_0"]
+			arr = np.load(path)["arr_0"]
 
 		return arr
 
