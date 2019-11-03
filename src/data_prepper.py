@@ -189,11 +189,10 @@ def _prepare_data():
 	void_idcs = _find_voids(aerial)
 	LOG("Done finding voids\n2 x %i images where voids\n" % void_idcs.sum())
 
-	LOG("Transposing images to PyTorch's preferred format")
+	LOG("Transposing images to PyTorch's preferred format...")
 	aerial = np.transpose(aerial, (0, 3, 1, 2))
-	target = np.transpose(target, (0, 3,1, 2))
+	target = np.transpose(target, (0, 3, 1, 2))
 	LOG(f"Images transposed. Shape: {aerial.shape}\n")
-
 
 	LOG("Saving images...")
 	aerial_path = "local_data/aerial_prepared.npz"

@@ -42,8 +42,8 @@ def _reconstruct_aerial(standardized: np.ndarray):
 	standardized should have shape n_imgs x width x height x channels
 	"""
 
-	void_pixels = (standardized==0).all(axis=3)
-	for i in range(standardized.shape[3]):
+	void_pixels = (standardized==0).all(axis=1)
+	for i in range(standardized.shape[1]):
 		channel = standardized[:, :, :, i]
 		channel[~void_pixels] = channel[~void_pixels] * STDS[i] + MEANS[i]
 	images = standardized.astype(np.uint8)
@@ -85,7 +85,7 @@ def reconstruct_aerial_from_file(path, *show):
 	"""
 
 	LOG.log("Loading standardized image...")
-	aerial = _load_npz(path)
+	aerial = load_npz(path)
 	LOG.log("Done loading image\n")
 
 	aerial = reconstruct_aerial(aerial, *show)

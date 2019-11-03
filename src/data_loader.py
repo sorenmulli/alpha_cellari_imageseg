@@ -29,13 +29,16 @@ class DataLoader:
 			self.cfg = json.load(f)
 		
 		self.log("Loading data...")
-		self.aerial = torch.from_numpy(load_npz(self.cfg["aerial_path"])).to(GPU)
-		self.target = torch.from_numpy(load_npz(self.cfg["target_path"])).to(GPU)
+		with torch.no_grad():
+			self.aerial = torch.from_numpy(load_npz(self.cfg["aerial_path"]))
+			# print(self.aerial.size, self.aerial.itemsize, self.aerial.dtype)
+			self.target = torch.from_numpy(load_npz(self.cfg["target_path"]))
+			# print(self.target.size, self.target.itemsize, self.aerial.dtype)
 
-		self.train_x = self.aerial[self.cfg["train_idcs"]]
-		self.train_y = self.target[self.cfg["train_idcs"]]
-		self.val_x = self.aerial[self.cfg["val_idcs"]]
-		self.val_y = self.target[self.cfg["val_idcs"]]
+		self.train_x = self.aerial[self.cfg["train_idcs"]].to(GPU)
+		self.train_y = self.target[self.cfg["train_idcs"]].to(GPU)
+		self.val_x = self.aerial[self.cfg["val_idcs"]].to(GPU)
+		self.val_y = self.target[self.cfg["val_idcs"]].to(GPU)
 		self.test_x = self.aerial[self.cfg["test_idcs"]]
 		self.test_y = self.target[self.cfg["test_idcs"]]
 		self.log("Done loading %i images\n" % len(self.aerial))

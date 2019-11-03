@@ -23,7 +23,7 @@ data_loader = DataLoader(
 	BATCH_SIZE,
 	logger = LOG
 )
-net = Net(ARCHITECTURE)
+net = Net(ARCHITECTURE).to(GPU)
 #####################
 
 for batch_data, batch_target in data_loader.generate_epoch():
