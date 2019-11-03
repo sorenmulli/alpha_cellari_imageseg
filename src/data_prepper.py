@@ -161,47 +161,53 @@ def _split_data(voids):
 
 def _prepare_data():
 
-	LOG.log("Downloading images...")
+	LOG("Downloading images...")
 	_save_images()
-	LOG.log("Done downloading images to paths\n%s\n%s\n" % IMAGE_PATHS)
+	LOG("Done downloading images to paths\n%s\n%s\n" % IMAGE_PATHS)
 
-	LOG.log("Loading images...")
+	LOG("Loading images...")
 	aerial, target = [_load_image(x) for x in IMAGE_PATHS]
-	LOG.log("Done loading images\nShapes: %s\nSplit: %s\n" % (aerial.shape, SPLIT))
+	LOG("Done loading images\nShapes: %s\nSplit: %s\n" % (aerial.shape, SPLIT))
 
-	LOG.log("Standardizing aerial image...")
+	LOG("Standardizing aerial image...")
 	aerial, means, stds = _standardize(aerial)
-	LOG.log("Done standardizing image\n")
+	LOG("Done standardizing image\n")
 
-	LOG.log("Creating one-hot representation of target image...")
+	LOG("Creating one-hot representation of target image...")
 	target = _create_one_hot(target)
-	LOG.log("Done creating one-hot. Shape: %s\n" % (target.shape,))
+	LOG("Done creating one-hot. Shape: %s\n" % (target.shape,))
 
-	LOG.log("Padding images...")
+	LOG("Padding images...")
 	aerial, target = _pad(aerial), _pad(target)
-	LOG.log("Done padding images\nShapes: %s\n" % (aerial.shape,))
+	LOG("Done padding images\nShapes: %s\n" % (aerial.shape,))
 
-	LOG.log("Splitting images...")
+	LOG("Splitting images...")
 	aerial, target = _split_image(aerial), _split_image(target)
-	LOG.log("Done splitting images\nNumber of images: %i\nShapes: %s\n" % (aerial.shape[0], IMAGE_SHAPE))
+	LOG("Done splitting images\nNumber of images: %i\nShapes: %s\n" % (aerial.shape[0], IMAGE_SHAPE))
 
-	LOG.log("Detecting void images...")
+	LOG("Detecting void images...")
 	void_idcs = _find_voids(aerial)
-	LOG.log("Done finding voids\n2 x %i images where voids\n" % void_idcs.sum())
+	LOG("Done finding voids\n2 x %i images where voids\n" % void_idcs.sum())
 
-	LOG.log("Saving images...")
+	LOG("Transposing images to PyTorch's preferred format")
+	aerial = np.transpose(aerial, (0, 3, 1, 2))
+	target = np.transpose(target, (0, 3,1, 2))
+	LOG(f"Images transposed. Shape: {aerial.shape}\n")
+
+
+	LOG("Saving images...")
 	aerial_path = "local_data/aerial_prepared.npz"
 	target_path = "local_data/target_prepared.npz"
 	np.savez_compressed(aerial_path, aerial.astype(np.float64))
 	np.savez_compressed(target_path, target.astype(np.float64))
-	LOG.log("Saved aerial images to '%s' and target images to '%s'\n" % (aerial_path, target_path))
+	LOG("Saved aerial images to '%s' and target images to '%s'\n" % (aerial_path, target_path))
 
-	LOG.log("Splitting images into train, validation, test, and voids...")
+	LOG("Splitting images into train, validation, test, and voids...")
 	train_idcs, val_idcs, test_idcs, void_idcs = _split_data(void_idcs)
-	LOG.log("Done splitting images\nTrain: %i images\nValidation: %i images\nTest: %i images\nVoid: %i images\n"
+	LOG("Done splitting images\nTrain: %i images\nValidation: %i images\nTest: %i images\nVoid: %i images\n"
 		% (len(train_idcs), len(val_idcs), len(test_idcs), len(void_idcs)))
 
-	LOG.log("Saving data preparation output...")
+	LOG("Saving data preparation output...")
 	prep_out = {
 		"image_shape": IMAGE_SHAPE,
 		"split": SPLIT,
@@ -217,9 +223,9 @@ def _prepare_data():
 	json_path = "local_data/prep_out.json"
 	with open(json_path, "w", encoding="utf-8") as f:
 		json.dump(prep_out, f, indent=4)
-	LOG.log("Done saving output to '%s'\n" % json_path)
+	LOG("Done saving output to '%s'\n" % json_path)
 
-	LOG.log("Done preparing data\n")
+	LOG("Done preparing data\n")
 
 
 if __name__ == "__main__":
