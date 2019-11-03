@@ -12,8 +12,8 @@ JSON_PATH = "local_data/prep_out.json"
 with open(JSON_PATH, encoding="utf-8") as f:
 	CFG = json.load(f)
 
-DEVICE = torch.device("gpu") if torch.cuda.is_available() else torch.device("cpu")
-#DEVICE = torch.device("cpu")
+DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+# DEVICE = torch.device("cpu")
 
 class DataLoader:
 
