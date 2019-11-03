@@ -4,10 +4,12 @@ from data_loader import DataLoader
 from logger import Logger
 from model import Net
 
+from time import sleep
+
 JSON_PATH = "local_data/prep_out.json"
 
 CPU = torch.device("cpu")
-GPU = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+GPU = torch.device("cpu")
 
 ARCHITECTURE = {
 	"kernel_size":  3,
@@ -29,6 +31,5 @@ net = Net(ARCHITECTURE).to(GPU)
 for batch_data, batch_target in data_loader.generate_epoch():
 	#I SHOULD NOT BE NECESSARY: GET THIS INTO data_loader
 	LOG("Testing forward pass")
-	batch_data = batch_data.float()
 	net(batch_data)
 	LOG("Forward pass completed")

@@ -50,3 +50,18 @@ class Logger:
     with open(self.fpath, "a", encoding="utf-8") as logfile:
       logfile.write("\n")
       print()
+
+class NullLogger(Logger):
+
+  def __init__(self, *args, **kwargs):
+
+    pass
+
+  def log(self, *tolog):
+
+    pass
+
+  def newline(self):
+
+    pass
+

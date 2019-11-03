@@ -5,93 +5,93 @@ import json
 import numpy as np
 from PIL import Image
 
-from logger import Logger
+from logger import Logger, NullLogger
+from data_loader import DataLoader
 
-LOG = Logger("logs/reconstruction.log", "Image reconstruction")
-with open("local_data/prep_out.json", encoding="utf-8") as f:
-	PREPOUT = json.load(f)
-MEANS = PREPOUT["means"]
-STDS = PREPOUT["stds"]
-PATHS = ("local_data/aerial_prepared.npz", "local_data/target_prepared.npz")
+JSON_PATH = "local_data/prep_out.json"
+with open(JSON_PATH, encoding="utf-8") as f:
+	CFG = json.load(f)
+MEANS = CFG["means"]
+STDS = CFG["stds"]
+PATHS = ("local_data/aerial_prepared", "local_data/target_prepared")
 
-def load_npz(path: str):
+class ImageReconstructor:
 
-	"""
-	Loads a numpy array saved as a .npz file
-	"""
+	def __init__(self, logger: Logger=None):
+		
+		self.log = logger if logger else NullLogger()
 
-	arr = np.load(path)["arr_0"]
+	def _ensure_shape(self, arr: np.ndarray):
 
-	return arr
+		"""
+		Ensures an array has four axes. If it has three, a fourth axis is added as the first, so the shape is 1 x m x n x o
+		"""
 
-def _ensure_shape(arr: np.ndarray):
+		if len(arr.shape) == 3:
+			arr = arr.reshape((1, *arr.shape))
+		
+		return arr
 
-	"""
-	Ensures an array has four axes. If it has three, a fourth axis is added as the first, so the shape is 1 x m x n x o
-	"""
+	def _reconstruct_aerial(self, standardized: np.ndarray):
 
-	if len(arr.shape) == 3:
-		arr = arr.reshape((1, *arr.shape))
-	
-	return arr
+		"""
+		Reconstructs standardized images from saved mean and stds
+		standardized should have shape n_imgs x width x height x channels
+		"""
 
-def _reconstruct_aerial(standardized: np.ndarray):
+		void_pixels = (standardized==0).all(axis=1)
+		for i in range(standardized.shape[1]):
+			channel = standardized[:, i, :, :]
+			channel[~void_pixels] = channel[~void_pixels] * STDS[i] + MEANS[i]
+		images = standardized.astype(np.uint8)
 
-	"""
-	Reconstructs standardized images from saved mean and stds
-	standardized should have shape n_imgs x width x height x channels
-	"""
+		return np.transpose(images, (0, 2, 3, 1))
 
-	void_pixels = (standardized==0).all(axis=1)
-	for i in range(standardized.shape[1]):
-		channel = standardized[:, :, :, i]
-		channel[~void_pixels] = channel[~void_pixels] * STDS[i] + MEANS[i]
-	images = standardized.astype(np.uint8)
+	def reconstruct_aerial(self, standardized: np.ndarray, *show):
 
-	return images
+		"""
+		Reconstructs images from standardized images
+		Should be of shape width x height x channels for single image or n x width x height x channels for n images
+		to_show: Indices of images that should be showed when reconstructed if show
+		"""
 
-def reconstruct_aerial(standardized: np.ndarray, *show):
+		# Makes sure the standardized array has four axes
+		standardized = self._ensure_shape(standardized)
 
-	"""
-	Reconstructs images from standardized images
-	Should be of shape width x height x channels for single image or n x width x height x channels for n images
-	to_show: Indices of images that should be showed when reconstructed if show
-	"""
+		# Does the actual image reconstruction
+		self.log("Starting reconstruction of %i aerial image(s)..." % len(standardized))
+		aerial = self._reconstruct_aerial(standardized)
+		self.log("Done reconstructing %i aerial images\n" % len(standardized))
 
-	# Makes sure the standardized array has four axes
-	standardized = _ensure_shape(standardized)
-
-	# Does the actual image reconstruction
-	LOG.log("Starting reconstruction of %i aerial image(s)..." % len(standardized))
-	aerial = _reconstruct_aerial(standardized)
-	LOG.log("Done reconstructing %i aerial images\n" % len(standardized))
-
-	# Shows demanded reconstructions
-	if len(show) != 0:
-		LOG.log("Showing reconstructed %i image(s)\n" % len(show))
-	else:
-		LOG.log("Not showing any images\n")
-	for i in show:
-		im = Image.fromarray(aerial[i])
-		im.show()
-	
-	return aerial
+		# Shows demanded reconstructions
+		if len(show) != 0:
+			self.log("Showing reconstructed %i image(s)\n" % len(show))
+		else:
+			self.log("Not showing any images\n")
+		
+		for i in show:
+			im = Image.fromarray(aerial[i])
+			im.show()
+		
+		return aerial
 
 
-def reconstruct_aerial_from_file(path, *show):
+	def reconstruct_aerial_from_file(self, path, *show):
 
-	"""
-	Reconstructs images from saved npz's
-	"""
+		"""
+		Reconstructs images from saved npz's
+		"""
 
-	LOG.log("Loading standardized image...")
-	aerial = load_npz(path)
-	LOG.log("Done loading image\n")
+		self.log("Loading standardized image...")
+		aerial = DataLoader.load(path)
+		self.log("Done loading image\n")
 
-	aerial = reconstruct_aerial(aerial, *show)
+		aerial = self.reconstruct_aerial(aerial, *show)
 
-	return aerial
+		return aerial
 
 if __name__ == "__main__":
 
-	reconstruct_aerial_from_file(PATHS[0])
+	ImageReconstructor(
+		Logger("logs/reconstruction.log", "Reconstructing images from data")
+	).reconstruct_aerial_from_file(PATHS[0], 3, 5, 9)

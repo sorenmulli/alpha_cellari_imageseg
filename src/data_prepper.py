@@ -28,6 +28,7 @@ MR_COOL_IDCS = np.array([0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0
 	0, 1, 0, 0, 0, 1], dtype=np.bool)
 
 LOG = Logger("logs/data_prepper.log", "Preparation of data with images of shape %s" % ((IMAGE_SHAPE,)))
+USE_NPZ = False
 
 def _save_images():
 
@@ -195,10 +196,14 @@ def _prepare_data():
 	LOG(f"Images transposed. Shape: {aerial.shape}\n")
 
 	LOG("Saving images...")
-	aerial_path = "local_data/aerial_prepared.npz"
-	target_path = "local_data/target_prepared.npz"
-	np.savez_compressed(aerial_path, aerial.astype(np.float64))
-	np.savez_compressed(target_path, target.astype(np.float64))
+	aerial_path = "local_data/aerial_prepared"
+	target_path = "local_data/target_prepared"
+	if USE_NPZ:
+		np.savez_compressed(aerial_path, aerial.astype(np.float64))
+		np.savez_compressed(target_path, target.astype(np.bool))
+	else:
+		np.save(aerial_path, aerial.astype(np.float64))
+		np.save(target_path, target.astype(np.bool))
 	LOG("Saved aerial images to '%s' and target images to '%s'\n" % (aerial_path, target_path))
 
 	LOG("Splitting images into train, validation, test, and voids...")

@@ -11,6 +11,8 @@ example_architecture = {
 	"pool_dims": (2, 2), 
 }
 
+CPU = torch.device("cpu")
+GPU = torch.device("cpu")
 
 class Net(nn.Module):
 	def __init__(self, architecture_dict):
@@ -39,7 +41,9 @@ class Net(nn.Module):
 		x = self.decoder2(x, ind2, size2)
 		x = self.decoder3(x, ind1, size1)
 
-		return F.softmax(x, dim=1)
+		x = F.softmax(x, dim=1)
+
+		return x
 
 
 

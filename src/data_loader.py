@@ -5,46 +5,51 @@ import numpy as np
 import torch
 import json
 
-from logger import Logger
-from image_reconstructor import load_npz
+from logger import Logger, NullLogger
 from augmentations import data_augment
 
 JSON_PATH = "local_data/prep_out.json"
+with open(JSON_PATH, encoding="utf-8") as f:
+	CFG = json.load(f)
 CPU = torch.device("cpu")
-GPU = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+GPU = torch.device("cpu")
 
 class DataLoader:
 
 	def __init__(self, batch_size: int, augment: callable=None, logger: Logger=None):
 		
 		self.augment = augment if augment else lambda x, y: (x, y)
-			
 		
-		if logger:
-			self.log = logger
-		else:
-			self.log = lambda x: 0
-
-		with open(JSON_PATH, encoding="utf-8") as f:
-			self.cfg = json.load(f)
+		self.log = logger if logger else NullLogger()
 		
 		self.log("Loading data...")
-		with torch.no_grad():
-			self.aerial = torch.from_numpy(load_npz(self.cfg["aerial_path"]))
-			# print(self.aerial.size, self.aerial.itemsize, self.aerial.dtype)
-			self.target = torch.from_numpy(load_npz(self.cfg["target_path"]))
-			# print(self.target.size, self.target.itemsize, self.aerial.dtype)
+		aerial = torch.from_numpy(self.load(CFG["aerial_path"]))
+		target = torch.from_numpy(self.load(CFG["target_path"]))
 
-		self.train_x = self.aerial[self.cfg["train_idcs"]].to(GPU)
-		self.train_y = self.target[self.cfg["train_idcs"]].to(GPU)
-		self.val_x = self.aerial[self.cfg["val_idcs"]].to(GPU)
-		self.val_y = self.target[self.cfg["val_idcs"]].to(GPU)
-		self.test_x = self.aerial[self.cfg["test_idcs"]]
-		self.test_y = self.target[self.cfg["test_idcs"]]
-		self.log("Done loading %i images\n" % len(self.aerial))
+		self.train_x = aerial[CFG["train_idcs"]].float().to(GPU)
+		self.train_y = target[CFG["train_idcs"]].bool().to(GPU)
+		self.val_x = aerial[CFG["val_idcs"]].float().to(GPU)
+		self.val_y = target[CFG["val_idcs"]].bool().to(GPU)
+		self.log("Done loading %i images\n" % len(aerial))
 	
 		self.batch_size = batch_size
 		self.n_batches = len(self.train_x) // batch_size
+	
+	@staticmethod
+	def load(path: str):
+
+		"""
+		Loads a numpy array saved as a .npy or .npz file
+		path should not contain file extension
+		"""
+
+		# Prioritizes .npy, as they load much faster
+		if os.path.isfile(path+".npy"):
+			arr = np.load(path+".npy")
+		else:
+			arr = np.load(path+".npz")["arr_0"]
+
+		return arr
 
 	def _generate_batch(self, idcs: np.ndarray):
 
@@ -66,7 +71,13 @@ class DataLoader:
 	
 	def get_test(self):
 
-		return self.augment(self.test_x, self.test_y)
+		# Returns test data
+		# This is not stored in the class instance, as takes up unnecessary memory
+
+		aerial = torch.from_numpy(self.load(CFG["aerial_path"]))[CFG["test_idcs"]].float().to(GPU)
+		target = torch.from_numpy(self.load(CFG["target_path"]))[CFG["test_idcs"]].bool().to(GPU)
+
+		return self.augment(aerial, target)
 
 if __name__ == "__main__":
 	# Testing
@@ -77,8 +88,8 @@ if __name__ == "__main__":
 		logger
 	)
 	logger("Epoch")
-	for i, (train, test) in enumerate(data_loader.generate_epoch()):
-		logger(i, train.shape, test.shape, with_timestamp=False)
+	for i, (train_x, train_y) in enumerate(data_loader.generate_epoch()):
+		logger(i, train_x.shape, train_y.shape, with_timestamp=False)
 	logger.newline()
 
 	logger("Validation\n%s\n" % (data_loader.get_validation()[0].cpu().numpy().shape,))
