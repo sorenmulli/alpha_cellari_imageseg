@@ -15,16 +15,20 @@ ARCHITECTURE = {
 	"stride": 1,
 	"pool_dims": (2, 2), 
 }
-
+BATCH_SIZE = 7
 
 ######################
-logger = Logger("logs/training_loop_test.log", "Testing Training Loop")
+LOG = Logger("logs/training_loop_test.log", "Testing Training Loop")
 data_loader = DataLoader(
-	11,
-	logger = logger
+	BATCH_SIZE,
+	logger = LOG
 )
 net = Net(ARCHITECTURE)
 #####################
 
 for batch_data, batch_target in data_loader.generate_epoch():
+	#I SHOULD NOT BE NECESSARY: GET THIS INTO data_loader
+	LOG("Testing forward pass")
+	batch_data = batch_data.float()
 	net(batch_data)
+	LOG("Forward pass completed")
