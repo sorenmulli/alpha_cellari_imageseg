@@ -8,7 +8,7 @@ example_architecture = {
 	"kernel_size":  3,
 	"padding": 1, 
 	"stride": 1,
-	"pool_dims": (2,2), 
+	"pool_dims": (2, 2), 
 }
 
 
@@ -34,12 +34,12 @@ class Net(nn.Module):
 		x, ind1, size1 = self.encoder1(x)
 		x, ind2, size2 = self.encoder2(x)
 		x, ind3, size3 = self.encoder3(x)
-
-		x = self.decoder1(x, ind1, size1)
+		
+		x = self.decoder1(x, ind3, size3)
 		x = self.decoder2(x, ind2, size2)
-		x = self.decoder3(x, ind3, size3)
+		x = self.decoder3(x, ind1, size1)
 
-		return F.softmax(x,dim=3)
+		return F.softmax(x, dim=3)
 
 
 
@@ -47,3 +47,5 @@ class Net(nn.Module):
 
 #net = Net(example_architecture)
 #print(net)
+#x = torch.randn(10, 3, 512, 512)
+#net(x)
