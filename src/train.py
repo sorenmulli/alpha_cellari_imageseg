@@ -5,8 +5,10 @@ from logger import Logger
 from model import Net
 
 JSON_PATH = "local_data/prep_out.json"
+
 CPU = torch.device("cpu")
 GPU = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 ARCHITECTURE = {
 	"kernel_size":  3,
 	"padding": 1, 

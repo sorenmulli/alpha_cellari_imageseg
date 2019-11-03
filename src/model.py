@@ -39,7 +39,7 @@ class Net(nn.Module):
 		x = self.decoder2(x, ind2, size2)
 		x = self.decoder3(x, ind1, size1)
 
-		return F.softmax(x, dim=3)
+		return F.softmax(x, dim=1)
 
 
 
