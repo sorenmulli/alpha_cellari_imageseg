@@ -61,21 +61,20 @@ for epoch_idx in range(EPOCHS):
 
 		val_data, val_target = data_loader.get_validation() 
 		
-		targets = torch.argmax(val_target, dim = 1, keepdim = True).squeeze()
-		print(targets.size())
+		#targets = torch.argmax(val_target, dim = 1, keepdim = True).squeeze()
 
 		output = net(val_data)
 		
-		evalution_loss = criterion(output, targets)
+		evalution_loss = criterion(output, val_target)
 		LOG(f"Evaluation loss: {float(evalution_loss)}")
 		 
 	net.train()
 
 	training_loss = list()
 	for batch_data, batch_target in data_loader.generate_epoch():
-		targets = torch.argmax(batch_target, dim = 1, keepdim = True).squeeze()
+		#targets = torch.argmax(batch_target, dim = 1, keepdim = True).squeeze()
 		output = net(batch_data)
-		batch_loss = criterion(output, targets)
+		batch_loss = criterion(output, batch_target)
 
 		optimizer.zero_grad()
 		batch_loss.backward()
