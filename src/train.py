@@ -11,7 +11,7 @@ from data_loader import DataLoader
 from logger import get_timestamp, Logger
 from model import Net
 
-from augmentations import Augmenter, AugmentationConfig, flip_lr, flip_tb
+from augment import Augmenter, AugmentationConfig, flip_lr, flip_tb
 
 from time import sleep
 
@@ -26,8 +26,8 @@ ARCHITECTURE = {
 LEARNING_RATE = 5e-4
 
 
-BATCH_SIZE = 7
-EPOCHS = 3
+BATCH_SIZE = 3
+EPOCHS = 100
 VAL_EVERY = 1
 
 JSON_PATH = "local_data/prep_out.json"
