@@ -1,16 +1,41 @@
 from dataclasses import dataclass
-import 
 
 import numpy as np
 import torch
 
 from logger import Logger, NullLogger
 
+def flip_tb(image: torch.tensor, target: torch.tensor):
+
+	"""
+	Flips image and target images along the horizontal axis
+	Image size: n_images x channels x height x width
+	Target size: n_images x height x width
+	"""
+
+	image = image.flip(2)
+	target = target.flip(1)
+
+	return image, target
+
+def flip_lr(image: torch.tensor, target: torch.tensor):
+
+	"""
+	Flips image and target images along the horizontal axis
+	Image size: n_images x channels x height x width
+	Target size: n_images x height x width
+	"""
+
+	image = image.flip(3)
+	target = target.flip(2)
+
+	return image, target
+
 @dataclass
 class AugmentationConfig: 
-	augments: list
-	augment_p: list	
 	cropsize: iter = (450, 450)		
+	augments: iter = (flip_tb, flip_lr)
+	augment_p: iter = (.3, .3)
 
 
 class Augmenter:
@@ -57,39 +82,13 @@ class Augmenter:
 		
 		return image, target
 
-def flip_tb(image: torch.tensor, target: torch.tensor):
-
-	"""
-	Flips image and target images along the horizontal axis
-	Image size: n_images x channels x height x width
-	Target size: n_images x height x width
-	"""
-
-	image = image.flip(2)
-	target = target.flip(1)
-
-	return image, target
-
-def flip_lr(image: torch.tensor, target: torch.tensor):
-
-	"""
-	Flips image and target images along the horizontal axis
-	Image size: n_images x channels x height x width
-	Target size: n_images x height x width
-	"""
-
-	image = image.flip(3)
-	target = target.flip(2)
-
-	return image, target
-
 
 if __name__ == "__main__":
 
 	# Test case
 	from data_loader import DataLoader
 	log = Logger("logs/augmentation-test.log", "Testing image augmentations")
-	aug_cfg = AugmentationConfig([flip_tb, flip_lr], [.5, .5])
+	aug_cfg = AugmentationConfig()
 	img, target = DataLoader(
 		"local_data/prep_out.json",
 		3,
