@@ -74,8 +74,8 @@ class DataLoader:
 		# Returns test data
 		# This is not stored in the class instance, as takes up unnecessary memory
 
-		aerial = torch.from_numpy(self.load(CFG["aerial_path"]))[CFG["test_idcs"]].float().to(DEVICE)
-		target = torch.from_numpy(self.load(CFG["target_path"]))[CFG["test_idcs"]].bool().to(DEVICE)
+		aerial = torch.from_numpy(self.load(self.cfg["aerial_path"]))[self.cfg["test_idcs"]].float().to(DEVICE)
+		target = torch.from_numpy(self.load(self.cfg["target_path"]))[self.cfg["test_idcs"]].bool().to(DEVICE)
 
 		return self.augment(aerial, target)
 
