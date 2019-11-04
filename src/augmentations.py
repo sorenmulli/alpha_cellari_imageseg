@@ -24,7 +24,8 @@ class Augmenter:
 
 		"""
 		Crops image and target base self.augment_cfg.cropsize
-		Input size: n_images x channels x height x width
+		Image size: n_images x channels x height x width
+		Target size: n_images x height x width
 		"""
 
 		assert image.shape == target.shape
@@ -34,11 +35,15 @@ class Augmenter:
 		w_shift = np.random.randint(target.shape[3]-w)
 
 		image = image[:, :, h_shift:h_shift+h, w_shift:w_shift+w]
-		target = target[:, :, h_shift:h_shift+h, w_shift:w_shift+w]
+		target = target[:, h_shift:h_shift+h, w_shift:w_shift+w]
 
 		return image, target
 	
-	def augment(self, image, target):
+	def __call__(self, image: torch.tensor, target: torch.tensor):
+
+		return self.augment(image, target)
+	
+	def augment(self, image: torch.tensor, target: torch.tensor):
 		
 		self.log("Cropping images...")
 		image, target = self._crop(image, target)
@@ -57,13 +62,14 @@ def flip_tb(image: torch.tensor, target: torch.tensor):
 
 	"""
 	Flips image and target images along the horizontal axis
-	Input size: n_images x channels x height x width
+	Image size: n_images x channels x height x width
+	Target size: n_images x height x width
 	"""
 
 	assert image.shape == target.shape
 
 	image = image.flip(2)
-	target = target.flip(2)
+	target = target.flip(1)
 
 	return image, target
 
@@ -71,13 +77,14 @@ def flip_lr(image: torch.tensor, target: torch.tensor):
 
 	"""
 	Flips image and target images along the horizontal axis
-	Input size: n_images x channels x height x width
+	Image size: n_images x channels x height x width
+	Target size: n_images x height x width
 	"""
 
 	assert image.shape == target.shape
 
 	image = image.flip(3)
-	target = target.flip(3)
+	target = target.flip(2)
 
 	return image, target
 
@@ -91,7 +98,7 @@ if __name__ == "__main__":
 	img, target = DataLoader(
 		"local_data/prep_out.json",
 		5,
-		Augmenter(aug_cfg, logger=log).augment,
+		Augmenter(aug_cfg, logger=log),
 		logger=log
 	).get_test()
 
