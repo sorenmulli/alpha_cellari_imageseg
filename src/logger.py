@@ -57,7 +57,7 @@ class NullLogger(Logger):
 
     pass
 
-  def log(self, *tolog):
+  def log(self, *tolog, **kwargs):
 
     pass
 
