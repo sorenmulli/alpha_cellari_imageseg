@@ -66,7 +66,7 @@ for epoch_idx in range(EPOCHS):
 		output = net(val_data)
 		
 		evalution_loss = criterion(output, val_target)
-		LOG(f"Evaluation loss: {float(evalution_loss)}")
+		LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
 		 
 	net.train()
 
@@ -82,7 +82,7 @@ for epoch_idx in range(EPOCHS):
 
 		training_loss.append(float(batch_loss))
 		
-	LOG(f"Training loss: {np.mean(training_loss)}")
+	LOG(f"Epoch {epoch_idx}: Training loss: {np.mean(training_loss)}\n")
 
 
 		
