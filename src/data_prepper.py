@@ -7,7 +7,7 @@
 #########################################################
 import os, sys
 os.chdir(sys.path[0])
-
+import numpy as np
 import json
 import numpy as np
 from PIL import Image
@@ -86,13 +86,18 @@ def _create_one_hot(image):
 
 	image = image // 255
 
-	yellow_value = np.array([0,0,1])
+	yellow_value = np.array([0,0,2])
 	# Yellow = red + green
 	yellows = (image[:, :, 0] == 1) & (image[:, :, 1] == 1)
 	image[yellows] = yellow_value
 
 	return image.astype(np.bool)
-	
+
+def target_index(image):
+
+	image=np.argmax(image,axis=1)
+
+	return image	
 
 def _pad(image):
 
@@ -177,6 +182,10 @@ def _prepare_data():
 	LOG("Creating one-hot representation of target image...")
 	target = _create_one_hot(target)
 	LOG("Done creating one-hot. Shape: %s\n" % (target.shape,))
+
+	LOG("Creating target values...")
+	target = target_index(target)
+	LOG("Done creating target values. %s\n" % (target.shape,))
 
 	LOG("Padding images...")
 	aerial, target = _pad(aerial), _pad(target)
