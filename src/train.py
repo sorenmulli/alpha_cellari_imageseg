@@ -110,8 +110,8 @@ for epoch_idx in range(EPOCHS):
 	
 	
 
-plt.plot(full_eval_loss, np.arange(EPOCHS), 'r')
-plt.plot(full_training_loss, np.arange(EPOCHS), 'b')
+plt.plot(np.arange(EPOCHS), full_eval_loss, 'r')
+plt.plot(np.arange(EPOCHS), full_training_loss, 'b')
 
 plt.show()
 #net.save(f"local_data/models/{get_timestamp(True)}-model.pt")
