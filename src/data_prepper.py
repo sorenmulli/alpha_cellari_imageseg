@@ -205,6 +205,7 @@ def _prepare_data():
 	LOG("Transposing images to PyTorch's preferred format...")
 	aerial = np.transpose(aerial, (0, 3, 1, 2))
 	LOG(f"Images transposed. Shape: {aerial.shape}\n")
+	print(aerial.shape, target.shape)
 
 	LOG("Saving images...")
 	aerial_path = "local_data/aerial_prepared"

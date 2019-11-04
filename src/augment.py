@@ -28,11 +28,9 @@ class Augmenter:
 		Target size: n_images x height x width
 		"""
 
-		assert image.shape == target.shape
-
 		h, w = self.augment_cfg.cropsize
-		h_shift = np.random.randint(image.shape[2]-h)
-		w_shift = np.random.randint(target.shape[3]-w)
+		h_shift = np.random.randint(image.shape[3]-h)
+		w_shift = np.random.randint(image.shape[3]-w)
 
 		image = image[:, :, h_shift:h_shift+h, w_shift:w_shift+w]
 		target = target[:, h_shift:h_shift+h, w_shift:w_shift+w]
@@ -66,8 +64,6 @@ def flip_tb(image: torch.tensor, target: torch.tensor):
 	Target size: n_images x height x width
 	"""
 
-	assert image.shape == target.shape
-
 	image = image.flip(2)
 	target = target.flip(1)
 
@@ -80,8 +76,6 @@ def flip_lr(image: torch.tensor, target: torch.tensor):
 	Image size: n_images x channels x height x width
 	Target size: n_images x height x width
 	"""
-
-	assert image.shape == target.shape
 
 	image = image.flip(3)
 	target = target.flip(2)
@@ -97,7 +91,7 @@ if __name__ == "__main__":
 	aug_cfg = AugmentationConfig([flip_tb, flip_lr], [.5, .5])
 	img, target = DataLoader(
 		"local_data/prep_out.json",
-		5,
+		3,
 		Augmenter(aug_cfg, logger=log),
 		logger=log
 	).get_test()
