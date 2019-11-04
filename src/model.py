@@ -29,13 +29,13 @@ class Net(nn.Module):
 		self.log("Initializing encoding blocks...")
 		self.encoder1 = EncoderBlock(3, 10, 1, self.kernel_size, self.padding, self.stride, self.pool_dims)
 		self.encoder2 = EncoderBlock(10, 15, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
-		self.encoder3 = EncoderBlock(29, 31, 3, self.kernel_size, self.padding, self.stride, self.pool_dims)
+#		self.encoder3 = EncoderBlock(29, 31, 3, self.kernel_size, self.padding, self.stride, self.pool_dims)
 		self.log("Done initializing encoding blocks\n")
 
 		self.log("Initializing decoder blocks...")
 		self.decoder1 = DecoderBlock(15, 10,  2, self.kernel_size, self.padding, self.stride, self.pool_dims)
 		self.decoder2 = DecoderBlock(10, 3, 1, self.kernel_size, self.padding, self.stride, self.pool_dims)
-		self.decoder3 = DecoderBlock(17, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
+#		self.decoder3 = DecoderBlock(17, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
 		self.log("Done initializing decoder blocks\n")
 
 	def forward(self, x):
