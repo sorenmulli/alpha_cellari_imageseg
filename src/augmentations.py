@@ -6,10 +6,10 @@ import torch
 from logger import Logger, NullLogger
 
 @dataclass
-class AugmentationConfig:
-	cropsize = (450, 450)
+class AugmentationConfig: 
 	augments: list
-	augment_p: list
+	augment_p: list	
+	cropsize: iter = (450, 450)		
 
 
 class Augmenter:
