@@ -15,7 +15,7 @@ from augmentations import Augmenter, AugmentationConfig, flip_lr, flip_tb
 
 from time import sleep
 
-from matplotlib import pyplot 
+from matplotlib import pyplot as plt 
 
 ARCHITECTURE = {
 	"kernel_size":  3,
@@ -27,7 +27,7 @@ LEARNING_RATE = 5e-4
 
 
 BATCH_SIZE = 7
-EPOCHS = 100
+EPOCHS = 3
 VAL_EVERY = 1
 
 JSON_PATH = "local_data/prep_out.json"
@@ -69,6 +69,12 @@ Test size: {len(data_loader.get_test()[0])}
 
 #####################
 
+assert VAL_EVERY == 1
+full_training_loss = list()
+full_eval_loss = list()
+
+#####################
+
 for epoch_idx in range(EPOCHS):
 	if not epoch_idx % VAL_EVERY:
 		net.eval()
@@ -79,9 +85,13 @@ for epoch_idx in range(EPOCHS):
 
 		output = net(val_data)
 		
-		evalution_loss = criterion(output, val_target)
+		evalution_loss = criterion(output, val_target); full_eval_loss.append(evalution_loss)
+		
+		
 		LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
-		 
+		full_eval_loss.append(evalution_loss)
+
+		
 	net.train()
 
 	training_loss = list()
@@ -95,10 +105,12 @@ for epoch_idx in range(EPOCHS):
 		optimizer.step()
 
 		training_loss.append(float(batch_loss))
-		
+
+	full_training_loss.append(np.mean(training_loss))
 	LOG(f"Epoch {epoch_idx}: Training loss: {np.mean(training_loss)}\n")
 
+plt.plot(full_eval_loss, range(EPOCHS), 'r')
+plt.plot(full_training_loss, range(EPOCHS), 'b')
 
-		
-
+plt.show()
 #net.save(f"local_data/models/{get_timestamp(True)}-model.pt")
