@@ -24,7 +24,7 @@ LEARNING_RATE = 5e-4
 
 
 BATCH_SIZE = 7
-EPOCHS = 2
+EPOCHS = 10
 VAL_EVERY = 1
 
 JSON_PATH = "local_data/prep_out.json"
@@ -61,17 +61,21 @@ for epoch_idx in range(EPOCHS):
 
 		val_data, val_target = data_loader.get_validation() 
 		
+		targets = torch.argmax(val_target, dim = 1, keepdim = True).squeeze()
+		print(targets.size())
+
 		output = net(val_data)
-		evalution_loss = criterion(output, val_target)
+		
+		evalution_loss = criterion(output, targets)
 		LOG(f"Evaluation loss: {float(evalution_loss)}")
 		 
 	net.train()
 
 	training_loss = list()
 	for batch_data, batch_target in data_loader.generate_epoch():
-		
+		targets = torch.argmax(batch_target, dim = 1, keepdim = True).squeeze()
 		output = net(batch_data)
-		batch_loss = criterion(output, batch_target)
+		batch_loss = criterion(output, targets)
 
 		optimizer.zero_grad()
 		batch_loss.backward()
