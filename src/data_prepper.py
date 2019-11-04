@@ -219,7 +219,11 @@ def _prepare_data():
 	else:
 		np.save(aerial_path, aerial.astype(np.float64))
 		np.save(target_path, target.astype(np.bool))
-	LOG("Saved aerial images to '%s' and target images to '%s'\n" % (aerial_path, target_path))
+	LOG("Saved aerial images to '%s' and target images to '%s%s'\n" % (
+		aerial_path,
+		target_path,
+		".npz" if USE_NPZ else ".npy"
+	))
 
 	LOG("Splitting images into train, validation, test, and voids...")
 	train_idcs, val_idcs, test_idcs, void_idcs = _split_data(void_idcs)
