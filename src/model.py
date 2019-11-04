@@ -14,8 +14,6 @@ example_architecture = {
 	"pool_dims": (2, 2), 
 }
 
-CPU = torch.device("cpu")
-GPU = torch.device("cpu")
 
 class Net(nn.Module):
 	def __init__(self, architecture_dict, log: Logger=NullLogger()):
@@ -29,15 +27,15 @@ class Net(nn.Module):
 		self.pool_dims = architecture_dict["pool_dims"]
 
 		self.log("Initializing encoding blocks...")
-		self.encoder1 = EncoderBlock(3, 17, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
-		self.encoder2 = EncoderBlock(17, 29, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
-		self.encoder3 = EncoderBlock(29, 31, 3, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.encoder1 = EncoderBlock(3, 10, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.encoder2 = EncoderBlock(10, 30, 3, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		#self.encoder3 = EncoderBlock(29, 31, 3, self.kernel_size, self.padding, self.stride, self.pool_dims)
 		self.log("Done initializing encoding blocks\n")
 
 		self.log("Initializing decoder blocks...")
-		self.decoder1 = DecoderBlock(31, 29,  3, self.kernel_size, self.padding, self.stride, self.pool_dims)
-		self.decoder2 = DecoderBlock(29, 17, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
-		self.decoder3 = DecoderBlock(17, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.decoder1 = DecoderBlock(30, 10,  3, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.decoder2 = DecoderBlock(10, 3, 3, self.kernel_size, self.padding, self.stride, self.pool_dims)
+#		self.decoder3 = DecoderBlock(17, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
 		self.log("Done initializing decoder blocks\n")
 
 	def forward(self, x):
@@ -45,13 +43,13 @@ class Net(nn.Module):
 		self.log("Forwarding through encoder blocks...")
 		x, ind1, size1 = self.encoder1(x)
 		x, ind2, size2 = self.encoder2(x)
-		x, ind3, size3 = self.encoder3(x)
+#		x, ind3, size3 = self.encoder3(x)
 		self.log("Done forwarding through encoder blocks. Shape: %s" % (x.shape,))
 		
 		self.log("Forwarding through decoder blocks...")
-		x = self.decoder1(x, ind3, size3)
-		x = self.decoder2(x, ind2, size2)
-		x = self.decoder3(x, ind1, size1)
+		x = self.decoder1(x, ind2, size2)
+		x = self.decoder2(x, ind1, size1)
+#		x = self.decoder3(x, ind1, size1)
 		x = F.softmax(x, dim=1)
 		self.log("Done forwarding. Shape: %s" % (x.shape,))
 
