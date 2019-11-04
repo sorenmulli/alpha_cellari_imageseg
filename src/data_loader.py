@@ -12,7 +12,7 @@ DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cp
 
 class DataLoader:
 
-	def __init__(self, json_path: str , batch_size: int, augment: callable=None, logger: Logger=None):
+	def __init__(self, json_path: str, batch_size: int, augment: callable=None, logger: Logger=None):
 		
 		with open(json_path, encoding="utf-8") as f:
 			self.cfg = json.load(f)
