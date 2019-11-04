@@ -26,8 +26,8 @@ ARCHITECTURE = {
 LEARNING_RATE = 5e-4
 
 
-BATCH_SIZE = 3
-EPOCHS = 100
+BATCH_SIZE = 23
+EPOCHS = 3
 VAL_EVERY = 1
 
 JSON_PATH = "local_data/prep_out.json"
@@ -41,7 +41,7 @@ LOG = Logger("logs/training_loop_test.log", "Testing Training Loop")
 augmentations = AugmentationConfig(
 	augments =  [flip_lr, flip_tb],  
 	augment_p = [0.3, 0.3],
-	cropsize = (256, 256)
+	cropsize = (100, 100)
 )
 
 augmenter = Augmenter(augment_cfg=augmentations)
@@ -85,11 +85,10 @@ for epoch_idx in range(EPOCHS):
 
 		output = net(val_data)
 		
-		evalution_loss = criterion(output, val_target); full_eval_loss.append(evalution_loss)
-		
-		
+		evalution_loss = criterion(output, val_target)
+
 		LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
-		full_eval_loss.append(evalution_loss)
+		full_eval_loss.append(float(evalution_loss))
 
 		
 	net.train()
@@ -108,9 +107,11 @@ for epoch_idx in range(EPOCHS):
 
 	full_training_loss.append(np.mean(training_loss))
 	LOG(f"Epoch {epoch_idx}: Training loss: {np.mean(training_loss)}\n")
+	
+	
 
-plt.plot(full_eval_loss, range(EPOCHS), 'r')
-plt.plot(full_training_loss, range(EPOCHS), 'b')
+plt.plot(full_eval_loss, np.arange(EPOCHS), 'r')
+plt.plot(full_training_loss, np.arange(EPOCHS), 'b')
 
 plt.show()
 #net.save(f"local_data/models/{get_timestamp(True)}-model.pt")
