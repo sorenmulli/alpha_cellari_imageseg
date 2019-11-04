@@ -93,13 +93,13 @@ def _create_one_hot(image):
 
 	return image.astype(np.bool)
 
-def target_index(image):
+def _target_index(image):
 
-	image=np.argmax(image,axis=1)
+	image = np.argmax(image, axis=1)
 
 	return image	
 
-def _pad(image):
+def _pad(image, channels):
 
 	"""
 	Pads an m x n x 3 array on the right and bottom such that images of shape IMAGE_SHAPE fit nicely
@@ -107,22 +107,29 @@ def _pad(image):
 
 	extra_height = IMAGE_SHAPE[0] - image.shape[0] % IMAGE_SHAPE[0]
 	extra_width = IMAGE_SHAPE[1] - image.shape[1] % IMAGE_SHAPE[1]
-	padded_shape = (image.shape[0] + extra_height, image.shape[1] + extra_width, IMAGE_SHAPE[2])
+
+	new_dimensions = (image.shape[0] + extra_height, image.shape[1] + extra_width)
+	
+	padded_shape =  (*new_dimensions, channels) if channels else new_dimensions
+	
 	padded_img = np.zeros(padded_shape)
 	padded_img[:image.shape[0], :image.shape[1]] = image
 
 	return padded_img
 
-def _split_image(image):
+def _split_image(image, channels):
 
 	"""
-	Splits an image into n images of shape IMAGE_SHAPE and returns them as a n x m x o x 3 array
+	Splits an image into n images of shape IMAGE_SHAPE and returns them as a n x m x o x channels array
 	"""
 
 	split_shape = image.shape[0] // IMAGE_SHAPE[0],\
 				image.shape[1] // IMAGE_SHAPE[1]
 	n_imgs = split_shape[0] * split_shape[1]
-	split_imgs = np.empty((n_imgs, *IMAGE_SHAPE))
+	
+	split_dim = (IMAGE_SHAPE[0], IMAGE_SHAPE[1], channels) if channels else (IMAGE_SHAPE[0], IMAGE_SHAPE[1])
+	split_imgs = np.empty((n_imgs, *split_dim))
+
 	for i in range(split_shape[0]):
 		for j in range(split_shape[1]):
 			cut = image[i*IMAGE_SHAPE[0]:(i+1)*IMAGE_SHAPE[0], j*IMAGE_SHAPE[1]:(j+1)*IMAGE_SHAPE[1]]
@@ -184,15 +191,15 @@ def _prepare_data():
 	LOG("Done creating one-hot. Shape: %s\n" % (target.shape,))
 
 	LOG("Creating target values...")
-	target = target_index(target)
+	target = _target_index(target)
 	LOG("Done creating target values. %s\n" % (target.shape,))
 
 	LOG("Padding images...")
-	aerial, target = _pad(aerial), _pad(target)
+	aerial, target = _pad(aerial, IMAGE_SHAPE[2]), _pad(target, None)
 	LOG("Done padding images\nShapes: %s\n" % (aerial.shape,))
 
 	LOG("Splitting images...")
-	aerial, target = _split_image(aerial), _split_image(target)
+	aerial, target = _split_image(aerial, IMAGE_SHAPE[2]), _split_image(target, None)
 	LOG("Done splitting images\nNumber of images: %i\nShapes: %s\n" % (aerial.shape[0], IMAGE_SHAPE))
 
 	LOG("Detecting void images...")
@@ -201,7 +208,6 @@ def _prepare_data():
 
 	LOG("Transposing images to PyTorch's preferred format...")
 	aerial = np.transpose(aerial, (0, 3, 1, 2))
-	target = np.transpose(target, (0, 3, 1, 2))
 	LOG(f"Images transposed. Shape: {aerial.shape}\n")
 
 	LOG("Saving images...")
