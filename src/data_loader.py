@@ -1,5 +1,3 @@
-import os, sys
-os.chdir(sys.path[0])
 
 import numpy as np
 import torch
@@ -8,29 +6,29 @@ import json
 from logger import Logger, NullLogger
 from augmentations import data_augment
 
-JSON_PATH = "local_data/prep_out.json"
-with open(JSON_PATH, encoding="utf-8") as f:
-	CFG = json.load(f)
 
 DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 # DEVICE = torch.device("cpu")
 
 class DataLoader:
 
-	def __init__(self, batch_size: int, augment: callable=None, logger: Logger=None):
+	def __init__(self, json_path: str , batch_size: int, augment: callable=None, logger: Logger=None):
 		
+		with open(JSON_PATH, encoding="utf-8") as f:
+			self.cfg = json.load(f)
+
 		self.augment = augment if augment else lambda x, y: (x, y)
 		
 		self.log = logger if logger else NullLogger()
 		
 		self.log("Loading data...")
-		aerial = torch.from_numpy(self.load(CFG["aerial_path"]))
-		target = torch.from_numpy(self.load(CFG["target_path"]))
+		aerial = torch.from_numpy(self.load(self.cfg["aerial_path"]))
+		target = torch.from_numpy(self.load(self.cfg["target_path"]))
 
-		self.train_x = aerial[CFG["train_idcs"]].float().to(DEVICE)
-		self.train_y = target[CFG["train_idcs"]].bool().to(DEVICE)
-		self.val_x = aerial[CFG["val_idcs"]].float().to(DEVICE)
-		self.val_y = target[CFG["val_idcs"]].bool().to(DEVICE)
+		self.train_x = aerial[self.cfg["train_idcs"]].float().to(DEVICE)
+		self.train_y = target[self.cfg["train_idcs"]].bool().to(DEVICE)
+		self.val_x = aerial[self.cfg["val_idcs"]].float().to(DEVICE)
+		self.val_y = target[self.cfg["val_idcs"]].bool().to(DEVICE)
 		self.log("Done loading %i images\n" % len(aerial))
 	
 		self.batch_size = batch_size

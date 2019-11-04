@@ -1,4 +1,9 @@
+import os, sys
+os.chdir(sys.path[0])
+
+
 import torch
+
 
 from data_loader import DataLoader
 from logger import get_timestamp, Logger
@@ -35,7 +40,3 @@ for batch_data, batch_target in data_loader.generate_epoch():
 	LOG("Forward pass completed\n")
 
 net.save(f"local_data/models/{get_timestamp(True)}-model.pt")
-
-
-
-
