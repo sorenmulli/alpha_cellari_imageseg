@@ -27,6 +27,7 @@ BATCH_SIZE = 7
 ######################
 LOG = Logger("logs/training_loop_test.log", "Testing Training Loop")
 data_loader = DataLoader(
+	JSON_PATH,
 	BATCH_SIZE,
 	logger = LOG
 )
