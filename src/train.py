@@ -11,8 +11,11 @@ from data_loader import DataLoader
 from logger import get_timestamp, Logger
 from model import Net
 
+from augmentations import Augmenter, AugmentationConfig, flip_lr, flip_tb
+
 from time import sleep
 
+from matplotlib import pyplot 
 
 ARCHITECTURE = {
 	"kernel_size":  3,
@@ -24,7 +27,7 @@ LEARNING_RATE = 5e-4
 
 
 BATCH_SIZE = 7
-EPOCHS = 10
+EPOCHS = 100
 VAL_EVERY = 1
 
 JSON_PATH = "local_data/prep_out.json"
@@ -34,9 +37,19 @@ DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cp
 ######################
 # Initialization
 LOG = Logger("logs/training_loop_test.log", "Testing Training Loop")
+
+augmentations = AugmentationConfig(
+	augments =  [flip_lr, flip_tb],  
+	augment_p = [0.3, 0.3],
+	cropsize = (256, 256)
+)
+
+augmenter = Augmenter(augment_cfg=augmentations)
+
 data_loader = DataLoader(
 	JSON_PATH,
 	BATCH_SIZE,
+#	augment= augmenter.augment  
 #	logger = LOG
 )
 net = Net(ARCHITECTURE).to(DEVICE)
@@ -55,27 +68,27 @@ Test size: {len(data_loader.get_test()[0])}
 """)
 
 #####################
+
 for epoch_idx in range(EPOCHS):
 	if not epoch_idx % VAL_EVERY:
 		net.eval()
 
 		val_data, val_target = data_loader.get_validation() 
 		
-		targets = torch.argmax(val_target, dim = 1, keepdim = True).squeeze()
-		print(targets.size())
+		#targets = torch.argmax(val_target, dim = 1, keepdim = True).squeeze()
 
 		output = net(val_data)
 		
-		evalution_loss = criterion(output, targets)
-		LOG(f"Evaluation loss: {float(evalution_loss)}")
+		evalution_loss = criterion(output, val_target)
+		LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
 		 
 	net.train()
 
 	training_loss = list()
 	for batch_data, batch_target in data_loader.generate_epoch():
-		targets = torch.argmax(batch_target, dim = 1, keepdim = True).squeeze()
+		#targets = torch.argmax(batch_target, dim = 1, keepdim = True).squeeze()
 		output = net(batch_data)
-		batch_loss = criterion(output, targets)
+		batch_loss = criterion(output, batch_target)
 
 		optimizer.zero_grad()
 		batch_loss.backward()
@@ -83,7 +96,7 @@ for epoch_idx in range(EPOCHS):
 
 		training_loss.append(float(batch_loss))
 		
-	LOG(f"Training loss: {np.mean(training_loss)}")
+	LOG(f"Epoch {epoch_idx}: Training loss: {np.mean(training_loss)}\n")
 
 
 		
