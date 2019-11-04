@@ -27,15 +27,15 @@ class Net(nn.Module):
 		self.pool_dims = architecture_dict["pool_dims"]
 
 		self.log("Initializing encoding blocks...")
-		self.encoder1 = EncoderBlock(3, 12, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
-		self.encoder2 = EncoderBlock(12, 24, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
-		self.encoder3 = EncoderBlock(24, 50, 3, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.encoder1 = EncoderBlock(3, 32, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.encoder2 = EncoderBlock(32, 64, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.encoder3 = EncoderBlock(64, 128, 3, self.kernel_size, self.padding, self.stride, self.pool_dims)
 		self.log("Done initializing encoding blocks\n")
 
 		self.log("Initializing decoder blocks...")
-		self.decoder1 = DecoderBlock(50, 24,  3, self.kernel_size, self.padding, self.stride, self.pool_dims)
-		self.decoder2 = DecoderBlock(24, 12, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
-		self.decoder3 = DecoderBlock(12, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.decoder1 = DecoderBlock(128, 64,  3, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.decoder2 = DecoderBlock(64, 32, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
+		self.decoder3 = DecoderBlock(32, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims)
 		self.log("Done initializing decoder blocks\n")
 
 	def forward(self, x):
