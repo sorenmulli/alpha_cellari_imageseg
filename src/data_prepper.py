@@ -107,9 +107,7 @@ def _pad(image, channels):
 	extra_width = IMAGE_SHAPE[1] - image.shape[1] % IMAGE_SHAPE[1]
 
 	new_dimensions = (image.shape[0] + extra_height, image.shape[1] + extra_width)
-	print(new_dimensions)
 	padded_shape =  (*new_dimensions, channels) if channels else new_dimensions
-	print(padded_shape)	
 	padded_img = np.zeros(padded_shape)
 	padded_img[:image.shape[0], :image.shape[1]] = image
 
@@ -205,7 +203,6 @@ def _prepare_data():
 	LOG("Transposing images to PyTorch's preferred format...")
 	aerial = np.transpose(aerial, (0, 3, 1, 2))
 	LOG(f"Images transposed. Shape: {aerial.shape}\n")
-	print(aerial.shape, target.shape)
 
 	LOG("Saving images...")
 	aerial_path = "local_data/aerial_prepared"
