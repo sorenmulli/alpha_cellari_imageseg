@@ -94,9 +94,7 @@ def _create_one_hot(image):
 	return image.astype(np.bool)
 
 def _target_index(image):
-
-	image = np.argmax(image, axis=1)
-
+	image = np.argmax(image, axis=2)
 	return image	
 
 def _pad(image, channels):
@@ -109,9 +107,9 @@ def _pad(image, channels):
 	extra_width = IMAGE_SHAPE[1] - image.shape[1] % IMAGE_SHAPE[1]
 
 	new_dimensions = (image.shape[0] + extra_height, image.shape[1] + extra_width)
-	
+	print(new_dimensions)
 	padded_shape =  (*new_dimensions, channels) if channels else new_dimensions
-	
+	print(padded_shape)	
 	padded_img = np.zeros(padded_shape)
 	padded_img[:image.shape[0], :image.shape[1]] = image
 
@@ -186,11 +184,8 @@ def _prepare_data():
 	aerial, means, stds = _standardize(aerial)
 	LOG("Done standardizing image\n")
 
-	LOG("Creating one-hot representation of target image...")
+	LOG("Squeezing target images to single channel...")
 	target = _create_one_hot(target)
-	LOG("Done creating one-hot. Shape: %s\n" % (target.shape,))
-
-	LOG("Creating target values...")
 	target = _target_index(target)
 	LOG("Done creating target values. %s\n" % (target.shape,))
 
