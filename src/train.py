@@ -26,7 +26,7 @@ ARCHITECTURE = {
 LEARNING_RATE = 5e-4
 
 
-BATCH_SIZE = 23
+BATCH_SIZE = 3
 EPOCHS = 100
 VAL_EVERY = 1
 
@@ -61,11 +61,12 @@ optimizer = torch.optim.Adam(net.parameters(), lr=LEARNING_RATE)
 
 #####################
 
-LOG(f"""
-Train size: {len(data_loader.train_x)}
+LOG(
+	f"""Train size: {len(data_loader.train_x)}
 Eval size: {len(data_loader.val_x)}
 Test size: {len(data_loader.get_test()[0])} 
-""")
+"""
+)
 
 #####################
 
@@ -77,18 +78,19 @@ full_eval_loss = list()
 
 for epoch_idx in range(EPOCHS):
 	if not epoch_idx % VAL_EVERY:
-		net.eval()
+		with torch.no_grad():
+			net.eval()
 
-		val_data, val_target = data_loader.get_validation() 
-		
-		#targets = torch.argmax(val_target, dim = 1, keepdim = True).squeeze()
+			val_data, val_target = data_loader.get_validation() 
+			
+			#targets = torch.argmax(val_target, dim = 1, keepdim = True).squeeze()
 
-		output = net(val_data)
-		
-		evalution_loss = criterion(output, val_target)
+			output = net(val_data)
+			
+			evalution_loss = criterion(output, val_target)
 
-		LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
-		full_eval_loss.append(float(evalution_loss))
+			LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
+			full_eval_loss.append(float(evalution_loss))
 
 		
 	net.train()
@@ -102,16 +104,19 @@ for epoch_idx in range(EPOCHS):
 		optimizer.zero_grad()
 		batch_loss.backward()
 		optimizer.step()
+		torch.cuda.empty_cache()
 
 		training_loss.append(float(batch_loss))
 
 	full_training_loss.append(np.mean(training_loss))
-	LOG(f"Epoch {epoch_idx}: Training loss: {np.mean(training_loss)}\n")
-	
-	
+	LOG(f"Epoch {epoch_idx}: Training loss:   {np.mean(training_loss)}\n")
 
-plt.plot(np.arange(EPOCHS), full_eval_loss, 'r')
-plt.plot(np.arange(EPOCHS), full_training_loss, 'b')
 
+plt.figure(figsize=(19.2, 10.8))
+plt.plot(np.arange(EPOCHS), full_eval_loss, 'r', label="Validation loss")
+plt.plot(np.arange(EPOCHS), full_training_loss, 'b', label="Training loss")
+plt.xlabel("Epoch")
+plt.ylabel(str(criterion))
+plt.legend()
 plt.show()
 #net.save(f"local_data/models/{get_timestamp(True)}-model.pt")
