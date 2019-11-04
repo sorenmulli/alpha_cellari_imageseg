@@ -41,7 +41,7 @@ LOG = Logger("logs/training_loop_test.log", "Testing Training Loop")
 augmentations = AugmentationConfig(
 	augments =  [flip_lr, flip_tb],  
 	augment_p = [0.3, 0.3],
-	cropsize = (100, 100)
+	cropsize = (250, 250)
 )
 
 augmenter = Augmenter(augment_cfg=augmentations)
