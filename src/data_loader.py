@@ -27,9 +27,9 @@ class DataLoader:
 		target = torch.from_numpy(self.load(self.cfg["target_path"]))
 
 		self.train_x = aerial[self.cfg["train_idcs"]].float().to(DEVICE)
-		self.train_y = target[self.cfg["train_idcs"]].bool().to(DEVICE)
+		self.train_y = target[self.cfg["train_idcs"]].long().to(DEVICE)
 		self.val_x = aerial[self.cfg["val_idcs"]].float().to(DEVICE)
-		self.val_y = target[self.cfg["val_idcs"]].bool().to(DEVICE)
+		self.val_y = target[self.cfg["val_idcs"]].long().to(DEVICE)
 		self.log("Done loading %i images\n" % len(aerial))
 	
 		self.batch_size = batch_size
@@ -75,7 +75,7 @@ class DataLoader:
 		# This is not stored in the class instance, as takes up unnecessary memory
 
 		aerial = torch.from_numpy(self.load(self.cfg["aerial_path"]))[self.cfg["test_idcs"]].float().to(DEVICE)
-		target = torch.from_numpy(self.load(self.cfg["target_path"]))[self.cfg["test_idcs"]].bool().to(DEVICE)
+		target = torch.from_numpy(self.load(self.cfg["target_path"]))[self.cfg["test_idcs"]].long().to(DEVICE)
 
 		return self.augment(aerial, target)
 

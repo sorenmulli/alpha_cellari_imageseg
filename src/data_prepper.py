@@ -19,7 +19,7 @@ EPS = np.finfo("float64").eps
 #til git store 
 IMAGE_SHAPE = (512, 512, 3)  # Height, width, channel
 IMAGE_PATHS = ("local_data/raw.png", "local_data/target.png")
-SPLIT = (.8, .2,)
+SPLIT = (.85, .15,)
 
 MR_COOL_IDCS = np.array([0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,
 	1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
