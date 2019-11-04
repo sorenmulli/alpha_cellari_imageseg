@@ -19,7 +19,7 @@ EPS = np.finfo("float64").eps
 #til git store 
 IMAGE_SHAPE = (512, 512, 3)  # Height, width, channel
 IMAGE_PATHS = ("local_data/raw.png", "local_data/target.png")
-SPLIT = (.85, .15,)
+SPLIT = (.83, .17,)
 
 MR_COOL_IDCS = np.array([0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,
 	1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
@@ -137,7 +137,7 @@ def _split_image(image, channels):
 
 	return split_imgs
 
-def _find_voids(images):
+def _find_voids(images: np.ndarray):
 
 	"""
 	Returns a boolean vector of where the images are void
@@ -149,15 +149,16 @@ def _find_voids(images):
 
 	return voids
 
-def _split_data(voids):
+def _split_data(voids: np.ndarray):
 
 	"""
+	voids must be a boolean vector
 	Splits images into train, validation, test, and voids
 	Returns four integer lists, each containing indices of images that belong to the respective category
 	"""
 
-	train_val_idcs = np.where(~MR_COOL_IDCS)[0]
-	test_idcs = np.where(MR_COOL_IDCS)[0]
+	train_val_idcs = np.where(~(MR_COOL_IDCS | voids))[0]
+	test_idcs = np.where(MR_COOL_IDCS & ~voids)[0]
 
 	# Calculates size of different sets
 	n_train = int(SPLIT[0] * train_val_idcs.size)
@@ -165,10 +166,10 @@ def _split_data(voids):
 
 	# Gets arrays of indices
 	# Converts to list so they can be saved in json
+	train_idcs = [int(x) for x in train_val_idcs[:n_train]]
+	val_idcs = [int(x) for x in train_val_idcs[n_train:]]
+	test_idcs = [int(x) for x in test_idcs]
 	void_idcs = [int(x) for x in np.where(voids)[0]]
-	train_idcs = [int(x) for x in train_val_idcs[:n_train] if x not in void_idcs]
-	val_idcs = [int(x) for x in train_val_idcs[n_train:] if x not in void_idcs]
-	test_idcs = [int(x) for x in test_idcs if x not in void_idcs]
 
 	return train_idcs, val_idcs, test_idcs, void_idcs
 
@@ -203,8 +204,8 @@ def _prepare_data():
 	LOG("Done splitting images\nNumber of images: %i\nShapes: %s\n" % (aerial.shape[0], IMAGE_SHAPE))
 
 	LOG("Detecting void images...")
-	void_idcs = _find_voids(aerial)
-	LOG("Done finding voids\n2 x %i images where voids\n" % void_idcs.sum())
+	voids = _find_voids(aerial)
+	LOG("Done finding voids\n%i images where voids\n" % voids.sum())
 
 	LOG("Transposing images to PyTorch's preferred format...")
 	aerial = np.transpose(aerial, (0, 3, 1, 2))
@@ -226,7 +227,7 @@ def _prepare_data():
 	))
 
 	LOG("Splitting images into train, validation, test, and voids...")
-	train_idcs, val_idcs, test_idcs, void_idcs = _split_data(void_idcs)
+	train_idcs, val_idcs, test_idcs, void_idcs = _split_data(voids)
 	LOG("Done splitting images\nTrain: %i images\nValidation: %i images\nTest: %i images\nVoid: %i images\n"
 		% (len(train_idcs), len(val_idcs), len(test_idcs), len(void_idcs)))
 
