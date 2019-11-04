@@ -27,7 +27,7 @@ LEARNING_RATE = 5e-4
 
 
 BATCH_SIZE = 23
-EPOCHS = 3
+EPOCHS = 100
 VAL_EVERY = 1
 
 JSON_PATH = "local_data/prep_out.json"
@@ -49,7 +49,7 @@ augmenter = Augmenter(augment_cfg=augmentations)
 data_loader = DataLoader(
 	JSON_PATH,
 	BATCH_SIZE,
-#	augment= augmenter.augment  
+	augment= augmenter.augment  
 #	logger = LOG
 )
 net = Net(ARCHITECTURE).to(DEVICE)
