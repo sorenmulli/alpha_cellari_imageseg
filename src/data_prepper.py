@@ -86,7 +86,7 @@ def _create_one_hot(image):
 
 	image = image // 255
 
-	yellow_value = np.array([0,0,2])
+	yellow_value = np.array([0,0,1])
 	# Yellow = red + green
 	yellows = (image[:, :, 0] == 1) & (image[:, :, 1] == 1)
 	image[yellows] = yellow_value
