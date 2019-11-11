@@ -95,7 +95,7 @@ def _create_one_hot(image):
 
 def _target_index(image):
 	image = np.argmax(image, axis=2)
-	return image	
+	return image
 
 def _pad(image, channels):
 
@@ -210,10 +210,10 @@ def _prepare_data():
 	target_path = "local_data/target_prepared"
 	if USE_NPZ:
 		np.savez_compressed(aerial_path, aerial.astype(np.float64))
-		np.savez_compressed(target_path, target.astype(np.bool))
+		np.savez_compressed(target_path, target.astype(np.uint8))
 	else:
 		np.save(aerial_path, aerial.astype(np.float64))
-		np.save(target_path, target.astype(np.bool))
+		np.save(target_path, target.astype(np.uint8))
 	LOG("Saved aerial images to '%s' and target images to '%s%s'\n" % (
 		aerial_path,
 		target_path,
