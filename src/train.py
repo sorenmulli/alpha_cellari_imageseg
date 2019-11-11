@@ -8,6 +8,7 @@ from torch import nn
 import numpy as np
 
 from data_loader import DataLoader
+from forward_passer import classify_images
 from logger import get_timestamp, Logger
 from model import Net
 
@@ -117,6 +118,6 @@ if __name__ == "__main__":
 	batch_size = 3
 	epochs = 10
 
-
-	model_trainer(architecture, learning_rate, augmentations, epochs, batch_size,val_every = 10)
+	net = model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 1)
+	classify_images(net, None, True, "train-forward-test.png")
 #net.save(f"local_data/models/{get_timestamp(True)}-model.pt")

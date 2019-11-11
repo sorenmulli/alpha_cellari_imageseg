@@ -15,6 +15,7 @@ with open("local_data/prep_out.json", encoding="utf-8") as f:
 	CFG = json.load(f)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+# TODO: Mere sigende navn
 def classify_images(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch = True, save_paths = None):
 
 	"""

@@ -14,11 +14,12 @@ class BlueLayer(nn.Module):
 		self.dropout = nn.Dropout(p = probs, inplace = False)
 		self.bnorm = nn.BatchNorm2d(out_channels)
 		self.relu = nn.ReLU()
+		self.probs = probs
 
 	def forward(self, x):
 		
 		x = self.convolutional(x)
-		if probs == None:
+		if self.probs == None:
 			pass
 		else:
 			x = self.dropout(x)
