@@ -37,7 +37,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 	optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
 
-	LOG(f"Train size: {len(data_loader.train_x)}\n Eval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}")
+	LOG(f"Train size: {len(data_loader.train_x)}\nEval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}\n")
 	
 	full_training_loss = list()
 	full_eval_loss = list()
