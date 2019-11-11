@@ -14,6 +14,7 @@ from model import Net
 from augment import Augmenter, AugmentationConfig, flip_lr, flip_tb
 
 from matplotlib import pyplot as plt 
+import matplotlib.animation as anim
 
 from utilities import class_weight_counter
 
@@ -37,14 +38,14 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 	LOG(f"Train size: {len(data_loader.train_x)}\n Eval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}")
 	
-	assert val_every == 1
 	full_training_loss = list()
 	full_eval_loss = list()
-
+	train_iter = list()
+	valid_iter = list()
 
 	
 	for epoch_idx in range(epochs):
-		if not epoch_idx % val_every:
+		if epoch_idx % val_every == 0:
 			with torch.no_grad():
 				net.eval()
 
@@ -60,8 +61,9 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 				LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
 				LOG("Accuracy measures: Global acc.: {G:.4}, Class acc.: {C:.4}, Mean IoU.: {mIoU:.4}, Bound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, output)))
+				
 				full_eval_loss.append(float(evalution_loss))
-
+				valid_iter.append(epoch_idx)
 			
 		net.train()
 
@@ -77,26 +79,33 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 			torch.cuda.empty_cache()
 
 			training_loss.append(float(batch_loss))
+		train_iter.append(epoch_idx)
 		full_training_loss.append(np.mean(training_loss))
-		LOG(f"Epoch {epoch_idx}: Training loss:   {np.mean(training_loss)}\n")
-
-	if with_plot:
-		plt.figure(figsize=(19.2, 10.8))
-		plt.plot(np.arange(epochs), full_eval_loss, 'r', label="Validation loss")
-		plt.plot(np.arange(epochs), full_training_loss, 'b', label="Training loss")
-		plt.xlabel("Epoch")
-		plt.ylabel(str(criterion))
-		plt.legend()
-		plt.show()
-
+		
+		if epoch_idx % val_every == 0:
+			LOG(f"Epoch {epoch_idx}: Training loss:   {np.mean(training_loss)}")
+			LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}\n")
+		if epoch_idx == epochs-1:
+			if with_plot:
+				plt.figure(figsize=(19.2, 10.8))
+				plt.plot(valid_iter, full_eval_loss, 'r', label="Validation loss")
+				plt.plot(train_iter, full_training_loss, 'b', label="Training loss")
+				plt.xlabel("Epoch")
+				plt.ylabel(str(criterion))
+				plt.legend()
+				plt.show()				
+	return net
 if __name__ == "__main__":
 	os.chdir(sys.path[0])
+
+
 
 	architecture = {
 	"kernel_size":  3,
 	"padding": 1, 
 	"stride": 1,
-	"pool_dims": (2, 2)}
+	"pool_dims": (2, 2),
+	"probs": 0.5,}
 
 
 	learning_rate = 5e-4
@@ -109,8 +118,8 @@ if __name__ == "__main__":
 	augment_p = [0.3, 0.3])
 
 	batch_size = 3
-	epochs = 100
+	epochs = 10
 
 
-	model_trainer(architecture, learning_rate, augmentations, epochs, batch_size)
+	model_trainer(architecture, learning_rate, augmentations, epochs, batch_size,val_every = 10)
 #net.save(f"local_data/models/{get_timestamp(True)}-model.pt")
