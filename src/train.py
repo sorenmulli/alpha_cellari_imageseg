@@ -60,7 +60,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 				evalution_loss = criterion(output, val_target)
 
 				LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
-				LOG("Accuracy measures: Global acc.: {G:.4}, Class acc.: {C:.4}, Mean IoU.: {mIoU:.4}, Bound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, output)))
+				LOG("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, output)))
 				
 				full_eval_loss.append(float(evalution_loss))
 				valid_iter.append(epoch_idx)
