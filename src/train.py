@@ -14,7 +14,7 @@ from augment import Augmenter, AugmentationConfig, flip_lr, flip_tb
 
 from matplotlib import pyplot as plt 
 
-torch.manual_seed(0)
+from utilities import class_weight_counter
 
 JSON_PATH = "local_data/prep_out.json"
 DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
@@ -30,7 +30,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 	net = Net(architecture).to(DEVICE)
 
-	criterion = nn.CrossEntropyLoss()
+	criterion = nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y))
 	optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
 
