@@ -8,6 +8,7 @@ from torch import nn
 import numpy as np
 
 from data_loader import DataLoader
+from forward_passer import classify_images
 from logger import get_timestamp, Logger
 from model import Net
 
@@ -36,7 +37,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 	optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
 
-	LOG(f"Train size: {len(data_loader.train_x)}\n Eval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}")
+	LOG(f"Train size: {len(data_loader.train_x)}\nEval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}\n")
 	
 	full_training_loss = list()
 	full_eval_loss = list()
@@ -120,6 +121,6 @@ if __name__ == "__main__":
 	batch_size = 3
 	epochs = 10
 
-
-	model_trainer(architecture, learning_rate, augmentations, epochs, batch_size,val_every = 10)
+	net = model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 1)
+	classify_images(net, None, True, "train-forward-test.png")
 #net.save(f"local_data/models/{get_timestamp(True)}-model.pt")
