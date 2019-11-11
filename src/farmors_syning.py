@@ -1,5 +1,4 @@
 import os, sys
-os.chdir(sys.path[0])
 
 import json
 from PIL import Image
@@ -37,6 +36,7 @@ def stitch(images: np.ndarray, split_shape: tuple, show = False, savepath: str =
 
 		
 if __name__ == "__main__":
+	os.chdir(sys.path[0])
 
 	# Test case
 	from image_reconstructor import ImageReconstructor
