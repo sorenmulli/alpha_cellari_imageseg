@@ -17,9 +17,9 @@ PATHS = ("local_data/aerial_prepared", "local_data/target_prepared")
 
 class ImageReconstructor:
 
-	def __init__(self, logger: Logger=None):
+	def __init__(self, logger: Logger = NullLogger()):
 		
-		self.log = logger if logger else NullLogger()
+		self.log = logger
 
 	def _ensure_shape(self, arr: np.ndarray):
 
