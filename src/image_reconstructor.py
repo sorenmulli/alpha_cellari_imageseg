@@ -1,5 +1,4 @@
 import os, sys
-os.chdir(sys.path[0])
 
 import json
 import numpy as np
@@ -129,6 +128,7 @@ class ImageReconstructor:
 		
 
 if __name__ == "__main__":
+	os.chdir(sys.path[0])
 
 	# Test cases
 	reconstructor = ImageReconstructor(Logger("logs/test-reconstruction.log", "Reconstructing images from data"))
