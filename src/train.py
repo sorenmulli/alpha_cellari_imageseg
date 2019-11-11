@@ -1,5 +1,6 @@
 import os, sys
 
+from evaluation import global_score
 
 import torch
 from torch import nn
@@ -15,6 +16,7 @@ from augment import Augmenter, AugmentationConfig, flip_lr, flip_tb
 from matplotlib import pyplot as plt 
 import matplotlib.animation as anim
 
+from utilities import class_weight_counter
 
 JSON_PATH = "local_data/prep_out.json"
 DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
@@ -30,12 +32,11 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 	net = Net(architecture).to(DEVICE)
 
-	criterion = nn.CrossEntropyLoss()
+	criterion = nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y))
 	optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
 
 	LOG(f"Train size: {len(data_loader.train_x)}\n Eval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}")
-
 	
 	full_training_loss = list()
 	full_eval_loss = list()
@@ -54,6 +55,8 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 				output = net(val_data)
 				
+				global_score(val_target, output)
+
 				evalution_loss = criterion(output, val_target)
 
 				full_eval_loss.append(float(evalution_loss))
@@ -88,7 +91,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 				plt.ylabel(str(criterion))
 				plt.legend()
 				plt.show()				
-
+	return net
 if __name__ == "__main__":
 	os.chdir(sys.path[0])
 
@@ -98,7 +101,8 @@ if __name__ == "__main__":
 	"kernel_size":  3,
 	"padding": 1, 
 	"stride": 1,
-	"pool_dims": (2, 2)}
+	"pool_dims": (2, 2),
+	"probs": 0.5,}
 
 
 	learning_rate = 5e-4
@@ -110,8 +114,8 @@ if __name__ == "__main__":
 	cropsize = (250, 250), 
 	augment_p = [0.3, 0.3])
 
-	batch_size = 1
-	epochs = 2
+	batch_size = 3
+	epochs = 10
 
 
 	model_trainer(architecture, learning_rate, augmentations, epochs, batch_size,val_every = 10)

@@ -86,7 +86,7 @@ def _create_one_hot(image):
 
 	image = image // 255
 
-	yellow_value = np.array([0,0,2])
+	yellow_value = np.array([0,0,1])
 	# Yellow = red + green
 	yellows = (image[:, :, 0] == 1) & (image[:, :, 1] == 1)
 	image[yellows] = yellow_value
@@ -95,7 +95,7 @@ def _create_one_hot(image):
 
 def _target_index(image):
 	image = np.argmax(image, axis=2)
-	return image	
+	return image
 
 def _pad(image, channels):
 
@@ -131,7 +131,7 @@ def _split_image(image, channels):
 			cut = image[i*IMAGE_SHAPE[0]:(i+1)*IMAGE_SHAPE[0], j*IMAGE_SHAPE[1]:(j+1)*IMAGE_SHAPE[1]]
 			split_imgs[i*split_shape[1]+j] = cut
 
-	return split_imgs
+	return split_imgs, split_shape
 
 def _find_voids(images: np.ndarray):
 
@@ -193,7 +193,8 @@ def _prepare_data():
 	LOG("Done padding images\nShapes: %s\n" % (aerial.shape,))
 
 	LOG("Splitting images...")
-	aerial, target = _split_image(aerial, IMAGE_SHAPE[2]), _split_image(target, None)
+	aerial, split_shape = _split_image(aerial, IMAGE_SHAPE[2])
+	target, _ = _split_image(target, None)
 	LOG("Done splitting images\nNumber of images: %i\nShapes: %s\n" % (aerial.shape[0], IMAGE_SHAPE))
 
 	LOG("Detecting void images...")
@@ -209,10 +210,10 @@ def _prepare_data():
 	target_path = "local_data/target_prepared"
 	if USE_NPZ:
 		np.savez_compressed(aerial_path, aerial.astype(np.float64))
-		np.savez_compressed(target_path, target.astype(np.bool))
+		np.savez_compressed(target_path, target.astype(np.uint8))
 	else:
 		np.save(aerial_path, aerial.astype(np.float64))
-		np.save(target_path, target.astype(np.bool))
+		np.save(target_path, target.astype(np.uint8))
 	LOG("Saved aerial images to '%s' and target images to '%s%s'\n" % (
 		aerial_path,
 		target_path,
@@ -227,6 +228,7 @@ def _prepare_data():
 	LOG("Saving data preparation output...")
 	prep_out = {
 		"image_shape": IMAGE_SHAPE,
+		"split_shape": split_shape,
 		"split": SPLIT,
 		"means": means,
 		"stds": stds,
