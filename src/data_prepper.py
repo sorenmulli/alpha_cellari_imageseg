@@ -131,7 +131,7 @@ def _split_image(image, channels):
 			cut = image[i*IMAGE_SHAPE[0]:(i+1)*IMAGE_SHAPE[0], j*IMAGE_SHAPE[1]:(j+1)*IMAGE_SHAPE[1]]
 			split_imgs[i*split_shape[1]+j] = cut
 
-	return split_imgs
+	return split_imgs, split_shape
 
 def _find_voids(images: np.ndarray):
 
@@ -193,8 +193,8 @@ def _prepare_data():
 	LOG("Done padding images\nShapes: %s\n" % (aerial.shape,))
 
 	LOG("Splitting images...")
-	aerial, target = _split_image(aerial, IMAGE_SHAPE[2]), _split_image(target, None)
-
+	aerial, split_shape = _split_image(aerial, IMAGE_SHAPE[2])
+	target, _ = _split_image(target, None)
 	LOG("Done splitting images\nNumber of images: %i\nShapes: %s\n" % (aerial.shape[0], IMAGE_SHAPE))
 
 	LOG("Detecting void images...")
@@ -228,6 +228,7 @@ def _prepare_data():
 	LOG("Saving data preparation output...")
 	prep_out = {
 		"image_shape": IMAGE_SHAPE,
+		"split_shape": split_shape,
 		"split": SPLIT,
 		"means": means,
 		"stds": stds,

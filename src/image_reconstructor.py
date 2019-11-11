@@ -17,9 +17,9 @@ PATHS = ("local_data/aerial_prepared", "local_data/target_prepared")
 
 class ImageReconstructor:
 
-	def __init__(self, logger: Logger=None):
+	def __init__(self, logger: Logger = NullLogger()):
 		
-		self.log = logger if logger else NullLogger()
+		self.log = logger
 
 	def _ensure_shape(self, arr: np.ndarray):
 
@@ -69,12 +69,12 @@ class ImageReconstructor:
 		else:
 			self.log("Not showing any images\n")
 		
+		self.log("Showing %i images" % len(show))
 		for i in show:
 			im = Image.fromarray(aerial[i])
 			im.show()
 		
 		return aerial
-
 
 	def reconstruct_aerial_from_file(self, path, *show):
 
@@ -90,8 +90,46 @@ class ImageReconstructor:
 
 		return aerial
 
+	def reconstruct_output(self, output: np.ndarray, *show):
+
+		"""
+		Reconstructs output image from network
+		Shape: n_images x n_channels x height x width
+		"""
+
+		self.log("Ensuring shape...")
+		output = self._ensure_shape(output)
+		output = output.transpose(0, 2, 3, 1)
+		self.log("Done ensuring shape. Shape: %s\n" % (output.shape, ))
+
+		red = np.array([255, 0, 0], dtype=np.uint8)
+		green = np.array([0, 255, 0], dtype=np.uint8)
+		yellow = np.array([255, 255, 0], dtype=np.uint8)
+
+		self.log("Determining classes and inserting colours...")
+		classes = np.argmax(output, 3)
+		reconst = np.empty_like(output, dtype=np.uint8)
+		reconst[classes==0] = red
+		reconst[classes==1] = green
+		reconst[classes==2] = yellow
+		self.log("Done determining classes and inserting colours\n")
+
+		self.log("Showing %i images" % len(show))
+		for i in show:
+			Image.fromarray(reconst[i]).show()
+
+		return reconst
+		
+
 if __name__ == "__main__":
 
-	ImageReconstructor(
-		Logger("logs/reconstruction.log", "Reconstructing images from data")
-	).reconstruct_aerial_from_file(PATHS[0], 3, 5, 9)
+	# Test cases
+	reconstructor = ImageReconstructor(Logger("logs/test_reconstruction.log", "Reconstructing images from data"))
+	# reconstructor.reconstruct_aerial_from_file(PATHS[0], 3, 5, 9)
+
+	test_output = np.random.randn(2, 3, 512, 512)
+	reconstructor.reconstruct_output(test_output, 0, 1)
+
+
+
+
