@@ -13,25 +13,24 @@ with open(JSON_PATH, encoding="utf-8") as f:
 	CFG = json.load(f)
 MEANS = CFG["means"]
 STDS = CFG["stds"]
-PATHS = ("local_data/aerial_prepared", "local_data/target_prepared")
+PATHS = CFG["aerial_path"], CFG["target_path"]
+
+def ensure_shape(arr: np.ndarray or torch.Tensor, axes = 4):
+
+	"""
+	Ensures an array has four axes. If it has three, a fourth axis is added as the first, so the shape is 1 x m x n x o
+	"""
+
+	if len(arr.shape) == axes - 1:
+		arr = arr.reshape((1, *arr.shape))
+	
+	return arr
 
 class ImageReconstructor:
 
 	def __init__(self, logger: Logger = NullLogger()):
 		
 		self.log = logger
-
-	def _ensure_shape(self, arr: np.ndarray):
-
-		"""
-		Ensures an array has four axes. If it has three, a fourth axis is added as the first, so the shape is 1 x m x n x o
-		"""
-
-		if len(arr.shape) == 3:
-			arr = arr.reshape((1, *arr.shape))
-		
-		return arr
-
 	def _reconstruct_aerial(self, standardized: np.ndarray):
 
 		"""
@@ -56,7 +55,7 @@ class ImageReconstructor:
 		"""
 
 		# Makes sure the standardized array has four axes
-		standardized = self._ensure_shape(standardized)
+		standardized = ensure_shape(standardized)
 
 		# Does the actual image reconstruction
 		self.log("Starting reconstruction of %i aerial image(s)..." % len(standardized))
@@ -69,7 +68,7 @@ class ImageReconstructor:
 		else:
 			self.log("Not showing any images\n")
 		
-		self.log("Showing %i images" % len(show))
+		self.log("Showing %i images\n" % len(show))
 		for i in show:
 			im = Image.fromarray(aerial[i])
 			im.show()
@@ -90,31 +89,39 @@ class ImageReconstructor:
 
 		return aerial
 
-	def reconstruct_output(self, output: np.ndarray, *show):
+	def reconstruct_output(self, output: np.ndarray, voids: np.ndarray = None, *show):
 
 		"""
 		Reconstructs output image from network
-		Shape: n_images x n_channels x height x width
+		Shape: n
+		yellow = np.array([255, 255, 0], dtype=np.uint8)_images x n_channels x height x width
+		voids: Boolean vector of shape n_images x height x width
+		If given, all pixels where it is true will be set to black
 		"""
 
 		self.log("Ensuring shape...")
-		output = self._ensure_shape(output)
+		output = ensure_shape(output)
+		voids = ensure_shape(voids, axes=3)
 		output = output.transpose(0, 2, 3, 1)
 		self.log("Done ensuring shape. Shape: %s\n" % (output.shape, ))
 
 		red = np.array([255, 0, 0], dtype=np.uint8)
 		green = np.array([0, 255, 0], dtype=np.uint8)
 		yellow = np.array([255, 255, 0], dtype=np.uint8)
+		black = np.array([0, 0, 0], dtype=np.uint8)
 
 		self.log("Determining classes and inserting colours...")
 		classes = np.argmax(output, 3)
-		reconst = np.empty_like(output, dtype=np.uint8)
+		reconst = np.zeros_like(output, dtype=np.uint8)
 		reconst[classes==0] = red
 		reconst[classes==1] = green
 		reconst[classes==2] = yellow
+		if voids is not None:
+			self.log("Setting void pixels to black...")
+			reconst[voids] = black
 		self.log("Done determining classes and inserting colours\n")
 
-		self.log("Showing %i images" % len(show))
+		self.log("Showing %i images\n" % len(show))
 		for i in show:
 			Image.fromarray(reconst[i]).show()
 
@@ -124,11 +131,12 @@ class ImageReconstructor:
 if __name__ == "__main__":
 
 	# Test cases
-	reconstructor = ImageReconstructor(Logger("logs/test_reconstruction.log", "Reconstructing images from data"))
-	# reconstructor.reconstruct_aerial_from_file(PATHS[0], 3, 5, 9)
+	reconstructor = ImageReconstructor(Logger("logs/test-reconstruction.log", "Reconstructing images from data"))
+	reconstructor.reconstruct_aerial_from_file(PATHS[0], 3, 5, 9)
 
+	voids = np.random.randint(2, size=(2, 512, 512), dtype=np.bool)
 	test_output = np.random.randn(2, 3, 512, 512)
-	reconstructor.reconstruct_output(test_output, 0, 1)
+	reconstructor.reconstruct_output(test_output, voids, 0, 1)
 
 
 

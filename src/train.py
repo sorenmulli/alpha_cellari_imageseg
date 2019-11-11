@@ -85,6 +85,8 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 		plt.ylabel(str(criterion))
 		plt.legend()
 		plt.show()
+	
+	return net
 
 if __name__ == "__main__":
 	os.chdir(sys.path[0])
