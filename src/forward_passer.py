@@ -26,6 +26,7 @@ def classify_images(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitc
 
 	# Loads data and performs input validation
 	x = ensure_shape(DataLoader.load(CFG["aerial_path"]))
+	y = np.empty_like(x)
 	if idcs is not None:
 		x = ensure_shape(x[idcs])
 		if save_paths is not None:
@@ -34,7 +35,6 @@ def classify_images(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitc
 	x = torch.from_numpy(x).float().to(DEVICE)
 
 	# Performs forward pass and finds voids
-	y = np.empty_like(x)
 	with torch.no_grad():
 		for i in range(x.shape[0]):
 			y[i] = net(ensure_shape(x[i])).cpu().numpy()

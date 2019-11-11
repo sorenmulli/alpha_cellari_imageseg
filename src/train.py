@@ -106,10 +106,10 @@ if __name__ == "__main__":
 	"padding": 1, 
 	"stride": 1,
 	"pool_dims": (2, 2),
-	"probs": 0,}
+	"probs": 0.1,}
 
 
-	learning_rate = 5e-4
+	learning_rate = 2e-4
 
 
 
@@ -120,8 +120,8 @@ if __name__ == "__main__":
 	)
 
 	batch_size = 3
-	epochs = 10
+	epochs = 2000
 
 	net = model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 1)
-	classify_images(net, None, True, "train-forward-test.png")
+	classify_images(net, None, True, "local_data/full-forward.png")
 #net.save(f"local_data/models/{get_timestamp(True)}-model.pt")

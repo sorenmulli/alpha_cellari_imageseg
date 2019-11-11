@@ -9,7 +9,7 @@ from sklearn.metrics import confusion_matrix
 def accuracy_measures(y_true_tensor: torch.Tensor, network_output: torch.Tensor, measures: dict = {'G': True, 'C': True, 'mIoU': True, 'BF': True}):
 	### Assumes that it receives images of shape: (# images, height, width)
 	y_pred_tensor = softmax_output_to_prediction(network_output)
-	y_true, y_pred = y_true_tensor.flatten().detach().numpy(), y_pred_tensor.flatten().detach().numpy()
+	y_true, y_pred = y_true_tensor.flatten().detach().cpu().numpy(), y_pred_tensor.flatten().detach().cpu().numpy()
 
 	n_classes =  network_output.size()[1]
 	conf_matrix = confusion_matrix(y_true, y_pred)
