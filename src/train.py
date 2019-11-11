@@ -14,6 +14,7 @@ from augment import Augmenter, AugmentationConfig, flip_lr, flip_tb
 
 from matplotlib import pyplot as plt 
 
+torch.manual_seed(0)
 
 JSON_PATH = "local_data/prep_out.json"
 DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
