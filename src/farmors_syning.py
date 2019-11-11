@@ -9,7 +9,7 @@ import torch
 
 from logger import Logger, NullLogger
 	
-def stitch(images: np.ndarray or torch.tensor, split_shape: tuple, show = False, savepath: str = ""):
+def stitch(images: np.ndarray, split_shape: tuple, show = False, savepath: str = ""):
 
 	"""
 	Performs stitching of reconstructed numpy images
