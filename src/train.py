@@ -93,7 +93,8 @@ if __name__ == "__main__":
 	"kernel_size":  3,
 	"padding": 1, 
 	"stride": 1,
-	"pool_dims": (2, 2)}
+	"pool_dims": (2, 2),
+	"probs": 0.5,}
 
 
 	learning_rate = 5e-4
@@ -106,7 +107,7 @@ if __name__ == "__main__":
 	augment_p = [0.3, 0.3])
 
 	batch_size = 3
-	epochs = 100
+	epochs = 10
 
 
 	model_trainer(architecture, learning_rate, augmentations, epochs, batch_size)

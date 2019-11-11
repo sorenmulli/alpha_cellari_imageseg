@@ -7,34 +7,36 @@ import torch.nn.functional as F
 
 
 class BlueLayer(nn.Module):
-	def __init__(self, in_channels, out_channels, kernel_size, padding, stride, bias=True, dilation=1):
+	def __init__(self, in_channels, out_channels, kernel_size, padding, stride, probs = 0, bias=True, dilation=1):
 		super().__init__()
 		
 		self.convolutional = nn.Conv2d(in_channels, out_channels, kernel_size = kernel_size, padding = padding, stride = stride,bias =  bias, dilation =  dilation)
+		self.dropout = nn.Dropout(p = probs, inplace = False)
 		self.bnorm = nn.BatchNorm2d(out_channels)
 		self.relu = nn.ReLU()
 
 	def forward(self, x):
 		
 		x = self.convolutional(x)
+		x = self.dropout(x)
 		x = self.bnorm(x)
 		x = self.relu(x)
 
 		return x
 #https://stackoverflow.com/questions/49433936/how-to-initialize-weights-in-pytorch
 class EncoderBlock(nn.Module):
-	def __init__(self, in_size, out_size, n_layers, kernel_size, padding, stride, mpool_dim):
+	def __init__(self, in_size, out_size, n_layers, kernel_size, padding, stride, mpool_dim, dropout):
 		super().__init__()
 		
 		layers = []
 
 		layers.append(
-			BlueLayer(in_size, out_size, kernel_size, padding, stride)
+			BlueLayer(in_size, out_size, kernel_size, padding, stride, dropout)
 		)
 		
 		for _ in range(n_layers-1):
 			layers.append(
-				BlueLayer(out_size, out_size, kernel_size, padding, stride)
+				BlueLayer(out_size, out_size, kernel_size, padding, stride, dropout)
 			)
 		
 		self.encoder = nn.Sequential(*layers)
@@ -50,7 +52,7 @@ class EncoderBlock(nn.Module):
 		return x, indices, upsample_size  
 
 class DecoderBlock(nn.Module):
-	def __init__(self, in_size, out_size, n_layers, kernel_size, padding, stride, unpool_dim):
+	def __init__(self, in_size, out_size, n_layers, kernel_size, padding, stride, unpool_dim, dropout):
 		super().__init__()
 		
 		layers = []
@@ -58,11 +60,11 @@ class DecoderBlock(nn.Module):
 		
 		for _ in range(n_layers-1):
 			layers.append(
-				BlueLayer(in_size, in_size, kernel_size, padding, stride)
+				BlueLayer(in_size, in_size, kernel_size, padding, stride, dropout)
 			)
 
 		layers.append(
-			BlueLayer(in_size, out_size, kernel_size, padding, stride)
+			BlueLayer(in_size, out_size, kernel_size, padding, stride, dropout)
 		)
 
 		self.unpool = nn.MaxUnpool2d(*unpool_dim)
