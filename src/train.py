@@ -1,5 +1,6 @@
 import os, sys
 
+from evaluation import global_score
 
 import torch
 from torch import nn
@@ -35,7 +36,6 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 
 	LOG(f"Train size: {len(data_loader.train_x)}\n Eval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}")
-
 	
 	assert val_every == 1
 	full_training_loss = list()
@@ -54,6 +54,8 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 				output = net(val_data)
 				
+				global_score(val_target, output)
+
 				evalution_loss = criterion(output, val_target)
 
 				LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
@@ -95,7 +97,8 @@ if __name__ == "__main__":
 	"kernel_size":  3,
 	"padding": 1, 
 	"stride": 1,
-	"pool_dims": (2, 2)}
+	"pool_dims": (2, 2),
+	"probs": 0.5,}
 
 
 	learning_rate = 5e-4
@@ -108,7 +111,7 @@ if __name__ == "__main__":
 	augment_p = [0.3, 0.3])
 
 	batch_size = 3
-	epochs = 100
+	epochs = 10
 
 
 	model_trainer(architecture, learning_rate, augmentations, epochs, batch_size)
