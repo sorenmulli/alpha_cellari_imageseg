@@ -32,7 +32,7 @@ VAL_EVERY = 1
 
 JSON_PATH = "local_data/prep_out.json"
 DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-# DEVICE = torch.device("cpu")
+#DEVICE = torch.device("cpu")
 
 ######################
 # Initialization

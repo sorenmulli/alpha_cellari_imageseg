@@ -8,7 +8,6 @@ from logger import Logger, NullLogger
 
 
 DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-# DEVICE = torch.device("cpu")
 
 class DataLoader:
 
