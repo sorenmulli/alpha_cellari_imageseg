@@ -1,5 +1,4 @@
 import os, sys
-os.chdir(sys.path[0])
 
 import json
 from PIL import Image
@@ -58,6 +57,7 @@ def classify_images(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitc
 
 
 if __name__ == "__main__":
+	os.chdir(sys.path[0])
 
 	# Test case
 	net = Net(example_architecture)

@@ -54,14 +54,12 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 				
 				#targets = torch.argmax(val_target, dim = 1, keepdim = True).squeeze()
 
-				output = net(val_data)
+				val_output = net(val_data)
 				
 				
 
-				evalution_loss = criterion(output, val_target)
+				evalution_loss = criterion(val_output, val_target)
 
-				LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
-				LOG("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, output)))
 				
 				full_eval_loss.append(float(evalution_loss))
 				valid_iter.append(epoch_idx)
@@ -85,7 +83,9 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 		
 		if epoch_idx % val_every == 0:
 			LOG(f"Epoch {epoch_idx}: Training loss:   {np.mean(training_loss)}")
-			LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}\n")
+			LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
+			LOG("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, val_output)))
+
 		if epoch_idx == epochs-1:
 			if with_plot:
 				plt.figure(figsize=(19.2, 10.8))
@@ -106,7 +106,7 @@ if __name__ == "__main__":
 	"padding": 1, 
 	"stride": 1,
 	"pool_dims": (2, 2),
-	"probs": 0.5,}
+	"probs": 0,}
 
 
 	learning_rate = 5e-4
@@ -116,7 +116,8 @@ if __name__ == "__main__":
 	augmentations = AugmentationConfig(
 	augments =  [flip_lr, flip_tb],  
 	cropsize = (250, 250), 
-	augment_p = [0.3, 0.3])
+	augment_p = [0.3, 0.3]
+	)
 
 	batch_size = 3
 	epochs = 10
