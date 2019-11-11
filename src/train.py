@@ -1,6 +1,6 @@
 import os, sys
 
-from evaluation import global_score
+from evaluation import accuracy_measures
 
 import torch
 from torch import nn
@@ -56,10 +56,13 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 				output = net(val_data)
 				
-				global_score(val_target, output)
+				
 
 				evalution_loss = criterion(output, val_target)
 
+				LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
+				LOG("Accuracy measures: Global acc.: {G:.4}, Class acc.: {C:.4}, Mean IoU.: {mIoU:.4}, Bound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, output)))
+				
 				full_eval_loss.append(float(evalution_loss))
 				valid_iter.append(epoch_idx)
 			
