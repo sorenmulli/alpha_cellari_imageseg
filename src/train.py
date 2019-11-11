@@ -122,5 +122,5 @@ if __name__ == "__main__":
 	epochs = 10
 
 	net = model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 1)
-	classify_images(net, None, True, "train-forward-test.png")
+	classify_images(net, None, True, "local_data/full-forward-pass.png")
 #net.save(f"local_data/models/{get_timestamp(True)}-model.pt")
