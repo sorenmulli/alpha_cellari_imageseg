@@ -38,7 +38,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 
 	LOG(f"Train size: {len(data_loader.train_x)}\nEval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}\n")
-	
+	LOG(f"Neural network information\n\t{net}")
 	full_training_loss = list()
 	full_eval_loss = list()
 	train_iter = list()
@@ -98,7 +98,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 	return net
 if __name__ == "__main__":
 	os.chdir(sys.path[0])
-
+	
 
 
 	architecture = {
