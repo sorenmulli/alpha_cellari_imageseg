@@ -10,5 +10,5 @@
  
 echo "Running script..."
 python3 test_print_slet_gerne.py
-python3 model.py
+python3 train.py
 echo "Submitted training model"
