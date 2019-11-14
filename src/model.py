@@ -69,3 +69,4 @@ class Net(nn.Module):
 #print(net)
 #x = torch.randn(10, 3, 512, 512)
 #net(x)
+#net.save("test_model.pt")
