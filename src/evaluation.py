@@ -6,12 +6,15 @@ import numpy as np
 from sklearn.metrics import jaccard_similarity_score 
 from sklearn.metrics import confusion_matrix
 
-def accuracy_measures(y_true_tensor: torch.Tensor, network_output: torch.Tensor, measures: dict = {'G': True, 'C': True, 'mIoU': True, 'BF': True}):
+def accuracy_measures(y_true_tensor: torch.Tensor, y_pred_tensor: torch.Tensor, n_classes: int = 3, is_onehot: bool = True,  measures: dict = {'G': True, 'C': True, 'mIoU': True, 'BF': True}):
 	### Assumes that it receives images of shape: (# images, height, width)
-	y_pred_tensor = softmax_output_to_prediction(network_output)
+	
+	if is_onehot:
+		y_pred_tensor = softmax_output_to_prediction(y_pred_tensor)
+	
 	y_true, y_pred = y_true_tensor.flatten().detach().cpu().numpy(), y_pred_tensor.flatten().detach().cpu().numpy()
 
-	n_classes =  network_output.size()[1]
+	
 	conf_matrix = confusion_matrix(y_true, y_pred)
 	output = dict()
 

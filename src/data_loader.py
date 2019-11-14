@@ -71,7 +71,7 @@ class DataLoader:
 	
 	def get_validation(self):
 
-		return self.augment(self.val_x, self.val_y)
+		return self.val_x, self.val_y
 	
 	def get_test(self):
 
@@ -81,7 +81,7 @@ class DataLoader:
 		aerial = torch.from_numpy(self.load(self.cfg["aerial_path"]))[self.cfg["test_idcs"]].float().to(DEVICE)
 		target = torch.from_numpy(self.load(self.cfg["target_path"]))[self.cfg["test_idcs"]].long().to(DEVICE)
 
-		return self.augment(aerial, target)
+		return aerial, target
 
 #if __name__ == "__main__":
 	# Testing

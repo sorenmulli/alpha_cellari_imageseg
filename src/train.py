@@ -1,6 +1,6 @@
 import os, sys
 
-from evaluation import accuracy_measures
+import evaluation
 
 import torch
 from torch import nn
@@ -84,7 +84,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 		if epoch_idx % val_every == 0:
 			LOG(f"Epoch {epoch_idx}: Training loss:   {np.mean(training_loss)}")
 			LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
-			LOG("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, val_output)))
+			LOG("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**evaluation.accuracy_measures(val_target, val_output)))
 
 		if epoch_idx == epochs-1:
 			if with_plot:
