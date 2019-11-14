@@ -7,12 +7,6 @@ from PIL import Image
 from logger import Logger, NullLogger
 from data_loader import DataLoader
 
-JSON_PATH = "local_data/prep_out.json"
-with open(JSON_PATH, encoding="utf-8") as f:
-	CFG = json.load(f)
-MEANS = CFG["means"]
-STDS = CFG["stds"]
-PATHS = CFG["aerial_path"], CFG["target_path"]
 
 def ensure_shape(arr: np.ndarray or torch.Tensor, axes = 4):
 
@@ -27,8 +21,13 @@ def ensure_shape(arr: np.ndarray or torch.Tensor, axes = 4):
 
 class ImageReconstructor:
 
-	def __init__(self, logger: Logger = NullLogger()):
-		
+	def __init__(self, logger: Logger = NullLogger(), json_path: str = "local_data/prep_out.json"):
+		with open(json_path , encoding="utf-8") as f:
+			self.cfg = json.load(f)
+		self.means = self.cfg["means"]
+		self.stds = self.cfg["stds"]
+		self.paths = self.cfg["aerial_path"], self.cfg["target_path"]
+
 		self.log = logger
 	def _reconstruct_aerial(self, standardized: np.ndarray):
 
@@ -40,7 +39,7 @@ class ImageReconstructor:
 		void_pixels = (standardized==0).all(axis=1)
 		for i in range(standardized.shape[1]):
 			channel = standardized[:, i, :, :]
-			channel[~void_pixels] = channel[~void_pixels] * STDS[i] + MEANS[i]
+			channel[~void_pixels] = channel[~void_pixels] * self.stds[i] + self.means[i]
 		images = standardized.astype(np.uint8)
 
 		return np.transpose(images, (0, 2, 3, 1))
@@ -132,7 +131,7 @@ if __name__ == "__main__":
 
 	# Test cases
 	reconstructor = ImageReconstructor(Logger("logs/test-reconstruction.log", "Reconstructing images from data"))
-	reconstructor.reconstruct_aerial_from_file(PATHS[0], 3, 5, 9)
+	reconstructor.reconstruct_aerial_from_file(reconstructor.paths[0], 3, 5, 9)
 
 	voids = np.random.randint(2, size=(2, 512, 512), dtype=np.bool)
 	test_output = np.random.randn(2, 3, 512, 512)
