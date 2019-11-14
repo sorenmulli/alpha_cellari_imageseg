@@ -23,9 +23,15 @@ class DataLoader:
 		self.log("Loading data...")
 		aerial = torch.from_numpy(self.load(self.cfg["aerial_path"]))
 		target = torch.from_numpy(self.load(self.cfg["target_path"]))
-
+		values, counts = torch.unique(target, return_counts = True)
+		
+		
 		self.train_x = aerial[self.cfg["train_idcs"]].float().to(DEVICE)
 		self.train_y = target[self.cfg["train_idcs"]].long().to(DEVICE)
+		
+		values, counts = torch.unique(self.train_y, return_counts = True)
+
+
 		self.val_x = aerial[self.cfg["val_idcs"]].float().to(DEVICE)
 		self.val_y = target[self.cfg["val_idcs"]].long().to(DEVICE)
 		self.log("Done loading %i images\n" % len(aerial))
@@ -46,7 +52,6 @@ class DataLoader:
 			arr = np.load(path+".npy")
 		else:
 			arr = np.load(path+".npz")["arr_0"]
-
 		return arr
 
 	def _generate_batch(self, idcs: np.ndarray):
