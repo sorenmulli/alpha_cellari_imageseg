@@ -33,5 +33,6 @@ def accuracy_measures(y_true_tensor: torch.Tensor, y_pred_tensor: torch.Tensor, 
 		F1s = np.empty(n_classes)
 		for class_ in  range(n_classes):
 			F1s[class_] = 2* conf_matrix[class_, class_] / (conf_matrix[class_].sum()  + conf_matrix[:, class_].sum())	
+		print(F1s)
 		output['BF'] = F1s.mean()
 	return output
