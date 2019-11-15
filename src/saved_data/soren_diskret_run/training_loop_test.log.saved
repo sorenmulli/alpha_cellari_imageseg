@@ -1,0 +1,2823 @@
+2019-11-14 09:11:09.714648	Testing Training Loop
+
+2019-11-14 09:11:17.783634	Train size: 69
+                          	Eval size: 15
+                          	Test size: 24
+
+2019-11-14 09:11:20.571503	Epoch 0: Training loss:   1.0708860573561296
+2019-11-14 09:11:20.572286	Epoch 0: Evaluation loss: 1.0994501113891602
+2019-11-14 09:11:23.662619	Accuracy measures: Global acc.: 0.04755
+                          	Class acc.: 0.3333
+                          	Mean IoU.: 0.01586
+                          	Bound. F1: 0.03171
+
+2019-11-14 09:13:07.288032	Train size: 69
+                          	Eval size: 15
+                          	Test size: 24
+
+2019-11-14 09:13:09.993719	Epoch 0: Training loss:   1.0995986357979153
+2019-11-14 09:13:09.994539	Epoch 0: Evaluation loss: 1.0971720218658447
+2019-11-14 09:13:23.676090	Train size: 69
+                          	Eval size: 15
+                          	Test size: 24
+
+2019-11-14 09:13:26.215220	Epoch 0: Training loss:   1.0880913371625154
+2019-11-14 09:13:26.215845	Epoch 0: Evaluation loss: 1.1036230325698853
+2019-11-14 09:13:29.313238	Accuracy measures: Global acc.: 0.02183
+                          	Class acc.: 0.3333
+                          	Mean IoU.: 0.007278
+                          	Bound. F1: 0.01456
+
+2019-11-14 09:13:39.926504	Epoch 5: Training loss:   1.0023519189461418
+2019-11-14 09:13:39.927460	Epoch 5: Evaluation loss: 0.9672855734825134
+2019-11-14 09:13:43.056259	Accuracy measures: Global acc.: 0.9326
+                          	Class acc.: 0.6836
+                          	Mean IoU.: 0.5234
+                          	Bound. F1: 0.9536
+
+2019-11-14 09:13:51.894385	Epoch 10: Training loss:   0.9759352284929027
+2019-11-14 09:13:51.895076	Epoch 10: Evaluation loss: 0.9593757390975952
+2019-11-14 09:13:54.951007	Accuracy measures: Global acc.: 0.9358
+                          	Class acc.: 0.7758
+                          	Mean IoU.: 0.5548
+                          	Bound. F1: 1.004
+
+2019-11-14 09:14:03.947076	Epoch 15: Training loss:   0.9549355869707854
+2019-11-14 09:14:03.947988	Epoch 15: Evaluation loss: 0.9092082381248474
+2019-11-14 09:14:07.062269	Accuracy measures: Global acc.: 0.909
+                          	Class acc.: 0.678
+                          	Mean IoU.: 0.4591
+                          	Bound. F1: 0.8567
+
+2019-11-14 09:14:15.974567	Epoch 20: Training loss:   0.9587838572004567
+2019-11-14 09:14:15.975383	Epoch 20: Evaluation loss: 0.8891626596450806
+2019-11-14 09:14:19.118043	Accuracy measures: Global acc.: 0.9162
+                          	Class acc.: 0.7833
+                          	Mean IoU.: 0.5282
+                          	Bound. F1: 0.9798
+
+2019-11-14 09:14:28.016981	Epoch 25: Training loss:   0.9329645581867384
+2019-11-14 09:14:28.017789	Epoch 25: Evaluation loss: 0.8490267992019653
+2019-11-14 09:14:31.098055	Accuracy measures: Global acc.: 0.8647
+                          	Class acc.: 0.8222
+                          	Mean IoU.: 0.4801
+                          	Bound. F1: 0.875
+
+2019-11-14 09:14:39.999669	Epoch 30: Training loss:   0.9254073656123617
+2019-11-14 09:14:40.000769	Epoch 30: Evaluation loss: 0.8646246194839478
+2019-11-14 09:14:43.045469	Accuracy measures: Global acc.: 0.866
+                          	Class acc.: 0.7306
+                          	Mean IoU.: 0.4611
+                          	Bound. F1: 0.8468
+
+2019-11-14 09:14:51.968969	Epoch 35: Training loss:   0.8982573643974636
+2019-11-14 09:14:51.969676	Epoch 35: Evaluation loss: 0.8508685827255249
+2019-11-14 09:14:55.009773	Accuracy measures: Global acc.: 0.8976
+                          	Class acc.: 0.813
+                          	Mean IoU.: 0.5115
+                          	Bound. F1: 0.9493
+
+2019-11-14 09:15:03.938385	Epoch 40: Training loss:   0.8976360792699067
+2019-11-14 09:15:03.939121	Epoch 40: Evaluation loss: 0.8545494079589844
+2019-11-14 09:15:07.049050	Accuracy measures: Global acc.: 0.8646
+                          	Class acc.: 0.7402
+                          	Mean IoU.: 0.4676
+                          	Bound. F1: 0.8581
+
+2019-11-14 09:15:15.974171	Epoch 45: Training loss:   0.8905047022778055
+2019-11-14 09:15:15.974852	Epoch 45: Evaluation loss: 0.8325399160385132
+2019-11-14 09:15:19.128370	Accuracy measures: Global acc.: 0.8671
+                          	Class acc.: 0.7817
+                          	Mean IoU.: 0.4844
+                          	Bound. F1: 0.8915
+
+2019-11-14 09:15:28.064492	Epoch 50: Training loss:   0.8869621105816053
+2019-11-14 09:15:28.065385	Epoch 50: Evaluation loss: 0.8928777575492859
+2019-11-14 09:15:31.227283	Accuracy measures: Global acc.: 0.8539
+                          	Class acc.: 0.6963
+                          	Mean IoU.: 0.4775
+                          	Bound. F1: 0.8657
+
+2019-11-14 09:15:40.278299	Epoch 55: Training loss:   0.9116505332615065
+2019-11-14 09:15:40.279021	Epoch 55: Evaluation loss: 0.7969328761100769
+2019-11-14 09:15:43.420596	Accuracy measures: Global acc.: 0.8701
+                          	Class acc.: 0.8626
+                          	Mean IoU.: 0.526
+                          	Bound. F1: 0.9576
+
+2019-11-14 09:15:52.331421	Epoch 60: Training loss:   0.8744475711946902
+2019-11-14 09:15:52.332186	Epoch 60: Evaluation loss: 0.8761993646621704
+2019-11-14 09:15:55.480107	Accuracy measures: Global acc.: 0.8811
+                          	Class acc.: 0.7426
+                          	Mean IoU.: 0.5188
+                          	Bound. F1: 0.9383
+
+2019-11-14 09:16:04.388955	Epoch 65: Training loss:   0.8796200259872105
+2019-11-14 09:16:04.389770	Epoch 65: Evaluation loss: 0.7924719452857971
+2019-11-14 09:16:07.483793	Accuracy measures: Global acc.: 0.8856
+                          	Class acc.: 0.8575
+                          	Mean IoU.: 0.5358
+                          	Bound. F1: 0.9958
+
+2019-11-14 09:16:16.416073	Epoch 70: Training loss:   0.8632975531660992
+2019-11-14 09:16:16.416850	Epoch 70: Evaluation loss: 0.8039277791976929
+2019-11-14 09:16:19.472747	Accuracy measures: Global acc.: 0.8725
+                          	Class acc.: 0.8377
+                          	Mean IoU.: 0.5124
+                          	Bound. F1: 0.9458
+
+2019-11-14 09:16:28.435404	Epoch 75: Training loss:   0.8588472008705139
+2019-11-14 09:16:28.436023	Epoch 75: Evaluation loss: 0.8244593739509583
+2019-11-14 09:16:31.537011	Accuracy measures: Global acc.: 0.852
+                          	Class acc.: 0.757
+                          	Mean IoU.: 0.4668
+                          	Bound. F1: 0.8543
+
+2019-11-14 09:16:40.457971	Epoch 80: Training loss:   0.8486813488213912
+2019-11-14 09:16:40.459003	Epoch 80: Evaluation loss: 0.777003824710846
+2019-11-14 09:16:43.626766	Accuracy measures: Global acc.: 0.8867
+                          	Class acc.: 0.8663
+                          	Mean IoU.: 0.5283
+                          	Bound. F1: 0.9827
+
+2019-11-14 09:16:52.525709	Epoch 85: Training loss:   0.8348849260288737
+2019-11-14 09:16:52.526481	Epoch 85: Evaluation loss: 0.772270679473877
+2019-11-14 09:16:55.659524	Accuracy measures: Global acc.: 0.8783
+                          	Class acc.: 0.838
+                          	Mean IoU.: 0.4931
+                          	Bound. F1: 0.9109
+
+2019-11-14 09:17:04.572428	Epoch 90: Training loss:   0.8430137193721273
+2019-11-14 09:17:04.573233	Epoch 90: Evaluation loss: 0.8116331100463867
+2019-11-14 09:17:07.650735	Accuracy measures: Global acc.: 0.8788
+                          	Class acc.: 0.7708
+                          	Mean IoU.: 0.4957
+                          	Bound. F1: 0.919
+
+2019-11-14 09:17:16.688878	Epoch 95: Training loss:   0.8464959445207015
+2019-11-14 09:17:16.689685	Epoch 95: Evaluation loss: 0.8021523356437683
+2019-11-14 09:17:19.766989	Accuracy measures: Global acc.: 0.8725
+                          	Class acc.: 0.786
+                          	Mean IoU.: 0.4982
+                          	Bound. F1: 0.922
+
+2019-11-14 09:17:28.677115	Epoch 100: Training loss:   0.8374553322792053
+2019-11-14 09:17:28.678061	Epoch 100: Evaluation loss: 0.7930508255958557
+2019-11-14 09:17:31.741773	Accuracy measures: Global acc.: 0.8823
+                          	Class acc.: 0.8177
+                          	Mean IoU.: 0.5133
+                          	Bound. F1: 0.9536
+
+2019-11-14 09:17:40.672264	Epoch 105: Training loss:   0.8137629161710325
+2019-11-14 09:17:40.672855	Epoch 105: Evaluation loss: 0.7857323884963989
+2019-11-14 09:17:43.824178	Accuracy measures: Global acc.: 0.8938
+                          	Class acc.: 0.852
+                          	Mean IoU.: 0.5412
+                          	Bound. F1: 1.008
+
+2019-11-14 09:17:52.716803	Epoch 110: Training loss:   0.8148042326388152
+2019-11-14 09:17:52.717668	Epoch 110: Evaluation loss: 0.7713800072669983
+2019-11-14 09:17:55.855599	Accuracy measures: Global acc.: 0.8928
+                          	Class acc.: 0.8444
+                          	Mean IoU.: 0.5352
+                          	Bound. F1: 0.9986
+
+2019-11-14 09:18:04.917082	Epoch 115: Training loss:   0.8364672660827637
+2019-11-14 09:18:04.917757	Epoch 115: Evaluation loss: 0.7813936471939087
+2019-11-14 09:18:08.064651	Accuracy measures: Global acc.: 0.9043
+                          	Class acc.: 0.8049
+                          	Mean IoU.: 0.5257
+                          	Bound. F1: 0.9852
+
+2019-11-14 09:18:16.950996	Epoch 120: Training loss:   0.8189525474672732
+2019-11-14 09:18:16.951744	Epoch 120: Evaluation loss: 0.7571203112602234
+2019-11-14 09:18:20.068877	Accuracy measures: Global acc.: 0.9012
+                          	Class acc.: 0.8782
+                          	Mean IoU.: 0.5518
+                          	Bound. F1: 1.033
+
+2019-11-14 09:18:28.976892	Epoch 125: Training loss:   0.8143470080002494
+2019-11-14 09:18:28.977601	Epoch 125: Evaluation loss: 0.7995774745941162
+2019-11-14 09:18:32.028818	Accuracy measures: Global acc.: 0.8899
+                          	Class acc.: 0.8085
+                          	Mean IoU.: 0.5378
+                          	Bound. F1: 0.9896
+
+2019-11-14 09:18:40.933381	Epoch 130: Training loss:   0.8126214742660522
+2019-11-14 09:18:40.934291	Epoch 130: Evaluation loss: 0.8017933964729309
+2019-11-14 09:18:44.034047	Accuracy measures: Global acc.: 0.8876
+                          	Class acc.: 0.7974
+                          	Mean IoU.: 0.5343
+                          	Bound. F1: 0.9877
+
+2019-11-14 09:18:53.063125	Epoch 135: Training loss:   0.8005971753078959
+2019-11-14 09:18:53.064094	Epoch 135: Evaluation loss: 0.7678428888320923
+2019-11-14 09:18:56.093633	Accuracy measures: Global acc.: 0.9032
+                          	Class acc.: 0.8438
+                          	Mean IoU.: 0.5533
+                          	Bound. F1: 1.033
+
+2019-11-14 09:19:05.001727	Epoch 140: Training loss:   0.8199493263078772
+2019-11-14 09:19:05.002867	Epoch 140: Evaluation loss: 0.7981469035148621
+2019-11-14 09:19:08.050681	Accuracy measures: Global acc.: 0.8897
+                          	Class acc.: 0.7798
+                          	Mean IoU.: 0.5263
+                          	Bound. F1: 0.9779
+
+2019-11-14 09:19:16.927395	Epoch 145: Training loss:   0.8043533252633136
+2019-11-14 09:19:16.928138	Epoch 145: Evaluation loss: 0.7564061284065247
+2019-11-14 09:19:20.071500	Accuracy measures: Global acc.: 0.8939
+                          	Class acc.: 0.8838
+                          	Mean IoU.: 0.5677
+                          	Bound. F1: 1.053
+
+2019-11-14 09:19:28.950307	Epoch 150: Training loss:   0.8054405787716741
+2019-11-14 09:19:28.951127	Epoch 150: Evaluation loss: 0.773536205291748
+2019-11-14 09:19:32.132846	Accuracy measures: Global acc.: 0.887
+                          	Class acc.: 0.8397
+                          	Mean IoU.: 0.5441
+                          	Bound. F1: 1.008
+
+2019-11-14 09:19:41.146386	Epoch 155: Training loss:   0.7989594703135283
+2019-11-14 09:19:41.147172	Epoch 155: Evaluation loss: 0.7568851709365845
+2019-11-14 09:19:44.303416	Accuracy measures: Global acc.: 0.8904
+                          	Class acc.: 0.856
+                          	Mean IoU.: 0.5434
+                          	Bound. F1: 1.011
+
+2019-11-14 09:19:53.161030	Epoch 160: Training loss:   0.7946656864622365
+2019-11-14 09:19:53.161883	Epoch 160: Evaluation loss: 0.751153290271759
+2019-11-14 09:19:56.304852	Accuracy measures: Global acc.: 0.8848
+                          	Class acc.: 0.8555
+                          	Mean IoU.: 0.5472
+                          	Bound. F1: 1.012
+
+2019-11-14 09:20:05.178075	Epoch 165: Training loss:   0.7839622057002523
+2019-11-14 09:20:05.178678	Epoch 165: Evaluation loss: 0.7690617442131042
+2019-11-14 09:20:08.249355	Accuracy measures: Global acc.: 0.8885
+                          	Class acc.: 0.8229
+                          	Mean IoU.: 0.5386
+                          	Bound. F1: 1.003
+
+2019-11-14 09:20:17.114492	Epoch 170: Training loss:   0.7846189840980198
+2019-11-14 09:20:17.115131	Epoch 170: Evaluation loss: 0.7499873638153076
+2019-11-14 09:20:20.182434	Accuracy measures: Global acc.: 0.9136
+                          	Class acc.: 0.8614
+                          	Mean IoU.: 0.5676
+                          	Bound. F1: 1.068
+
+2019-11-14 09:20:29.179645	Epoch 175: Training loss:   0.7832731785981552
+2019-11-14 09:20:29.180450	Epoch 175: Evaluation loss: 0.7539144158363342
+2019-11-14 09:20:32.238911	Accuracy measures: Global acc.: 0.9067
+                          	Class acc.: 0.8598
+                          	Mean IoU.: 0.5762
+                          	Bound. F1: 1.075
+
+2019-11-14 09:20:41.110488	Epoch 180: Training loss:   0.767014944035074
+2019-11-14 09:20:41.111148	Epoch 180: Evaluation loss: 0.7580176591873169
+2019-11-14 09:20:44.180524	Accuracy measures: Global acc.: 0.9107
+                          	Class acc.: 0.8821
+                          	Mean IoU.: 0.5876
+                          	Bound. F1: 1.096
+
+2019-11-14 09:20:53.048955	Epoch 185: Training loss:   0.7690595932628798
+2019-11-14 09:20:53.049717	Epoch 185: Evaluation loss: 0.7325584292411804
+2019-11-14 09:20:56.204339	Accuracy measures: Global acc.: 0.915
+                          	Class acc.: 0.8889
+                          	Mean IoU.: 0.5837
+                          	Bound. F1: 1.101
+
+2019-11-14 09:21:05.093728	Epoch 190: Training loss:   0.7699351077494414
+2019-11-14 09:21:05.094551	Epoch 190: Evaluation loss: 0.7662357687950134
+2019-11-14 09:21:08.260369	Accuracy measures: Global acc.: 0.8658
+                          	Class acc.: 0.8075
+                          	Mean IoU.: 0.5235
+                          	Bound. F1: 0.9643
+
+2019-11-14 09:21:17.285754	Epoch 195: Training loss:   0.7682095584662064
+2019-11-14 09:21:17.286795	Epoch 195: Evaluation loss: 0.7617717385292053
+2019-11-14 09:21:20.414496	Accuracy measures: Global acc.: 0.8967
+                          	Class acc.: 0.839
+                          	Mean IoU.: 0.5614
+                          	Bound. F1: 1.037
+
+2019-11-14 09:21:29.300481	Epoch 200: Training loss:   0.7707503204760344
+2019-11-14 09:21:29.301307	Epoch 200: Evaluation loss: 0.7646333575248718
+2019-11-14 09:21:32.437870	Accuracy measures: Global acc.: 0.9207
+                          	Class acc.: 0.8248
+                          	Mean IoU.: 0.5783
+                          	Bound. F1: 1.084
+
+2019-11-14 09:21:41.315668	Epoch 205: Training loss:   0.7738998972851298
+2019-11-14 09:21:41.316344	Epoch 205: Evaluation loss: 0.7551910281181335
+2019-11-14 09:21:44.410751	Accuracy measures: Global acc.: 0.9149
+                          	Class acc.: 0.8517
+                          	Mean IoU.: 0.5836
+                          	Bound. F1: 1.089
+
+2019-11-14 09:21:53.290699	Epoch 210: Training loss:   0.7639031436132349
+2019-11-14 09:21:53.291521	Epoch 210: Evaluation loss: 0.7775555849075317
+2019-11-14 09:21:56.360560	Accuracy measures: Global acc.: 0.9155
+                          	Class acc.: 0.8387
+                          	Mean IoU.: 0.5868
+                          	Bound. F1: 1.071
+
+2019-11-14 09:22:05.377913	Epoch 215: Training loss:   0.7648082142290862
+2019-11-14 09:22:05.378664	Epoch 215: Evaluation loss: 0.7671673893928528
+2019-11-14 09:22:08.488518	Accuracy measures: Global acc.: 0.9074
+                          	Class acc.: 0.8324
+                          	Mean IoU.: 0.5693
+                          	Bound. F1: 1.054
+
+2019-11-14 09:22:17.351040	Epoch 220: Training loss:   0.7618338750756305
+2019-11-14 09:22:17.351843	Epoch 220: Evaluation loss: 0.7165220975875854
+2019-11-14 09:22:20.500075	Accuracy measures: Global acc.: 0.9207
+                          	Class acc.: 0.8972
+                          	Mean IoU.: 0.5923
+                          	Bound. F1: 1.121
+
+2019-11-14 09:22:29.387564	Epoch 225: Training loss:   0.7604344409445057
+2019-11-14 09:22:29.388191	Epoch 225: Evaluation loss: 0.7330784797668457
+2019-11-14 09:22:32.466816	Accuracy measures: Global acc.: 0.9114
+                          	Class acc.: 0.835
+                          	Mean IoU.: 0.5439
+                          	Bound. F1: 1.023
+
+2019-11-14 09:22:41.336543	Epoch 230: Training loss:   0.7555261876272119
+2019-11-14 09:22:41.337433	Epoch 230: Evaluation loss: 0.7772946357727051
+2019-11-14 09:22:44.407670	Accuracy measures: Global acc.: 0.913
+                          	Class acc.: 0.8321
+                          	Mean IoU.: 0.5842
+                          	Bound. F1: 1.053
+
+2019-11-14 09:22:53.380894	Epoch 235: Training loss:   0.7390397372453109
+2019-11-14 09:22:53.381704	Epoch 235: Evaluation loss: 0.7437376976013184
+2019-11-14 09:22:56.483181	Accuracy measures: Global acc.: 0.9313
+                          	Class acc.: 0.8692
+                          	Mean IoU.: 0.6132
+                          	Bound. F1: 1.149
+
+2019-11-14 09:23:05.350632	Epoch 240: Training loss:   0.759260136148204
+2019-11-14 09:23:05.351439	Epoch 240: Evaluation loss: 0.7447657585144043
+2019-11-14 09:23:08.496837	Accuracy measures: Global acc.: 0.9268
+                          	Class acc.: 0.8283
+                          	Mean IoU.: 0.5725
+                          	Bound. F1: 1.081
+
+2019-11-14 09:23:17.393708	Epoch 245: Training loss:   0.7475010441697162
+2019-11-14 09:23:17.394471	Epoch 245: Evaluation loss: 0.7292435765266418
+2019-11-14 09:23:20.568684	Accuracy measures: Global acc.: 0.9447
+                          	Class acc.: 0.8834
+                          	Mean IoU.: 0.6394
+                          	Bound. F1: 1.204
+
+2019-11-14 09:23:29.464475	Epoch 250: Training loss:   0.7525735419729481
+2019-11-14 09:23:29.465262	Epoch 250: Evaluation loss: 0.7282189726829529
+2019-11-14 09:23:32.614750	Accuracy measures: Global acc.: 0.9374
+                          	Class acc.: 0.8974
+                          	Mean IoU.: 0.6325
+                          	Bound. F1: 1.188
+
+2019-11-14 09:23:41.650954	Epoch 255: Training loss:   0.7353405123171599
+2019-11-14 09:23:41.651766	Epoch 255: Evaluation loss: 0.730202853679657
+2019-11-14 09:23:44.796562	Accuracy measures: Global acc.: 0.9188
+                          	Class acc.: 0.8921
+                          	Mean IoU.: 0.6084
+                          	Bound. F1: 1.126
+
+2019-11-14 09:23:53.699080	Epoch 260: Training loss:   0.7384074952291406
+2019-11-14 09:23:53.699889	Epoch 260: Evaluation loss: 0.7186484932899475
+2019-11-14 09:23:56.847511	Accuracy measures: Global acc.: 0.9329
+                          	Class acc.: 0.8674
+                          	Mean IoU.: 0.603
+                          	Bound. F1: 1.141
+
+2019-11-14 09:24:05.726586	Epoch 265: Training loss:   0.7330554723739624
+2019-11-14 09:24:05.727399	Epoch 265: Evaluation loss: 0.7281451225280762
+2019-11-14 09:24:08.820317	Accuracy measures: Global acc.: 0.9364
+                          	Class acc.: 0.8599
+                          	Mean IoU.: 0.6073
+                          	Bound. F1: 1.151
+
+2019-11-14 09:24:17.697105	Epoch 270: Training loss:   0.7342307593511499
+2019-11-14 09:24:17.697854	Epoch 270: Evaluation loss: 0.7241184115409851
+2019-11-14 09:24:20.837077	Accuracy measures: Global acc.: 0.9377
+                          	Class acc.: 0.8894
+                          	Mean IoU.: 0.6311
+                          	Bound. F1: 1.188
+
+2019-11-14 09:24:29.749105	Epoch 275: Training loss:   0.7437910437583923
+2019-11-14 09:24:29.750095	Epoch 275: Evaluation loss: 0.7295824289321899
+2019-11-14 09:24:32.879768	Accuracy measures: Global acc.: 0.9398
+                          	Class acc.: 0.8877
+                          	Mean IoU.: 0.6145
+                          	Bound. F1: 1.147
+
+2019-11-14 09:24:41.784706	Epoch 280: Training loss:   0.7260372198146322
+2019-11-14 09:24:41.785412	Epoch 280: Evaluation loss: 0.7633376717567444
+2019-11-14 09:24:44.894592	Accuracy measures: Global acc.: 0.9468
+                          	Class acc.: 0.7995
+                          	Mean IoU.: 0.6039
+                          	Bound. F1: 1.129
+
+2019-11-14 09:24:53.759051	Epoch 285: Training loss:   0.7262403083884198
+2019-11-14 09:24:53.759723	Epoch 285: Evaluation loss: 0.7316223978996277
+2019-11-14 09:24:56.949969	Accuracy measures: Global acc.: 0.9409
+                          	Class acc.: 0.8528
+                          	Mean IoU.: 0.6189
+                          	Bound. F1: 1.168
+
+2019-11-14 09:25:05.833866	Epoch 290: Training loss:   0.7294942425644916
+2019-11-14 09:25:05.834774	Epoch 290: Evaluation loss: 0.7501264214515686
+2019-11-14 09:25:08.997529	Accuracy measures: Global acc.: 0.9492
+                          	Class acc.: 0.8271
+                          	Mean IoU.: 0.6258
+                          	Bound. F1: 1.161
+
+2019-11-14 09:25:17.931877	Epoch 295: Training loss:   0.7215281569439432
+2019-11-14 09:25:17.932563	Epoch 295: Evaluation loss: 0.728888213634491
+2019-11-14 09:25:21.080624	Accuracy measures: Global acc.: 0.9323
+                          	Class acc.: 0.8614
+                          	Mean IoU.: 0.615
+                          	Bound. F1: 1.149
+
+2019-11-14 09:25:29.987731	Epoch 300: Training loss:   0.7252458411714305
+2019-11-14 09:25:29.988414	Epoch 300: Evaluation loss: 0.6998081207275391
+2019-11-14 09:25:33.154790	Accuracy measures: Global acc.: 0.951
+                          	Class acc.: 0.8789
+                          	Mean IoU.: 0.647
+                          	Bound. F1: 1.226
+
+2019-11-14 09:25:42.034556	Epoch 305: Training loss:   0.7221197019452634
+2019-11-14 09:25:42.035408	Epoch 305: Evaluation loss: 0.7469801902770996
+2019-11-14 09:25:45.152797	Accuracy measures: Global acc.: 0.9494
+                          	Class acc.: 0.8447
+                          	Mean IoU.: 0.6361
+                          	Bound. F1: 1.181
+
+2019-11-14 09:25:54.022844	Epoch 310: Training loss:   0.7158172363820283
+2019-11-14 09:25:54.023690	Epoch 310: Evaluation loss: 0.7080068588256836
+2019-11-14 09:25:57.122813	Accuracy measures: Global acc.: 0.9601
+                          	Class acc.: 0.868
+                          	Mean IoU.: 0.6739
+                          	Bound. F1: 1.271
+
+2019-11-14 09:26:06.161615	Epoch 315: Training loss:   0.7207731215850167
+2019-11-14 09:26:06.162446	Epoch 315: Evaluation loss: 0.731847882270813
+2019-11-14 09:26:09.262952	Accuracy measures: Global acc.: 0.9553
+                          	Class acc.: 0.8396
+                          	Mean IoU.: 0.6435
+                          	Bound. F1: 1.207
+
+2019-11-14 09:26:18.120623	Epoch 320: Training loss:   0.7115585259769274
+2019-11-14 09:26:18.121813	Epoch 320: Evaluation loss: 0.7219608426094055
+2019-11-14 09:26:21.213060	Accuracy measures: Global acc.: 0.9563
+                          	Class acc.: 0.866
+                          	Mean IoU.: 0.6597
+                          	Bound. F1: 1.239
+
+2019-11-14 09:26:30.087655	Epoch 325: Training loss:   0.7252259850502014
+2019-11-14 09:26:30.088412	Epoch 325: Evaluation loss: 0.713374674320221
+2019-11-14 09:26:33.235320	Accuracy measures: Global acc.: 0.9205
+                          	Class acc.: 0.8672
+                          	Mean IoU.: 0.5865
+                          	Bound. F1: 1.105
+
+2019-11-14 09:26:42.122965	Epoch 330: Training loss:   0.7141902343086575
+2019-11-14 09:26:42.123641	Epoch 330: Evaluation loss: 0.7155606746673584
+2019-11-14 09:26:45.282179	Accuracy measures: Global acc.: 0.9629
+                          	Class acc.: 0.852
+                          	Mean IoU.: 0.6789
+                          	Bound. F1: 1.269
+
+2019-11-14 09:26:54.322500	Epoch 335: Training loss:   0.709721855495287
+2019-11-14 09:26:54.323320	Epoch 335: Evaluation loss: 0.7423384189605713
+2019-11-14 09:26:57.524136	Accuracy measures: Global acc.: 0.9586
+                          	Class acc.: 0.8162
+                          	Mean IoU.: 0.6419
+                          	Bound. F1: 1.195
+
+2019-11-14 09:27:06.387491	Epoch 340: Training loss:   0.7137112902558368
+2019-11-14 09:27:06.388422	Epoch 340: Evaluation loss: 0.6910099983215332
+2019-11-14 09:27:09.578430	Accuracy measures: Global acc.: 0.9471
+                          	Class acc.: 0.8897
+                          	Mean IoU.: 0.6411
+                          	Bound. F1: 1.215
+
+2019-11-14 09:27:18.471179	Epoch 345: Training loss:   0.7052777746449346
+2019-11-14 09:27:18.471999	Epoch 345: Evaluation loss: 0.7259334921836853
+2019-11-14 09:27:21.605507	Accuracy measures: Global acc.: 0.9676
+                          	Class acc.: 0.8371
+                          	Mean IoU.: 0.6916
+                          	Bound. F1: 1.28
+
+2019-11-14 09:27:30.472329	Epoch 350: Training loss:   0.7127624076345692
+2019-11-14 09:27:30.473191	Epoch 350: Evaluation loss: 0.6974384188652039
+2019-11-14 09:27:33.606169	Accuracy measures: Global acc.: 0.948
+                          	Class acc.: 0.8891
+                          	Mean IoU.: 0.6447
+                          	Bound. F1: 1.223
+
+2019-11-14 09:27:42.628235	Epoch 355: Training loss:   0.700825325820757
+2019-11-14 09:27:42.629126	Epoch 355: Evaluation loss: 0.710693359375
+2019-11-14 09:27:45.706735	Accuracy measures: Global acc.: 0.9527
+                          	Class acc.: 0.8622
+                          	Mean IoU.: 0.6484
+                          	Bound. F1: 1.222
+
+2019-11-14 09:27:54.600730	Epoch 360: Training loss:   0.7019203927205957
+2019-11-14 09:27:54.601499	Epoch 360: Evaluation loss: 0.6905314326286316
+2019-11-14 09:27:57.766078	Accuracy measures: Global acc.: 0.9509
+                          	Class acc.: 0.8805
+                          	Mean IoU.: 0.6473
+                          	Bound. F1: 1.23
+
+2019-11-14 09:28:06.628020	Epoch 365: Training loss:   0.7041154063266256
+2019-11-14 09:28:06.628674	Epoch 365: Evaluation loss: 0.7455906867980957
+2019-11-14 09:28:09.696725	Accuracy measures: Global acc.: 0.9566
+                          	Class acc.: 0.7892
+                          	Mean IoU.: 0.6206
+                          	Bound. F1: 1.156
+
+2019-11-14 09:28:18.563263	Epoch 370: Training loss:   0.7107626484787982
+2019-11-14 09:28:18.564274	Epoch 370: Evaluation loss: 0.7292620539665222
+2019-11-14 09:28:21.686013	Accuracy measures: Global acc.: 0.9518
+                          	Class acc.: 0.8271
+                          	Mean IoU.: 0.6275
+                          	Bound. F1: 1.176
+
+2019-11-14 09:28:30.724004	Epoch 375: Training loss:   0.7056951056356016
+2019-11-14 09:28:30.724831	Epoch 375: Evaluation loss: 0.7318124771118164
+2019-11-14 09:28:33.893311	Accuracy measures: Global acc.: 0.9646
+                          	Class acc.: 0.8436
+                          	Mean IoU.: 0.6801
+                          	Bound. F1: 1.257
+
+2019-11-14 09:28:42.779962	Epoch 380: Training loss:   0.6945424598196278
+2019-11-14 09:28:42.780915	Epoch 380: Evaluation loss: 0.6886222958564758
+2019-11-14 09:28:45.844402	Accuracy measures: Global acc.: 0.9574
+                          	Class acc.: 0.8866
+                          	Mean IoU.: 0.6712
+                          	Bound. F1: 1.274
+
+2019-11-14 09:28:54.708402	Epoch 385: Training loss:   0.6943322135054547
+2019-11-14 09:28:54.709193	Epoch 385: Evaluation loss: 0.7125608325004578
+2019-11-14 09:28:57.886951	Accuracy measures: Global acc.: 0.9672
+                          	Class acc.: 0.8672
+                          	Mean IoU.: 0.7033
+                          	Bound. F1: 1.312
+
+2019-11-14 09:29:06.782093	Epoch 390: Training loss:   0.6954609233400096
+2019-11-14 09:29:06.782969	Epoch 390: Evaluation loss: 0.7262948751449585
+2019-11-14 09:29:09.992444	Accuracy measures: Global acc.: 0.9634
+                          	Class acc.: 0.8499
+                          	Mean IoU.: 0.6772
+                          	Bound. F1: 1.25
+
+2019-11-14 09:29:18.997303	Epoch 395: Training loss:   0.695182406384012
+2019-11-14 09:29:18.998101	Epoch 395: Evaluation loss: 0.7275457382202148
+2019-11-14 09:29:22.179606	Accuracy measures: Global acc.: 0.969
+                          	Class acc.: 0.836
+                          	Mean IoU.: 0.698
+                          	Bound. F1: 1.284
+
+2019-11-14 09:29:31.042090	Epoch 400: Training loss:   0.6936231670172318
+2019-11-14 09:29:31.042821	Epoch 400: Evaluation loss: 0.6952677369117737
+2019-11-14 09:29:34.261626	Accuracy measures: Global acc.: 0.965
+                          	Class acc.: 0.891
+                          	Mean IoU.: 0.7028
+                          	Bound. F1: 1.321
+
+2019-11-14 09:29:43.121791	Epoch 405: Training loss:   0.6909805691760519
+2019-11-14 09:29:43.122296	Epoch 405: Evaluation loss: 0.6982713937759399
+2019-11-14 09:29:46.319241	Accuracy measures: Global acc.: 0.9579
+                          	Class acc.: 0.87
+                          	Mean IoU.: 0.6669
+                          	Bound. F1: 1.258
+
+2019-11-14 09:29:55.174549	Epoch 410: Training loss:   0.6914824117784915
+2019-11-14 09:29:55.175458	Epoch 410: Evaluation loss: 0.7133032083511353
+2019-11-14 09:29:58.335461	Accuracy measures: Global acc.: 0.9617
+                          	Class acc.: 0.8444
+                          	Mean IoU.: 0.6684
+                          	Bound. F1: 1.248
+
+2019-11-14 09:30:07.322262	Epoch 415: Training loss:   0.6896818254304968
+2019-11-14 09:30:07.322971	Epoch 415: Evaluation loss: 0.717208206653595
+2019-11-14 09:30:10.466878	Accuracy measures: Global acc.: 0.9662
+                          	Class acc.: 0.824
+                          	Mean IoU.: 0.6774
+                          	Bound. F1: 1.252
+
+2019-11-14 09:30:19.328840	Epoch 420: Training loss:   0.6841357272604237
+2019-11-14 09:30:19.329655	Epoch 420: Evaluation loss: 0.7425777316093445
+2019-11-14 09:30:22.425528	Accuracy measures: Global acc.: 0.9662
+                          	Class acc.: 0.8091
+                          	Mean IoU.: 0.6699
+                          	Bound. F1: 1.221
+
+2019-11-14 09:30:31.302445	Epoch 425: Training loss:   0.6853543027587559
+2019-11-14 09:30:31.303607	Epoch 425: Evaluation loss: 0.7005689740180969
+2019-11-14 09:30:34.439072	Accuracy measures: Global acc.: 0.97
+                          	Class acc.: 0.8724
+                          	Mean IoU.: 0.7219
+                          	Bound. F1: 1.346
+
+2019-11-14 09:30:43.304432	Epoch 430: Training loss:   0.692470379497694
+2019-11-14 09:30:43.305095	Epoch 430: Evaluation loss: 0.6932032704353333
+2019-11-14 09:30:46.460045	Accuracy measures: Global acc.: 0.9707
+                          	Class acc.: 0.8654
+                          	Mean IoU.: 0.7274
+                          	Bound. F1: 1.347
+
+2019-11-14 09:30:55.463553	Epoch 435: Training loss:   0.6820157092550526
+2019-11-14 09:30:55.464234	Epoch 435: Evaluation loss: 0.729275107383728
+2019-11-14 09:30:58.664346	Accuracy measures: Global acc.: 0.9711
+                          	Class acc.: 0.8354
+                          	Mean IoU.: 0.7213
+                          	Bound. F1: 1.309
+
+2019-11-14 09:31:07.537329	Epoch 440: Training loss:   0.685163052185722
+2019-11-14 09:31:07.538099	Epoch 440: Evaluation loss: 0.6977463364601135
+2019-11-14 09:31:10.690145	Accuracy measures: Global acc.: 0.9649
+                          	Class acc.: 0.8849
+                          	Mean IoU.: 0.7015
+                          	Bound. F1: 1.311
+
+2019-11-14 09:31:19.565428	Epoch 445: Training loss:   0.6777725219726562
+2019-11-14 09:31:19.566168	Epoch 445: Evaluation loss: 0.7191006541252136
+2019-11-14 09:31:22.655405	Accuracy measures: Global acc.: 0.97
+                          	Class acc.: 0.8256
+                          	Mean IoU.: 0.7026
+                          	Bound. F1: 1.284
+
+2019-11-14 09:31:31.514945	Epoch 450: Training loss:   0.677563286345938
+2019-11-14 09:31:31.515690	Epoch 450: Evaluation loss: 0.6859391927719116
+2019-11-14 09:31:34.628378	Accuracy measures: Global acc.: 0.9695
+                          	Class acc.: 0.866
+                          	Mean IoU.: 0.7199
+                          	Bound. F1: 1.34
+
+2019-11-14 09:31:43.601355	Epoch 455: Training loss:   0.6707005837689275
+2019-11-14 09:31:43.602314	Epoch 455: Evaluation loss: 0.6869662404060364
+2019-11-14 09:31:46.671660	Accuracy measures: Global acc.: 0.964
+                          	Class acc.: 0.8894
+                          	Mean IoU.: 0.698
+                          	Bound. F1: 1.317
+
+2019-11-14 09:31:55.543631	Epoch 460: Training loss:   0.6727990482164465
+2019-11-14 09:31:55.544420	Epoch 460: Evaluation loss: 0.6994127035140991
+2019-11-14 09:31:58.648136	Accuracy measures: Global acc.: 0.9707
+                          	Class acc.: 0.8485
+                          	Mean IoU.: 0.7179
+                          	Bound. F1: 1.322
+
+2019-11-14 09:32:07.517143	Epoch 465: Training loss:   0.6806012340213942
+2019-11-14 09:32:07.517741	Epoch 465: Evaluation loss: 0.7032220959663391
+2019-11-14 09:32:10.671599	Accuracy measures: Global acc.: 0.9679
+                          	Class acc.: 0.8707
+                          	Mean IoU.: 0.7132
+                          	Bound. F1: 1.319
+
+2019-11-14 09:32:19.547649	Epoch 470: Training loss:   0.6740593754726908
+2019-11-14 09:32:19.548337	Epoch 470: Evaluation loss: 0.7108083367347717
+2019-11-14 09:32:22.704118	Accuracy measures: Global acc.: 0.9674
+                          	Class acc.: 0.839
+                          	Mean IoU.: 0.6905
+                          	Bound. F1: 1.277
+
+2019-11-14 09:32:31.747266	Epoch 475: Training loss:   0.6749489955280138
+2019-11-14 09:32:31.747985	Epoch 475: Evaluation loss: 0.7045509219169617
+2019-11-14 09:32:34.916318	Accuracy measures: Global acc.: 0.9716
+                          	Class acc.: 0.8349
+                          	Mean IoU.: 0.716
+                          	Bound. F1: 1.31
+
+2019-11-14 09:32:43.811035	Epoch 480: Training loss:   0.6676740542702053
+2019-11-14 09:32:43.811865	Epoch 480: Evaluation loss: 0.6667242050170898
+2019-11-14 09:32:46.940069	Accuracy measures: Global acc.: 0.9682
+                          	Class acc.: 0.8891
+                          	Mean IoU.: 0.7232
+                          	Bound. F1: 1.36
+
+2019-11-14 09:32:55.827467	Epoch 485: Training loss:   0.6869504762732465
+2019-11-14 09:32:55.828237	Epoch 485: Evaluation loss: 0.7114676237106323
+2019-11-14 09:32:58.913388	Accuracy measures: Global acc.: 0.9602
+                          	Class acc.: 0.8165
+                          	Mean IoU.: 0.6469
+                          	Bound. F1: 1.206
+
+2019-11-14 09:33:07.797161	Epoch 490: Training loss:   0.6683491131533748
+2019-11-14 09:33:07.798131	Epoch 490: Evaluation loss: 0.6937621235847473
+2019-11-14 09:33:10.863436	Accuracy measures: Global acc.: 0.9688
+                          	Class acc.: 0.8421
+                          	Mean IoU.: 0.7001
+                          	Bound. F1: 1.297
+
+2019-11-14 09:33:19.810787	Epoch 495: Training loss:   0.668666660785675
+2019-11-14 09:33:19.811519	Epoch 495: Evaluation loss: 0.7162495255470276
+2019-11-14 09:33:22.846559	Accuracy measures: Global acc.: 0.968
+                          	Class acc.: 0.8351
+                          	Mean IoU.: 0.6938
+                          	Bound. F1: 1.273
+
+2019-11-14 09:33:31.727280	Epoch 500: Training loss:   0.6673940964367079
+2019-11-14 09:33:31.727968	Epoch 500: Evaluation loss: 0.6843134164810181
+2019-11-14 09:33:34.884877	Accuracy measures: Global acc.: 0.9721
+                          	Class acc.: 0.8728
+                          	Mean IoU.: 0.7343
+                          	Bound. F1: 1.366
+
+2019-11-14 09:33:43.759091	Epoch 505: Training loss:   0.6734688981719639
+2019-11-14 09:33:43.759948	Epoch 505: Evaluation loss: 0.6793683767318726
+2019-11-14 09:33:46.849599	Accuracy measures: Global acc.: 0.9736
+                          	Class acc.: 0.8865
+                          	Mean IoU.: 0.7497
+                          	Bound. F1: 1.397
+
+2019-11-14 09:33:55.724799	Epoch 510: Training loss:   0.6649222062981647
+2019-11-14 09:33:55.725556	Epoch 510: Evaluation loss: 0.6936708688735962
+2019-11-14 09:33:58.842960	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.8623
+                          	Mean IoU.: 0.7359
+                          	Bound. F1: 1.357
+
+2019-11-14 09:34:07.833674	Epoch 515: Training loss:   0.656954710898192
+2019-11-14 09:34:07.834619	Epoch 515: Evaluation loss: 0.7067213654518127
+2019-11-14 09:34:10.924892	Accuracy measures: Global acc.: 0.9712
+                          	Class acc.: 0.8483
+                          	Mean IoU.: 0.7269
+                          	Bound. F1: 1.326
+
+2019-11-14 09:34:19.811905	Epoch 520: Training loss:   0.6590823608896007
+2019-11-14 09:34:19.813046	Epoch 520: Evaluation loss: 0.6915757060050964
+2019-11-14 09:34:22.918565	Accuracy measures: Global acc.: 0.9726
+                          	Class acc.: 0.8549
+                          	Mean IoU.: 0.7326
+                          	Bound. F1: 1.347
+
+2019-11-14 09:34:31.813029	Epoch 525: Training loss:   0.6592766538910244
+2019-11-14 09:34:31.813736	Epoch 525: Evaluation loss: 0.6923811435699463
+2019-11-14 09:34:34.956008	Accuracy measures: Global acc.: 0.9705
+                          	Class acc.: 0.849
+                          	Mean IoU.: 0.7141
+                          	Bound. F1: 1.319
+
+2019-11-14 09:34:43.843040	Epoch 530: Training loss:   0.662905436495076
+2019-11-14 09:34:43.843826	Epoch 530: Evaluation loss: 0.736833393573761
+2019-11-14 09:34:46.997805	Accuracy measures: Global acc.: 0.9706
+                          	Class acc.: 0.8017
+                          	Mean IoU.: 0.7125
+                          	Bound. F1: 1.268
+
+2019-11-14 09:34:56.010299	Epoch 535: Training loss:   0.6634147089460621
+2019-11-14 09:34:56.011070	Epoch 535: Evaluation loss: 0.6952915787696838
+2019-11-14 09:34:59.179358	Accuracy measures: Global acc.: 0.9724
+                          	Class acc.: 0.8471
+                          	Mean IoU.: 0.7258
+                          	Bound. F1: 1.335
+
+2019-11-14 09:35:08.067236	Epoch 540: Training loss:   0.6616557940192844
+2019-11-14 09:35:08.068059	Epoch 540: Evaluation loss: 0.6865044236183167
+2019-11-14 09:35:11.138902	Accuracy measures: Global acc.: 0.9717
+                          	Class acc.: 0.8602
+                          	Mean IoU.: 0.7282
+                          	Bound. F1: 1.346
+
+2019-11-14 09:35:20.029968	Epoch 545: Training loss:   0.6666002118069193
+2019-11-14 09:35:20.030608	Epoch 545: Evaluation loss: 0.679698646068573
+2019-11-14 09:35:23.076617	Accuracy measures: Global acc.: 0.972
+                          	Class acc.: 0.8826
+                          	Mean IoU.: 0.7401
+                          	Bound. F1: 1.376
+
+2019-11-14 09:35:31.961739	Epoch 550: Training loss:   0.6578088325002919
+2019-11-14 09:35:31.962506	Epoch 550: Evaluation loss: 0.7235410809516907
+2019-11-14 09:35:35.026690	Accuracy measures: Global acc.: 0.9715
+                          	Class acc.: 0.8222
+                          	Mean IoU.: 0.7198
+                          	Bound. F1: 1.297
+
+2019-11-14 09:35:44.067616	Epoch 555: Training loss:   0.6592885748199795
+2019-11-14 09:35:44.068286	Epoch 555: Evaluation loss: 0.7013762593269348
+2019-11-14 09:35:47.112883	Accuracy measures: Global acc.: 0.9719
+                          	Class acc.: 0.8416
+                          	Mean IoU.: 0.7227
+                          	Bound. F1: 1.322
+
+2019-11-14 09:35:55.995884	Epoch 560: Training loss:   0.6498312924219214
+2019-11-14 09:35:55.996787	Epoch 560: Evaluation loss: 0.6959528923034668
+2019-11-14 09:35:59.110058	Accuracy measures: Global acc.: 0.9713
+                          	Class acc.: 0.8535
+                          	Mean IoU.: 0.7257
+                          	Bound. F1: 1.335
+
+2019-11-14 09:36:07.998700	Epoch 565: Training loss:   0.6493376208388287
+2019-11-14 09:36:07.999658	Epoch 565: Evaluation loss: 0.6789659261703491
+2019-11-14 09:36:11.126189	Accuracy measures: Global acc.: 0.9722
+                          	Class acc.: 0.8673
+                          	Mean IoU.: 0.7351
+                          	Bound. F1: 1.363
+
+2019-11-14 09:36:20.004010	Epoch 570: Training loss:   0.653805162595666
+2019-11-14 09:36:20.004747	Epoch 570: Evaluation loss: 0.7110270261764526
+2019-11-14 09:36:23.121254	Accuracy measures: Global acc.: 0.972
+                          	Class acc.: 0.805
+                          	Mean IoU.: 0.7125
+                          	Bound. F1: 1.278
+
+2019-11-14 09:36:32.136180	Epoch 575: Training loss:   0.6531278750170832
+2019-11-14 09:36:32.137017	Epoch 575: Evaluation loss: 0.6749442219734192
+2019-11-14 09:36:35.251782	Accuracy measures: Global acc.: 0.9716
+                          	Class acc.: 0.8809
+                          	Mean IoU.: 0.736
+                          	Bound. F1: 1.368
+
+2019-11-14 09:36:44.123122	Epoch 580: Training loss:   0.6558204241420912
+2019-11-14 09:36:44.124120	Epoch 580: Evaluation loss: 0.7287474870681763
+2019-11-14 09:36:47.248638	Accuracy measures: Global acc.: 0.9716
+                          	Class acc.: 0.795
+                          	Mean IoU.: 0.7153
+                          	Bound. F1: 1.268
+
+2019-11-14 09:36:56.122877	Epoch 585: Training loss:   0.6540588321893112
+2019-11-14 09:36:56.123800	Epoch 585: Evaluation loss: 0.6791799068450928
+2019-11-14 09:36:59.181759	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.864
+                          	Mean IoU.: 0.7379
+                          	Bound. F1: 1.362
+
+2019-11-14 09:37:08.055766	Epoch 590: Training loss:   0.6510017980699954
+2019-11-14 09:37:08.056673	Epoch 590: Evaluation loss: 0.7170293927192688
+2019-11-14 09:37:11.113340	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.8101
+                          	Mean IoU.: 0.7223
+                          	Bound. F1: 1.292
+
+2019-11-14 09:37:20.155965	Epoch 595: Training loss:   0.648537171923596
+2019-11-14 09:37:20.156995	Epoch 595: Evaluation loss: 0.6791298389434814
+2019-11-14 09:37:23.226235	Accuracy measures: Global acc.: 0.973
+                          	Class acc.: 0.8542
+                          	Mean IoU.: 0.7347
+                          	Bound. F1: 1.351
+
+2019-11-14 09:37:32.095502	Epoch 600: Training loss:   0.6514039454252823
+2019-11-14 09:37:32.096125	Epoch 600: Evaluation loss: 0.7328243851661682
+2019-11-14 09:37:35.152354	Accuracy measures: Global acc.: 0.9712
+                          	Class acc.: 0.7719
+                          	Mean IoU.: 0.6896
+                          	Bound. F1: 1.224
+
+2019-11-14 09:37:44.036773	Epoch 605: Training loss:   0.6451884508132935
+2019-11-14 09:37:44.037795	Epoch 605: Evaluation loss: 0.7030484080314636
+2019-11-14 09:37:47.191173	Accuracy measures: Global acc.: 0.9731
+                          	Class acc.: 0.8165
+                          	Mean IoU.: 0.7195
+                          	Bound. F1: 1.3
+
+2019-11-14 09:37:56.082043	Epoch 610: Training loss:   0.6445192176362743
+2019-11-14 09:37:56.082877	Epoch 610: Evaluation loss: 0.6668802499771118
+2019-11-14 09:37:59.240101	Accuracy measures: Global acc.: 0.9739
+                          	Class acc.: 0.8773
+                          	Mean IoU.: 0.7492
+                          	Bound. F1: 1.392
+
+2019-11-14 09:38:08.292335	Epoch 615: Training loss:   0.6537539440652599
+2019-11-14 09:38:08.292925	Epoch 615: Evaluation loss: 0.6641064882278442
+2019-11-14 09:38:11.391101	Accuracy measures: Global acc.: 0.9707
+                          	Class acc.: 0.8968
+                          	Mean IoU.: 0.7373
+                          	Bound. F1: 1.38
+
+2019-11-14 09:38:20.292735	Epoch 620: Training loss:   0.6478932577630748
+2019-11-14 09:38:20.293374	Epoch 620: Evaluation loss: 0.6814719438552856
+2019-11-14 09:38:23.395098	Accuracy measures: Global acc.: 0.9725
+                          	Class acc.: 0.8506
+                          	Mean IoU.: 0.7287
+                          	Bound. F1: 1.34
+
+2019-11-14 09:38:32.302522	Epoch 625: Training loss:   0.6438643984172655
+2019-11-14 09:38:32.303364	Epoch 625: Evaluation loss: 0.7075576782226562
+2019-11-14 09:38:35.379389	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.8211
+                          	Mean IoU.: 0.7306
+                          	Bound. F1: 1.311
+
+2019-11-14 09:38:44.286332	Epoch 630: Training loss:   0.6450579555138297
+2019-11-14 09:38:44.287197	Epoch 630: Evaluation loss: 0.6825491189956665
+2019-11-14 09:38:47.361876	Accuracy measures: Global acc.: 0.9686
+                          	Class acc.: 0.8557
+                          	Mean IoU.: 0.7108
+                          	Bound. F1: 1.314
+
+2019-11-14 09:38:56.376417	Epoch 635: Training loss:   0.6476293387620345
+2019-11-14 09:38:56.377286	Epoch 635: Evaluation loss: 0.7000544667243958
+2019-11-14 09:38:59.442071	Accuracy measures: Global acc.: 0.9701
+                          	Class acc.: 0.8546
+                          	Mean IoU.: 0.7199
+                          	Bound. F1: 1.315
+
+2019-11-14 09:39:08.290130	Epoch 640: Training loss:   0.6470400898352914
+2019-11-14 09:39:08.290744	Epoch 640: Evaluation loss: 0.7326455116271973
+2019-11-14 09:39:11.416473	Accuracy measures: Global acc.: 0.9688
+                          	Class acc.: 0.7396
+                          	Mean IoU.: 0.6456
+                          	Bound. F1: 1.162
+
+2019-11-14 09:39:20.315288	Epoch 645: Training loss:   0.6408696537432463
+2019-11-14 09:39:20.316031	Epoch 645: Evaluation loss: 0.7252265214920044
+2019-11-14 09:39:23.378930	Accuracy measures: Global acc.: 0.9707
+                          	Class acc.: 0.8108
+                          	Mean IoU.: 0.7177
+                          	Bound. F1: 1.282
+
+2019-11-14 09:39:32.250101	Epoch 650: Training loss:   0.6449425375979879
+2019-11-14 09:39:32.250909	Epoch 650: Evaluation loss: 0.6919484734535217
+2019-11-14 09:39:35.314915	Accuracy measures: Global acc.: 0.9724
+                          	Class acc.: 0.8218
+                          	Mean IoU.: 0.7148
+                          	Bound. F1: 1.299
+
+2019-11-14 09:39:44.339885	Epoch 655: Training loss:   0.6504033285638561
+2019-11-14 09:39:44.340633	Epoch 655: Evaluation loss: 0.7062167525291443
+2019-11-14 09:39:47.472669	Accuracy measures: Global acc.: 0.9673
+                          	Class acc.: 0.8607
+                          	Mean IoU.: 0.7051
+                          	Bound. F1: 1.29
+
+2019-11-14 09:39:56.337118	Epoch 660: Training loss:   0.6402394279189731
+2019-11-14 09:39:56.337986	Epoch 660: Evaluation loss: 0.7016832828521729
+2019-11-14 09:39:59.475361	Accuracy measures: Global acc.: 0.9724
+                          	Class acc.: 0.832
+                          	Mean IoU.: 0.7297
+                          	Bound. F1: 1.319
+
+2019-11-14 09:40:08.330141	Epoch 665: Training loss:   0.6384966839914736
+2019-11-14 09:40:08.330895	Epoch 665: Evaluation loss: 0.6996227502822876
+2019-11-14 09:40:11.507602	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.8204
+                          	Mean IoU.: 0.7241
+                          	Bound. F1: 1.305
+
+2019-11-14 09:40:20.375841	Epoch 670: Training loss:   0.6398180671360182
+2019-11-14 09:40:20.376564	Epoch 670: Evaluation loss: 0.702061653137207
+2019-11-14 09:40:23.509078	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.8404
+                          	Mean IoU.: 0.7472
+                          	Bound. F1: 1.35
+
+2019-11-14 09:40:32.516553	Epoch 675: Training loss:   0.6366073126378267
+2019-11-14 09:40:32.517275	Epoch 675: Evaluation loss: 0.7079574465751648
+2019-11-14 09:40:35.659846	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.8101
+                          	Mean IoU.: 0.7229
+                          	Bound. F1: 1.293
+
+2019-11-14 09:40:44.534937	Epoch 680: Training loss:   0.6387011590211288
+2019-11-14 09:40:44.535685	Epoch 680: Evaluation loss: 0.6900167465209961
+2019-11-14 09:40:47.701020	Accuracy measures: Global acc.: 0.9742
+                          	Class acc.: 0.8418
+                          	Mean IoU.: 0.7399
+                          	Bound. F1: 1.346
+
+2019-11-14 09:40:56.554810	Epoch 685: Training loss:   0.6315958422163258
+2019-11-14 09:40:56.555653	Epoch 685: Evaluation loss: 0.7051236629486084
+2019-11-14 09:40:59.790178	Accuracy measures: Global acc.: 0.9716
+                          	Class acc.: 0.8109
+                          	Mean IoU.: 0.7101
+                          	Bound. F1: 1.28
+
+2019-11-14 09:41:08.638554	Epoch 690: Training loss:   0.6431606023207955
+2019-11-14 09:41:08.639377	Epoch 690: Evaluation loss: 0.7028099894523621
+2019-11-14 09:41:11.855495	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.808
+                          	Mean IoU.: 0.7151
+                          	Bound. F1: 1.285
+
+2019-11-14 09:41:20.846978	Epoch 695: Training loss:   0.6359497049580449
+2019-11-14 09:41:20.847657	Epoch 695: Evaluation loss: 0.6539295315742493
+2019-11-14 09:41:23.966865	Accuracy measures: Global acc.: 0.9705
+                          	Class acc.: 0.8829
+                          	Mean IoU.: 0.7326
+                          	Bound. F1: 1.37
+
+2019-11-14 09:41:32.811425	Epoch 700: Training loss:   0.6363623738288879
+2019-11-14 09:41:32.812091	Epoch 700: Evaluation loss: 0.6617598533630371
+2019-11-14 09:41:36.008769	Accuracy measures: Global acc.: 0.9705
+                          	Class acc.: 0.8554
+                          	Mean IoU.: 0.7251
+                          	Bound. F1: 1.337
+
+2019-11-14 09:41:44.856449	Epoch 705: Training loss:   0.6377480004144751
+2019-11-14 09:41:44.857100	Epoch 705: Evaluation loss: 0.683942973613739
+2019-11-14 09:41:48.143357	Accuracy measures: Global acc.: 0.9752
+                          	Class acc.: 0.8592
+                          	Mean IoU.: 0.7545
+                          	Bound. F1: 1.38
+
+2019-11-14 09:41:56.970579	Epoch 710: Training loss:   0.6405576933985171
+2019-11-14 09:41:56.971480	Epoch 710: Evaluation loss: 0.6874488592147827
+2019-11-14 09:42:00.267600	Accuracy measures: Global acc.: 0.9741
+                          	Class acc.: 0.8438
+                          	Mean IoU.: 0.7439
+                          	Bound. F1: 1.351
+
+2019-11-14 09:42:09.252023	Epoch 715: Training loss:   0.6372618934382563
+2019-11-14 09:42:09.252861	Epoch 715: Evaluation loss: 0.6799900531768799
+2019-11-14 09:42:12.544979	Accuracy measures: Global acc.: 0.9737
+                          	Class acc.: 0.8378
+                          	Mean IoU.: 0.7328
+                          	Bound. F1: 1.336
+
+2019-11-14 09:42:21.414646	Epoch 720: Training loss:   0.6331013907556948
+2019-11-14 09:42:21.415558	Epoch 720: Evaluation loss: 0.7026674151420593
+2019-11-14 09:42:24.686498	Accuracy measures: Global acc.: 0.9733
+                          	Class acc.: 0.8114
+                          	Mean IoU.: 0.7242
+                          	Bound. F1: 1.298
+
+2019-11-14 09:42:33.545501	Epoch 725: Training loss:   0.6340259313583374
+2019-11-14 09:42:33.546285	Epoch 725: Evaluation loss: 0.6733302474021912
+2019-11-14 09:42:36.770974	Accuracy measures: Global acc.: 0.9739
+                          	Class acc.: 0.8552
+                          	Mean IoU.: 0.7422
+                          	Bound. F1: 1.362
+
+2019-11-14 09:42:45.647985	Epoch 730: Training loss:   0.6314709834430529
+2019-11-14 09:42:45.648863	Epoch 730: Evaluation loss: 0.6947475075721741
+2019-11-14 09:42:48.889600	Accuracy measures: Global acc.: 0.9737
+                          	Class acc.: 0.8293
+                          	Mean IoU.: 0.7367
+                          	Bound. F1: 1.329
+
+2019-11-14 09:42:57.889528	Epoch 735: Training loss:   0.6360654882762743
+2019-11-14 09:42:57.890448	Epoch 735: Evaluation loss: 0.7376402616500854
+2019-11-14 09:43:01.097551	Accuracy measures: Global acc.: 0.9689
+                          	Class acc.: 0.7472
+                          	Mean IoU.: 0.6641
+                          	Bound. F1: 1.175
+
+2019-11-14 09:43:09.969044	Epoch 740: Training loss:   0.6319252719049868
+2019-11-14 09:43:09.970129	Epoch 740: Evaluation loss: 0.6707666516304016
+2019-11-14 09:43:13.050737	Accuracy measures: Global acc.: 0.9741
+                          	Class acc.: 0.864
+                          	Mean IoU.: 0.7482
+                          	Bound. F1: 1.375
+
+2019-11-14 09:43:21.936246	Epoch 745: Training loss:   0.62722974497339
+2019-11-14 09:43:21.937061	Epoch 745: Evaluation loss: 0.6711511015892029
+2019-11-14 09:43:25.147594	Accuracy measures: Global acc.: 0.9738
+                          	Class acc.: 0.8673
+                          	Mean IoU.: 0.7501
+                          	Bound. F1: 1.379
+
+2019-11-14 09:43:34.002947	Epoch 750: Training loss:   0.6348273598629496
+2019-11-14 09:43:34.003616	Epoch 750: Evaluation loss: 0.6572633385658264
+2019-11-14 09:43:37.191247	Accuracy measures: Global acc.: 0.9758
+                          	Class acc.: 0.8817
+                          	Mean IoU.: 0.7666
+                          	Bound. F1: 1.419
+
+2019-11-14 09:43:46.209860	Epoch 755: Training loss:   0.6289951697639797
+2019-11-14 09:43:46.210626	Epoch 755: Evaluation loss: 0.7138215899467468
+2019-11-14 09:43:49.391863	Accuracy measures: Global acc.: 0.9729
+                          	Class acc.: 0.7912
+                          	Mean IoU.: 0.7139
+                          	Bound. F1: 1.268
+
+2019-11-14 09:43:58.250607	Epoch 760: Training loss:   0.6298585430435513
+2019-11-14 09:43:58.251471	Epoch 760: Evaluation loss: 0.6659016609191895
+2019-11-14 09:44:01.434853	Accuracy measures: Global acc.: 0.9758
+                          	Class acc.: 0.8584
+                          	Mean IoU.: 0.7575
+                          	Bound. F1: 1.388
+
+2019-11-14 09:44:10.304448	Epoch 765: Training loss:   0.6308228917743849
+2019-11-14 09:44:10.305448	Epoch 765: Evaluation loss: 0.6949400305747986
+2019-11-14 09:44:13.464299	Accuracy measures: Global acc.: 0.9728
+                          	Class acc.: 0.8185
+                          	Mean IoU.: 0.724
+                          	Bound. F1: 1.303
+
+2019-11-14 09:44:22.358029	Epoch 770: Training loss:   0.628362238407135
+2019-11-14 09:44:22.358882	Epoch 770: Evaluation loss: 0.740507185459137
+2019-11-14 09:44:25.508714	Accuracy measures: Global acc.: 0.9698
+                          	Class acc.: 0.7974
+                          	Mean IoU.: 0.7099
+                          	Bound. F1: 1.26
+
+2019-11-14 09:44:34.513225	Epoch 775: Training loss:   0.6296930313110352
+2019-11-14 09:44:34.514046	Epoch 775: Evaluation loss: 0.706659734249115
+2019-11-14 09:44:37.654645	Accuracy measures: Global acc.: 0.9717
+                          	Class acc.: 0.828
+                          	Mean IoU.: 0.7266
+                          	Bound. F1: 1.309
+
+2019-11-14 09:44:46.505151	Epoch 780: Training loss:   0.6300141137579213
+2019-11-14 09:44:46.505851	Epoch 780: Evaluation loss: 0.6797713041305542
+2019-11-14 09:44:49.732601	Accuracy measures: Global acc.: 0.9742
+                          	Class acc.: 0.8313
+                          	Mean IoU.: 0.7332
+                          	Bound. F1: 1.331
+
+2019-11-14 09:44:58.593689	Epoch 785: Training loss:   0.6267054288283639
+2019-11-14 09:44:58.594500	Epoch 785: Evaluation loss: 0.6882460713386536
+2019-11-14 09:45:01.711103	Accuracy measures: Global acc.: 0.9733
+                          	Class acc.: 0.8326
+                          	Mean IoU.: 0.7297
+                          	Bound. F1: 1.324
+
+2019-11-14 09:45:10.588996	Epoch 790: Training loss:   0.6298993152120839
+2019-11-14 09:45:10.590027	Epoch 790: Evaluation loss: 0.6998743414878845
+2019-11-14 09:45:13.744728	Accuracy measures: Global acc.: 0.9731
+                          	Class acc.: 0.8017
+                          	Mean IoU.: 0.7137
+                          	Bound. F1: 1.28
+
+2019-11-14 09:45:22.789512	Epoch 795: Training loss:   0.6370309098907139
+2019-11-14 09:45:22.790272	Epoch 795: Evaluation loss: 0.6797800660133362
+2019-11-14 09:45:25.887788	Accuracy measures: Global acc.: 0.9743
+                          	Class acc.: 0.8541
+                          	Mean IoU.: 0.7489
+                          	Bound. F1: 1.366
+
+2019-11-14 09:45:34.763063	Epoch 800: Training loss:   0.6225022595861683
+2019-11-14 09:45:34.763723	Epoch 800: Evaluation loss: 0.6991797089576721
+2019-11-14 09:45:37.904193	Accuracy measures: Global acc.: 0.9721
+                          	Class acc.: 0.8209
+                          	Mean IoU.: 0.7242
+                          	Bound. F1: 1.302
+
+2019-11-14 09:45:46.786648	Epoch 805: Training loss:   0.6253240834111753
+2019-11-14 09:45:46.788023	Epoch 805: Evaluation loss: 0.6980950236320496
+2019-11-14 09:45:49.903803	Accuracy measures: Global acc.: 0.9735
+                          	Class acc.: 0.8239
+                          	Mean IoU.: 0.7331
+                          	Bound. F1: 1.319
+
+2019-11-14 09:45:58.766702	Epoch 810: Training loss:   0.6224786457808121
+2019-11-14 09:45:58.767557	Epoch 810: Evaluation loss: 0.6998569369316101
+2019-11-14 09:46:01.922269	Accuracy measures: Global acc.: 0.9729
+                          	Class acc.: 0.8277
+                          	Mean IoU.: 0.7333
+                          	Bound. F1: 1.32
+
+2019-11-14 09:46:10.923083	Epoch 815: Training loss:   0.6271397652833358
+2019-11-14 09:46:10.923739	Epoch 815: Evaluation loss: 0.6625331044197083
+2019-11-14 09:46:14.113541	Accuracy measures: Global acc.: 0.9723
+                          	Class acc.: 0.866
+                          	Mean IoU.: 0.7341
+                          	Bound. F1: 1.359
+
+2019-11-14 09:46:22.965960	Epoch 820: Training loss:   0.6247628693995269
+2019-11-14 09:46:22.966990	Epoch 820: Evaluation loss: 0.6858589053153992
+2019-11-14 09:46:26.106689	Accuracy measures: Global acc.: 0.9733
+                          	Class acc.: 0.8509
+                          	Mean IoU.: 0.7411
+                          	Bound. F1: 1.35
+
+2019-11-14 09:46:34.968197	Epoch 825: Training loss:   0.6228557099466738
+2019-11-14 09:46:34.968927	Epoch 825: Evaluation loss: 0.70476233959198
+2019-11-14 09:46:38.059563	Accuracy measures: Global acc.: 0.9723
+                          	Class acc.: 0.7885
+                          	Mean IoU.: 0.7011
+                          	Bound. F1: 1.253
+
+2019-11-14 09:46:46.911443	Epoch 830: Training loss:   0.6225276045177294
+2019-11-14 09:46:46.912382	Epoch 830: Evaluation loss: 0.7050030827522278
+2019-11-14 09:46:50.038634	Accuracy measures: Global acc.: 0.9714
+                          	Class acc.: 0.8189
+                          	Mean IoU.: 0.721
+                          	Bound. F1: 1.295
+
+2019-11-14 09:46:59.051607	Epoch 835: Training loss:   0.6227997800578242
+2019-11-14 09:46:59.052496	Epoch 835: Evaluation loss: 0.701973557472229
+2019-11-14 09:47:02.113438	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.827
+                          	Mean IoU.: 0.7423
+                          	Bound. F1: 1.332
+
+2019-11-14 09:47:10.981167	Epoch 840: Training loss:   0.623977736286495
+2019-11-14 09:47:10.982124	Epoch 840: Evaluation loss: 0.6944912075996399
+2019-11-14 09:47:14.058685	Accuracy measures: Global acc.: 0.9738
+                          	Class acc.: 0.8357
+                          	Mean IoU.: 0.7416
+                          	Bound. F1: 1.338
+
+2019-11-14 09:47:22.922786	Epoch 845: Training loss:   0.6202814216199128
+2019-11-14 09:47:22.923718	Epoch 845: Evaluation loss: 0.6999353170394897
+2019-11-14 09:47:26.098430	Accuracy measures: Global acc.: 0.9722
+                          	Class acc.: 0.8247
+                          	Mean IoU.: 0.7239
+                          	Bound. F1: 1.305
+
+2019-11-14 09:47:34.958625	Epoch 850: Training loss:   0.6199346392051034
+2019-11-14 09:47:34.959624	Epoch 850: Evaluation loss: 0.6538445353507996
+2019-11-14 09:47:38.072056	Accuracy measures: Global acc.: 0.9752
+                          	Class acc.: 0.8688
+                          	Mean IoU.: 0.7549
+                          	Bound. F1: 1.395
+
+2019-11-14 09:47:46.989582	Epoch 855: Training loss:   0.6192126585089642
+2019-11-14 09:47:46.990272	Epoch 855: Evaluation loss: 0.6837620735168457
+2019-11-14 09:47:50.112333	Accuracy measures: Global acc.: 0.9739
+                          	Class acc.: 0.8451
+                          	Mean IoU.: 0.7471
+                          	Bound. F1: 1.355
+
+2019-11-14 09:47:58.982002	Epoch 860: Training loss:   0.6202010978823123
+2019-11-14 09:47:58.982844	Epoch 860: Evaluation loss: 0.696476936340332
+2019-11-14 09:48:02.120799	Accuracy measures: Global acc.: 0.9736
+                          	Class acc.: 0.8209
+                          	Mean IoU.: 0.7336
+                          	Bound. F1: 1.316
+
+2019-11-14 09:48:10.973371	Epoch 865: Training loss:   0.6232504378194395
+2019-11-14 09:48:10.974243	Epoch 865: Evaluation loss: 0.6990500092506409
+2019-11-14 09:48:14.043570	Accuracy measures: Global acc.: 0.9733
+                          	Class acc.: 0.8304
+                          	Mean IoU.: 0.7395
+                          	Bound. F1: 1.331
+
+2019-11-14 09:48:22.910458	Epoch 870: Training loss:   0.6199811567430911
+2019-11-14 09:48:22.911055	Epoch 870: Evaluation loss: 0.6998672485351562
+2019-11-14 09:48:25.990091	Accuracy measures: Global acc.: 0.9736
+                          	Class acc.: 0.8185
+                          	Mean IoU.: 0.7338
+                          	Bound. F1: 1.314
+
+2019-11-14 09:48:34.928173	Epoch 875: Training loss:   0.6233824776566547
+2019-11-14 09:48:34.928927	Epoch 875: Evaluation loss: 0.6795549392700195
+2019-11-14 09:48:38.005088	Accuracy measures: Global acc.: 0.9748
+                          	Class acc.: 0.8537
+                          	Mean IoU.: 0.7555
+                          	Bound. F1: 1.376
+
+2019-11-14 09:48:46.874127	Epoch 880: Training loss:   0.6292163677837538
+2019-11-14 09:48:46.875131	Epoch 880: Evaluation loss: 0.7359716296195984
+2019-11-14 09:48:49.942416	Accuracy measures: Global acc.: 0.9702
+                          	Class acc.: 0.7902
+                          	Mean IoU.: 0.7081
+                          	Bound. F1: 1.251
+
+2019-11-14 09:48:58.832069	Epoch 885: Training loss:   0.6219308402227319
+2019-11-14 09:48:58.832871	Epoch 885: Evaluation loss: 0.7183281183242798
+2019-11-14 09:49:01.951970	Accuracy measures: Global acc.: 0.9706
+                          	Class acc.: 0.775
+                          	Mean IoU.: 0.6904
+                          	Bound. F1: 1.226
+
+2019-11-14 09:49:10.821731	Epoch 890: Training loss:   0.6196922685789026
+2019-11-14 09:49:10.822823	Epoch 890: Evaluation loss: 0.6653467416763306
+2019-11-14 09:49:14.038935	Accuracy measures: Global acc.: 0.9753
+                          	Class acc.: 0.8523
+                          	Mean IoU.: 0.7512
+                          	Bound. F1: 1.373
+
+2019-11-14 09:49:23.042858	Epoch 895: Training loss:   0.6216442792311959
+2019-11-14 09:49:23.043854	Epoch 895: Evaluation loss: 0.6969958543777466
+2019-11-14 09:49:26.234898	Accuracy measures: Global acc.: 0.9732
+                          	Class acc.: 0.8195
+                          	Mean IoU.: 0.7334
+                          	Bound. F1: 1.314
+
+2019-11-14 09:49:35.116665	Epoch 900: Training loss:   0.6173140354778456
+2019-11-14 09:49:35.117702	Epoch 900: Evaluation loss: 0.6935373544692993
+2019-11-14 09:49:38.243838	Accuracy measures: Global acc.: 0.9739
+                          	Class acc.: 0.8233
+                          	Mean IoU.: 0.7328
+                          	Bound. F1: 1.318
+
+2019-11-14 09:49:47.113545	Epoch 905: Training loss:   0.6215046825616256
+2019-11-14 09:49:47.114634	Epoch 905: Evaluation loss: 0.6921999454498291
+2019-11-14 09:49:50.220288	Accuracy measures: Global acc.: 0.9743
+                          	Class acc.: 0.8514
+                          	Mean IoU.: 0.7512
+                          	Bound. F1: 1.365
+
+2019-11-14 09:49:59.069321	Epoch 910: Training loss:   0.6213759313458982
+2019-11-14 09:49:59.070243	Epoch 910: Evaluation loss: 0.7025262117385864
+2019-11-14 09:50:02.170864	Accuracy measures: Global acc.: 0.9725
+                          	Class acc.: 0.8132
+                          	Mean IoU.: 0.7246
+                          	Bound. F1: 1.296
+
+2019-11-14 09:50:11.179247	Epoch 915: Training loss:   0.6200721497121064
+2019-11-14 09:50:11.180172	Epoch 915: Evaluation loss: 0.6734282374382019
+2019-11-14 09:50:14.303277	Accuracy measures: Global acc.: 0.9745
+                          	Class acc.: 0.8548
+                          	Mean IoU.: 0.7452
+                          	Bound. F1: 1.366
+
+2019-11-14 09:50:23.164177	Epoch 920: Training loss:   0.6192276866539664
+2019-11-14 09:50:23.165062	Epoch 920: Evaluation loss: 0.6763070225715637
+2019-11-14 09:50:26.345029	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.8574
+                          	Mean IoU.: 0.75
+                          	Bound. F1: 1.37
+
+2019-11-14 09:50:35.189184	Epoch 925: Training loss:   0.6177930546843488
+2019-11-14 09:50:35.190122	Epoch 925: Evaluation loss: 0.6927872896194458
+2019-11-14 09:50:38.287694	Accuracy measures: Global acc.: 0.9739
+                          	Class acc.: 0.831
+                          	Mean IoU.: 0.7408
+                          	Bound. F1: 1.333
+
+2019-11-14 09:50:47.155185	Epoch 930: Training loss:   0.6174694040547246
+2019-11-14 09:50:47.155952	Epoch 930: Evaluation loss: 0.6937580704689026
+2019-11-14 09:50:50.262498	Accuracy measures: Global acc.: 0.9742
+                          	Class acc.: 0.8292
+                          	Mean IoU.: 0.7451
+                          	Bound. F1: 1.338
+
+2019-11-14 09:50:59.239694	Epoch 935: Training loss:   0.616734126339788
+2019-11-14 09:50:59.240494	Epoch 935: Evaluation loss: 0.687156081199646
+2019-11-14 09:51:02.350106	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.8388
+                          	Mean IoU.: 0.7451
+                          	Bound. F1: 1.347
+
+2019-11-14 09:51:11.194472	Epoch 940: Training loss:   0.6156971014064291
+2019-11-14 09:51:11.195297	Epoch 940: Evaluation loss: 0.6860053539276123
+2019-11-14 09:51:14.300365	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.8447
+                          	Mean IoU.: 0.7314
+                          	Bound. F1: 1.331
+
+2019-11-14 09:51:23.146887	Epoch 945: Training loss:   0.6141217117724211
+2019-11-14 09:51:23.147759	Epoch 945: Evaluation loss: 0.7101320624351501
+2019-11-14 09:51:26.331407	Accuracy measures: Global acc.: 0.9723
+                          	Class acc.: 0.7816
+                          	Mean IoU.: 0.7019
+                          	Bound. F1: 1.247
+
+2019-11-14 09:51:35.176083	Epoch 950: Training loss:   0.6180238464604253
+2019-11-14 09:51:35.176801	Epoch 950: Evaluation loss: 0.7010813355445862
+2019-11-14 09:51:38.303120	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.8031
+                          	Mean IoU.: 0.7127
+                          	Bound. F1: 1.277
+
+2019-11-14 09:51:47.309257	Epoch 955: Training loss:   0.6168758817341017
+2019-11-14 09:51:47.309894	Epoch 955: Evaluation loss: 0.7194918990135193
+2019-11-14 09:51:50.497644	Accuracy measures: Global acc.: 0.9716
+                          	Class acc.: 0.783
+                          	Mean IoU.: 0.7062
+                          	Bound. F1: 1.247
+
+2019-11-14 09:51:59.351794	Epoch 960: Training loss:   0.6199177244435186
+2019-11-14 09:51:59.352590	Epoch 960: Evaluation loss: 0.6972956657409668
+2019-11-14 09:52:02.493455	Accuracy measures: Global acc.: 0.9714
+                          	Class acc.: 0.8323
+                          	Mean IoU.: 0.7253
+                          	Bound. F1: 1.311
+
+2019-11-14 09:52:11.346677	Epoch 965: Training loss:   0.6174169001371964
+2019-11-14 09:52:11.347420	Epoch 965: Evaluation loss: 0.6630351543426514
+2019-11-14 09:52:14.451218	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.8678
+                          	Mean IoU.: 0.7487
+                          	Bound. F1: 1.379
+
+2019-11-14 09:52:23.295562	Epoch 970: Training loss:   0.6169565864231276
+2019-11-14 09:52:23.296397	Epoch 970: Evaluation loss: 0.6756762266159058
+2019-11-14 09:52:26.398258	Accuracy measures: Global acc.: 0.9735
+                          	Class acc.: 0.8595
+                          	Mean IoU.: 0.7455
+                          	Bound. F1: 1.363
+
+2019-11-14 09:52:35.400129	Epoch 975: Training loss:   0.6176117917765742
+2019-11-14 09:52:35.400981	Epoch 975: Evaluation loss: 0.6727681159973145
+2019-11-14 09:52:38.525934	Accuracy measures: Global acc.: 0.9743
+                          	Class acc.: 0.8452
+                          	Mean IoU.: 0.7445
+                          	Bound. F1: 1.355
+
+2019-11-14 09:52:47.405682	Epoch 980: Training loss:   0.6169001952461575
+2019-11-14 09:52:47.406519	Epoch 980: Evaluation loss: 0.7015271782875061
+2019-11-14 09:52:50.541179	Accuracy measures: Global acc.: 0.9731
+                          	Class acc.: 0.8136
+                          	Mean IoU.: 0.7274
+                          	Bound. F1: 1.301
+
+2019-11-14 09:52:59.400904	Epoch 985: Training loss:   0.6220698408458544
+2019-11-14 09:52:59.401766	Epoch 985: Evaluation loss: 0.6865226626396179
+2019-11-14 09:53:02.560893	Accuracy measures: Global acc.: 0.9616
+                          	Class acc.: 0.7743
+                          	Mean IoU.: 0.6311
+                          	Bound. F1: 1.156
+
+2019-11-14 09:53:11.397323	Epoch 990: Training loss:   0.6199670356252919
+2019-11-14 09:53:11.398130	Epoch 990: Evaluation loss: 0.7234563827514648
+2019-11-14 09:53:14.640988	Accuracy measures: Global acc.: 0.9716
+                          	Class acc.: 0.7712
+                          	Mean IoU.: 0.6991
+                          	Bound. F1: 1.231
+
+2019-11-14 09:53:23.634547	Epoch 995: Training loss:   0.6101894482322361
+2019-11-14 09:53:23.635504	Epoch 995: Evaluation loss: 0.7090502977371216
+2019-11-14 09:53:26.823663	Accuracy measures: Global acc.: 0.9721
+                          	Class acc.: 0.8232
+                          	Mean IoU.: 0.7328
+                          	Bound. F1: 1.314
+
+2019-11-14 09:53:35.699794	Epoch 1000: Training loss:   0.6169462307639744
+2019-11-14 09:53:35.700511	Epoch 1000: Evaluation loss: 0.675763726234436
+2019-11-14 09:53:38.846512	Accuracy measures: Global acc.: 0.9743
+                          	Class acc.: 0.8539
+                          	Mean IoU.: 0.7455
+                          	Bound. F1: 1.361
+
+2019-11-14 09:53:47.695828	Epoch 1005: Training loss:   0.6072033721467723
+2019-11-14 09:53:47.696517	Epoch 1005: Evaluation loss: 0.6500073671340942
+2019-11-14 09:53:50.813080	Accuracy measures: Global acc.: 0.9747
+                          	Class acc.: 0.8759
+                          	Mean IoU.: 0.752
+                          	Bound. F1: 1.395
+
+2019-11-14 09:53:59.662901	Epoch 1010: Training loss:   0.6162099475445955
+2019-11-14 09:53:59.663730	Epoch 1010: Evaluation loss: 0.6344494223594666
+2019-11-14 09:54:02.791971	Accuracy measures: Global acc.: 0.9706
+                          	Class acc.: 0.9107
+                          	Mean IoU.: 0.7463
+                          	Bound. F1: 1.41
+
+2019-11-14 09:54:11.656947	Epoch 1015: Training loss:   0.6087802907694941
+2019-11-14 09:54:11.657631	Epoch 1015: Evaluation loss: 0.6924189925193787
+2019-11-14 09:54:14.761859	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.8208
+                          	Mean IoU.: 0.7385
+                          	Bound. F1: 1.322
+
+2019-11-14 09:54:23.611102	Epoch 1020: Training loss:   0.6256852098133253
+2019-11-14 09:54:23.611890	Epoch 1020: Evaluation loss: 0.691582977771759
+2019-11-14 09:54:26.767162	Accuracy measures: Global acc.: 0.9715
+                          	Class acc.: 0.7929
+                          	Mean IoU.: 0.6919
+                          	Bound. F1: 1.251
+
+2019-11-14 09:54:35.622838	Epoch 1025: Training loss:   0.6089834985525712
+2019-11-14 09:54:35.623661	Epoch 1025: Evaluation loss: 0.6913007497787476
+2019-11-14 09:54:38.812782	Accuracy measures: Global acc.: 0.9749
+                          	Class acc.: 0.8298
+                          	Mean IoU.: 0.7464
+                          	Bound. F1: 1.342
+
+2019-11-14 09:54:47.664683	Epoch 1030: Training loss:   0.621653209561887
+2019-11-14 09:54:47.665558	Epoch 1030: Evaluation loss: 0.7538431286811829
+2019-11-14 09:54:50.908896	Accuracy measures: Global acc.: 0.9682
+                          	Class acc.: 0.7463
+                          	Mean IoU.: 0.6767
+                          	Bound. F1: 1.179
+
+2019-11-14 09:54:59.875843	Epoch 1035: Training loss:   0.6065939172454502
+2019-11-14 09:54:59.876712	Epoch 1035: Evaluation loss: 0.67684406042099
+2019-11-14 09:55:03.122478	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.8335
+                          	Mean IoU.: 0.7339
+                          	Bound. F1: 1.332
+
+2019-11-14 09:55:11.966220	Epoch 1040: Training loss:   0.6074172362037327
+2019-11-14 09:55:11.967024	Epoch 1040: Evaluation loss: 0.7077987194061279
+2019-11-14 09:55:15.222278	Accuracy measures: Global acc.: 0.9716
+                          	Class acc.: 0.7768
+                          	Mean IoU.: 0.6919
+                          	Bound. F1: 1.233
+
+2019-11-14 09:55:24.070972	Epoch 1045: Training loss:   0.6027154067288274
+2019-11-14 09:55:24.071689	Epoch 1045: Evaluation loss: 0.7120499610900879
+2019-11-14 09:55:27.214024	Accuracy measures: Global acc.: 0.9721
+                          	Class acc.: 0.7993
+                          	Mean IoU.: 0.7186
+                          	Bound. F1: 1.276
+
+2019-11-14 09:55:36.053469	Epoch 1050: Training loss:   0.6054031356521274
+2019-11-14 09:55:36.054108	Epoch 1050: Evaluation loss: 0.6816060543060303
+2019-11-14 09:55:39.180811	Accuracy measures: Global acc.: 0.9741
+                          	Class acc.: 0.842
+                          	Mean IoU.: 0.7447
+                          	Bound. F1: 1.35
+
+2019-11-14 09:55:48.134138	Epoch 1055: Training loss:   0.6056557375451793
+2019-11-14 09:55:48.134814	Epoch 1055: Evaluation loss: 0.6466846466064453
+2019-11-14 09:55:51.237984	Accuracy measures: Global acc.: 0.9753
+                          	Class acc.: 0.8722
+                          	Mean IoU.: 0.7569
+                          	Bound. F1: 1.402
+
+2019-11-14 09:56:00.099817	Epoch 1060: Training loss:   0.6033589269803918
+2019-11-14 09:56:00.100745	Epoch 1060: Evaluation loss: 0.6815268993377686
+2019-11-14 09:56:03.276267	Accuracy measures: Global acc.: 0.9742
+                          	Class acc.: 0.8177
+                          	Mean IoU.: 0.7242
+                          	Bound. F1: 1.309
+
+2019-11-14 09:56:12.121665	Epoch 1065: Training loss:   0.6052374347396519
+2019-11-14 09:56:12.122590	Epoch 1065: Evaluation loss: 0.6997392773628235
+2019-11-14 09:56:15.233197	Accuracy measures: Global acc.: 0.9731
+                          	Class acc.: 0.81
+                          	Mean IoU.: 0.7249
+                          	Bound. F1: 1.296
+
+2019-11-14 09:56:24.076722	Epoch 1070: Training loss:   0.6044744797374891
+2019-11-14 09:56:24.077599	Epoch 1070: Evaluation loss: 0.6502103209495544
+2019-11-14 09:56:27.227246	Accuracy measures: Global acc.: 0.9723
+                          	Class acc.: 0.8795
+                          	Mean IoU.: 0.7456
+                          	Bound. F1: 1.384
+
+2019-11-14 09:56:36.225403	Epoch 1075: Training loss:   0.6082293909528981
+2019-11-14 09:56:36.226277	Epoch 1075: Evaluation loss: 0.7121015191078186
+2019-11-14 09:56:39.350834	Accuracy measures: Global acc.: 0.9705
+                          	Class acc.: 0.8041
+                          	Mean IoU.: 0.7146
+                          	Bound. F1: 1.272
+
+2019-11-14 09:56:48.223471	Epoch 1080: Training loss:   0.6057680301044298
+2019-11-14 09:56:48.224349	Epoch 1080: Evaluation loss: 0.7281017303466797
+2019-11-14 09:56:51.344120	Accuracy measures: Global acc.: 0.9707
+                          	Class acc.: 0.763
+                          	Mean IoU.: 0.6926
+                          	Bound. F1: 1.216
+
+2019-11-14 09:57:00.211013	Epoch 1085: Training loss:   0.6091832829558331
+2019-11-14 09:57:00.211765	Epoch 1085: Evaluation loss: 0.7001002430915833
+2019-11-14 09:57:03.418903	Accuracy measures: Global acc.: 0.9745
+                          	Class acc.: 0.814
+                          	Mean IoU.: 0.7364
+                          	Bound. F1: 1.315
+
+2019-11-14 09:57:12.278126	Epoch 1090: Training loss:   0.6052161481069482
+2019-11-14 09:57:12.278881	Epoch 1090: Evaluation loss: 0.7091988921165466
+2019-11-14 09:57:15.412248	Accuracy measures: Global acc.: 0.9725
+                          	Class acc.: 0.8192
+                          	Mean IoU.: 0.7323
+                          	Bound. F1: 1.31
+
+2019-11-14 09:57:24.397698	Epoch 1095: Training loss:   0.6060329546099124
+2019-11-14 09:57:24.398476	Epoch 1095: Evaluation loss: 0.67499178647995
+2019-11-14 09:57:27.543859	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.8413
+                          	Mean IoU.: 0.7394
+                          	Bound. F1: 1.344
+
+2019-11-14 09:57:36.422543	Epoch 1100: Training loss:   0.6118127910987191
+2019-11-14 09:57:36.423153	Epoch 1100: Evaluation loss: 0.7035177946090698
+2019-11-14 09:57:39.580169	Accuracy measures: Global acc.: 0.973
+                          	Class acc.: 0.8101
+                          	Mean IoU.: 0.7289
+                          	Bound. F1: 1.299
+
+2019-11-14 09:57:48.432432	Epoch 1105: Training loss:   0.6027511746987052
+2019-11-14 09:57:48.433272	Epoch 1105: Evaluation loss: 0.6934502124786377
+2019-11-14 09:57:51.539007	Accuracy measures: Global acc.: 0.9737
+                          	Class acc.: 0.8153
+                          	Mean IoU.: 0.734
+                          	Bound. F1: 1.312
+
+2019-11-14 09:58:00.381235	Epoch 1110: Training loss:   0.6012551084808682
+2019-11-14 09:58:00.381852	Epoch 1110: Evaluation loss: 0.7085784077644348
+2019-11-14 09:58:03.505870	Accuracy measures: Global acc.: 0.972
+                          	Class acc.: 0.8063
+                          	Mean IoU.: 0.7219
+                          	Bound. F1: 1.285
+
+2019-11-14 09:58:12.521408	Epoch 1115: Training loss:   0.6037651559580928
+2019-11-14 09:58:12.522081	Epoch 1115: Evaluation loss: 0.6784821152687073
+2019-11-14 09:58:15.636905	Accuracy measures: Global acc.: 0.9747
+                          	Class acc.: 0.8518
+                          	Mean IoU.: 0.7484
+                          	Bound. F1: 1.364
+
+2019-11-14 09:58:24.503796	Epoch 1120: Training loss:   0.6021937779758287
+2019-11-14 09:58:24.504776	Epoch 1120: Evaluation loss: 0.6861263513565063
+2019-11-14 09:58:27.678588	Accuracy measures: Global acc.: 0.9746
+                          	Class acc.: 0.8114
+                          	Mean IoU.: 0.7286
+                          	Bound. F1: 1.308
+
+2019-11-14 09:58:36.523511	Epoch 1125: Training loss:   0.6034372578496519
+2019-11-14 09:58:36.524355	Epoch 1125: Evaluation loss: 0.7008355855941772
+2019-11-14 09:58:39.705945	Accuracy measures: Global acc.: 0.9725
+                          	Class acc.: 0.798
+                          	Mean IoU.: 0.7136
+                          	Bound. F1: 1.272
+
+2019-11-14 09:58:48.570610	Epoch 1130: Training loss:   0.6017776805421581
+2019-11-14 09:58:48.571467	Epoch 1130: Evaluation loss: 0.6698722839355469
+2019-11-14 09:58:51.733348	Accuracy measures: Global acc.: 0.9748
+                          	Class acc.: 0.8642
+                          	Mean IoU.: 0.7543
+                          	Bound. F1: 1.384
+
+2019-11-14 09:59:00.707028	Epoch 1135: Training loss:   0.6054260860318723
+2019-11-14 09:59:00.707672	Epoch 1135: Evaluation loss: 0.727027416229248
+2019-11-14 09:59:03.913024	Accuracy measures: Global acc.: 0.9714
+                          	Class acc.: 0.7838
+                          	Mean IoU.: 0.7065
+                          	Bound. F1: 1.247
+
+2019-11-14 09:59:12.748692	Epoch 1140: Training loss:   0.6031379984772723
+2019-11-14 09:59:12.749394	Epoch 1140: Evaluation loss: 0.689433217048645
+2019-11-14 09:59:15.903639	Accuracy measures: Global acc.: 0.9738
+                          	Class acc.: 0.827
+                          	Mean IoU.: 0.7362
+                          	Bound. F1: 1.325
+
+2019-11-14 09:59:24.749888	Epoch 1145: Training loss:   0.6044672001963076
+2019-11-14 09:59:24.750618	Epoch 1145: Evaluation loss: 0.6875863671302795
+2019-11-14 09:59:27.920751	Accuracy measures: Global acc.: 0.9734
+                          	Class acc.: 0.829
+                          	Mean IoU.: 0.7364
+                          	Bound. F1: 1.326
+
+2019-11-14 09:59:36.762394	Epoch 1150: Training loss:   0.6044276538102523
+2019-11-14 09:59:36.763122	Epoch 1150: Evaluation loss: 0.6936295032501221
+2019-11-14 09:59:39.894900	Accuracy measures: Global acc.: 0.9731
+                          	Class acc.: 0.8107
+                          	Mean IoU.: 0.7237
+                          	Bound. F1: 1.296
+
+2019-11-14 09:59:48.882287	Epoch 1155: Training loss:   0.600772069848102
+2019-11-14 09:59:48.883229	Epoch 1155: Evaluation loss: 0.7016123533248901
+2019-11-14 09:59:51.981787	Accuracy measures: Global acc.: 0.972
+                          	Class acc.: 0.835
+                          	Mean IoU.: 0.729
+                          	Bound. F1: 1.317
+
+2019-11-14 10:00:00.832300	Epoch 1160: Training loss:   0.6003392131432242
+2019-11-14 10:00:00.833236	Epoch 1160: Evaluation loss: 0.6896095871925354
+2019-11-14 10:00:03.958047	Accuracy measures: Global acc.: 0.9738
+                          	Class acc.: 0.8188
+                          	Mean IoU.: 0.7335
+                          	Bound. F1: 1.315
+
+2019-11-14 10:00:12.800283	Epoch 1165: Training loss:   0.5983844814093217
+2019-11-14 10:00:12.801252	Epoch 1165: Evaluation loss: 0.7277905344963074
+2019-11-14 10:00:16.024892	Accuracy measures: Global acc.: 0.9708
+                          	Class acc.: 0.7872
+                          	Mean IoU.: 0.7161
+                          	Bound. F1: 1.261
+
+2019-11-14 10:00:24.866733	Epoch 1170: Training loss:   0.6025232880011849
+2019-11-14 10:00:24.867481	Epoch 1170: Evaluation loss: 0.6834186315536499
+2019-11-14 10:00:28.099545	Accuracy measures: Global acc.: 0.9709
+                          	Class acc.: 0.7918
+                          	Mean IoU.: 0.6861
+                          	Bound. F1: 1.244
+
+2019-11-14 10:00:36.968899	Epoch 1175: Training loss:   0.6005310649457185
+2019-11-14 10:00:36.969605	Epoch 1175: Evaluation loss: 0.6663057804107666
+2019-11-14 10:00:40.188860	Accuracy measures: Global acc.: 0.9754
+                          	Class acc.: 0.8458
+                          	Mean IoU.: 0.7486
+                          	Bound. F1: 1.363
+
+2019-11-14 10:00:49.046457	Epoch 1180: Training loss:   0.5992385149002075
+2019-11-14 10:00:49.047242	Epoch 1180: Evaluation loss: 0.6781973838806152
+2019-11-14 10:00:52.285642	Accuracy measures: Global acc.: 0.9736
+                          	Class acc.: 0.8219
+                          	Mean IoU.: 0.7254
+                          	Bound. F1: 1.312
+
+2019-11-14 10:01:01.158630	Epoch 1185: Training loss:   0.6011486157127048
+2019-11-14 10:01:01.159385	Epoch 1185: Evaluation loss: 0.7229517698287964
+2019-11-14 10:01:04.309767	Accuracy measures: Global acc.: 0.9695
+                          	Class acc.: 0.7423
+                          	Mean IoU.: 0.6586
+                          	Bound. F1: 1.17
+
+2019-11-14 10:01:13.170702	Epoch 1190: Training loss:   0.5983866971472035
+2019-11-14 10:01:13.171415	Epoch 1190: Evaluation loss: 0.698637843132019
+2019-11-14 10:01:16.273715	Accuracy measures: Global acc.: 0.9717
+                          	Class acc.: 0.8097
+                          	Mean IoU.: 0.7122
+                          	Bound. F1: 1.279
+
+2019-11-14 10:01:25.257651	Epoch 1195: Training loss:   0.6059230358704276
+2019-11-14 10:01:25.258412	Epoch 1195: Evaluation loss: 0.6623897552490234
+2019-11-14 10:01:28.385784	Accuracy measures: Global acc.: 0.9761
+                          	Class acc.: 0.8588
+                          	Mean IoU.: 0.7612
+                          	Bound. F1: 1.391
+
+2019-11-14 10:01:37.240670	Epoch 1200: Training loss:   0.6002297090447467
+2019-11-14 10:01:37.241281	Epoch 1200: Evaluation loss: 0.7002503871917725
+2019-11-14 10:01:40.471175	Accuracy measures: Global acc.: 0.9735
+                          	Class acc.: 0.7922
+                          	Mean IoU.: 0.7169
+                          	Bound. F1: 1.273
+
+2019-11-14 10:01:49.299822	Epoch 1205: Training loss:   0.6061691615892493
+2019-11-14 10:01:49.300470	Epoch 1205: Evaluation loss: 0.7116632461547852
+2019-11-14 10:01:52.383716	Accuracy measures: Global acc.: 0.9712
+                          	Class acc.: 0.8152
+                          	Mean IoU.: 0.7252
+                          	Bound. F1: 1.296
+
+2019-11-14 10:02:01.224154	Epoch 1210: Training loss:   0.6030171928198441
+2019-11-14 10:02:01.224959	Epoch 1210: Evaluation loss: 0.6945649981498718
+2019-11-14 10:02:04.342515	Accuracy measures: Global acc.: 0.9732
+                          	Class acc.: 0.7941
+                          	Mean IoU.: 0.7077
+                          	Bound. F1: 1.269
+
+2019-11-14 10:02:13.325489	Epoch 1215: Training loss:   0.6030014235040416
+2019-11-14 10:02:13.326124	Epoch 1215: Evaluation loss: 0.7096617817878723
+2019-11-14 10:02:16.408497	Accuracy measures: Global acc.: 0.9735
+                          	Class acc.: 0.7846
+                          	Mean IoU.: 0.7174
+                          	Bound. F1: 1.266
+
+2019-11-14 10:02:25.254810	Epoch 1220: Training loss:   0.6062203101489855
+2019-11-14 10:02:25.255596	Epoch 1220: Evaluation loss: 0.7041414380073547
+2019-11-14 10:02:28.369401	Accuracy measures: Global acc.: 0.9713
+                          	Class acc.: 0.7769
+                          	Mean IoU.: 0.6918
+                          	Bound. F1: 1.232
+
+2019-11-14 10:02:37.197445	Epoch 1225: Training loss:   0.5982984174852786
+2019-11-14 10:02:37.198171	Epoch 1225: Evaluation loss: 0.7130040526390076
+2019-11-14 10:02:40.395149	Accuracy measures: Global acc.: 0.9717
+                          	Class acc.: 0.7918
+                          	Mean IoU.: 0.7122
+                          	Bound. F1: 1.262
+
+2019-11-14 10:02:49.235087	Epoch 1230: Training loss:   0.597579546596693
+2019-11-14 10:02:49.235839	Epoch 1230: Evaluation loss: 0.6827374696731567
+2019-11-14 10:02:52.446596	Accuracy measures: Global acc.: 0.9752
+                          	Class acc.: 0.8353
+                          	Mean IoU.: 0.7493
+                          	Bound. F1: 1.351
+
+2019-11-14 10:03:01.373361	Epoch 1235: Training loss:   0.5977906170098678
+2019-11-14 10:03:01.374111	Epoch 1235: Evaluation loss: 0.7242900133132935
+2019-11-14 10:03:04.566179	Accuracy measures: Global acc.: 0.9708
+                          	Class acc.: 0.7617
+                          	Mean IoU.: 0.6933
+                          	Bound. F1: 1.214
+
+2019-11-14 10:03:13.439591	Epoch 1240: Training loss:   0.595545760963274
+2019-11-14 10:03:13.440562	Epoch 1240: Evaluation loss: 0.6916757822036743
+2019-11-14 10:03:16.586395	Accuracy measures: Global acc.: 0.9737
+                          	Class acc.: 0.8145
+                          	Mean IoU.: 0.7298
+                          	Bound. F1: 1.306
+
+2019-11-14 10:03:25.433624	Epoch 1245: Training loss:   0.5989194901093192
+2019-11-14 10:03:25.434416	Epoch 1245: Evaluation loss: 0.703771710395813
+2019-11-14 10:03:28.551142	Accuracy measures: Global acc.: 0.9719
+                          	Class acc.: 0.7809
+                          	Mean IoU.: 0.6962
+                          	Bound. F1: 1.242
+
+2019-11-14 10:03:37.390704	Epoch 1250: Training loss:   0.5991360830224078
+2019-11-14 10:03:37.391554	Epoch 1250: Evaluation loss: 0.707545816898346
+2019-11-14 10:03:40.531578	Accuracy measures: Global acc.: 0.972
+                          	Class acc.: 0.7839
+                          	Mean IoU.: 0.7077
+                          	Bound. F1: 1.252
+
+2019-11-14 10:03:49.518378	Epoch 1255: Training loss:   0.59423145522242
+2019-11-14 10:03:49.519039	Epoch 1255: Evaluation loss: 0.6928392648696899
+2019-11-14 10:03:52.636653	Accuracy measures: Global acc.: 0.9738
+                          	Class acc.: 0.8082
+                          	Mean IoU.: 0.7228
+                          	Bound. F1: 1.296
+
+2019-11-14 10:04:01.480080	Epoch 1260: Training loss:   0.6025572989297949
+2019-11-14 10:04:01.480835	Epoch 1260: Evaluation loss: 0.6996517181396484
+2019-11-14 10:04:04.604240	Accuracy measures: Global acc.: 0.973
+                          	Class acc.: 0.8108
+                          	Mean IoU.: 0.7257
+                          	Bound. F1: 1.296
+
+2019-11-14 10:04:13.445335	Epoch 1265: Training loss:   0.5974685031434764
+2019-11-14 10:04:13.446742	Epoch 1265: Evaluation loss: 0.6779630184173584
+2019-11-14 10:04:16.626110	Accuracy measures: Global acc.: 0.9752
+                          	Class acc.: 0.831
+                          	Mean IoU.: 0.7452
+                          	Bound. F1: 1.343
+
+2019-11-14 10:04:25.498339	Epoch 1270: Training loss:   0.5956996886626534
+2019-11-14 10:04:25.499114	Epoch 1270: Evaluation loss: 0.7105530500411987
+2019-11-14 10:04:28.689414	Accuracy measures: Global acc.: 0.9731
+                          	Class acc.: 0.7936
+                          	Mean IoU.: 0.7149
+                          	Bound. F1: 1.271
+
+2019-11-14 10:04:37.605249	Epoch 1275: Training loss:   0.5951789384302886
+2019-11-14 10:04:37.606137	Epoch 1275: Evaluation loss: 0.6842121481895447
+2019-11-14 10:04:40.790902	Accuracy measures: Global acc.: 0.9742
+                          	Class acc.: 0.8254
+                          	Mean IoU.: 0.739
+                          	Bound. F1: 1.328
+
+2019-11-14 10:04:49.658069	Epoch 1280: Training loss:   0.5963232517242432
+2019-11-14 10:04:49.658953	Epoch 1280: Evaluation loss: 0.7107471823692322
+2019-11-14 10:04:52.844670	Accuracy measures: Global acc.: 0.9722
+                          	Class acc.: 0.7953
+                          	Mean IoU.: 0.7191
+                          	Bound. F1: 1.273
+
+2019-11-14 10:05:01.684869	Epoch 1285: Training loss:   0.5941636069961216
+2019-11-14 10:05:01.685623	Epoch 1285: Evaluation loss: 0.6897006630897522
+2019-11-14 10:05:04.815517	Accuracy measures: Global acc.: 0.9743
+                          	Class acc.: 0.833
+                          	Mean IoU.: 0.7462
+                          	Bound. F1: 1.342
+
+2019-11-14 10:05:13.671471	Epoch 1290: Training loss:   0.6007249199825785
+2019-11-14 10:05:13.672187	Epoch 1290: Evaluation loss: 0.6835237741470337
+2019-11-14 10:05:16.779518	Accuracy measures: Global acc.: 0.9746
+                          	Class acc.: 0.8263
+                          	Mean IoU.: 0.7396
+                          	Bound. F1: 1.331
+
+2019-11-14 10:05:25.743959	Epoch 1295: Training loss:   0.5951001929200214
+2019-11-14 10:05:25.744902	Epoch 1295: Evaluation loss: 0.6789431571960449
+2019-11-14 10:05:28.890763	Accuracy measures: Global acc.: 0.975
+                          	Class acc.: 0.8282
+                          	Mean IoU.: 0.7426
+                          	Bound. F1: 1.337
+
+2019-11-14 10:05:37.749151	Epoch 1300: Training loss:   0.5913227122762929
+2019-11-14 10:05:37.749777	Epoch 1300: Evaluation loss: 0.7446048855781555
+2019-11-14 10:05:40.807609	Accuracy measures: Global acc.: 0.9704
+                          	Class acc.: 0.7628
+                          	Mean IoU.: 0.6981
+                          	Bound. F1: 1.218
+
+2019-11-14 10:05:49.725092	Epoch 1305: Training loss:   0.5924314752868984
+2019-11-14 10:05:49.726678	Epoch 1305: Evaluation loss: 0.7004393339157104
+2019-11-14 10:05:52.872528	Accuracy measures: Global acc.: 0.9724
+                          	Class acc.: 0.7906
+                          	Mean IoU.: 0.7071
+                          	Bound. F1: 1.259
+
+2019-11-14 10:06:01.735123	Epoch 1310: Training loss:   0.5933406275251637
+2019-11-14 10:06:01.735849	Epoch 1310: Evaluation loss: 0.706239640712738
+2019-11-14 10:06:04.903648	Accuracy measures: Global acc.: 0.9731
+                          	Class acc.: 0.8059
+                          	Mean IoU.: 0.7289
+                          	Bound. F1: 1.295
+
+2019-11-14 10:06:13.891257	Epoch 1315: Training loss:   0.5984858404035154
+2019-11-14 10:06:13.892122	Epoch 1315: Evaluation loss: 0.6962027549743652
+2019-11-14 10:06:17.030983	Accuracy measures: Global acc.: 0.9723
+                          	Class acc.: 0.8198
+                          	Mean IoU.: 0.726
+                          	Bound. F1: 1.303
+
+2019-11-14 10:06:25.898080	Epoch 1320: Training loss:   0.594657529955325
+2019-11-14 10:06:25.898826	Epoch 1320: Evaluation loss: 0.7183066010475159
+2019-11-14 10:06:29.069316	Accuracy measures: Global acc.: 0.9714
+                          	Class acc.: 0.7801
+                          	Mean IoU.: 0.7031
+                          	Bound. F1: 1.242
+
+2019-11-14 10:06:37.947480	Epoch 1325: Training loss:   0.5950320596280305
+2019-11-14 10:06:37.948284	Epoch 1325: Evaluation loss: 0.6770300269126892
+2019-11-14 10:06:41.032474	Accuracy measures: Global acc.: 0.975
+                          	Class acc.: 0.8378
+                          	Mean IoU.: 0.7462
+                          	Bound. F1: 1.35
+
+2019-11-14 10:06:49.895439	Epoch 1330: Training loss:   0.5978664393010347
+2019-11-14 10:06:49.896442	Epoch 1330: Evaluation loss: 0.7502411603927612
+2019-11-14 10:06:52.956047	Accuracy measures: Global acc.: 0.9691
+                          	Class acc.: 0.7636
+                          	Mean IoU.: 0.6978
+                          	Bound. F1: 1.218
+
+2019-11-14 10:07:01.836626	Epoch 1335: Training loss:   0.5961298216944155
+2019-11-14 10:07:01.837631	Epoch 1335: Evaluation loss: 0.7143141627311707
+2019-11-14 10:07:04.891182	Accuracy measures: Global acc.: 0.9715
+                          	Class acc.: 0.8025
+                          	Mean IoU.: 0.7202
+                          	Bound. F1: 1.279
+
+2019-11-14 10:07:13.761124	Epoch 1340: Training loss:   0.596349501091501
+2019-11-14 10:07:13.761969	Epoch 1340: Evaluation loss: 0.714815080165863
+2019-11-14 10:07:16.873686	Accuracy measures: Global acc.: 0.973
+                          	Class acc.: 0.7922
+                          	Mean IoU.: 0.7242
+                          	Bound. F1: 1.277
+
+2019-11-14 10:07:25.729337	Epoch 1345: Training loss:   0.5937110496603925
+2019-11-14 10:07:25.729919	Epoch 1345: Evaluation loss: 0.7093152403831482
+2019-11-14 10:07:28.786064	Accuracy measures: Global acc.: 0.9719
+                          	Class acc.: 0.7873
+                          	Mean IoU.: 0.7034
+                          	Bound. F1: 1.25
+
+2019-11-14 10:07:37.646852	Epoch 1350: Training loss:   0.5946374457815419
+2019-11-14 10:07:37.647745	Epoch 1350: Evaluation loss: 0.676003098487854
+2019-11-14 10:07:40.659710	Accuracy measures: Global acc.: 0.9748
+                          	Class acc.: 0.8274
+                          	Mean IoU.: 0.7361
+                          	Bound. F1: 1.331
+
+2019-11-14 10:07:49.643152	Epoch 1355: Training loss:   0.5995718007502349
+2019-11-14 10:07:49.643894	Epoch 1355: Evaluation loss: 0.7392914891242981
+2019-11-14 10:07:52.677314	Accuracy measures: Global acc.: 0.9697
+                          	Class acc.: 0.7737
+                          	Mean IoU.: 0.707
+                          	Bound. F1: 1.238
+
+2019-11-14 10:08:01.562724	Epoch 1360: Training loss:   0.6017962849658468
+2019-11-14 10:08:01.563568	Epoch 1360: Evaluation loss: 0.6942017078399658
+2019-11-14 10:08:04.667762	Accuracy measures: Global acc.: 0.9738
+                          	Class acc.: 0.806
+                          	Mean IoU.: 0.7194
+                          	Bound. F1: 1.29
+
+2019-11-14 10:08:13.560354	Epoch 1365: Training loss:   0.5923886687859244
+2019-11-14 10:08:13.561117	Epoch 1365: Evaluation loss: 0.694931149482727
+2019-11-14 10:08:16.684035	Accuracy measures: Global acc.: 0.9729
+                          	Class acc.: 0.7989
+                          	Mean IoU.: 0.7155
+                          	Bound. F1: 1.276
+
+2019-11-14 10:08:25.538454	Epoch 1370: Training loss:   0.6096254561258398
+2019-11-14 10:08:25.539118	Epoch 1370: Evaluation loss: 0.6754626035690308
+2019-11-14 10:08:28.656415	Accuracy measures: Global acc.: 0.9743
+                          	Class acc.: 0.8333
+                          	Mean IoU.: 0.7373
+                          	Bound. F1: 1.336
+
+2019-11-14 10:08:37.673494	Epoch 1375: Training loss:   0.5975043644075808
+2019-11-14 10:08:37.674472	Epoch 1375: Evaluation loss: 0.6822980642318726
+2019-11-14 10:08:40.800780	Accuracy measures: Global acc.: 0.9743
+                          	Class acc.: 0.8183
+                          	Mean IoU.: 0.7307
+                          	Bound. F1: 1.314
+
+2019-11-14 10:08:49.649377	Epoch 1380: Training loss:   0.6004794265912927
+2019-11-14 10:08:49.650311	Epoch 1380: Evaluation loss: 0.7151198387145996
+2019-11-14 10:08:52.800876	Accuracy measures: Global acc.: 0.9719
+                          	Class acc.: 0.8059
+                          	Mean IoU.: 0.7161
+                          	Bound. F1: 1.277
+
+2019-11-14 10:09:01.646600	Epoch 1385: Training loss:   0.5967831896698993
+2019-11-14 10:09:01.647734	Epoch 1385: Evaluation loss: 0.7293209433555603
+2019-11-14 10:09:04.719525	Accuracy measures: Global acc.: 0.97
+                          	Class acc.: 0.7281
+                          	Mean IoU.: 0.6549
+                          	Bound. F1: 1.157
+
+2019-11-14 10:09:13.578403	Epoch 1390: Training loss:   0.5963870546092158
+2019-11-14 10:09:13.579178	Epoch 1390: Evaluation loss: 0.705176830291748
+2019-11-14 10:09:16.647405	Accuracy measures: Global acc.: 0.9735
+                          	Class acc.: 0.8024
+                          	Mean IoU.: 0.7225
+                          	Bound. F1: 1.287
+
+2019-11-14 10:09:25.657266	Epoch 1395: Training loss:   0.596589648205301
+2019-11-14 10:09:25.657983	Epoch 1395: Evaluation loss: 0.7406793832778931
+2019-11-14 10:09:28.801428	Accuracy measures: Global acc.: 0.9692
+                          	Class acc.: 0.7602
+                          	Mean IoU.: 0.6923
+                          	Bound. F1: 1.208
+
+2019-11-14 10:09:37.671185	Epoch 1400: Training loss:   0.5911091021869493
+2019-11-14 10:09:37.672012	Epoch 1400: Evaluation loss: 0.6661117076873779
+2019-11-14 10:09:40.819059	Accuracy measures: Global acc.: 0.9747
+                          	Class acc.: 0.8339
+                          	Mean IoU.: 0.7346
+                          	Bound. F1: 1.336
+
+2019-11-14 10:09:49.689558	Epoch 1405: Training loss:   0.5928035430286241
+2019-11-14 10:09:49.690424	Epoch 1405: Evaluation loss: 0.7036872506141663
+2019-11-14 10:09:52.843125	Accuracy measures: Global acc.: 0.9726
+                          	Class acc.: 0.798
+                          	Mean IoU.: 0.7203
+                          	Bound. F1: 1.278
+
+2019-11-14 10:10:01.707798	Epoch 1410: Training loss:   0.5927820542584294
+2019-11-14 10:10:01.708675	Epoch 1410: Evaluation loss: 0.6857194900512695
+2019-11-14 10:10:04.871747	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.8083
+                          	Mean IoU.: 0.7215
+                          	Bound. F1: 1.296
+
+2019-11-14 10:10:13.847922	Epoch 1415: Training loss:   0.602009628130042
+2019-11-14 10:10:13.848743	Epoch 1415: Evaluation loss: 0.6856594085693359
+2019-11-14 10:10:17.020740	Accuracy measures: Global acc.: 0.9737
+                          	Class acc.: 0.8041
+                          	Mean IoU.: 0.7133
+                          	Bound. F1: 1.287
+
+2019-11-14 10:10:25.873040	Epoch 1420: Training loss:   0.5951731438222139
+2019-11-14 10:10:25.873863	Epoch 1420: Evaluation loss: 0.7041581869125366
+2019-11-14 10:10:29.088855	Accuracy measures: Global acc.: 0.9725
+                          	Class acc.: 0.788
+                          	Mean IoU.: 0.7105
+                          	Bound. F1: 1.26
+
+2019-11-14 10:10:37.940413	Epoch 1425: Training loss:   0.6010157336359438
+2019-11-14 10:10:37.941262	Epoch 1425: Evaluation loss: 0.7000471949577332
+2019-11-14 10:10:41.056518	Accuracy measures: Global acc.: 0.9724
+                          	Class acc.: 0.7868
+                          	Mean IoU.: 0.702
+                          	Bound. F1: 1.252
+
+2019-11-14 10:10:49.937133	Epoch 1430: Training loss:   0.5922420335852582
+2019-11-14 10:10:49.937962	Epoch 1430: Evaluation loss: 0.6670878529548645
+2019-11-14 10:10:53.090234	Accuracy measures: Global acc.: 0.9761
+                          	Class acc.: 0.8425
+                          	Mean IoU.: 0.75
+                          	Bound. F1: 1.365
+
+2019-11-14 10:11:02.067667	Epoch 1435: Training loss:   0.5938592345818229
+2019-11-14 10:11:02.068611	Epoch 1435: Evaluation loss: 0.7176264524459839
+2019-11-14 10:11:05.188907	Accuracy measures: Global acc.: 0.9717
+                          	Class acc.: 0.764
+                          	Mean IoU.: 0.6872
+                          	Bound. F1: 1.217
+
+2019-11-14 10:11:14.038713	Epoch 1440: Training loss:   0.5948506541874098
+2019-11-14 10:11:14.039383	Epoch 1440: Evaluation loss: 0.7096139192581177
+2019-11-14 10:11:17.143834	Accuracy measures: Global acc.: 0.9728
+                          	Class acc.: 0.7719
+                          	Mean IoU.: 0.702
+                          	Bound. F1: 1.239
+
+2019-11-14 10:11:26.020631	Epoch 1445: Training loss:   0.5903090368146482
+2019-11-14 10:11:26.021410	Epoch 1445: Evaluation loss: 0.6965132355690002
+2019-11-14 10:11:29.207245	Accuracy measures: Global acc.: 0.9743
+                          	Class acc.: 0.8085
+                          	Mean IoU.: 0.7324
+                          	Bound. F1: 1.305
+
+2019-11-14 10:11:38.053405	Epoch 1450: Training loss:   0.5933949740036674
+2019-11-14 10:11:38.054262	Epoch 1450: Evaluation loss: 0.7257314324378967
+2019-11-14 10:11:41.205124	Accuracy measures: Global acc.: 0.9725
+                          	Class acc.: 0.7785
+                          	Mean IoU.: 0.7156
+                          	Bound. F1: 1.255
+
+2019-11-14 10:11:50.203252	Epoch 1455: Training loss:   0.5921719696210779
+2019-11-14 10:11:50.204058	Epoch 1455: Evaluation loss: 0.7165204882621765
+2019-11-14 10:11:53.391058	Accuracy measures: Global acc.: 0.9719
+                          	Class acc.: 0.7948
+                          	Mean IoU.: 0.7193
+                          	Bound. F1: 1.272
+
+2019-11-14 10:12:02.241922	Epoch 1460: Training loss:   0.5962917286416759
+2019-11-14 10:12:02.242682	Epoch 1460: Evaluation loss: 0.6836908459663391
+2019-11-14 10:12:05.429795	Accuracy measures: Global acc.: 0.9747
+                          	Class acc.: 0.8333
+                          	Mean IoU.: 0.745
+                          	Bound. F1: 1.343
+
+2019-11-14 10:12:14.276878	Epoch 1465: Training loss:   0.596458771954412
+2019-11-14 10:12:14.277738	Epoch 1465: Evaluation loss: 0.6920817494392395
+2019-11-14 10:12:17.352515	Accuracy measures: Global acc.: 0.9737
+                          	Class acc.: 0.8415
+                          	Mean IoU.: 0.7437
+                          	Bound. F1: 1.346
+
+2019-11-14 10:12:26.205269	Epoch 1470: Training loss:   0.597105438294618
+2019-11-14 10:12:26.206173	Epoch 1470: Evaluation loss: 0.6791587471961975
+2019-11-14 10:12:29.291515	Accuracy measures: Global acc.: 0.9752
+                          	Class acc.: 0.8431
+                          	Mean IoU.: 0.7516
+                          	Bound. F1: 1.36
+
+2019-11-14 10:12:38.295356	Epoch 1475: Training loss:   0.5983621970466946
+2019-11-14 10:12:38.296239	Epoch 1475: Evaluation loss: 0.708203136920929
+2019-11-14 10:12:41.377737	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.7822
+                          	Mean IoU.: 0.7104
+                          	Bound. F1: 1.255
+
+2019-11-14 10:12:50.246435	Epoch 1480: Training loss:   0.5924815794695979
+2019-11-14 10:12:50.247070	Epoch 1480: Evaluation loss: 0.7110373377799988
+2019-11-14 10:12:53.393593	Accuracy measures: Global acc.: 0.9736
+                          	Class acc.: 0.7955
+                          	Mean IoU.: 0.7299
+                          	Bound. F1: 1.288
+
+2019-11-14 10:13:02.230616	Epoch 1485: Training loss:   0.5924947365470554
+2019-11-14 10:13:02.231477	Epoch 1485: Evaluation loss: 0.7653284668922424
+2019-11-14 10:13:05.338535	Accuracy measures: Global acc.: 0.9693
+                          	Class acc.: 0.7423
+                          	Mean IoU.: 0.6884
+                          	Bound. F1: 1.189
+
+2019-11-14 10:13:14.180835	Epoch 1490: Training loss:   0.594211757183075
+2019-11-14 10:13:14.181692	Epoch 1490: Evaluation loss: 0.7032389044761658
+2019-11-14 10:13:17.273356	Accuracy measures: Global acc.: 0.9729
+                          	Class acc.: 0.8059
+                          	Mean IoU.: 0.7271
+                          	Bound. F1: 1.293
+
+2019-11-14 10:13:26.265413	Epoch 1495: Training loss:   0.5924054798872574
+2019-11-14 10:13:26.266282	Epoch 1495: Evaluation loss: 0.7131618857383728
+2019-11-14 10:13:29.386966	Accuracy measures: Global acc.: 0.9717
+                          	Class acc.: 0.7982
+                          	Mean IoU.: 0.7182
+                          	Bound. F1: 1.273
+
+2019-11-14 10:13:38.240948	Epoch 1500: Training loss:   0.5970213516898777
+2019-11-14 10:13:38.241629	Epoch 1500: Evaluation loss: 0.6783348321914673
+2019-11-14 10:13:41.278801	Accuracy measures: Global acc.: 0.9738
+                          	Class acc.: 0.8529
+                          	Mean IoU.: 0.7425
+                          	Bound. F1: 1.353
+
+2019-11-14 10:13:50.140654	Epoch 1505: Training loss:   0.5941573770149894
+2019-11-14 10:13:50.141306	Epoch 1505: Evaluation loss: 0.7046265006065369
+2019-11-14 10:13:53.291625	Accuracy measures: Global acc.: 0.9737
+                          	Class acc.: 0.8252
+                          	Mean IoU.: 0.7418
+                          	Bound. F1: 1.328
+
+2019-11-14 10:14:02.155435	Epoch 1510: Training loss:   0.591173970181009
+2019-11-14 10:14:02.156456	Epoch 1510: Evaluation loss: 0.7137187123298645
+2019-11-14 10:14:05.291653	Accuracy measures: Global acc.: 0.9717
+                          	Class acc.: 0.788
+                          	Mean IoU.: 0.7135
+                          	Bound. F1: 1.259
+
+2019-11-14 10:14:14.278348	Epoch 1515: Training loss:   0.5936584446741187
+2019-11-14 10:14:14.279142	Epoch 1515: Evaluation loss: 0.7004554867744446
+2019-11-14 10:14:17.392784	Accuracy measures: Global acc.: 0.9734
+                          	Class acc.: 0.8166
+                          	Mean IoU.: 0.7305
+                          	Bound. F1: 1.308
+
+2019-11-14 10:14:26.249738	Epoch 1520: Training loss:   0.5890072195426278
+2019-11-14 10:14:26.250372	Epoch 1520: Evaluation loss: 0.713587760925293
+2019-11-14 10:14:29.411134	Accuracy measures: Global acc.: 0.9734
+                          	Class acc.: 0.807
+                          	Mean IoU.: 0.7326
+                          	Bound. F1: 1.301
+
+2019-11-14 10:14:38.256449	Epoch 1525: Training loss:   0.6019123559412749
+2019-11-14 10:14:38.257301	Epoch 1525: Evaluation loss: 0.6617650389671326
+2019-11-14 10:14:41.364312	Accuracy measures: Global acc.: 0.9741
+                          	Class acc.: 0.8498
+                          	Mean IoU.: 0.7416
+                          	Bound. F1: 1.356
+
+2019-11-14 10:14:50.221023	Epoch 1530: Training loss:   0.5917129698007003
+2019-11-14 10:14:50.221921	Epoch 1530: Evaluation loss: 0.7315145134925842
+2019-11-14 10:14:53.357117	Accuracy measures: Global acc.: 0.9704
+                          	Class acc.: 0.7801
+                          	Mean IoU.: 0.7102
+                          	Bound. F1: 1.247
+
+2019-11-14 10:15:02.368822	Epoch 1535: Training loss:   0.5937572562176249
+2019-11-14 10:15:02.369587	Epoch 1535: Evaluation loss: 0.6600977778434753
+2019-11-14 10:15:05.493706	Accuracy measures: Global acc.: 0.9748
+                          	Class acc.: 0.8362
+                          	Mean IoU.: 0.7362
+                          	Bound. F1: 1.341
+
+2019-11-14 10:15:14.346641	Epoch 1540: Training loss:   0.5913116880085157
+2019-11-14 10:15:14.347679	Epoch 1540: Evaluation loss: 0.6969878673553467
+2019-11-14 10:15:17.416270	Accuracy measures: Global acc.: 0.9749
+                          	Class acc.: 0.8065
+                          	Mean IoU.: 0.7337
+                          	Bound. F1: 1.306
+
+2019-11-14 10:15:26.290491	Epoch 1545: Training loss:   0.5958587501360022
+2019-11-14 10:15:26.291127	Epoch 1545: Evaluation loss: 0.6944871544837952
+2019-11-14 10:15:29.462569	Accuracy measures: Global acc.: 0.9746
+                          	Class acc.: 0.8218
+                          	Mean IoU.: 0.7414
+                          	Bound. F1: 1.327
+
+2019-11-14 10:15:38.323610	Epoch 1550: Training loss:   0.5882954338322515
+2019-11-14 10:15:38.324342	Epoch 1550: Evaluation loss: 0.6838465332984924
+2019-11-14 10:15:41.492145	Accuracy measures: Global acc.: 0.9739
+                          	Class acc.: 0.8339
+                          	Mean IoU.: 0.7395
+                          	Bound. F1: 1.334
+
+2019-11-14 10:15:50.488420	Epoch 1555: Training loss:   0.5908490419387817
+2019-11-14 10:15:50.489193	Epoch 1555: Evaluation loss: 0.6718398332595825
+2019-11-14 10:15:53.676470	Accuracy measures: Global acc.: 0.9743
+                          	Class acc.: 0.8319
+                          	Mean IoU.: 0.7359
+                          	Bound. F1: 1.334
+
+2019-11-14 10:16:02.555932	Epoch 1560: Training loss:   0.5917801934739818
+2019-11-14 10:16:02.556556	Epoch 1560: Evaluation loss: 0.6992704272270203
+2019-11-14 10:16:05.745743	Accuracy measures: Global acc.: 0.9736
+                          	Class acc.: 0.8229
+                          	Mean IoU.: 0.7388
+                          	Bound. F1: 1.323
+
+2019-11-14 10:16:14.594448	Epoch 1565: Training loss:   0.5927308460940486
+2019-11-14 10:16:14.595100	Epoch 1565: Evaluation loss: 0.7077524662017822
+2019-11-14 10:16:17.653684	Accuracy measures: Global acc.: 0.9738
+                          	Class acc.: 0.816
+                          	Mean IoU.: 0.7414
+                          	Bound. F1: 1.32
+
+2019-11-14 10:16:26.498823	Epoch 1570: Training loss:   0.5879975272261578
+2019-11-14 10:16:26.499493	Epoch 1570: Evaluation loss: 0.6736966371536255
+2019-11-14 10:16:29.599537	Accuracy measures: Global acc.: 0.9748
+                          	Class acc.: 0.8299
+                          	Mean IoU.: 0.7411
+                          	Bound. F1: 1.337
+
+2019-11-14 10:16:38.603142	Epoch 1575: Training loss:   0.5951104526934416
+2019-11-14 10:16:38.603723	Epoch 1575: Evaluation loss: 0.682944655418396
+2019-11-14 10:16:41.664668	Accuracy measures: Global acc.: 0.9754
+                          	Class acc.: 0.8256
+                          	Mean IoU.: 0.7442
+                          	Bound. F1: 1.337
+
+2019-11-14 10:16:50.549409	Epoch 1580: Training loss:   0.5937208481456923
+2019-11-14 10:16:50.550035	Epoch 1580: Evaluation loss: 0.6771504878997803
+2019-11-14 10:16:53.632405	Accuracy measures: Global acc.: 0.9754
+                          	Class acc.: 0.8288
+                          	Mean IoU.: 0.7447
+                          	Bound. F1: 1.341
+
+2019-11-14 10:17:02.491094	Epoch 1585: Training loss:   0.5943926261818927
+2019-11-14 10:17:02.491791	Epoch 1585: Evaluation loss: 0.6525904536247253
+2019-11-14 10:17:05.675257	Accuracy measures: Global acc.: 0.975
+                          	Class acc.: 0.8635
+                          	Mean IoU.: 0.7523
+                          	Bound. F1: 1.384
+
+2019-11-14 10:17:14.556692	Epoch 1590: Training loss:   0.6032309247099835
+2019-11-14 10:17:14.557323	Epoch 1590: Evaluation loss: 0.6969746947288513
+2019-11-14 10:17:17.719131	Accuracy measures: Global acc.: 0.9729
+                          	Class acc.: 0.803
+                          	Mean IoU.: 0.7257
+                          	Bound. F1: 1.289
+
+2019-11-14 10:17:26.631176	Epoch 1595: Training loss:   0.5911550262699956
+2019-11-14 10:17:26.631978	Epoch 1595: Evaluation loss: 0.7033280730247498
+2019-11-14 10:17:29.811738	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.8091
+                          	Mean IoU.: 0.7236
+                          	Bound. F1: 1.29
+
+2019-11-14 10:17:38.669926	Epoch 1600: Training loss:   0.5908041466837344
+2019-11-14 10:17:38.670574	Epoch 1600: Evaluation loss: 0.7006694674491882
+2019-11-14 10:17:41.811421	Accuracy measures: Global acc.: 0.973
+                          	Class acc.: 0.8204
+                          	Mean IoU.: 0.7263
+                          	Bound. F1: 1.303
+
+2019-11-14 10:17:50.660074	Epoch 1605: Training loss:   0.5924144646395808
+2019-11-14 10:17:50.660857	Epoch 1605: Evaluation loss: 0.6869065761566162
+2019-11-14 10:17:53.734001	Accuracy measures: Global acc.: 0.9739
+                          	Class acc.: 0.8117
+                          	Mean IoU.: 0.724
+                          	Bound. F1: 1.301
+
+2019-11-14 10:18:02.568949	Epoch 1610: Training loss:   0.5905562328255695
+2019-11-14 10:18:02.569720	Epoch 1610: Evaluation loss: 0.7382503747940063
+2019-11-14 10:18:05.676086	Accuracy measures: Global acc.: 0.97
+                          	Class acc.: 0.7567
+                          	Mean IoU.: 0.6882
+                          	Bound. F1: 1.203
+
+2019-11-14 10:18:14.679021	Epoch 1615: Training loss:   0.5910884893458822
+2019-11-14 10:18:14.679696	Epoch 1615: Evaluation loss: 0.7350755929946899
+2019-11-14 10:18:17.744578	Accuracy measures: Global acc.: 0.9696
+                          	Class acc.: 0.7616
+                          	Mean IoU.: 0.6911
+                          	Bound. F1: 1.209
+
+2019-11-14 10:18:26.610857	Epoch 1620: Training loss:   0.5894477833872256
+2019-11-14 10:18:26.611792	Epoch 1620: Evaluation loss: 0.6950028538703918
+2019-11-14 10:18:29.830916	Accuracy measures: Global acc.: 0.9732
+                          	Class acc.: 0.8254
+                          	Mean IoU.: 0.7336
+                          	Bound. F1: 1.317
+
+2019-11-14 10:18:38.679541	Epoch 1625: Training loss:   0.5984533791956694
+2019-11-14 10:18:38.680308	Epoch 1625: Evaluation loss: 0.7221288084983826
+2019-11-14 10:18:41.759279	Accuracy measures: Global acc.: 0.9719
+                          	Class acc.: 0.7552
+                          	Mean IoU.: 0.6871
+                          	Bound. F1: 1.209
+
+2019-11-14 10:18:50.613145	Epoch 1630: Training loss:   0.5967504408048547
+2019-11-14 10:18:50.613827	Epoch 1630: Evaluation loss: 0.7039957642555237
+2019-11-14 10:18:53.713479	Accuracy measures: Global acc.: 0.9737
+                          	Class acc.: 0.8039
+                          	Mean IoU.: 0.7281
+                          	Bound. F1: 1.294
+
+2019-11-14 10:19:02.722051	Epoch 1635: Training loss:   0.5892135734143464
+2019-11-14 10:19:02.722976	Epoch 1635: Evaluation loss: 0.6921765208244324
+2019-11-14 10:19:05.846802	Accuracy measures: Global acc.: 0.9728
+                          	Class acc.: 0.8115
+                          	Mean IoU.: 0.7247
+                          	Bound. F1: 1.296
+
+2019-11-14 10:19:14.715769	Epoch 1640: Training loss:   0.5890646395475968
+2019-11-14 10:19:14.716547	Epoch 1640: Evaluation loss: 0.6900619268417358
+2019-11-14 10:19:17.785728	Accuracy measures: Global acc.: 0.9737
+                          	Class acc.: 0.8188
+                          	Mean IoU.: 0.7334
+                          	Bound. F1: 1.314
+
+2019-11-14 10:19:26.651387	Epoch 1645: Training loss:   0.593206542989482
+2019-11-14 10:19:26.652014	Epoch 1645: Evaluation loss: 0.75873202085495
+2019-11-14 10:19:29.821954	Accuracy measures: Global acc.: 0.9698
+                          	Class acc.: 0.7512
+                          	Mean IoU.: 0.695
+                          	Bound. F1: 1.204
+
+2019-11-14 10:19:38.679878	Epoch 1650: Training loss:   0.5881497626719268
+2019-11-14 10:19:38.680708	Epoch 1650: Evaluation loss: 0.7016658186912537
+2019-11-14 10:19:41.849407	Accuracy measures: Global acc.: 0.9735
+                          	Class acc.: 0.7897
+                          	Mean IoU.: 0.7146
+                          	Bound. F1: 1.269
+
+2019-11-14 10:19:50.864178	Epoch 1655: Training loss:   0.5875277208245319
+2019-11-14 10:19:50.864839	Epoch 1655: Evaluation loss: 0.6998858451843262
+2019-11-14 10:19:54.091569	Accuracy measures: Global acc.: 0.973
+                          	Class acc.: 0.7983
+                          	Mean IoU.: 0.7179
+                          	Bound. F1: 1.278
+
+2019-11-14 10:20:02.949905	Epoch 1660: Training loss:   0.5913507212763247
+2019-11-14 10:20:02.950996	Epoch 1660: Evaluation loss: 0.7001393437385559
+2019-11-14 10:20:06.160623	Accuracy measures: Global acc.: 0.9728
+                          	Class acc.: 0.791
+                          	Mean IoU.: 0.7125
+                          	Bound. F1: 1.266
+
+2019-11-14 10:20:15.002529	Epoch 1665: Training loss:   0.5906932690869207
+2019-11-14 10:20:15.003341	Epoch 1665: Evaluation loss: 0.7065367698669434
+2019-11-14 10:20:18.103707	Accuracy measures: Global acc.: 0.9733
+                          	Class acc.: 0.7898
+                          	Mean IoU.: 0.7168
+                          	Bound. F1: 1.27
+
+2019-11-14 10:20:26.965396	Epoch 1670: Training loss:   0.593169541462608
+2019-11-14 10:20:26.966059	Epoch 1670: Evaluation loss: 0.6977813839912415
+2019-11-14 10:20:30.054666	Accuracy measures: Global acc.: 0.9737
+                          	Class acc.: 0.7947
+                          	Mean IoU.: 0.7197
+                          	Bound. F1: 1.278
+
+2019-11-14 10:20:39.021307	Epoch 1675: Training loss:   0.5984635327173315
+2019-11-14 10:20:39.022018	Epoch 1675: Evaluation loss: 0.7251770496368408
+2019-11-14 10:20:42.110614	Accuracy measures: Global acc.: 0.9709
+                          	Class acc.: 0.7492
+                          	Mean IoU.: 0.6807
+                          	Bound. F1: 1.195
+
+2019-11-14 10:20:50.962641	Epoch 1680: Training loss:   0.5874258824016737
+2019-11-14 10:20:50.963232	Epoch 1680: Evaluation loss: 0.7304486632347107
+2019-11-14 10:20:54.050046	Accuracy measures: Global acc.: 0.9712
+                          	Class acc.: 0.7776
+                          	Mean IoU.: 0.7092
+                          	Bound. F1: 1.244
+
+2019-11-14 10:21:02.928366	Epoch 1685: Training loss:   0.5917188291964324
+2019-11-14 10:21:02.929002	Epoch 1685: Evaluation loss: 0.7138593196868896
+2019-11-14 10:21:06.114011	Accuracy measures: Global acc.: 0.972
+                          	Class acc.: 0.777
+                          	Mean IoU.: 0.7054
+                          	Bound. F1: 1.243
+
+2019-11-14 10:21:14.990841	Epoch 1690: Training loss:   0.5897965068402498
+2019-11-14 10:21:14.991671	Epoch 1690: Evaluation loss: 0.6763740181922913
+2019-11-14 10:21:18.127421	Accuracy measures: Global acc.: 0.9754
+                          	Class acc.: 0.8323
+                          	Mean IoU.: 0.7435
+                          	Bound. F1: 1.343
+
+2019-11-14 10:21:27.132412	Epoch 1695: Training loss:   0.5911801405574965
+2019-11-14 10:21:27.133040	Epoch 1695: Evaluation loss: 0.6806693077087402
+2019-11-14 10:21:30.255060	Accuracy measures: Global acc.: 0.9751
+                          	Class acc.: 0.8288
+                          	Mean IoU.: 0.7441
+                          	Bound. F1: 1.339
+
+2019-11-14 10:21:39.120770	Epoch 1700: Training loss:   0.5911843180656433
+2019-11-14 10:21:39.121454	Epoch 1700: Evaluation loss: 0.7063858509063721
+2019-11-14 10:21:42.268351	Accuracy measures: Global acc.: 0.9721
+                          	Class acc.: 0.7862
+                          	Mean IoU.: 0.7103
+                          	Bound. F1: 1.256
+
+2019-11-14 10:21:51.114855	Epoch 1705: Training loss:   0.5919664268908293
+2019-11-14 10:21:51.115936	Epoch 1705: Evaluation loss: 0.7184487581253052
+2019-11-14 10:21:54.207528	Accuracy measures: Global acc.: 0.9723
+                          	Class acc.: 0.7616
+                          	Mean IoU.: 0.6943
+                          	Bound. F1: 1.223
+
+2019-11-14 10:22:03.055490	Epoch 1710: Training loss:   0.5894416726153829
+2019-11-14 10:22:03.056314	Epoch 1710: Evaluation loss: 0.6920648813247681
+2019-11-14 10:22:06.135431	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.8174
+                          	Mean IoU.: 0.7342
+                          	Bound. F1: 1.313
+
+2019-11-14 10:22:15.117464	Epoch 1715: Training loss:   0.5907665957575259
+2019-11-14 10:22:15.118295	Epoch 1715: Evaluation loss: 0.6738839149475098
+2019-11-14 10:22:18.212457	Accuracy measures: Global acc.: 0.9732
+                          	Class acc.: 0.8006
+                          	Mean IoU.: 0.7011
+                          	Bound. F1: 1.274
+
+2019-11-14 10:22:27.067532	Epoch 1720: Training loss:   0.5935187935829163
+2019-11-14 10:22:27.068356	Epoch 1720: Evaluation loss: 0.686328113079071
+2019-11-14 10:22:30.160075	Accuracy measures: Global acc.: 0.9743
+                          	Class acc.: 0.8087
+                          	Mean IoU.: 0.7265
+                          	Bound. F1: 1.301
+
+2019-11-14 10:22:39.001741	Epoch 1725: Training loss:   0.5942513061606366
+2019-11-14 10:22:39.002560	Epoch 1725: Evaluation loss: 0.7359808087348938
+2019-11-14 10:22:42.154889	Accuracy measures: Global acc.: 0.9707
+                          	Class acc.: 0.7517
+                          	Mean IoU.: 0.688
+                          	Bound. F1: 1.2
+
+2019-11-14 10:22:51.012797	Epoch 1730: Training loss:   0.5892597100009089
+2019-11-14 10:22:51.013514	Epoch 1730: Evaluation loss: 0.6272085309028625
+2019-11-14 10:22:54.200386	Accuracy measures: Global acc.: 0.9719
+                          	Class acc.: 0.8942
+                          	Mean IoU.: 0.7516
+                          	Bound. F1: 1.407
+
+2019-11-14 10:23:03.177238	Epoch 1735: Training loss:   0.5962052785831949
+2019-11-14 10:23:03.177987	Epoch 1735: Evaluation loss: 0.7267276048660278
+2019-11-14 10:23:06.373939	Accuracy measures: Global acc.: 0.9703
+                          	Class acc.: 0.7502
+                          	Mean IoU.: 0.6778
+                          	Bound. F1: 1.19
+
+2019-11-14 10:23:15.228558	Epoch 1740: Training loss:   0.5946773575699847
+2019-11-14 10:23:15.229481	Epoch 1740: Evaluation loss: 0.6987584233283997
+2019-11-14 10:23:18.409464	Accuracy measures: Global acc.: 0.9738
+                          	Class acc.: 0.8151
+                          	Mean IoU.: 0.7357
+                          	Bound. F1: 1.312
+
+2019-11-14 10:23:27.279818	Epoch 1745: Training loss:   0.5892370602358943
+2019-11-14 10:23:27.280536	Epoch 1745: Evaluation loss: 0.6977608799934387
+2019-11-14 10:23:30.380514	Accuracy measures: Global acc.: 0.9746
+                          	Class acc.: 0.8066
+                          	Mean IoU.: 0.7316
+                          	Bound. F1: 1.303
+
+2019-11-14 10:23:39.230453	Epoch 1750: Training loss:   0.5894611788832623
+2019-11-14 10:23:39.231096	Epoch 1750: Evaluation loss: 0.6875965595245361
+2019-11-14 10:23:42.336686	Accuracy measures: Global acc.: 0.9742
+                          	Class acc.: 0.7999
+                          	Mean IoU.: 0.7148
+                          	Bound. F1: 1.286
+
+2019-11-14 10:23:51.320438	Epoch 1755: Training loss:   0.5906859999117644
+2019-11-14 10:23:51.321037	Epoch 1755: Evaluation loss: 0.6996713876724243
+2019-11-14 10:23:54.372694	Accuracy measures: Global acc.: 0.9734
+                          	Class acc.: 0.7958
+                          	Mean IoU.: 0.7227
+                          	Bound. F1: 1.281
+
+2019-11-14 10:24:03.234235	Epoch 1760: Training loss:   0.5924610780633014
+2019-11-14 10:24:03.234982	Epoch 1760: Evaluation loss: 0.6670123934745789
+2019-11-14 10:24:06.394068	Accuracy measures: Global acc.: 0.9769
+                          	Class acc.: 0.8433
+                          	Mean IoU.: 0.7583
+                          	Bound. F1: 1.375
+
+2019-11-14 10:24:15.244931	Epoch 1765: Training loss:   0.5908681620722231
+2019-11-14 10:24:15.245836	Epoch 1765: Evaluation loss: 0.6921603679656982
+2019-11-14 10:24:18.402483	Accuracy measures: Global acc.: 0.975
+                          	Class acc.: 0.808
+                          	Mean IoU.: 0.7316
+                          	Bound. F1: 1.306
+
+2019-11-14 10:24:27.234935	Epoch 1770: Training loss:   0.5926610075909159
+2019-11-14 10:24:27.235711	Epoch 1770: Evaluation loss: 0.6813658475875854
+2019-11-14 10:24:30.337377	Accuracy measures: Global acc.: 0.9753
+                          	Class acc.: 0.8172
+                          	Mean IoU.: 0.7379
+                          	Bound. F1: 1.323
+
+2019-11-14 10:24:39.200907	Epoch 1775: Training loss:   0.5913993431174237
+2019-11-14 10:24:39.201555	Epoch 1775: Evaluation loss: 0.6707190871238708
+2019-11-14 10:24:42.323332	Accuracy measures: Global acc.: 0.9751
+                          	Class acc.: 0.8313
+                          	Mean IoU.: 0.7425
+                          	Bound. F1: 1.342
+
+2019-11-14 10:24:51.197797	Epoch 1780: Training loss:   0.5926716016686481
+2019-11-14 10:24:51.198614	Epoch 1780: Evaluation loss: 0.7128472328186035
+2019-11-14 10:24:54.380387	Accuracy measures: Global acc.: 0.973
+                          	Class acc.: 0.7773
+                          	Mean IoU.: 0.7056
+                          	Bound. F1: 1.248
+
+2019-11-14 10:25:03.245359	Epoch 1785: Training loss:   0.588288786618606
+2019-11-14 10:25:03.246149	Epoch 1785: Evaluation loss: 0.6966022849082947
+2019-11-14 10:25:06.462337	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.7951
+                          	Mean IoU.: 0.7154
+                          	Bound. F1: 1.272
+
+2019-11-14 10:25:15.328038	Epoch 1790: Training loss:   0.5883247126703677
+2019-11-14 10:25:15.328891	Epoch 1790: Evaluation loss: 0.7214505672454834
+2019-11-14 10:25:18.508305	Accuracy measures: Global acc.: 0.9718
+                          	Class acc.: 0.7811
+                          	Mean IoU.: 0.7125
+                          	Bound. F1: 1.252
+
+2019-11-14 10:25:27.480404	Epoch 1795: Training loss:   0.5905654015748397
+2019-11-14 10:25:27.481053	Epoch 1795: Evaluation loss: 0.7537631392478943
+2019-11-14 10:25:30.675303	Accuracy measures: Global acc.: 0.9681
+                          	Class acc.: 0.7098
+                          	Mean IoU.: 0.6454
+                          	Bound. F1: 1.126
+
+2019-11-14 10:25:39.513746	Epoch 1800: Training loss:   0.5873007230136705
+2019-11-14 10:25:39.514535	Epoch 1800: Evaluation loss: 0.6591191291809082
+2019-11-14 10:25:42.670129	Accuracy measures: Global acc.: 0.9759
+                          	Class acc.: 0.8548
+                          	Mean IoU.: 0.7576
+                          	Bound. F1: 1.383
+
+2019-11-14 10:25:51.518904	Epoch 1805: Training loss:   0.59233114771221
+2019-11-14 10:25:51.519597	Epoch 1805: Evaluation loss: 0.669948399066925
+2019-11-14 10:25:54.627769	Accuracy measures: Global acc.: 0.975
+                          	Class acc.: 0.8323
+                          	Mean IoU.: 0.7417
+                          	Bound. F1: 1.341
+
+2019-11-14 10:26:03.486825	Epoch 1810: Training loss:   0.5882489862649337
+2019-11-14 10:26:03.487547	Epoch 1810: Evaluation loss: 0.6865394115447998
+2019-11-14 10:26:06.607674	Accuracy measures: Global acc.: 0.9745
+                          	Class acc.: 0.8122
+                          	Mean IoU.: 0.7325
+                          	Bound. F1: 1.31
+
+2019-11-14 10:26:15.463588	Epoch 1815: Training loss:   0.5955238627350848
+2019-11-14 10:26:15.464176	Epoch 1815: Evaluation loss: 0.6658845543861389
+2019-11-14 10:26:18.560178	Accuracy measures: Global acc.: 0.9743
+                          	Class acc.: 0.8439
+                          	Mean IoU.: 0.7385
+                          	Bound. F1: 1.346
+
+2019-11-14 10:26:27.424266	Epoch 1820: Training loss:   0.5899538942005323
+2019-11-14 10:26:27.425120	Epoch 1820: Evaluation loss: 0.7775012254714966
+2019-11-14 10:26:30.512470	Accuracy measures: Global acc.: 0.9678
+                          	Class acc.: 0.7182
+                          	Mean IoU.: 0.6674
+                          	Bound. F1: 1.146
+
+2019-11-14 10:26:39.390273	Epoch 1825: Training loss:   0.5900164687115214
+2019-11-14 10:26:39.390893	Epoch 1825: Evaluation loss: 0.7086392641067505
+2019-11-14 10:26:42.550643	Accuracy measures: Global acc.: 0.9739
+                          	Class acc.: 0.7961
+                          	Mean IoU.: 0.7312
+                          	Bound. F1: 1.29
+
+2019-11-14 10:26:51.402367	Epoch 1830: Training loss:   0.5936170064884684
+2019-11-14 10:26:51.403178	Epoch 1830: Evaluation loss: 0.7146387696266174
+2019-11-14 10:26:54.583690	Accuracy measures: Global acc.: 0.9712
+                          	Class acc.: 0.7659
+                          	Mean IoU.: 0.6889
+                          	Bound. F1: 1.217
+
+2019-11-14 10:27:03.533070	Epoch 1835: Training loss:   0.5871194134587827
+2019-11-14 10:27:03.533946	Epoch 1835: Evaluation loss: 0.6469528079032898
+2019-11-14 10:27:06.720149	Accuracy measures: Global acc.: 0.9757
+                          	Class acc.: 0.8597
+                          	Mean IoU.: 0.7551
+                          	Bound. F1: 1.387
+
+2019-11-14 10:27:15.572471	Epoch 1840: Training loss:   0.5903775510580643
+2019-11-14 10:27:15.573375	Epoch 1840: Evaluation loss: 0.685468852519989
+2019-11-14 10:27:18.732607	Accuracy measures: Global acc.: 0.9746
+                          	Class acc.: 0.817
+                          	Mean IoU.: 0.7341
+                          	Bound. F1: 1.317
+
+2019-11-14 10:27:27.591578	Epoch 1845: Training loss:   0.5877109195875085
+2019-11-14 10:27:27.592351	Epoch 1845: Evaluation loss: 0.6935652494430542
+2019-11-14 10:27:30.731400	Accuracy measures: Global acc.: 0.9742
+                          	Class acc.: 0.8305
+                          	Mean IoU.: 0.7419
+                          	Bound. F1: 1.335
+
+2019-11-14 10:27:39.565180	Epoch 1850: Training loss:   0.5881888192632924
+2019-11-14 10:27:39.566063	Epoch 1850: Evaluation loss: 0.693131148815155
+2019-11-14 10:27:42.699937	Accuracy measures: Global acc.: 0.9725
+                          	Class acc.: 0.8157
+                          	Mean IoU.: 0.72
+                          	Bound. F1: 1.292
+
+2019-11-14 10:27:51.583444	Epoch 1855: Training loss:   0.5878247152204099
+2019-11-14 10:27:51.584144	Epoch 1855: Evaluation loss: 0.6906563639640808
+2019-11-14 10:27:54.645111	Accuracy measures: Global acc.: 0.9733
+                          	Class acc.: 0.8191
+                          	Mean IoU.: 0.7269
+                          	Bound. F1: 1.305
+
+2019-11-14 10:28:03.478982	Epoch 1860: Training loss:   0.5909926709921464
+2019-11-14 10:28:03.479646	Epoch 1860: Evaluation loss: 0.7231152653694153
+2019-11-14 10:28:06.518169	Accuracy measures: Global acc.: 0.9711
+                          	Class acc.: 0.7522
+                          	Mean IoU.: 0.6799
+                          	Bound. F1: 1.197
+
+2019-11-14 10:28:15.361003	Epoch 1865: Training loss:   0.5845856277838998
+2019-11-14 10:28:15.361731	Epoch 1865: Evaluation loss: 0.7062182426452637
+2019-11-14 10:28:18.513464	Accuracy measures: Global acc.: 0.9721
+                          	Class acc.: 0.8169
+                          	Mean IoU.: 0.7283
+                          	Bound. F1: 1.302
+
+2019-11-14 10:28:27.362457	Epoch 1870: Training loss:   0.5857604871625486
+2019-11-14 10:28:27.363067	Epoch 1870: Evaluation loss: 0.7495129108428955
+2019-11-14 10:28:30.499994	Accuracy measures: Global acc.: 0.9699
+                          	Class acc.: 0.749
+                          	Mean IoU.: 0.6906
+                          	Bound. F1: 1.198
+
+2019-11-14 10:28:39.370039	Epoch 1875: Training loss:   0.5893252180970233
+2019-11-14 10:28:39.370615	Epoch 1875: Evaluation loss: 0.6975794434547424
+2019-11-14 10:28:42.519867	Accuracy measures: Global acc.: 0.9739
+                          	Class acc.: 0.8072
+                          	Mean IoU.: 0.734
+                          	Bound. F1: 1.304
+
+2019-11-14 10:28:51.391079	Epoch 1880: Training loss:   0.5958567702251932
+2019-11-14 10:28:51.392030	Epoch 1880: Evaluation loss: 0.6511114239692688
+2019-11-14 10:28:54.536922	Accuracy measures: Global acc.: 0.9713
+                          	Class acc.: 0.8443
+                          	Mean IoU.: 0.7214
+                          	Bound. F1: 1.326
+
+2019-11-14 10:29:03.394381	Epoch 1885: Training loss:   0.6003491826679396
+2019-11-14 10:29:03.395150	Epoch 1885: Evaluation loss: 0.6746172308921814
+2019-11-14 10:29:06.501213	Accuracy measures: Global acc.: 0.9755
+                          	Class acc.: 0.8333
+                          	Mean IoU.: 0.746
+                          	Bound. F1: 1.347
+
+2019-11-14 10:29:15.365711	Epoch 1890: Training loss:   0.5904670020808345
+2019-11-14 10:29:15.366368	Epoch 1890: Evaluation loss: 0.6671501398086548
+2019-11-14 10:29:18.436476	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.841
+                          	Mean IoU.: 0.7361
+                          	Bound. F1: 1.34
+
+2019-11-14 10:29:27.401145	Epoch 1895: Training loss:   0.5877090381539386
+2019-11-14 10:29:27.401843	Epoch 1895: Evaluation loss: 0.7168880701065063
+2019-11-14 10:29:30.519971	Accuracy measures: Global acc.: 0.9721
+                          	Class acc.: 0.7869
+                          	Mean IoU.: 0.7147
+                          	Bound. F1: 1.26
+
+2019-11-14 10:29:39.391641	Epoch 1900: Training loss:   0.5858006632846334
+2019-11-14 10:29:39.392470	Epoch 1900: Evaluation loss: 0.7038679718971252
+2019-11-14 10:29:42.573079	Accuracy measures: Global acc.: 0.9725
+                          	Class acc.: 0.8122
+                          	Mean IoU.: 0.726
+                          	Bound. F1: 1.296
+
+2019-11-14 10:29:51.437949	Epoch 1905: Training loss:   0.5945388363755267
+2019-11-14 10:29:51.438787	Epoch 1905: Evaluation loss: 0.6857714056968689
+2019-11-14 10:29:54.572383	Accuracy measures: Global acc.: 0.9747
+                          	Class acc.: 0.8161
+                          	Mean IoU.: 0.7338
+                          	Bound. F1: 1.316
+
+2019-11-14 10:30:03.435027	Epoch 1910: Training loss:   0.5924754712892615
+2019-11-14 10:30:03.435770	Epoch 1910: Evaluation loss: 0.6559966206550598
+2019-11-14 10:30:06.571398	Accuracy measures: Global acc.: 0.9766
+                          	Class acc.: 0.8576
+                          	Mean IoU.: 0.7635
+                          	Bound. F1: 1.396
+
+2019-11-14 10:30:15.496861	Epoch 1915: Training loss:   0.5893736663072006
+2019-11-14 10:30:15.497768	Epoch 1915: Evaluation loss: 0.727946400642395
+2019-11-14 10:30:18.601926	Accuracy measures: Global acc.: 0.9718
+                          	Class acc.: 0.7681
+                          	Mean IoU.: 0.6995
+                          	Bound. F1: 1.229
+
+2019-11-14 10:30:27.459295	Epoch 1920: Training loss:   0.5890265547710917
+2019-11-14 10:30:27.459992	Epoch 1920: Evaluation loss: 0.6837334632873535
+2019-11-14 10:30:30.589406	Accuracy measures: Global acc.: 0.9751
+                          	Class acc.: 0.8225
+                          	Mean IoU.: 0.7402
+                          	Bound. F1: 1.329
+
+2019-11-14 10:30:39.434052	Epoch 1925: Training loss:   0.5896898611732151
+2019-11-14 10:30:39.434900	Epoch 1925: Evaluation loss: 0.7745248079299927
+2019-11-14 10:30:42.598767	Accuracy measures: Global acc.: 0.9681
+                          	Class acc.: 0.7337
+                          	Mean IoU.: 0.6817
+                          	Bound. F1: 1.173
+
+2019-11-14 10:30:51.447049	Epoch 1930: Training loss:   0.5938153396482053
+2019-11-14 10:30:51.447793	Epoch 1930: Evaluation loss: 0.7058160901069641
+2019-11-14 10:30:54.617293	Accuracy measures: Global acc.: 0.9726
+                          	Class acc.: 0.8034
+                          	Mean IoU.: 0.7269
+                          	Bound. F1: 1.289
+
+2019-11-14 10:31:03.616864	Epoch 1935: Training loss:   0.5872048891108969
+2019-11-14 10:31:03.617691	Epoch 1935: Evaluation loss: 0.7475271821022034
+2019-11-14 10:31:06.777559	Accuracy measures: Global acc.: 0.97
+                          	Class acc.: 0.7469
+                          	Mean IoU.: 0.6861
+                          	Bound. F1: 1.192
+
+2019-11-14 10:31:15.650946	Epoch 1940: Training loss:   0.5891718397969785
+2019-11-14 10:31:15.651633	Epoch 1940: Evaluation loss: 0.6875206828117371
+2019-11-14 10:31:18.767550	Accuracy measures: Global acc.: 0.9741
+                          	Class acc.: 0.8123
+                          	Mean IoU.: 0.7329
+                          	Bound. F1: 1.309
+
+2019-11-14 10:31:27.611965	Epoch 1945: Training loss:   0.5886597451956376
+2019-11-14 10:31:27.612583	Epoch 1945: Evaluation loss: 0.7108108997344971
+2019-11-14 10:31:30.684948	Accuracy measures: Global acc.: 0.9721
+                          	Class acc.: 0.7913
+                          	Mean IoU.: 0.7143
+                          	Bound. F1: 1.264
+
+2019-11-14 10:31:39.533827	Epoch 1950: Training loss:   0.5870441664820132
+2019-11-14 10:31:39.534495	Epoch 1950: Evaluation loss: 0.7406569123268127
+2019-11-14 10:31:42.654493	Accuracy measures: Global acc.: 0.9697
+                          	Class acc.: 0.7508
+                          	Mean IoU.: 0.6892
+                          	Bound. F1: 1.198
+
+2019-11-14 10:31:51.542484	Epoch 1955: Training loss:   0.5971583413041156
+2019-11-14 10:31:51.543233	Epoch 1955: Evaluation loss: 0.7456257939338684
+2019-11-14 10:31:54.600717	Accuracy measures: Global acc.: 0.9694
+                          	Class acc.: 0.7457
+                          	Mean IoU.: 0.6821
+                          	Bound. F1: 1.187
+
+2019-11-14 10:32:03.455675	Epoch 1960: Training loss:   0.5876234121944593
+2019-11-14 10:32:03.456292	Epoch 1960: Evaluation loss: 0.6741885542869568
+2019-11-14 10:32:06.537051	Accuracy measures: Global acc.: 0.9749
+                          	Class acc.: 0.8478
+                          	Mean IoU.: 0.756
+                          	Bound. F1: 1.37
+
+2019-11-14 10:32:15.389376	Epoch 1965: Training loss:   0.5889648976533309
+2019-11-14 10:32:15.390065	Epoch 1965: Evaluation loss: 0.7139251828193665
+2019-11-14 10:32:18.517113	Accuracy measures: Global acc.: 0.9728
+                          	Class acc.: 0.7979
+                          	Mean IoU.: 0.7264
+                          	Bound. F1: 1.284
+
+2019-11-14 10:32:27.359665	Epoch 1970: Training loss:   0.5882823026698568
+2019-11-14 10:32:27.360434	Epoch 1970: Evaluation loss: 0.7045915126800537
+2019-11-14 10:32:30.489466	Accuracy measures: Global acc.: 0.973
+                          	Class acc.: 0.8104
+                          	Mean IoU.: 0.7271
+                          	Bound. F1: 1.297
+
+2019-11-14 10:32:39.459779	Epoch 1975: Training loss:   0.5900313206340956
+2019-11-14 10:32:39.460504	Epoch 1975: Evaluation loss: 0.7140544652938843
+2019-11-14 10:32:42.588232	Accuracy measures: Global acc.: 0.973
+                          	Class acc.: 0.7771
+                          	Mean IoU.: 0.7076
+                          	Bound. F1: 1.249
+
+2019-11-14 10:32:51.460706	Epoch 1980: Training loss:   0.6008562316065249
+2019-11-14 10:32:51.461488	Epoch 1980: Evaluation loss: 0.6936780214309692
+2019-11-14 10:32:54.598530	Accuracy measures: Global acc.: 0.974
+                          	Class acc.: 0.8143
+                          	Mean IoU.: 0.732
+                          	Bound. F1: 1.308
+
+2019-11-14 10:33:03.489228	Epoch 1985: Training loss:   0.5898829361666804
+2019-11-14 10:33:03.489893	Epoch 1985: Evaluation loss: 0.7199631333351135
+2019-11-14 10:33:06.592421	Accuracy measures: Global acc.: 0.9727
+                          	Class acc.: 0.781
+                          	Mean IoU.: 0.7139
+                          	Bound. F1: 1.256
+
+2019-11-14 10:33:15.447158	Epoch 1990: Training loss:   0.5856781368670256
+2019-11-14 10:33:15.448292	Epoch 1990: Evaluation loss: 0.699112594127655
+2019-11-14 10:33:18.510082	Accuracy measures: Global acc.: 0.9736
+                          	Class acc.: 0.8176
+                          	Mean IoU.: 0.7355
+                          	Bound. F1: 1.314
+
+2019-11-14 10:33:27.449892	Epoch 1995: Training loss:   0.5856963162836821
+2019-11-14 10:33:27.450491	Epoch 1995: Evaluation loss: 0.6931858062744141
+2019-11-14 10:33:30.491977	Accuracy measures: Global acc.: 0.9735
+                          	Class acc.: 0.8247
+                          	Mean IoU.: 0.7344
+                          	Bound. F1: 1.317
+

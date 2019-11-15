@@ -29,15 +29,15 @@ class Net(nn.Module):
 		self.probs = architecture_dict["probs"]
 
 		self.log("Initializing encoding blocks...")
-		self.encoder1 = EncoderBlock(3, 16, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.encoder2 = EncoderBlock(16, 32, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.encoder3 = EncoderBlock(32, 64, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.encoder1 = EncoderBlock(3, 32, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.encoder2 = EncoderBlock(32, 64, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.encoder3 = EncoderBlock(64, 128, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.log("Done initializing encoding blocks\n")
 
 		self.log("Initializing decoder blocks...")
-		self.decoder1 = DecoderBlock(64, 32,  3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.decoder2 = DecoderBlock(32, 16, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.decoder3 = DecoderBlock(16, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.decoder1 = DecoderBlock(128, 64,  3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.decoder2 = DecoderBlock(64, 32, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.decoder3 = DecoderBlock(32, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.log("Done initializing decoder blocks\n")
 
 	def forward(self, x):
@@ -71,3 +71,4 @@ class Net(nn.Module):
 #print(net)
 #x = torch.randn(10, 3, 512, 512)
 #net(x)
+#net.save("test_model.pt")

@@ -7,7 +7,7 @@ import torch.nn.functional as F
 
 
 class BlueLayer(nn.Module):
-	def __init__(self, in_channels, out_channels, kernel_size, padding, stride, probs = None, bias=True, dilation=1):
+	def __init__(self, in_channels, out_channels, kernel_size, padding, stride, probs = 0, bias=True, dilation=1):
 		super().__init__()
 		
 		self.convolutional = nn.Conv2d(in_channels, out_channels, kernel_size = kernel_size, padding = padding, stride = stride,bias =  bias, dilation =  dilation)
@@ -15,14 +15,10 @@ class BlueLayer(nn.Module):
 		self.bnorm = nn.BatchNorm2d(out_channels)
 		self.relu = nn.ReLU()
 		self.probs = probs
-
 	def forward(self, x):
 		
 		x = self.convolutional(x)
-		if self.probs == None:
-			pass
-		else:
-			x = self.dropout(x)
+		x = self.dropout(x)
 		x = self.bnorm(x)
 		x = self.relu(x)
 
@@ -84,3 +80,4 @@ class DecoderBlock(nn.Module):
 
 
 		
+ 

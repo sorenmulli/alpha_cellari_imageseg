@@ -1,5 +1,4 @@
 import os, sys
-os.chdir(sys.path[0])
 
 import json
 from PIL import Image
@@ -11,8 +10,6 @@ from farmors_syning import stitch
 from image_reconstructor import ensure_shape, ImageReconstructor
 from model import example_architecture, Net
 
-with open("local_data/prep_out.json", encoding="utf-8") as f:
-	CFG = json.load(f)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # TODO: Mere sigende navn
@@ -24,9 +21,12 @@ def classify_images(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitc
 	perform_stitch: If all images are used, they will be stitched together
 	save_paths: string if perform_stitch else iterable or None
 	"""
+	with open("local_data/prep_out.json", encoding="utf-8") as f:
+		cfg = json.load(f)
 
 	# Loads data and performs input validation
-	x = ensure_shape(DataLoader.load(CFG["aerial_path"]))
+	x = ensure_shape(DataLoader.load(cfg["aerial_path"]))
+	y = np.empty_like(x)
 	if idcs is not None:
 		x = ensure_shape(x[idcs])
 		if save_paths is not None:
@@ -35,7 +35,6 @@ def classify_images(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitc
 	x = torch.from_numpy(x).float().to(DEVICE)
 
 	# Performs forward pass and finds voids
-	y = np.empty_like(x)
 	with torch.no_grad():
 		for i in range(x.shape[0]):
 			y[i] = net(ensure_shape(x[i])).cpu().numpy()
@@ -46,7 +45,7 @@ def classify_images(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitc
 
 	# Stiching and saving
 	if idcs == None and perform_stitch:
-		reconst = stitch(reconst, CFG["split_shape"], False, savepath = save_paths)
+		reconst = stitch(reconst, cfg["split_shape"], False, savepath = save_paths)
 	elif save_paths:
 		for i in range(len(reconst)):
 			img = Image.fromarray(reconst[i]).save(save_paths[i])
@@ -58,6 +57,7 @@ def classify_images(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitc
 
 
 if __name__ == "__main__":
+	os.chdir(sys.path[0])
 
 	# Test case
 	net = Net(example_architecture)
