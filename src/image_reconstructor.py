@@ -87,15 +87,17 @@ class ImageReconstructor:
 
 		return aerial
 
-	def reconstruct_output(self, output: np.ndarray, voids: np.ndarray = None, *show):
+	def reconstruct_output(self, output: np.ndarray, voids: np.ndarray, *show):
 
 		"""
 		Reconstructs output image from network
-		Shape: n
+		Shape: n x channels x height x width
 		yellow = np.array([255, 255, 0], dtype=np.uint8)_images x n_channels x height x width
 		voids: Boolean vector of shape n_images x height x width
-		If given, all pixels where it is true will be set to black
 		"""
+
+		print(output.shape)
+		print(voids.shape)
 
 		self.log("Ensuring shape...")
 		output = ensure_shape(output)

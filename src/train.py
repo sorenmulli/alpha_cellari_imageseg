@@ -13,7 +13,7 @@ from forward_passer import classify_images
 from image_reconstructor import ensure_shape
 from logger import get_timestamp, Logger
 from model import Net
-from post_process import blur
+from test import Tester
 
 
 from matplotlib import pyplot as plt 
@@ -96,60 +96,36 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 				plt.xlabel("Epoch")
 				plt.ylabel(str(criterion))
 				plt.legend()
-				plt.show()				
-	return net
+				plt.show()
 
-def test_model(net: torch.nn.modules):
+	return net, criterion
 
-	"""
-	Calculates accuracy scores on a net using test images
-	"""
-
-	with open(JSON_PATH, encoding="utf-8") as f:
-		cfg = json.load(f)
-
-	LOG("Loading test data...")
-	test_x = torch.from_numpy(DataLoader.load(cfg["aerial_path"])[cfg["test_idcs"]]).to(DEVICE).float()
-	test_y = torch.from_numpy(DataLoader.load(cfg["target_path"])[cfg["test_idcs"]]).to(DEVICE).long()
-	LOG("Done loading test data\n")
-
-	LOG("Performing forward passes...")
-	output = torch.empty(test_y.shape).to(DEVICE).long()
-	with torch.no_grad():
-		for i, x in enumerate(test_x):
-			output[i] = net(ensure_shape(x)).squeeze().argmax(axis=0)
-	LOG("Done performing forward passes\n")
-	
-	LOG("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(test_y, output, is_onehot=False)))
-
-	LOG("Applying post processing...")
-	output = blur(output)
-	LOG("Done applying post processing")
-	LOG("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(test_y, output, is_onehot=False)))
 
 
 if __name__ == "__main__":
 	os.chdir(sys.path[0])
 
 	architecture = {
-	"kernel_size":  3,
-	"padding": 1, 
-	"stride": 1,
-	"pool_dims": (2, 2),
-	"probs": 0.1,}
+		"kernel_size":  3,
+		"padding": 1, 
+		"stride": 1,
+		"pool_dims": (2, 2),
+		"probs": 0.1,
+	}
 
 	learning_rate = 2e-4
 
 	augmentations = AugmentationConfig(
 		augments =  [flip_lr, flip_tb],  
 		cropsize = (250, 250), 
-		augment_p = [0.3, 0.3]
+		augment_p = [0.5, 0.5]
 	)
 
 	batch_size = 3
-	epochs = 1
+	epochs = 0
 
-	net = model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 10)
-	# classify_images(net, None, True, "local_data/full-forward.png")
-	test_model(net)
+	net, criterion = model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 10)
+	classify_images(net, None, True, "local_data/full-forward.png")
+	# tester = Tester(JSON_PATH, LOG)
+	# tester.test_model(net, criterion, "local_data/test")
 #net.save(f"local_data/models/{get_timestamp(True)}-model.pt")
