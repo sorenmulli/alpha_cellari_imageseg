@@ -52,6 +52,7 @@ class DataLoader:
 			arr = np.load(path+".npy")
 		else:
 			arr = np.load(path+".npz")["arr_0"]
+
 		return arr
 
 	def _generate_batch(self, idcs: np.ndarray):
