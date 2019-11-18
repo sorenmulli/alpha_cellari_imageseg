@@ -5,13 +5,12 @@
 # Divide images into train, eval, test, and voids.				#
 # Save images in efficient format						#
 #########################################################
-import os, sys
-os.chdir(sys.path[0])
 import numpy as np
 import json
 import numpy as np
 from PIL import Image
 import wget
+import os, sys
 
 from logger import Logger
 
@@ -253,6 +252,7 @@ def _prepare_data():
 
 
 if __name__ == "__main__":
+	os.chdir(sys.path[0])
 
 	_prepare_data()
 
