@@ -60,7 +60,7 @@ def _standardize(image):
 	"""
 	Standardizes the pixel values of non-void pixels channelwise
 	"""
-
+ 
 	# Detects void pixels
 	void_pixels = (image==0).all(axis=2)
 	means = list()
@@ -97,7 +97,7 @@ def _target_index(image):
 	image = np.argmax(image, axis=2)
 	return image
 
-def _pad(image, channels):
+def _pad(image, channels, mirror_padding = False):
 
 	"""
 	Pads an m x n x 3 array on the right and bottom such that images of shape IMAGE_SHAPE fit nicely
@@ -105,12 +105,17 @@ def _pad(image, channels):
 
 	extra_height = IMAGE_SHAPE[0] - image.shape[0] % IMAGE_SHAPE[0]
 	extra_width = IMAGE_SHAPE[1] - image.shape[1] % IMAGE_SHAPE[1]
+	
+	if mirror_padding: 
+		padded_img = np.pad(image, (extra_height, extra_width), 'reflect')
 
-	new_dimensions = (image.shape[0] + extra_height, image.shape[1] + extra_width)
-	padded_shape =  (*new_dimensions, channels) if channels else new_dimensions
-	padded_img = np.zeros(padded_shape)
-	padded_img[:image.shape[0], :image.shape[1]] = image
-
+	else:
+		new_dimensions = (image.shape[0] + extra_height, image.shape[1] + extra_width)
+		padded_shape =  (*new_dimensions, channels) if channels else new_dimensions
+		padded_img = np.zeros(padded_shape)
+		padded_img[:image.shape[0], :image.shape[1]] = image
+	
+	
 	return padded_img
 
 def _split_image(image, channels):
