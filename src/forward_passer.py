@@ -38,7 +38,6 @@ def classify_images(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitc
 	with torch.no_grad():
 		for i in range(x.shape[0]):
 			y[i] = net(ensure_shape(x[i])).cpu().numpy()
-			print(i)
 
 	# Performs reconstruction
 	recontructor = ImageReconstructor()

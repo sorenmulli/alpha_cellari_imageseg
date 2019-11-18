@@ -34,25 +34,21 @@ class Tester:
 		self.log("Done loading test data\n")
 
 		self.log("Performing forward passes...")
-		shape = list(test_x.shape)
-		shape[0] = 1
-		output = torch.empty(shape).to(test_y.dtype).to(test_y.device)
-		print(net)
+		output = torch.empty_like(test_x)
 		with torch.no_grad():
 			net.eval()
 			for i, x in enumerate(test_x):
-				print((x==0).sum())
-				output[0] = net(ensure_shape(x)).squeeze()
-				break
-
+				log("Forward passing test image %i" % i)
+				output[i] = net(ensure_shape(x)).squeeze()
 		self.log("Done performing forward passes\n")
-		# measures = accuracy_measures(test_y, output.argmax(dim=1), is_onehot=False)
-		# self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n"
-		# 	.format(**measures))
+		
+		measures = accuracy_measures(test_y, output.argmax(dim=1), is_onehot=False)
+		self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n"
+			.format(**measures))
 		
 		self.log("Reconstructing images...")
 		output = output.cpu().numpy()
-		voids = (ensure_shape(test_x[0] == 0)).all(dim=1).cpu().numpy()
+		voids = (test_x == 0).all(dim=1).cpu().numpy()
 		reconstructed = ImageReconstructor(json_path=self.json_path).reconstruct_output(output, voids=voids)
 		self.log("Done reconstructing images\n")
 
@@ -82,6 +78,6 @@ if __name__ == "__main__":
 	log = Logger("logs/test-tester.log", "Testing tester")
 	json_path = "local_data/prep_out.json"
 	tester = Tester(json_path, log)
-	model = Net.from_model("saved_data/soren_tog_run/model", log)
+	model = Net.from_model("saved_data/soren_tog_run/model")
 	tester.test_model(model, "local_data/test")
 
