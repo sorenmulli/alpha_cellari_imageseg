@@ -7,7 +7,13 @@ from sklearn.metrics import jaccard_similarity_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
 
-def accuracy_measures(y_true_tensor: torch.Tensor, y_pred_tensor: torch.Tensor, n_classes: int = 3, is_onehot: bool = True,  measures: dict = {'G': True, 'C': True, 'mIoU': True, 'BF': True}):
+def accuracy_measures(
+		y_true_tensor: torch.Tensor,
+		y_pred_tensor: torch.Tensor,
+		n_classes: int = 3,
+		is_onehot: bool = True,
+		measures: dict = {'G': True, 'C': True, 'mIoU': True, 'BF': True}
+	):
 	### Assumes that it receives images of shape: (# images, height, width)
 	
 	if is_onehot:

@@ -38,6 +38,7 @@ def classify_images(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitc
 	with torch.no_grad():
 		for i in range(x.shape[0]):
 			y[i] = net(ensure_shape(x[i])).cpu().numpy()
+			print(i)
 
 	# Performs reconstruction
 	recontructor = ImageReconstructor()
@@ -60,8 +61,8 @@ if __name__ == "__main__":
 	os.chdir(sys.path[0])
 
 	# Test case
-	net = Net(example_architecture)
-	classify_images(net, save_paths="local_data/test-forward-pass.png")
+	net = Net.from_model("saved_data/soren_tog_run/model")
+	classify_images(net, save_paths="local_data/test-forward-pass2.png")
 
 
 
