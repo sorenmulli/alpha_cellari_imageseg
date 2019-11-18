@@ -88,13 +88,6 @@ class ImageReconstructor:
 
 		return aerial
 
-	def cut_back(self, images, size_to_remove):
-		print(type(images))
-		print(images.shape)
-		print(size_to_remove)
-
-		raise NotImplementedError
-
 	def reconstruct_output(self, output: np.ndarray, voids: np.ndarray, down_cut = None,  *show):
 
 		"""
@@ -105,8 +98,9 @@ class ImageReconstructor:
 		"""
 
 		if down_cut is not None:
-			output = cut_back(output, self.cfg["extra_image_size"])
-
+			#Cuts the output down th
+			output =  output[:, :, down_cut//2: -down_cut//2, down_cut//2: -down_cut//2 ]
+			voids =  voids[:,  down_cut//2: -down_cut//2, down_cut//2: -down_cut//2 ]
 		self.log("Ensuring shape...")
 		output = ensure_shape(output)
 		voids = ensure_shape(voids, axes=3)

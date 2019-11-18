@@ -38,12 +38,14 @@ def full_forward(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch =
 
 	# Performs forward pass and finds voids
 	with torch.no_grad():
+		net.eval()
 		for i in range(x.shape[0]):
 			y[i] = net(ensure_shape(x[i])).cpu().numpy()
 
 	# Performs reconstruction
-	recontructor = ImageReconstructor(logger = Logger("/local_data/reconstrucion.log", "Testing reconstruction using oversampling"))
-	reconst = recontructor.reconstruct_output(y, voids)
+	down_cut = cfg["extra_image_size"] if oversample else None
+	recontructor = ImageReconstructor(logger = Logger("local_data/reconstrucion.log", "Testing reconstruction using oversampling"))
+	reconst = recontructor.reconstruct_output(y, voids, down_cut=down_cut)
 
 	# Stiching and saving
 	if idcs == None and perform_stitch:
