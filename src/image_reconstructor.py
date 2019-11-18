@@ -96,9 +96,6 @@ class ImageReconstructor:
 		voids: Boolean vector of shape n_images x height x width
 		"""
 
-		print(output.shape)
-		print(voids.shape)
-
 		self.log("Ensuring shape...")
 		output = ensure_shape(output)
 		voids = ensure_shape(voids, axes=3)
