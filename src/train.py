@@ -9,7 +9,7 @@ from torch import nn
 from augment import Augmenter, AugmentationConfig, flip_lr, flip_tb
 from data_loader import DataLoader
 from evaluation import accuracy_measures
-from forward_passer import classify_images
+from forward_passer import full_forward
 from image_reconstructor import ensure_shape
 from logger import get_timestamp, Logger
 from model import Net
@@ -35,7 +35,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 	net = Net(architecture).to(DEVICE)
 
-	criterion = nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y))
+	criterion = nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=-1)
 	optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
 
@@ -125,7 +125,7 @@ if __name__ == "__main__":
 	epochs = 0
 
 	net, criterion = model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 10)
-	classify_images(net, None, True, "local_data/full-forward.png")
+	full_forward(net, None, True, "local_data/full-forward.png")
 	# tester = Tester(JSON_PATH, LOG)
 	# tester.test_model(net, criterion, "local_data/test")
 #net.save(f"local_data/models/{get_timestamp(True)}-model.pt")

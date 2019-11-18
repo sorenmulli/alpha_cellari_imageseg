@@ -16,7 +16,7 @@ def softmax_output_to_prediction(output: torch.Tensor):
 def baseline_computation(json_path, log, nclasses = 3):
 
 	data_loader = DataLoader(json_path, 12)
-	criterion = torch.nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y))
+	criterion = torch.nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=-1)
 
 	baseline_pred = int(torch.argmax(torch.unique(data_loader.train_y, return_counts=True)[1]))
 	

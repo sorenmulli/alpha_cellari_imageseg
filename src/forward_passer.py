@@ -13,7 +13,7 @@ from model import example_architecture, Net
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # TODO: Mere sigende navn
-def classify_images(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch = True, save_paths = None):
+def full_forward(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch = True, save_paths = None):
 
 	"""
 	idcs: Iterable of integers of prepared aerial images
@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
 	# Test case
 	net = Net.from_model("saved_data/soren_tog_run/model")
-	classify_images(net, save_paths="local_data/test-forward-pass2.png")
+	full_forward(net, save_paths="local_data/test-forward-pass2.png")
 
 
 

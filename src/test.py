@@ -42,6 +42,7 @@ class Tester:
 				output[i] = net(ensure_shape(x)).squeeze()
 		self.log("Done performing forward passes\n")
 		
+		self.log("Calculating accuracy measures...")
 		measures = accuracy_measures(test_y, output.argmax(dim=1), is_onehot=False)
 		self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n"
 			.format(**measures))
@@ -52,20 +53,29 @@ class Tester:
 		reconstructed = ImageReconstructor(json_path=self.json_path).reconstruct_output(output, voids=voids)
 		self.log("Done reconstructing images\n")
 
+		# Creating output image with aerial, target, and reconstructed outputs
 		if output_dir:
 			self.log("Saving test images and reconstructions to directory %s..." % output_dir)
-			if not os.path.exists(output_dir):
-				os.makedirs(output_dir)
-			for i in range(len(reconstructed)):
-				path = output_dir + "/test-reconst_%i.png" % i
-				space = 20
-				img_arr = np.zeros(
-					(reconstructed[i].shape[0], reconstructed[i].shape[1] * 2 + space, reconstructed[i].shape[2]),
+			os.makedirs(output_dir, exist_ok=True)
+			shape = reconstructed[0].shape
+			space = 20  # Number of white pixels in between aerial, target, and output images
+			for i, ti in enumerate(self.cfg["test_idcs"]):
+				out_path = output_dir + "/test-reconst_%i.png" % ti
+				aerial_path = self.cfg["sub_imgs_folder"].format(type="aerial", index=ti)
+				target_path = self.cfg["sub_imgs_folder"].format(type="target", index=ti)
+				aerial = np.asarray(Image.open(aerial_path))
+				target = np.asarray(Image.open(target_path))
+
+				# Creating output image initialized as white
+				img_arr = np.ones(
+					(reconstructed[i].shape[0], reconstructed[i].shape[1] * 3 + space * 2, reconstructed[i].shape[2]),
 					dtype=np.uint8
-				)
-				img_arr[:, reconstructed[i].shape[1]+space:] = reconstructed[i]
+				) * 255
+				img_arr[:, :shape[1]] = aerial  # Inserting aerial image
+				img_arr[:, shape[1]+space:shape[1]*2+space] = target  # Inserting ground truth
+				img_arr[:, shape[1]*2+space*2:] = reconstructed[i]  # Inserting reconstructed output
 				img = Image.fromarray(img_arr)
-				img.save(path)
+				img.save(out_path)
 			self.log("Done saving images and reconstructions\n")
 
 		# return measures, reconstructed

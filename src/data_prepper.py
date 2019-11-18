@@ -16,16 +16,19 @@ import wget
 from logger import Logger
 
 EPS = np.finfo("float64").eps
-#til git store 
+
 IMAGE_SHAPE = (512, 512, 3)  # Height, width, channel
 IMAGE_PATHS = ("local_data/raw.png", "local_data/target.png")
+os.makedirs("local_data/imgs", exist_ok = True)
+SUB_PATH = "local_data/imgs/{type}-{index}.png"
 SPLIT = (.83, .17,)
 
-MR_COOL_IDCS = np.array([0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,
+MR_COOL_IDCS = np.array([
+	0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,
 	1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
 	0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0,
 	0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0,
-	0, 1, 0, 0, 0, 1], dtype=np.bool)
+	0, 1, 0, 0, 0, 1], dtype = np.bool)
 
 LOG = Logger("logs/data_prepper.log", "Preparation of data with images of shape %s" % ((IMAGE_SHAPE,)))
 USE_NPZ = False
@@ -43,14 +46,14 @@ def _save_images():
 	wget.download(raw_image_url, IMAGE_PATHS[0])
 	wget.download(target_image_url, IMAGE_PATHS[1])
 
-def _load_image(path: str):
+def _load_image(path: str, dtype = np.float64):
 
 	"""
 	Returns the pixel values of train and tests i as an m x n x 3 array
 	"""
 
 	img = Image.open(path)
-	pixels = np.asarray(img, np.float64)
+	pixels = np.asarray(img, dtype = dtype)
 	pixels = pixels[:, :, :IMAGE_SHAPE[2]]
 
 	return pixels
@@ -94,14 +97,17 @@ def _create_one_hot(image):
 	return image.astype(np.bool)
 
 def _target_index(image):
+
 	image = np.argmax(image, axis=2)
 	return image
 
-def _pad(image, channels, mirror_padding = False):
+def _pad(image, mirror_padding = False):
 
 	"""
 	Pads an m x n x 3 array on the right and bottom such that images of shape IMAGE_SHAPE fit nicely
 	"""
+
+	channels = IMAGE_SHAPE[2]
 
 	extra_height = IMAGE_SHAPE[0] - image.shape[0] % IMAGE_SHAPE[0]
 	extra_width = IMAGE_SHAPE[1] - image.shape[1] % IMAGE_SHAPE[1]
@@ -118,11 +124,13 @@ def _pad(image, channels, mirror_padding = False):
 	
 	return padded_img
 
-def _split_image(image, channels):
+def _split_image(image):
 
 	"""
-	Splits an image into n images of shape IMAGE_SHAPE and returns them as a n x m x o x channels array
+	Splits an image into n images of shape IMAGE_SHAPE and returns them as an n_images x height x width x n_channels array
 	"""
+
+	channels = IMAGE_SHAPE[2]
 
 	split_shape = image.shape[0] // IMAGE_SHAPE[0],\
 				image.shape[1] // IMAGE_SHAPE[1]
@@ -184,18 +192,26 @@ def _prepare_data():
 	aerial, target = [_load_image(x) for x in IMAGE_PATHS]
 	LOG("Done loading images\nShapes: %s\nSplit: %s\n" % (aerial.shape, SPLIT))
 
+	LOG("Padding images...")
+	aerial = _pad(aerial)
+	target = _pad(target)
+	LOG("Done padding images\nShapes: %s\n" % (aerial.shape,))
+
+	LOG("Saving subimages to folder %s" % SUB_PATH)
+	aerial_imgs = _split_image(aerial)[0].astype(np.uint8)
+	target_imgs = _split_image(target)[0].astype(np.uint8)
+	for i in range(len(aerial_imgs)):
+		Image.fromarray(aerial_imgs[i]).save(SUB_PATH.format(type="aerial", index=i))
+		Image.fromarray(target_imgs[i]).save(SUB_PATH.format(type="target", index=i))
+	LOG("Done saving subimages\n")
+
 	LOG("Standardizing aerial image...")
 	aerial, means, stds = _standardize(aerial)
 	LOG("Done standardizing image\n")
 
 	LOG("Squeezing target images to single channel...")
-	target = _create_one_hot(target)
 	target = _target_index(target)
 	LOG("Done creating target values. %s\n" % (target.shape,))
-
-	LOG("Padding images...")
-	aerial, target = _pad(aerial, IMAGE_SHAPE[2]), _pad(target, None)
-	LOG("Done padding images\nShapes: %s\n" % (aerial.shape,))
 
 	LOG("Splitting images...")
 	aerial, split_shape = _split_image(aerial, IMAGE_SHAPE[2])
@@ -239,6 +255,7 @@ def _prepare_data():
 		"stds": stds,
 		"aerial_path": aerial_path,
 		"target_path": target_path,
+		"sub_imgs_folder": SUB_PATH,
 		"train_idcs": sorted(train_idcs),
 		"val_idcs": sorted(val_idcs),
 		"test_idcs": sorted(test_idcs),
