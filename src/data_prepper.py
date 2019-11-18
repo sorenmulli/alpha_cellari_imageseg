@@ -17,6 +17,7 @@ from logger import Logger
 EPS = np.finfo("float64").eps
 #til git store 
 IMAGE_SHAPE = (512, 512, 3)  # Height, width, channel
+EXTRA_IMAGE_SIZE = 50
 IMAGE_PATHS = ("local_data/raw.png", "local_data/target.png")
 SPLIT = (.83, .17,)
 
@@ -96,14 +97,15 @@ def _target_index(image):
 	image = np.argmax(image, axis=2)
 	return image
 
-def _pad(image, channels, mirror_padding = False):
+def _pad(image, channels, mirror_padding = False, extra_shape = 0):
 
 	"""
 	Pads an m x n x 3 array on the right and bottom such that images of shape IMAGE_SHAPE fit nicely
 	"""
+	height, width = IMAGE_SHAPE[0] + extra_shape, IMAGE_SHAPE[1] + extra_shape
 
-	extra_height = IMAGE_SHAPE[0] - image.shape[0] % IMAGE_SHAPE[0]
-	extra_width = IMAGE_SHAPE[1] - image.shape[1] % IMAGE_SHAPE[1]
+	extra_height = height - image.shape[0] % height
+	extra_width = width - image.shape[1] % width 
 	
 	if mirror_padding: 
 		padded_img = np.pad(image, (extra_height, extra_width), 'reflect')
@@ -117,7 +119,7 @@ def _pad(image, channels, mirror_padding = False):
 	
 	return padded_img
 
-def _split_image(image, channels):
+def _split_image(image, channels, large_imgs = True):
 
 	"""
 	Splits an image into n images of shape IMAGE_SHAPE and returns them as a n x m x o x channels array
@@ -130,12 +132,25 @@ def _split_image(image, channels):
 	split_dim = (IMAGE_SHAPE[0], IMAGE_SHAPE[1], channels) if channels else (IMAGE_SHAPE[0], IMAGE_SHAPE[1])
 	split_imgs = np.empty((n_imgs, *split_dim))
 
+	if large_imgs:
+		large_split_dim = (IMAGE_SHAPE[0]+ EXTRA_IMAGE_SIZE, IMAGE_SHAPE[1]+EXTRA_IMAGE_SIZE, channels) if channels else (IMAGE_SHAPE[0]+ EXTRA_IMAGE_SIZE, IMAGE_SHAPE[1]+EXTRA_IMAGE_SIZE)
+		large_split_imgs = np.empty((n_imgs, *large_split_dim))
+		large_image = _pad(image, channels, extra_shape=EXTRA_IMAGE_SIZE // 2)
+
+	else:
+		large_split_imgs = np.empty([1])	
+
 	for i in range(split_shape[0]):
 		for j in range(split_shape[1]):
 			cut = image[i*IMAGE_SHAPE[0]:(i+1)*IMAGE_SHAPE[0], j*IMAGE_SHAPE[1]:(j+1)*IMAGE_SHAPE[1]]
 			split_imgs[i*split_shape[1]+j] = cut
+			
+			if large_imgs:
+				large_cut = large_image[i*IMAGE_SHAPE[0]:(i+1)*IMAGE_SHAPE[0]+EXTRA_IMAGE_SIZE, j*IMAGE_SHAPE[1]:(j+1)*IMAGE_SHAPE[1]+EXTRA_IMAGE_SIZE]
+				large_split_imgs[i*split_shape[1]+j] = large_cut
 
-	return split_imgs, split_shape
+
+	return split_imgs, split_shape, large_split_imgs
 
 def _find_voids(images: np.ndarray):
 
@@ -197,8 +212,8 @@ def _prepare_data():
 	LOG("Done padding images\nShapes: %s\n" % (aerial.shape,))
 
 	LOG("Splitting images...")
-	aerial, split_shape = _split_image(aerial, IMAGE_SHAPE[2])
-	target, _ = _split_image(target, None)
+	aerial, split_shape, large_aerial = _split_image(aerial, IMAGE_SHAPE[2])
+	target, _, large_target = _split_image(target, None)
 	LOG("Done splitting images\nNumber of images: %i\nShapes: %s\n" % (aerial.shape[0], IMAGE_SHAPE))
 
 	LOG("Detecting void images...")
@@ -207,17 +222,30 @@ def _prepare_data():
 
 	LOG("Transposing images to PyTorch's preferred format...")
 	aerial = np.transpose(aerial, (0, 3, 1, 2))
+	large_aerial = np.transpose(large_aerial, (0, 3, 1, 2))
 	LOG(f"Images transposed. Shape: {aerial.shape}\n")
 
 	LOG("Saving images...")
 	aerial_path = "local_data/aerial_prepared"
 	target_path = "local_data/target_prepared"
+	
+	large_aerial_path = "local_data/large_aerial_prepared"
+	large_target_path = "local_data/large_target_prepared"
+	
 	if USE_NPZ:
 		np.savez_compressed(aerial_path, aerial.astype(np.float64))
 		np.savez_compressed(target_path, target.astype(np.uint8))
+		
+		np.savez_compressed(large_aerial_path, large_aerial.astype(np.float64))
+		np.savez_compressed(large_target_path, large_target.astype(np.uint8))
+
 	else:
 		np.save(aerial_path, aerial.astype(np.float64))
 		np.save(target_path, target.astype(np.uint8))
+
+		np.save(large_aerial_path, large_aerial.astype(np.float64))
+		np.save(large_target_path, large_target.astype(np.uint8))
+
 	LOG("Saved aerial images to '%s' and target images to '%s%s'\n" % (
 		aerial_path,
 		target_path,
@@ -242,6 +270,7 @@ def _prepare_data():
 		"val_idcs": sorted(val_idcs),
 		"test_idcs": sorted(test_idcs),
 		"void_idcs": sorted(void_idcs),
+		"extra_image_size": EXTRA_IMAGE_SIZE
 	}
 	json_path = "local_data/prep_out.json"
 	with open(json_path, "w", encoding="utf-8") as f:
