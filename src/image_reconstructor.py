@@ -87,7 +87,14 @@ class ImageReconstructor:
 
 		return aerial
 
-	def reconstruct_output(self, output: np.ndarray, voids: np.ndarray, *show):
+	def cut_back(self, images, size_to_remove):
+		print(type(images))
+		print(images.shape)
+		print(size_to_remove)
+
+		raise NotImplementedError
+
+	def reconstruct_output(self, output: np.ndarray, voids: np.ndarray, down_cut = None,  *show):
 
 		"""
 		Reconstructs output image from network
@@ -95,6 +102,9 @@ class ImageReconstructor:
 		yellow = np.array([255, 255, 0], dtype=np.uint8)_images x n_channels x height x width
 		voids: Boolean vector of shape n_images x height x width
 		"""
+
+		if down_cut is not None:
+			output = cut_back(output, self.cfg["extra_image_size"])
 
 		self.log("Ensuring shape...")
 		output = ensure_shape(output)
@@ -135,7 +145,3 @@ if __name__ == "__main__":
 	voids = np.random.randint(2, size=(2, 512, 512), dtype=np.bool)
 	test_output = np.random.randn(2, 3, 512, 512)
 	reconstructor.reconstruct_output(test_output, voids, 0, 1)
-
-
-
-
