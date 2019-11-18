@@ -53,11 +53,18 @@
 
 
 \section{Introduction}
+\subsection{Brief overview of data}
+Our data consist of one large, high resolution, RGB, orthomosaic photo of a sugar cane field. The field has been manually labeled by an expert biologist to create a human-ground truth, these labels are represented as a GT-matrix with 3 possible classes. The possible class are crop row (green), weed (yellow), background (red). The large photo is cropped into smaller images and afterwards augmentation techniques are used to gain more data. We will return to the augmentation part later. The images with exclusively black pixels are removed from our data set, and images with some black pixels are ignored when calculating the loss function 
 
 \section{Methods}
 Netværket blev initialiseret
 
+
+\subsection{Unification of predictions}
+In a real-world application of the segmentation a farmer would want a complete and precise segmentation of his whole field at once, such that fertilization and pesticides can be distributed accordingly. However, it turns out that the prediction quality is of less quality near the boarders of the image. Therefore, a naïve stitching of the cropped images leads to a full-blown image prediction with obvious flaws near the boarders between the cropped images. To solve this problem, we have chosen to increase the size of the cropped images, and infer on these enlarged pictured. In the procedure of joining the enlarged cropped pictures the pictures are cropped again, to avoid the near border areas. This is computationally inefficient, but it works, and since the inference time is not that big, it is an alright solution. For industrial purposes, another approach might be beneficial.
 \section{Results}
+
+
 
 \section{Discussion}
 
