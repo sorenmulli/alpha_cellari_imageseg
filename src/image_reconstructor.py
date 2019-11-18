@@ -29,6 +29,7 @@ class ImageReconstructor:
 		self.paths = self.cfg["aerial_path"], self.cfg["target_path"]
 
 		self.log = logger
+		
 	def _reconstruct_aerial(self, standardized: np.ndarray):
 
 		"""
@@ -118,7 +119,7 @@ class ImageReconstructor:
 		black = np.array([0, 0, 0], dtype=np.uint8)
 
 		self.log("Determining classes and inserting colours...")
-		classes = np.argmax(output, 3)
+		classes = np.argmax(output, axis=3)
 		reconst = np.zeros_like(output, dtype=np.uint8)
 		reconst[classes==0] = red
 		reconst[classes==1] = green

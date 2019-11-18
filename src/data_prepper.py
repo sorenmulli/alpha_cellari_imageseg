@@ -235,17 +235,17 @@ def _prepare_data():
 	
 	if USE_NPZ:
 		np.savez_compressed(aerial_path, aerial.astype(np.float64))
-		np.savez_compressed(target_path, target.astype(np.uint8))
+		np.savez_compressed(target_path, target.astype(np.int8))
 		
 		np.savez_compressed(large_aerial_path, large_aerial.astype(np.float64))
-		np.savez_compressed(large_target_path, large_target.astype(np.uint8))
+		np.savez_compressed(large_target_path, large_target.astype(np.int8))
 
 	else:
 		np.save(aerial_path, aerial.astype(np.float64))
-		np.save(target_path, target.astype(np.uint8))
+		np.save(target_path, target.astype(np.int8))
 
 		np.save(large_aerial_path, large_aerial.astype(np.float64))
-		np.save(large_target_path, large_target.astype(np.uint8))
+		np.save(large_target_path, large_target.astype(np.int8))
 
 	LOG("Saved aerial images to '%s' and target images to '%s%s'\n" % (
 		aerial_path,
