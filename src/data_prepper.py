@@ -267,6 +267,8 @@ def _prepare_data():
 		"stds": stds,
 		"aerial_path": aerial_path,
 		"target_path": target_path,
+		"large_aerial_path": large_aerial_path,
+		"large_target_path": large_target_path,
 		"sub_imgs_folder": SUB_PATH,
 		"train_idcs": sorted(train_idcs),
 		"val_idcs": sorted(val_idcs),
@@ -287,4 +289,3 @@ if __name__ == "__main__":
 	os.makedirs("local_data/imgs", exist_ok = True)
 
 	_prepare_data()
-
