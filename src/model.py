@@ -84,6 +84,7 @@ class Net(nn.Module):
 		
 		net = Net(architecture_dict, logger)
 		net.load_state_dict(state_dict)
+		net = net.to(GPU)
 
 		return net
 

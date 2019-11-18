@@ -81,24 +81,15 @@ def _standardize(image):
 
 	return image, means, stds
 
-def _create_one_hot(image):
-
-	"""
-	Returns a one hot representation of the target image: Uses specialized features of the drone dataset
-	"""
+def _target_index(image):
 
 	image = image // 255
 
-	yellow_value = np.array([0,0,1])
-	# Yellow = red + green
-	yellows = (image[:, :, 0] == 1) & (image[:, :, 1] == 1)
-	image[yellows] = yellow_value
-
-	return image.astype(np.bool)
-
-def _target_index(image):
-
-	image = np.argmax(image, axis=2)
+	# As red, green, and yellow are 100, 010, and 110 respectively, they can be interpreted as binary numbers in reverse
+	# Multiplication with powers of 2 happens along the last axis and transforms them into decimal base
+	# Subtract one, as voids are -1
+	image = image @ np.array([1,2,4]) - 1
+	
 	return image
 
 def _pad(image, mirror_padding = False, extra_shape = 0):
@@ -206,7 +197,7 @@ def _prepare_data():
 	target = _pad(target)
 	LOG("Done padding images\nShapes: %s\n" % (aerial.shape,))
 
-	LOG("Saving subimages to folder %s" % SUB_PATH)
+	LOG("Saving subimages to location %s" % SUB_PATH)
 	aerial_imgs = _split_image(aerial, IMAGE_SHAPE[2])[0].astype(np.uint8)
 	target_imgs = _split_image(target, IMAGE_SHAPE[2])[0].astype(np.uint8)
 	for i in range(len(aerial_imgs)):
