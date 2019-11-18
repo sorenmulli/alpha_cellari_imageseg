@@ -19,7 +19,6 @@ EPS = np.finfo("float64").eps
 IMAGE_SHAPE = (512, 512, 3)  # Height, width, channel
 EXTRA_IMAGE_SIZE = 50
 IMAGE_PATHS = ("local_data/raw.png", "local_data/target.png")
-os.makedirs("local_data/imgs", exist_ok = True)
 SUB_PATH = "local_data/imgs/{type}-{index}.png"
 SPLIT = (.83, .17,)
 
@@ -285,6 +284,7 @@ def _prepare_data():
 
 if __name__ == "__main__":
 	os.chdir(sys.path[0])
+	os.makedirs("local_data/imgs", exist_ok = True)
 
 	_prepare_data()
 
