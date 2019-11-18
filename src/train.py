@@ -52,16 +52,10 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 			with torch.no_grad():
 				net.eval()
 
-				val_data, val_target = data_loader.get_validation() 
-				
-				#targets = torch.argmax(val_target, dim = 1, keepdim = True).squeeze()
-
+				val_data, val_target = data_loader.get_validation()
 				val_output = net(val_data)
-				
-				
 
 				evalution_loss = criterion(val_output, val_target)
-
 				
 				full_eval_loss.append(float(evalution_loss))
 				valid_iter.append(epoch_idx)
@@ -98,7 +92,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 				plt.legend()
 				plt.show()
 
-	return net, criterion
+	return net
 
 
 
@@ -124,8 +118,6 @@ if __name__ == "__main__":
 	batch_size = 3
 	epochs = 0
 
-	net, criterion = model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 10)
+	net = model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 10)
 	full_forward(net, None, True, "local_data/full-forward.png")
-	# tester = Tester(JSON_PATH, LOG)
-	# tester.test_model(net, criterion, "local_data/test")
-#net.save(f"local_data/models/{get_timestamp(True)}-model.pt")
+	
