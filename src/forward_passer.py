@@ -9,11 +9,12 @@ from data_loader import DataLoader
 from farmors_syning import stitch
 from image_reconstructor import ensure_shape, ImageReconstructor
 from model import example_architecture, Net
+from logger import Logger
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # TODO: Mere sigende navn
-def full_forward(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch = True, save_paths = None):
+def full_forward(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch = True, save_paths = None, oversample = True):
 
 	"""
 	idcs: Iterable of integers of prepared aerial images
@@ -25,7 +26,8 @@ def full_forward(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch =
 		cfg = json.load(f)
 
 	# Loads data and performs input validation
-	x = ensure_shape(DataLoader.load(cfg["aerial_path"]))
+	x_data_path = cfg["large_aerial_path"] if oversample else cfg["aerial_path"] 
+	x = ensure_shape(DataLoader.load(x_data_path))
 	y = np.empty_like(x)
 	if idcs is not None:
 		x = ensure_shape(x[idcs])
@@ -40,7 +42,7 @@ def full_forward(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch =
 			y[i] = net(ensure_shape(x[i])).cpu().numpy()
 
 	# Performs reconstruction
-	recontructor = ImageReconstructor()
+	recontructor = ImageReconstructor(logger = Logger("/local_data/reconstrucion.log", "Testing reconstruction using oversampling"))
 	reconst = recontructor.reconstruct_output(y, voids)
 
 	# Stiching and saving
@@ -58,10 +60,9 @@ def full_forward(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch =
 
 if __name__ == "__main__":
 	os.chdir(sys.path[0])
-
-	# Test case
+	
 	net = Net.from_model("saved_data/soren_tog_run/model")
-	full_forward(net, save_paths="local_data/test-forward-pass2.png")
+	full_forward(net, save_paths="saved_data/soren_tog_run/oversampled_full_forward.png", oversample = True)
 
 
 
