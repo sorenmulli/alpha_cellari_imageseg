@@ -1,3 +1,0 @@
-#Tester
-
-print("Running script - ")

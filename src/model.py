@@ -1,5 +1,6 @@
 from os.path import getsize
 
+import json
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -15,11 +16,18 @@ example_architecture = {
 	"probs": 0.25,
 }
 
+CPU = torch.device("cpu")
+GPU = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class Net(nn.Module):
+
+	model_fname = "/model.pt"
+	json_fname = "/architecture.json"
+
 	def __init__(self, architecture_dict, log: Logger=NullLogger()):
 		super().__init__()
 
+		self.architecture_dict = architecture_dict
 		self.log = log
 
 		self.kernel_size = architecture_dict["kernel_size"]
@@ -53,22 +61,31 @@ class Net(nn.Module):
 		x = self.decoder2(x, ind2, size2)
 		x = self.decoder3(x, ind1, size1)
 		x = F.softmax(x, dim=1)
+
 		self.log("Done forwarding. Shape: %s" % (x.shape,))
 
 		return x
 	
-	def save(self, path: str):
+	def save(self, folder: str):
 
-		self.log("Saving model to path %s..." % path)
-		torch.save(self.state_dict(), path)
-		self.log(f"Done saving model. Size: {getsize(path):,} bytes")
+		self.log("Saving model to folder %s..." % folder)
+		model_path = folder + self.model_fname
+		torch.save(self.state_dict(), model_path)
+		with open(folder + self.json_fname, encoding="utf-8") as f:
+			json.dump(self.architecture_dict, f, indent=4)
+		self.log(f"Done saving model. Size: {getsize(model_path):,} bytes")
+	
+	@classmethod
+	def from_model(cls, folder: str, logger: Logger = NullLogger()):
+
+		state_dict = torch.load(folder + cls.model_fname, map_location=GPU)
+		with open(folder + cls.json_fname, encoding="utf-8") as f:
+			architecture_dict = json.load(f)
+		
+		net = Net(architecture_dict, logger)
+		net.load_state_dict(state_dict)
+
+		return net
 
 
 
-
-
-#net = Net(example_architecture)
-#print(net)
-#x = torch.randn(10, 3, 512, 512)
-#net(x)
-#net.save("test_model.pt")

@@ -14,13 +14,15 @@ from model import example_architecture, Net
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class Tester:
+
 	def __init__(self, json_path: str, logger: Logger = NullLogger()):
+
 		self.json_path = json_path
 		with open(json_path, encoding="utf-8") as f:
 			self.cfg = json.load(f)
 		self.log = logger
 
-	def test_model(self, net: Net, loss_fn: callable, output_dir: str = ""):
+	def test_model(self, net: Net, output_dir: str = ""):
 
 		"""
 		Calculates accuracy scores on a net using test images
@@ -32,24 +34,25 @@ class Tester:
 		self.log("Done loading test data\n")
 
 		self.log("Performing forward passes...")
-		output = torch.empty(*test_x.shape).to(test_y.dtype).to(test_y.device)
+		shape = list(test_x.shape)
+		shape[0] = 1
+		output = torch.empty(shape).to(test_y.dtype).to(test_y.device)
+		print(net)
 		with torch.no_grad():
 			net.eval()
 			for i, x in enumerate(test_x):
-				output[i] = net(ensure_shape(x)).squeeze()
-			# print(output.shape)
-			# print(test_y.shape)
-			# loss = float(loss_fn(output, test_y))
-		# self.log("Done performing forward passes. Loss: %.4f\n" % loss)
-		
-		measures = accuracy_measures(test_y, output.argmax(dim=1), is_onehot=False)
-		# measures["loss"] = loss
-		self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n"
-			.format(**measures))
+				print((x==0).sum())
+				output[0] = net(ensure_shape(x)).squeeze()
+				break
+
+		self.log("Done performing forward passes\n")
+		# measures = accuracy_measures(test_y, output.argmax(dim=1), is_onehot=False)
+		# self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n"
+		# 	.format(**measures))
 		
 		self.log("Reconstructing images...")
 		output = output.cpu().numpy()
-		voids = (test_x == 0).all(dim=1).cpu().numpy()
+		voids = (ensure_shape(test_x[0] == 0)).all(dim=1).cpu().numpy()
 		reconstructed = ImageReconstructor(json_path=self.json_path).reconstruct_output(output, voids=voids)
 		self.log("Done reconstructing images\n")
 
@@ -60,13 +63,16 @@ class Tester:
 			for i in range(len(reconstructed)):
 				path = output_dir + "/test-reconst_%i.png" % i
 				space = 20
-				img_arr = np.zeros((reconstructed[i].shape[0], reconstructed[i].shape[1] * 2 + space, reconstructed[i].shape[2]), dtype=np.uint8)
+				img_arr = np.zeros(
+					(reconstructed[i].shape[0], reconstructed[i].shape[1] * 2 + space, reconstructed[i].shape[2]),
+					dtype=np.uint8
+				)
 				img_arr[:, reconstructed[i].shape[1]+space:] = reconstructed[i]
 				img = Image.fromarray(img_arr)
 				img.save(path)
 			self.log("Done saving images and reconstructions\n")
 
-		return measures, reconstructed
+		# return measures, reconstructed
 
 if __name__ == "__main__":
 
@@ -76,7 +82,6 @@ if __name__ == "__main__":
 	log = Logger("logs/test-tester.log", "Testing tester")
 	json_path = "local_data/prep_out.json"
 	tester = Tester(json_path, log)
-	model = Net(example_architecture).to(DEVICE)
-	model.load_state_dict(torch.load("saved_data/soren_tog_run/model.pt"))
-	tester.test_model(model, None, "local_data/test")
+	model = Net.from_model("saved_data/soren_tog_run/model", log)
+	tester.test_model(model, "local_data/test")
 
