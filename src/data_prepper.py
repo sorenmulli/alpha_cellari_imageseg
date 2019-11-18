@@ -106,20 +106,19 @@ def _pad(image, mirror_padding = False, extra_shape = 0):
 	"""
 	Pads an m x n x 3 array on the right and bottom such that images of shape IMAGE_SHAPE fit nicely
 	"""
-	height, width = IMAGE_SHAPE[0] + extra_shape, IMAGE_SHAPE[1] + extra_shape
+
+	height, width, channels = IMAGE_SHAPE[0] + extra_shape, IMAGE_SHAPE[1] + extra_shape, IMAGE_SHAPE[2]
 
 	extra_height = height - image.shape[0] % height
 	extra_width = width - image.shape[1] % width 
 	
 	if mirror_padding: 
 		padded_img = np.pad(image, (extra_height, extra_width), 'reflect')
-
 	else:
 		new_dimensions = (image.shape[0] + extra_height, image.shape[1] + extra_width)
 		padded_shape =  (*new_dimensions, channels) if channels else new_dimensions
 		padded_img = np.zeros(padded_shape)
 		padded_img[:image.shape[0], :image.shape[1]] = image
-	
 	
 	return padded_img
 
@@ -128,8 +127,6 @@ def _split_image(image, channels, large_imgs = True):
 	"""
 	Splits an image into n images of shape IMAGE_SHAPE and returns them as an n_images x height x width x n_channels array
 	"""
-
-	channels = IMAGE_SHAPE[2]
 
 	split_shape = image.shape[0] // IMAGE_SHAPE[0],\
 				image.shape[1] // IMAGE_SHAPE[1]
@@ -141,7 +138,7 @@ def _split_image(image, channels, large_imgs = True):
 	if large_imgs:
 		large_split_dim = (IMAGE_SHAPE[0]+ EXTRA_IMAGE_SIZE, IMAGE_SHAPE[1]+EXTRA_IMAGE_SIZE, channels) if channels else (IMAGE_SHAPE[0]+ EXTRA_IMAGE_SIZE, IMAGE_SHAPE[1]+EXTRA_IMAGE_SIZE)
 		large_split_imgs = np.empty((n_imgs, *large_split_dim))
-		large_image = _pad(image, channels, extra_shape=EXTRA_IMAGE_SIZE // 2)
+		large_image = _pad(image, extra_shape=EXTRA_IMAGE_SIZE // 2)
 
 	else:
 		large_split_imgs = np.empty([1])	
@@ -210,8 +207,8 @@ def _prepare_data():
 	LOG("Done padding images\nShapes: %s\n" % (aerial.shape,))
 
 	LOG("Saving subimages to folder %s" % SUB_PATH)
-	aerial_imgs = _split_image(aerial)[0].astype(np.uint8)
-	target_imgs = _split_image(target)[0].astype(np.uint8)
+	aerial_imgs = _split_image(aerial, IMAGE_SHAPE[2])[0].astype(np.uint8)
+	target_imgs = _split_image(target, IMAGE_SHAPE[2])[0].astype(np.uint8)
 	for i in range(len(aerial_imgs)):
 		Image.fromarray(aerial_imgs[i]).save(SUB_PATH.format(type="aerial", index=i))
 		Image.fromarray(target_imgs[i]).save(SUB_PATH.format(type="target", index=i))
@@ -227,7 +224,7 @@ def _prepare_data():
 
 	LOG("Splitting images...")
 	aerial, split_shape, large_aerial = _split_image(aerial, IMAGE_SHAPE[2])
-	target, _, large_target = _split_image(target, None)
+	target, _, large_target = _split_image(target, None, False)
 	LOG("Done splitting images\nNumber of images: %i\nShapes: %s\n" % (aerial.shape[0], IMAGE_SHAPE))
 
 	LOG("Detecting void images...")
