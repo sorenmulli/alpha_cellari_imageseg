@@ -12,7 +12,7 @@ example_architecture = {
 	"padding": 1, 
 	"stride": 1,
 	"pool_dims": (2, 2), 
-	"probs": 0.5,
+	"probs": 0.25,
 }
 
 
