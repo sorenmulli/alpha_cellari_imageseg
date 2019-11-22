@@ -17,7 +17,8 @@
 % to avoid problems.
 %\RequirePackage{kvoptions-patch}
 \RequirePackage{kvoptions}
-\DeclareStringOption[COMPUTER VISION POWER DISPLAY]{title} % default title
+\DeclareStringOption[Image Segmentation for Classification of Aerial Crop
+Images]{title} % default title
 \DeclareStringOption[Lala]{author}           % default author
 \DeclareStringOption[Subject of the Poster]{subject}  % default subject
 \DeclareStringOption[poster, DTU, LaTex]{keywords}    % default keywords
