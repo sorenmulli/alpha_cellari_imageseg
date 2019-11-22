@@ -13,7 +13,6 @@ from forward_passer import full_forward
 from image_reconstructor import ensure_shape
 from logger import get_timestamp, Logger
 from model import Net
-from test import Tester
 
 
 from matplotlib import pyplot as plt 
@@ -35,7 +34,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 	net = Net(architecture).to(DEVICE)
 
-	criterion = nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=-1)
+	criterion = nn.CrossEntropyLoss(weight = [None, *class_weight_counter(data_loader.train_y)], ignore_index=-1)
 	optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
 
@@ -104,7 +103,7 @@ if __name__ == "__main__":
 		"padding": 1, 
 		"stride": 1,
 		"pool_dims": (2, 2),
-		"probs": 0.1,
+		"probs": 0.25,
 	}
 
 	learning_rate = 2e-4
@@ -116,7 +115,7 @@ if __name__ == "__main__":
 	)
 
 	batch_size = 3
-	epochs = 0
+	epochs = 1
 
 	net = model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 10)
 	full_forward(net, None, True, "local_data/full-forward.png")
