@@ -101,15 +101,25 @@ The data used in this project is one drone image of a field, which is illustrate
 	\caption{}
 	\label{fig:Structure}
 \end{figure}
-
-
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=1\linewidth]{MaxPool}
-%	\caption{}
-%	\label{fig:maxpool}
-%\end{figure}
-
+The architecture of the SegNet has adopted the hourglass shaped encoder-decoder 
+framework. The layers of the decoder and the encoder are symmetrical to one 
+another, as seen in \ref{fig:Structure}. The skip conenctions used are the 
+maxpool indices of the encoder layers. During upsampling, the maxpool indicies 
+from the encoder-layers are used for upsampling in the coresponding 
+decoder-layer. 
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{pool}
+	\label{fig:maxpool}
+\end{figure}
+The encoder part of the network creates a rich feature map representing the image content. The more 
+layers of max-pooling there are the more translation invariance for robust 
+classification can be achieved. The boundary detail is very important when 
+dealing with image segmentation. Hence, capturing boundary information in 
+the feature maps of the encoder before upsampling is important. This can 
+simply be done by storing the whole feature map, but due to memory 
+constrains only the maxpooling indices are saved, which is a good 
+approximation of the feature maps. 
 \begin{figure}
 	\begin{fadebox}\begin{center}
 			\includegraphics[width=\linewidth,origin=c]{loss}
