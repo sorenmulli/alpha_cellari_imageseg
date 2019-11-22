@@ -20,22 +20,25 @@ def baseline_computation(json_path, log, nclasses = 3):
 
 	baseline_pred = int(torch.argmax(torch.unique(data_loader.train_y, return_counts=True)[1]))
 	
-	val_target = data_loader.val_y
+
+
+	train_target = torch.cat((data_loader.val_y, data_loader.train_y), dim = 0)
+	 
 	test_target = data_loader.get_test()[1]
 
-	val_output = torch.zeros((val_target.shape[0], nclasses, val_target.shape[1], val_target.shape[2]))
+	val_output = torch.zeros((train_target.shape[0], nclasses, train_target.shape[1], train_target.shape[2]))
 	test_output = torch.zeros((test_target.shape[0], nclasses, test_target.shape[1], test_target.shape[2]))
 
 	val_output[:, baseline_pred, :, :] = 1
 	test_output[:, baseline_pred, :, :] = 1
 
-	log("Validation accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**evaluation.accuracy_measures(val_target, val_output)))
+	log("Training accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**evaluation.accuracy_measures(train_target, val_output)))
 	log("Test accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**evaluation.accuracy_measures(test_target, test_output)))
 
-	val_loss = criterion(val_output, val_target)
+	val_loss = criterion(val_output, train_target)
 	test_loss = criterion(test_output, test_target)
 
-	log(f"Validation loss: {val_loss:.4}")
+	log(f"Training loss: {val_loss:.4}")
 	log(f"Test loss: {test_loss:.4}")
 if __name__ == "__main__":
 	import sys, os
