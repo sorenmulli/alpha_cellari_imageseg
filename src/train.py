@@ -34,7 +34,7 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 	net = Net(architecture).to(DEVICE)
 
-	criterion = nn.CrossEntropyLoss(weight = [None, *class_weight_counter(data_loader.train_y)], ignore_index=-1)
+	criterion = nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=-1)
 	optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
 
