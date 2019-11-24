@@ -56,6 +56,35 @@
 
 \section{Methods}
 Netværket blev initialiseret
+\\
+\\
+\subsection{Loss function: Quality over quantity}
+Multi-class cross entropy because:
+\begin{itemize}
+	\item Softmax Network: Minus log likelihood
+	\item Can be seen as a classic multiclass classifier -- just on a pixel-by-pixel basis.
+\end{itemize}
+Weighted cross entropy because:
+\begin{itemize}
+	\item Unbalanced class distribution: Network has to learn to focus on important pixels: Don't classify everything as dirt.
+	\item Initial tests made the network behave as the baseline: Simple features in early layers got were not penalized enough and learning was not stable.
+	\item Resampling expensive
+\end{itemize}
+\subsection{Metrics}
+Had to use different metrics because
+\begin{itemize}
+	\item Not agreement in Image Segmentation papers.
+	\item Want to get accuracy on a global scale and on a class scale.
+	\item Different metrics important in different fields.
+\end{itemize}
+The metrics \footnote{https://hal.inria.fr/hal-01581525/document}\footnote{
+http://www.bmva.org/bmvc/2013/Papers/paper0032/paper0032.pdf} 
+\begin{itemize}
+	\item Global accuracy: Trivial and  the most important because of class imbalance but is good for smoothness
+	\item Mean class-wise accuracy: Takes class imbalance into account. Is what is being optimized for in the model.
+	\item Mean Intersect over Union: "Jaccard Index".  Found to be better correlated with human classification though still only \(\approx 0.5\). Favors region smoothness highly and not boundary accuracy.
+	\item Harmonic mean of precision and recall. To compare to others with same project. Penalizes false positives and gives less credit to true negatives thus being better for unbalanced classes.
+\end{itemize}
 
 \section{Results}
 
