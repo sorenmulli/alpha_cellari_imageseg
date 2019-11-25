@@ -6,8 +6,8 @@ import evaluation
 
 def class_weight_counter(y: torch.Tensor):
 	_, counts = torch.unique(y, return_counts = True)
-	partitions = counts.float() / torch.sum(counts)
-	return 1 - partitions
+	partitions = 1 - counts.float() / torch.sum(counts)
+	return partitions[:-1]
 
 def softmax_output_to_prediction(output: torch.Tensor):
 	### Assumes that it receives images of shape: (image #, class #,  height, width)
@@ -16,11 +16,9 @@ def softmax_output_to_prediction(output: torch.Tensor):
 def baseline_computation(json_path, log, nclasses = 3):
 
 	data_loader = DataLoader(json_path, 12)
-	criterion = torch.nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=-1)
+	criterion = torch.nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=3)
 
 	baseline_pred = int(torch.argmax(torch.unique(data_loader.train_y, return_counts=True)[1]))
-	
-
 
 	train_target = torch.cat((data_loader.val_y, data_loader.train_y), dim = 0)
 	 
