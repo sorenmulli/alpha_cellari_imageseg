@@ -127,27 +127,6 @@ The data used in this project is one drone image of a field, which is illustrate
 \texttt{\scriptsize Conv2d}
 \end{equation*}
 
-The encoder part of the network creates a rich feature map representing the image content. The more 
-layers of max-pooling there are the more translation invariance for robust 
-classification can be achieved. The boundary detail is very important when 
-dealing with image segmentation. Hence, capturing boundary information in 
-the feature maps of the encoder before upsampling is important. This can 
-simply be done by storing the whole feature map, but due to memory 
-constrains only the maxpooling indices are saved, which is a good 
-approximation of the feature maps. 
-
-
-Loss of \(N\) pixels in one-hot \((N \times  3)\) matrix \(\mathbf x^pred\) with the true classes \(\mathbf c\).
-\[
-L = \frac 1 N \sum_{i=1}^{N} \mathbf{w}[i, c_i]  \cdot 
-\left( 
--\mathbf x^\text{pred}[i, c_i] + \log
-\left(
-\sum_{j=1}^{3}\exp(\mathbf x^\text{pred}[i, j])
-\right)
-\right)
-\]
-
 \begin{itemize}
 	\item Skip connections
 	\item Feature Maps
