@@ -48,6 +48,7 @@
 %           ]{typeface}
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{enumitem}
+\usepackage{amsmath}
 \setlist{nosep,leftmargin=*}
 %
 % 
@@ -110,7 +111,8 @@ decoder-layer.
 \begin{figure}
 	\centering
 	\begin{fadebox}
-	\includegraphics[width=1\linewidth]{pool}	
+	\includegraphics[width=1\linewidth]{pool}
+	
 	\end{fadebox}
 	\label{fig:maxpool}
 \end{figure}
@@ -122,6 +124,18 @@ the feature maps of the encoder before upsampling is important. This can
 simply be done by storing the whole feature map, but due to memory 
 constrains only the maxpooling indices are saved, which is a good 
 approximation of the feature maps. 
+
+
+Loss of \(N\) pixels in one-hot \((N \times  3)\) matrix \(\mathbf x^pred\) with the true classes \(\mathbf c\).
+\[
+L = \frac 1 N \sum_{i=1}^{N} \mathbf{w}[i, c_i]  \cdot 
+\left( 
+-\mathbf x^\text{pred}[i, c_i] + \log
+\left(
+\sum_{j=1}^{3}\exp(\mathbf x^\text{pred}[i, j])
+\right)
+\right)
+\]
 \begin{figure}
 	\begin{fadebox}\begin{center}
 			\includegraphics[width=\linewidth,origin=c]{loss}
@@ -148,11 +162,13 @@ approximation of the feature maps.
 		\hline
 		\rule[-1ex]{0pt}{2.5ex} Baseline&  33.3 &1.8  &3.4  &33.3  &1.1  &2.2  \\ 
 		
-		\rule[-1ex]{0pt}{2.5ex} Cellari    &  &  &  &  &  &77.7  \\ 
+		\rule[-1ex]{0pt}{2.5ex} U. SC. SegNet    &  &  &  &  &  &95.9  \\ 
+		\rule[-1ex]{0pt}{2.5ex} U. SC. UNet   &  &  &  &  &  &92.9  \\ 
+		\rule[-1ex]{0pt}{2.5ex} Cellari DNN   &  &  &  &  &  &77.7  \\ 
 		\hline 
-		\rule[-1ex]{0pt}{2.5ex} Our Segnet & 96.5&93.6  & 86.9 &97.5  & 90.7  &\textbf{84.6}  \\ 
+		\rule[-1ex]{0pt}{2.5ex} Our SegNet & 96.5&93.6  & 86.9 &97.5  & 90.7  &\textbf{84.6}  \\ 
 	\end{tabular} 
-\caption{Conclusions lala note cellari has not provided more scores}
+\caption{Conclusions lala note cellari has not provided more scores note U. SC. does not have same test set}
 \end{table}
 
 

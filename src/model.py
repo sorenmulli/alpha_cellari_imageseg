@@ -1,4 +1,5 @@
-from os.path import getsize
+from os.path import getsize, exists
+import os 
 
 import json
 import torch
@@ -37,15 +38,15 @@ class Net(nn.Module):
 		self.probs = architecture_dict["probs"]
 
 		self.log("Initializing encoding blocks...")
-		self.encoder1 = EncoderBlock(3, 32, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.encoder2 = EncoderBlock(32, 64, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.encoder3 = EncoderBlock(64, 128, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.encoder1 = EncoderBlock(3, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.encoder2 = EncoderBlock(3, 6, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.encoder3 = EncoderBlock(6, 12, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.log("Done initializing encoding blocks\n")
 
 		self.log("Initializing decoder blocks...")
-		self.decoder1 = DecoderBlock(128, 64,  3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.decoder2 = DecoderBlock(64, 32, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.decoder3 = DecoderBlock(32, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.decoder1 = DecoderBlock(12, 6,  3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.decoder2 = DecoderBlock(6, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.decoder3 = DecoderBlock(3, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.log("Done initializing decoder blocks\n")
 
 	def forward(self, x):
@@ -69,10 +70,15 @@ class Net(nn.Module):
 	def save(self, folder: str):
 
 		self.log("Saving model to folder %s..." % folder)
+		
+		os.makedirs(folder, exist_ok= True )
+
 		model_path = folder + self.model_fname
 		torch.save(self.state_dict(), model_path)
-		with open(folder + self.json_fname, encoding="utf-8") as f:
+		with open(folder + self.json_fname, "w", encoding="utf-8") as f:
 			json.dump(self.architecture_dict, f, indent=4)
+
+
 		self.log(f"Done saving model. Size: {getsize(model_path):,} bytes")
 	
 	@classmethod
