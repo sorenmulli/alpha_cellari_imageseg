@@ -75,11 +75,6 @@
 %===  ... and the rest of the content
 \begin{dtupostercontent}
 \section{Weeds, Crops and Dirt}
- One of the key motivation in choosing to work with deep neural networks, more specifically
- SegNet, is the adaptability of the algorithm as well as the wide application. SegNet can be
- used to segment images to speed up manual work, such as cell assessment by a doctor for
- cancer cells or counting invasive bird species. Using SegNet in autonomous vehicles is also
- highly desirable in order to classify objects such as people, houses, trees etc. In this project SegNet is used to classify crops in arieal drone images. 
  
 \section{The Data: Brazilian Sugar Fields}
 The data used in this project is one drone image of a field, which is illustrated as the following.
@@ -109,7 +104,9 @@ from the encoder-layers are used for upsampling in the coresponding
 decoder-layer. 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\linewidth]{pool}
+	\begin{fadebox}
+	\includegraphics[width=1\linewidth]{pool}	
+	\end{fadebox}
 	\label{fig:maxpool}
 \end{figure}
 The encoder part of the network creates a rich feature map representing the image content. The more 
@@ -137,7 +134,21 @@ approximation of the feature maps.
 
 %%Tabel med metrics 
 %% Gøre vores F1 score fed og skriftstørrelse 100
-
+\begin{table}
+	\begin{tabular}{c|ccc|ccc|}
+		
+		\rule[-1ex]{0pt}{2.5ex}  & \multicolumn{3}{c|}{Train} &  \multicolumn{3}{c|}{Test} \\ 
+		
+		\rule[-1ex]{0pt}{2.5ex} Metric  & G & C & F1 & G & C & F1 \\ 
+		\hline
+		\rule[-1ex]{0pt}{2.5ex} Baseline&  33.3 &1.8  &3.4  &33.3  &1.1  &2.2  \\ 
+		
+		\rule[-1ex]{0pt}{2.5ex} Cellari    &  &  &  &  &  &77.7  \\ 
+		\hline 
+		\rule[-1ex]{0pt}{2.5ex} Our Segnet & 96.5&93.6  & 86.9 &97.5  & 90.7  &\textbf{84.6}  \\ 
+	\end{tabular} 
+\caption{Conclusions lala note cellari has not provided more scores}
+\end{table}
 
 
 
@@ -155,11 +166,17 @@ approximation of the feature maps.
 the coloured background}\label{fig:example}
 \end{figure}
 
+
 \section{Where Can This Go?}
 % Yderligere arbejde
 %Perspektiv på problemet 
 
+\begin{figure}
+	\begin{fadebox}\begin{center}
+			\includegraphics[width=\linewidth,origin=c]{reconst}
+	\end{center}\end{fadebox}
+\end{figure}
+
 
 \end{dtupostercontent}
-
 \end{document}

@@ -5,6 +5,8 @@ from PIL import Image
 import numpy as np
 import torch
 
+from evaluation import accuracy_measures
+
 from data_loader import DataLoader
 from farmors_syning import stitch
 from image_reconstructor import ensure_shape, ImageReconstructor

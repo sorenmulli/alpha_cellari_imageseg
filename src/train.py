@@ -27,7 +27,7 @@ DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cp
 LOG = Logger("logs/training_loop_test.log", "Testing Training Loop")
 
 
-def model_trainer(architecture: dict, learning_rate: float, augmentations: AugmentationConfig,  epochs: int, batch_size: int, val_every: int = 1, with_plot: bool = True):
+def model_trainer(architecture: dict, learning_rate: float, augmentations: AugmentationConfig, epochs: int, batch_size: int, val_every: int = 1, with_plot: bool = True):
 	
 	augmenter = Augmenter(augment_cfg=augmentations)
 	data_loader = DataLoader(JSON_PATH, batch_size, augment = augmenter)

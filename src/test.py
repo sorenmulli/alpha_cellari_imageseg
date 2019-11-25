@@ -31,26 +31,55 @@ class Tester:
 		self.log("Loading test data...")
 		test_x = torch.from_numpy(DataLoader.load(self.cfg["aerial_path"])[self.cfg["test_idcs"]]).to(DEVICE).float()
 		test_y = torch.from_numpy(DataLoader.load(self.cfg["target_path"])[self.cfg["test_idcs"]]).to(DEVICE).long()
+
+		val_x = torch.from_numpy(DataLoader.load(self.cfg["aerial_path"])[self.cfg["val_idcs"]]).to(DEVICE).float()
+		val_y = torch.from_numpy(DataLoader.load(self.cfg["target_path"])[self.cfg["val_idcs"]]).to(DEVICE).long()
+
+		train_x = torch.from_numpy(DataLoader.load(self.cfg["aerial_path"])[self.cfg["train_idcs"]]).to(DEVICE).float()
+		train_y = torch.from_numpy(DataLoader.load(self.cfg["target_path"])[self.cfg["train_idcs"]]).to(DEVICE).long()
+
+		train_x = torch.cat((val_x, train_x), dim = 0)
+		train_y = torch.cat((val_y, train_y), dim = 0)
+
+		del val_x 
+		del val_y 
+
 		self.log("Done loading test data\n")
 
 		self.log("Performing forward passes...")
-		output = torch.empty_like(test_x)
+		test_output = torch.empty_like(test_x)
+		train_output = torch.empty_like(train_x)
 		with torch.no_grad():
 			net.eval()
 			for i, x in enumerate(test_x):
 				log("Forward passing test image %i" % i)
-				output[i] = net(ensure_shape(x)).squeeze()
+				test_output[i] = net(ensure_shape(x)).squeeze()
+			for i, x in enumerate(train_x):
+				log("Forward passing train image %i" % i)
+				train_output[i] = net(ensure_shape(x)).squeeze()
+
 		self.log("Done performing forward passes\n")
 		
-		self.log("Calculating accuracy measures...")
-		measures = accuracy_measures(test_y, output.argmax(dim=1), is_onehot=False)
+		self.log("Calculating train accuracy measures...")
+		train_measures = accuracy_measures(train_y, train_output.argmax(dim=1), is_onehot=False)
 		self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n"
-			.format(**measures))
+			.format(**train_measures))
+
+
+		self.log("Calculating test accuracy measures...")
+		test_measures = accuracy_measures(test_y, test_output.argmax(dim=1), is_onehot=False)
+		self.log("Test accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n"
+			.format(**test_measures))
 		
+		del train_x
+		del train_y
+		del train_output
+		
+
 		self.log("Reconstructing images...")
-		output = output.cpu().numpy()
+		test_output = test_output.cpu().numpy()
 		voids = (test_x == 0).all(dim=1).cpu().numpy()
-		reconstructed = ImageReconstructor(json_path=self.json_path).reconstruct_output(output, voids=voids)
+		reconstructed = ImageReconstructor(json_path=self.json_path).reconstruct_output(test_output, voids=voids)
 		self.log("Done reconstructing images\n")
 
 		# Creating output image with aerial, target, and reconstructed outputs

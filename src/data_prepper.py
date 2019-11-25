@@ -86,8 +86,7 @@ def _target_index(image):
 
 	# As red, green, and yellow are 100, 010, and 110 respectively, they can be interpreted as binary numbers in reverse
 	# Multiplication with powers of 2 happens along the last axis and transforms them into decimal base
-	# Subtract one, as voids are -1
-	image = image @ np.array([1,2,4]) - 1
+	image = image @ np.array([1,2,4])
 	
 	return image
 
