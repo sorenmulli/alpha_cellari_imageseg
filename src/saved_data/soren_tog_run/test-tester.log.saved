@@ -1,0 +1,44 @@
+2019-11-22 13:50:23.454833	Testing tester
+
+2019-11-22 13:50:23.514795	Loading test data...
+2019-11-22 13:50:24.270595	Done loading test data
+
+2019-11-22 13:50:24.270807	Performing forward passes...
+2019-11-22 13:50:24.271594	Forward passing test image 0
+2019-11-22 13:50:25.368422	Forward passing test image 1
+2019-11-22 13:50:26.147965	Forward passing test image 2
+2019-11-22 13:50:26.899856	Forward passing test image 3
+2019-11-22 13:50:27.656683	Forward passing test image 4
+2019-11-22 13:50:28.387293	Forward passing test image 5
+2019-11-22 13:50:29.128788	Forward passing test image 6
+2019-11-22 13:50:29.932744	Forward passing test image 7
+2019-11-22 13:50:30.760732	Forward passing test image 8
+2019-11-22 13:50:31.531670	Forward passing test image 9
+2019-11-22 13:50:32.552749	Forward passing test image 10
+2019-11-22 13:50:33.479332	Forward passing test image 11
+2019-11-22 13:50:34.338950	Forward passing test image 12
+2019-11-22 13:50:35.108435	Forward passing test image 13
+2019-11-22 13:50:36.090397	Forward passing test image 14
+2019-11-22 13:50:37.415535	Forward passing test image 15
+2019-11-22 13:50:38.497269	Forward passing test image 16
+2019-11-22 13:50:39.393500	Forward passing test image 17
+2019-11-22 13:50:40.185412	Forward passing test image 18
+2019-11-22 13:50:40.950150	Forward passing test image 19
+2019-11-22 13:50:41.780270	Forward passing test image 20
+2019-11-22 13:50:42.568386	Forward passing test image 21
+2019-11-22 13:50:43.295045	Forward passing test image 22
+2019-11-22 13:50:44.051700	Forward passing test image 23
+2019-11-22 13:50:44.853737	Done performing forward passes
+
+2019-11-22 13:50:44.853909	Calculating accuracy measures...
+2019-11-22 13:50:49.481083	Accuracy measures: Global acc.: 0.9745
+                          	Class acc.: 0.9068
+                          	Mean IoU.: 0.7472
+                          	Bound. F1: 0.8457
+
+2019-11-22 13:50:49.481254	Reconstructing images...
+2019-11-22 13:50:49.957756	Done reconstructing images
+
+2019-11-22 13:50:49.958088	Saving test images and reconstructions to directory local_data/test...
+2019-11-22 13:50:52.804118	Done saving images and reconstructions
+
