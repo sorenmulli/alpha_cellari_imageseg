@@ -6,7 +6,7 @@ import evaluation
 
 def class_weight_counter(y: torch.Tensor):
 	_, counts = torch.unique(y, return_counts = True)
-	partitions = counts.float() / torch.sum(counts)
+	partitions = 1- counts.float() / torch.sum(counts)
 	return partitions[:-1]
 
 def softmax_output_to_prediction(output: torch.Tensor):
