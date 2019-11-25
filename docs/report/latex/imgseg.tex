@@ -112,7 +112,7 @@ Regularization
 Hyperparameters
 \begin{itemize}
 	\item Adaptive learning rate from ADAM optimizer, initialized at $ 2\ctp{-4} $
-	\item Total: 26 conv + batchnorm + ReLU, 5 pool/upsample, 1 softmax
+	\item Total: 26 conv + batchnorm + ReLU with dropdown, 5 pool/upsample, 1 softmax
 	\item 14.7 M parameters in encoder -- significantly lower than 134 M in VGG16 because of no fully-connected layers
 	\item Kernel size: $ 3\times 3 $, stride 1, maxpool: $ 2\times 2 $, stride 2
 	\item Corresponding padding of 1 to prevent reduction of image size
