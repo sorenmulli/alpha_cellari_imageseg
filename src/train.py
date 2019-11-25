@@ -34,9 +34,8 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 
 	net = Net(architecture).to(DEVICE)
 
-	criterion = nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=-1)
+	criterion = nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=3)
 	optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
-
 
 	LOG(f"Train size: {len(data_loader.train_x)}\nEval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}\n")
 	LOG(f"Neural network information\n\t{net}")
@@ -45,7 +44,6 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 	train_iter = list()
 	valid_iter = list()
 
-	
 	for epoch_idx in range(epochs):
 		if epoch_idx % val_every == 0:
 			with torch.no_grad():
