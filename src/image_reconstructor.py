@@ -110,7 +110,7 @@ class ImageReconstructor:
 		red = np.array([255, 0, 0], dtype=np.uint8)
 		green = np.array([0, 255, 0], dtype=np.uint8)
 		yellow = np.array([255, 255, 0], dtype=np.uint8)
-		black = np.array([0, 0, 0], dtype=np.uint8)
+		black = np.array([245, 244, 244], dtype=np.uint8)
 
 		self.log("Determining classes and inserting colours...")
 		classes = np.argmax(output, axis=3)

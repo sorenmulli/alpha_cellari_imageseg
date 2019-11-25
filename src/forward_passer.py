@@ -15,7 +15,6 @@ from logger import Logger
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# TODO: Mere sigende navn
 def full_forward(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch = True, save_paths = None, oversample = True):
 
 	"""
