@@ -75,11 +75,12 @@
 %===  ... and the rest of the content
 \begin{dtupostercontent}
 \section{Weeds, Crops and Dirt}
- One of the key motivation in choosing to work with deep neural networks, more specifically
- SegNet, is the adaptability of the algorithm as well as the wide application. SegNet can be
- used to segment images to speed up manual work, such as cell assessment by a doctor for
- cancer cells or counting invasive bird species. Using SegNet in autonomous vehicles is also
- highly desirable in order to classify objects such as people, houses, trees etc. In this project SegNet is used to classify crops in arieal drone images. 
+
+\begin{itemize}
+	\item Motivation
+	
+	\item In this presentation
+\end{itemize}
  
 \section{The Data: Brazilian Sugar Fields}
 The data used in this project is one drone image of a field, which is illustrated as the following.
@@ -101,27 +102,22 @@ The data used in this project is one drone image of a field, which is illustrate
 	\caption{}
 	\label{fig:Structure}
 \end{figure}
-The architecture of the SegNet has adopted the hourglass shaped encoder-decoder 
-framework. The layers of the decoder and the encoder are symmetrical to one 
-another, as seen in \ref{fig:Structure}. The skip conenctions used are the 
-maxpool indices of the encoder layers. During upsampling, the maxpool indicies 
-from the encoder-layers are used for upsampling in the coresponding 
-decoder-layer. 
+ 
 \begin{figure}
 	\centering
 	\begin{fadebox}
-	\includegraphics[width=1\linewidth]{pool}	
+	\includegraphics[width=1\linewidth]{pool}
+	
 	\end{fadebox}
 	\label{fig:maxpool}
 \end{figure}
-The encoder part of the network creates a rich feature map representing the image content. The more 
-layers of max-pooling there are the more translation invariance for robust 
-classification can be achieved. The boundary detail is very important when 
-dealing with image segmentation. Hence, capturing boundary information in 
-the feature maps of the encoder before upsampling is important. This can 
-simply be done by storing the whole feature map, but due to memory 
-constrains only the maxpooling indices are saved, which is a good 
-approximation of the feature maps. 
+
+\begin{itemize}
+	\item Skip connections
+	\item Max-pool
+\end{itemize}
+
+
 \begin{figure}
 	\begin{fadebox}\begin{center}
 			\includegraphics[width=\linewidth,origin=c]{loss}
