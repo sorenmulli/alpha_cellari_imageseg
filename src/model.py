@@ -81,7 +81,7 @@ class Net(nn.Module):
 
 		self.log("Saving model to folder %s..." % folder)
 		
-		os.makedirs(folder, exist_ok= True )
+		os.makedirs(folder, exist_ok = True)
 
 		model_path = folder + self.model_fname
 		torch.save(self.state_dict(), model_path)
