@@ -75,6 +75,12 @@
 %===  ... and the rest of the content
 \begin{dtupostercontent}
 \section{Weeds, Crops and Dirt}
+
+\begin{itemize}
+	\item Motivation
+	
+	\item In this presentation
+\end{itemize}
  
 \section{The Data: Brazilian Sugar Fields}
 The data used in this project is one drone image of a field, which is illustrated as the following.
@@ -105,10 +111,17 @@ decoder-layer.
 \begin{figure}
 	\centering
 	\begin{fadebox}
-	\includegraphics[width=1\linewidth]{pool}	
+	\includegraphics[width=1\linewidth]{pool}
+	
 	\end{fadebox}
 	\label{fig:maxpool}
 \end{figure}
+
+\begin{itemize}
+	\item Skip connections
+	\item Max-pool
+\end{itemize}
+
 The encoder part of the network creates a rich feature map representing the image content. The more 
 layers of max-pooling there are the more translation invariance for robust 
 classification can be achieved. The boundary detail is very important when 
