@@ -210,7 +210,7 @@ def _prepare_data():
 
 	LOG("Squeezing target images to single channel...")
 	target = _target_index(target)
-	LOG("Done creating target values. %s\nVoid:\t-1\nRed:\t0\nGreen:\t1\nYellow:\t2\n" % (target.shape,))
+	LOG("Done creating target values. %s\nRed:\t0\nGreen:\t1\nYellow:\t2\nVoid:\t3\n" % (target.shape,))
 
 	LOG("Splitting images...")
 	aerial, split_shape, large_aerial = _split_image(aerial, IMAGE_SHAPE[2])
