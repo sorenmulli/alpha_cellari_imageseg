@@ -20,7 +20,7 @@ def accuracy_measures(
 		y_pred_tensor = softmax_output_to_prediction(y_pred_tensor)
 	
 	y_true, y_pred = y_true_tensor.flatten().detach().cpu().numpy(), y_pred_tensor.flatten().detach().cpu().numpy()
-	voids = y_true == -1
+	voids = y_true == 3
 	y_true, y_pred = y_true[~voids], y_pred[~voids]
 	
 	conf_matrix = confusion_matrix(y_true, y_pred)
