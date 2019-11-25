@@ -52,10 +52,10 @@ class Tester:
 		with torch.no_grad():
 			net.eval()
 			for i, x in enumerate(test_x):
-				log("Forward passing test image %i" % i)
+				self.log("Forward passing test image %i" % i)
 				test_output[i] = net(ensure_shape(x)).squeeze()
 			for i, x in enumerate(train_x):
-				log("Forward passing train image %i" % i)
+				self.log("Forward passing train image %i" % i)
 				train_output[i] = net(ensure_shape(x)).squeeze()
 
 		self.log("Done performing forward passes\n")
