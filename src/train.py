@@ -58,7 +58,8 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 				evalution_loss = criterion(val_output, val_target)
 				
 				full_eval_loss.append(float(evalution_loss))
-
+				del val_data
+				del val_target
 				LOG(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
 
 				#Overwrite name 
@@ -66,12 +67,16 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 				val_output = net(val_data)
 
 				training_loss = criterion(val_output, val_target)
-				
 				full_training_loss.append(float(training_loss))
+				del val_data
+				del val_target
 
 				LOG(f"Epoch {epoch_idx}: Training loss:   {float(training_loss)}\n")
 				
 				val_iter.append(epoch_idx)
+
+				torch.cuda.empty_cache()
+				
 		if with_accuracies_print:
 			LOG("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, val_output)))
 
