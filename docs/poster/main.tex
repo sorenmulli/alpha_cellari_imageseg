@@ -101,14 +101,27 @@ The data used in this project is one drone image of a field, which is illustrate
 	\caption{}
 	\label{fig:Structure}
 \end{figure}
-
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=1\linewidth]{MaxPool}
-%	\caption{}
-%	\label{fig:maxpool}
-%\end{figure}
-
+The architecture of the SegNet has adopted the hourglass shaped encoder-decoder 
+framework. The layers of the decoder and the encoder are symmetrical to one 
+another, as seen in \ref{fig:Structure}. The skip conenctions used are the 
+maxpool indices of the encoder layers. During upsampling, the maxpool indicies 
+from the encoder-layers are used for upsampling in the coresponding 
+decoder-layer. 
+\begin{figure}
+	\centering
+	\begin{fadebox}
+	\includegraphics[width=1\linewidth]{pool}	
+	\end{fadebox}
+	\label{fig:maxpool}
+\end{figure}
+The encoder part of the network creates a rich feature map representing the image content. The more 
+layers of max-pooling there are the more translation invariance for robust 
+classification can be achieved. The boundary detail is very important when 
+dealing with image segmentation. Hence, capturing boundary information in 
+the feature maps of the encoder before upsampling is important. This can 
+simply be done by storing the whole feature map, but due to memory 
+constrains only the maxpooling indices are saved, which is a good 
+approximation of the feature maps. 
 \begin{figure}
 	\begin{fadebox}\begin{center}
 			\includegraphics[width=\linewidth,origin=c]{loss}
@@ -126,7 +139,21 @@ The data used in this project is one drone image of a field, which is illustrate
 
 %%Tabel med metrics 
 %% Gøre vores F1 score fed og skriftstørrelse 100
-
+\begin{table}
+	\begin{tabular}{c|ccc|ccc|}
+		
+		\rule[-1ex]{0pt}{2.5ex}  & \multicolumn{3}{c|}{Train} &  \multicolumn{3}{c|}{Test} \\ 
+		
+		\rule[-1ex]{0pt}{2.5ex} Metric  & G & C & F1 & G & C & F1 \\ 
+		\hline
+		\rule[-1ex]{0pt}{2.5ex} Baseline&  33.3 &1.8  &3.4  &33.3  &1.1  &2.2  \\ 
+		
+		\rule[-1ex]{0pt}{2.5ex} Cellari    &  &  &  &  &  &77.7  \\ 
+		\hline 
+		\rule[-1ex]{0pt}{2.5ex} Our Segnet & 96.5&93.6  & 86.9 &97.5  & 90.7  &\textbf{84.6}  \\ 
+	\end{tabular} 
+\caption{Conclusions lala note cellari has not provided more scores}
+\end{table}
 
 
 
@@ -144,11 +171,17 @@ The data used in this project is one drone image of a field, which is illustrate
 the coloured background}\label{fig:example}
 \end{figure}
 
+
 \section{Where Can This Go?}
 % Yderligere arbejde
 %Perspektiv på problemet 
 
+\begin{figure}
+	\begin{fadebox}\begin{center}
+			\includegraphics[width=\linewidth,origin=c]{reconst}
+	\end{center}\end{fadebox}
+\end{figure}
+
 
 \end{dtupostercontent}
-
 \end{document}

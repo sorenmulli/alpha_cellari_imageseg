@@ -59,6 +59,66 @@ Our data consist of one large, high resolution orthomosaic photo of a sugar cane
 
 \section{Methods}
 Netværket blev initialiseret
+\\
+\\
+\subsection{Loss function: Quality over quantity}
+Multi-class cross entropy because:
+\begin{itemize}
+	\item Softmax Network: Minus log likelihood
+	\item Can be seen as a classic multiclass classifier -- just on a pixel-by-pixel basis.
+\end{itemize}
+Weighted cross entropy because:
+\begin{itemize}
+	\item Unbalanced class distribution: Network has to learn to focus on important pixels: Don't classify everything as dirt.
+	\item Initial tests made the network behave as the baseline: Simple features in early layers got were not penalized enough and learning was not stable.
+	\item Resampling expensive
+\end{itemize}
+\subsection{Metrics}
+Had to use different metrics because
+\begin{itemize}
+	\item Not agreement in Image Segmentation papers.
+	\item Want to get accuracy on a global scale and on a class scale.
+	\item Different metrics important in different fields.
+\end{itemize}
+The metrics \footnote{https://hal.inria.fr/hal-01581525/document}\footnote{
+http://www.bmva.org/bmvc/2013/Papers/paper0032/paper0032.pdf} 
+\begin{itemize}
+	\item Global accuracy: Trivial and  the most important because of class imbalance but is good for smoothness
+	\item Mean class-wise accuracy: Takes class imbalance into account. Is what is being optimized for in the model.
+	\item Mean Intersect over Union: "Jaccard Index".  Found to be better correlated with human classification though still only \(\approx 0.5\). Favours region smoothness highly and not boundary accuracy.
+	\item Harmonic mean of precision and recall. To compare to others with same project. Penalizes false positives and gives less credit to true negatives thus being better for unbalanced classes.
+\end{itemize}
+
+\subsection{Regularization and Hyperparameters}
+Regularization
+\begin{itemize}
+	\item NN's are prone to overfitting, because they are so flexible
+	\item Prevent overfitting $ \to $ better results on test data
+	\item Three methods
+	\item Dropout: Randomly remove nodes to increase variability. $ p=25\pro $
+	\item Data augmentation: Increase size of dataset
+	\begin{itemize}
+		\item Crop each $ 512\times 512 $ to random $ 250\times 250 $
+		\item 50\pro chance of flip T/D and 50\pro chance of flip L/R
+	\end{itemize}
+	\item Batch normalization
+	\begin{itemize}
+		\item Faster convergence
+		\item Prevents ReLU from not learning
+		\item Introduces noise
+		\item Reduces vanishing/exploding gradient problem, as values stay close to 0
+	\end{itemize}
+\end{itemize}
+Hyperparameters
+\begin{itemize}
+	\item Adaptive learning rate from ADAM optimizer, initialized at $ 2\ctp{-4} $
+	\item Total: 26 conv + batchnorm + ReLU, 5 pool/upsample, 1 softmax
+	\item 14.7 M parameters in encoder -- significantly lower than 134 M in VGG16 because of no fully-connected layers
+	\item Kernel size: $ 3\times 3 $, stride 1, maxpool: $ 2\times 2 $, stride 2
+	\item Corresponding padding of 1 to prevent reduction of image size
+\end{itemize}
+\texttt{https://www.analyticsvidhya.com/blog/2018/04/fundamentals-deep-learning-regularization-techniques/}\\
+\texttt{https://medium.com/deeper-learning/glossary-of-deep-learning-batch-normalisation-8266dcd2fa82}
 
 
 \subsection{Unification of cropped image predictions}
