@@ -104,14 +104,14 @@ The data used in this project is one drone image of a field, which is illustrate
 	\label{fig:Structure}
 \end{figure}
  
-\begin{figure}
-	\centering
-	\begin{fadebox}
-	\includegraphics[width=1\linewidth]{pool}
-	
-	\end{fadebox}
-	\label{fig:maxpool}
-\end{figure}
+\begin{equation*}\label{key}
+\scriptsize
+\begin{bmatrix}a&b\\c&d\end{bmatrix} \xrightarrow{\text{\scriptsize M. pool indices}}
+\begin{bmatrix}0&0&0&a\\b&0&0&0\\0&c&0&0\\0&0&d&0\end{bmatrix} 
+\rightarrow 
+\texttt{\scriptsize Conv2d}
+\end{equation*}
+
 The encoder part of the network creates a rich feature map representing the image content. The more 
 layers of max-pooling there are the more translation invariance for robust 
 classification can be achieved. The boundary detail is very important when 
