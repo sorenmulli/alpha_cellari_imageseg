@@ -110,7 +110,7 @@ class ImageReconstructor:
 		red = np.array([255, 0, 0], dtype=np.uint8)
 		green = np.array([0, 255, 0], dtype=np.uint8)
 		yellow = np.array([255, 255, 0], dtype=np.uint8)
-		black = np.array([245, 244, 244], dtype=np.uint8)
+		bg = np.array([245, 244, 244], dtype=np.uint8)
 
 		self.log("Determining classes and inserting colours...")
 		classes = np.argmax(output, axis=3)
@@ -120,7 +120,7 @@ class ImageReconstructor:
 		reconst[classes==2] = yellow
 		if voids is not None:
 			self.log("Setting void pixels to black...")
-			reconst[voids] = black
+			reconst[voids] = bg
 		self.log("Done determining classes and inserting colours\n")
 
 		self.log("Showing %i images\n" % len(show))
