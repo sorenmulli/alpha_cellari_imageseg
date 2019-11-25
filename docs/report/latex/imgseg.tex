@@ -60,7 +60,20 @@ cancer cells or counting invasive bird species. Using SegNet in autonomous vehic
 highly desirable in order to classify objects such as people, houses, trees etc. In this project SegNet is used to classify crops in arieal drone images. 
 
 \section{Methods}
-Netværket blev initialiseret
+\subsection{Architecture}
+The architecture of the SegNet has adopted the hourglass shaped encoder-decoder 
+framework. The layers of the decoder and the encoder are symmetrical to one 
+another, as seen in \ref{fig:Structure}. The skip conenctions used are the 
+maxpool indices of the encoder layers. During upsampling, the maxpool indicies 
+from the encoder-layers are used for upsampling in the coresponding 
+decoder-layer. The encoder part of the network creates a rich feature map representing the image content. 
+
+\subsection{Skip Connections and Max-pool}
+The more layers of max-pooling there are the more translation invariance for robust classification can be achieved. The boundary detail is very important when dealing with image segmentation. Hence, capturing boundary information in the feature maps of the encoder before upsampling is important. This can 
+simply be done by storing the whole feature map, but due to memory 
+constrains only the maxpooling indices are saved, which is a good 
+approximation of the feature maps. 
+
 \\
 \\
 \subsection{Loss function: Quality over quantity}
