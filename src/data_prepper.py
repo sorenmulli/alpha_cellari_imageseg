@@ -86,7 +86,8 @@ def _target_index(image):
 
 	# As red, green, and yellow are 100, 010, and 110 respectively, they can be interpreted as binary numbers in reverse
 	# Multiplication with powers of 2 happens along the last axis and transforms them into decimal base
-	image = image @ np.array([1,2,4])
+	image = image @ np.array([1,2,4]) - 1
+	image[image == -1] = 3
 	
 	return image
 
@@ -209,7 +210,7 @@ def _prepare_data():
 
 	LOG("Squeezing target images to single channel...")
 	target = _target_index(target)
-	LOG("Done creating target values. %s\nVoid:\t-1\nRed:\t0\nGreen:\t1\nYellow:\t2\n" % (target.shape,))
+	LOG("Done creating target values. %s\nRed:\t0\nGreen:\t1\nYellow:\t2\nVoid:\t3\n" % (target.shape,))
 
 	LOG("Splitting images...")
 	aerial, split_shape, large_aerial = _split_image(aerial, IMAGE_SHAPE[2])

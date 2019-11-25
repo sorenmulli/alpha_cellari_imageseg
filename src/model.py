@@ -1,4 +1,5 @@
-from os.path import getsize
+from os.path import getsize, exists
+import os 
 
 import json
 import torch
@@ -79,10 +80,15 @@ class Net(nn.Module):
 	def save(self, folder: str):
 
 		self.log("Saving model to folder %s..." % folder)
+		
+		os.makedirs(folder, exist_ok = True)
+
 		model_path = folder + self.model_fname
 		torch.save(self.state_dict(), model_path)
-		with open(folder + self.json_fname, encoding="utf-8") as f:
+		with open(folder + self.json_fname, "w", encoding="utf-8") as f:
 			json.dump(self.architecture_dict, f, indent=4)
+
+
 		self.log(f"Done saving model. Size: {getsize(model_path):,} bytes")
 	
 	@classmethod
