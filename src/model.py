@@ -88,7 +88,6 @@ class Net(nn.Module):
 		with open(folder + self.json_fname, "w", encoding="utf-8") as f:
 			json.dump(self.architecture_dict, f, indent=4)
 
-
 		self.log(f"Done saving model. Size: {getsize(model_path):,} bytes")
 	
 	@classmethod

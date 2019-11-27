@@ -99,7 +99,7 @@ class Tester:
 				img_arr = np.ones(
 					(reconstructed[i].shape[0], reconstructed[i].shape[1] * 3 + space * 2, reconstructed[i].shape[2]),
 					dtype=np.uint8
-				) * 255
+				) * 244
 				img_arr[:, :shape[1]] = aerial  # Inserting aerial image
 				img_arr[:, shape[1]+space:shape[1]*2+space] = target  # Inserting ground truth
 				img_arr[:, shape[1]*2+space*2:] = reconstructed[i]  # Inserting reconstructed output
@@ -117,6 +117,6 @@ if __name__ == "__main__":
 	log = Logger("logs/test-tester.log", "Testing tester")
 	json_path = "local_data/prep_out.json"
 	tester = Tester(json_path, log)
-	model = Net.from_model("saved_data/soren_tog_run/model")
+	model = Net.from_model("saved_data/soren_big_run/model")
 	tester.test_model(model, "local_data/test")
 
