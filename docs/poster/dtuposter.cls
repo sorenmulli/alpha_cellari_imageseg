@@ -145,12 +145,12 @@
 %\newlength{\bgheight}%
 %\setlength{\bgheight}{\dtuposter@tmp pt * 0}
 %\addtolength{\bgheight}{\paperheight}
-%
+
 \FPmul\dtuposter@tmp{ 120}{\dtuposter@sizeratio}
 \newlength{\bgfirstline}%
 \setlength{\bgfirstline}{\dtuposter@tmp mm}
 \stdout{background first line: \dtuposter@tmp mm}
-\FPmul\dtuposter@tmp{1080}{\dtuposter@sizeratio}
+\FPmul\dtuposter@tmp{1150}{\dtuposter@sizeratio}
 \newlength{\bgsecondline}%
 \setlength{\bgsecondline}{\dtuposter@tmp mm}
 \stdout{background second line: \dtuposter@tmp mm}
@@ -352,10 +352,10 @@
 		      \filldraw[inner sep=0pt,color=\dtuposter@bgcolor]    (\bgmarginleftright,-\bgfirstline) rectangle (\paperwidth-\bgmarginleftright,-\bgfirstline-\bglinewidth); %
 		      \filldraw[inner sep=0pt,color=\dtuposter@bgcolor]    (\bgmarginleftright,-\bgsecondline) rectangle (\paperwidth-\bgmarginleftright,-\bgsecondline-\bglinewidth); %
 		      %
-		      \draw (1\textmarginleftright+0\footerimagewidth,-\footerimagetop) node[inner sep=0pt, below right] {\includegraphics[width=\footerimagewidth]{\dtuposter@botlogo}}; %
-		      \draw (2\textmarginleftright+1\footerimagewidth,-\footerimagetop) node[inner sep=0pt, below right] {\includegraphics[width=\footerimagewidth]{\dtuposter@botlogo}}; %
-		      \draw (3\textmarginleftright+2\footerimagewidth,-\footerimagetop) node[inner sep=0pt, below right] {\includegraphics[width=\footerimagewidth]{\dtuposter@botlogo}}; %
-		      \draw (4\textmarginleftright+3\footerimagewidth,-\footerimagetop) node[inner sep=0pt, below right] {\includegraphics[width=\footerimagewidth]{\dtuposter@botlogo}}; %
+		      %\draw (1\textmarginleftright+0\footerimagewidth,-\footerimagetop) node[inner %sep=0pt, below right] %{\includegraphics[width=\footerimagewidth]{\dtuposter@botlogo}}; %
+		      %\draw (2\textmarginleftright+1\footerimagewidth,-\footerimagetop) node[inner %sep=0pt, below right] %{\includegraphics[width=\footerimagewidth]{\dtuposter@botlogo}}; %
+		      %\draw (3\textmarginleftright+2\footerimagewidth,-\footerimagetop) node[inner %sep=0pt, below right] %{\includegraphics[width=\footerimagewidth]{\dtuposter@botlogo}}; %
+		      %\draw (4\textmarginleftright+3\footerimagewidth,-\footerimagetop) node[inner %sep=0pt, below right] %{\includegraphics[width=\footerimagewidth]{\dtuposter@botlogo}}; %
 	      \end{tikzpicture} %
 	    }; %
     \end{pgfonlayer} %
