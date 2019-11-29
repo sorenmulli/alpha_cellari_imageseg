@@ -76,10 +76,12 @@
 %======================================================================
 %===  ... and the rest of the content
 \begin{dtupostercontent}
-\section{The Story to be Told}
+\section{The Problem to be Solved}
 
-Farmers, and later, biologists, have spent centuries manually seperating crops from weeds to optimize the year's harvest. Agriculture can be made more efficient by using automization to seperate the crops from the weeds and the dirt. \\
-On this poster, you can expect to learn about the implementation of SegNet for pixelwise crop classification on a drone image. The results of this implementation is also shown as well as the problems with such data and what can be done to improve it for future implementations
+Farmers, and later, biologists, have spent centuries manually seperating crops from weeds to optimize the year's harvest and minimize the amount of pesticides. This agricultural task can be made more efficient by using automatization to separate the crops from the weeds and the dirt.
+\\
+\\
+\indent On this poster, you can expect to learn about the implementation of SegNet for pixelwise crop classification on a drone image. The results of this implementation is also shown as well as the problems with such data and what can be done to improve it for future implementations.
  
 \section{The Data: Brazilian Sugar Fields}
 The data used in this project is one drone image of a field, which is illustrated as the following.
@@ -197,7 +199,7 @@ For training, the Adam algorithm was used and for \textbf{regularization}, the d
 \begin{itemize}
 	\item Inference is performed on smaller images for practical reasons.
 	\item Quality of predictions near borders are bad, our solution is to add padding and cut away border predictions.
-	\item This results in a smooth unified field prediction, when the smaller images are stitched .
+	\item This results in a smooth unified field prediction when the smaller images are stitched.
 \end{itemize}
 %Kort beskrivelse af resultater 
 
@@ -227,7 +229,7 @@ For training, the Adam algorithm was used and for \textbf{regularization}, the d
 \begin{itemize}
 	\item Complications with the task of image segmentation is the limited amount of data available. 
 	\item More data and more advanced data augmentation can lead to a more generalizable and robust model.
-	\item Can lead to an algorithm that can indentify crops and weed on a field and aid farmers in their work. 
+	\item Can lead to an algorithm that can identify crops and weed on a field and aid farmers in their work. 
 \end{itemize}
 
 \begin{thebibliography}{9}
