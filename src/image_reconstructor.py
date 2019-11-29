@@ -119,7 +119,7 @@ class ImageReconstructor:
 		reconst[classes==1] = green
 		reconst[classes==2] = yellow
 		if voids is not None:
-			self.log("Setting void pixels to black...")
+			self.log("Setting void pixels to paper colour...")
 			reconst[voids] = bg
 		self.log("Done determining classes and inserting colours\n")
 

@@ -68,18 +68,6 @@ the feature maps of the encoder before upsampling is important. This can
 simply be done by storing the whole feature map, but due to memory 
 constrains only the maxpooling indices are saved, which is a good 
 approximation of the feature maps. 
-
-
-Loss of \(N\) pixels in one-hot \((N \times  3)\) matrix \(\mathbf x^pred\) with the true classes \(\mathbf c\).
-\[
-L = \frac 1 N \sum_{i=1}^{N} \mathbf{w}[i, c_i]  \cdot 
-\left( 
--\mathbf x^\text{pred}[i, c_i] + \log
-\left(
-\sum_{j=1}^{3}\exp(\mathbf x^\text{pred}[i, j])
-\right)
-\right)
-\]
 \\
 \\
 \subsection{Loss function: Quality over quantity}

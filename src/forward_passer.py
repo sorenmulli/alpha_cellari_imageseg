@@ -64,8 +64,8 @@ def full_forward(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch =
 if __name__ == "__main__":
 	os.chdir(sys.path[0])
 	
-	net = Net.from_model("saved_data/soren_tog_run/model")
-	full_forward(net, save_paths="saved_data/soren_tog_run/oversampled_full_forward.png", oversample = True)
+	net = Net.from_model("saved_data/soren_big_run/model")
+	full_forward(net, save_paths="saved_data/soren_big_run/oversampled_full_forward.png", oversample = True)
 
 
 
