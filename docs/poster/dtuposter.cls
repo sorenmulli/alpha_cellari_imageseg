@@ -17,8 +17,7 @@
 % to avoid problems.
 %\RequirePackage{kvoptions-patch}
 \RequirePackage{kvoptions}
-\DeclareStringOption[Image Segmentation for Classification of Aerial Crop
-Images]{title} % default title
+\DeclareStringOption[title]{title} % default title
 \DeclareStringOption[Lala]{author}           % default author
 \DeclareStringOption[Subject of the Poster]{subject}  % default subject
 \DeclareStringOption[poster, DTU, LaTex]{keywords}    % default keywords
@@ -298,7 +297,7 @@ Images]{title} % default title
   \ifdtuposter@longtitle%
     \setkomafont{title}{       \normalfont\dtuposter@fs{100}{120}{1}\bfseries\color{\dtuposter@highlight}} % used with title
   \else
-    \setkomafont{title}{       \normalfont\dtuposter@fs{160}{170}{1}\bfseries\color{\dtuposter@highlight}} % used with title
+    \setkomafont{title}{       \normalfont\dtuposter@fs{300}{310}{1}\bfseries\color{\dtuposter@highlight}} % used with title
   \fi
   \setkomafont{minisec}{     \normalfont\dtuposter@fs{ 60}{ 70}{1}\bfseries} % used for authors
   \setkomafont{dictum}{      \normalfont\dtuposter@fs{ 48}{ 60}{1}} % used for affiliation
