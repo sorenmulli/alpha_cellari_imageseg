@@ -92,9 +92,8 @@ The data used in this project is one drone image of a field, which is illustrate
 \begin{itemize}
 	\item Labelling of the field is performed by biologist into 3 categories: crops, weeds and soil.
 	\item The goal of our project is to train a neural network that can perform a pixelwise classification on a field.
-	\item Augmentation techniques has been used to expand our data set.
 \end{itemize}
-
+\subparagraph{Data Augmentation} was used with random croppings to 256x256 images and \(50 \%\) chances of flipping the image both horizontally and vertically as a method for regularization and expanding the limited data set.
 \section{Our SegNet: 5760 Feature Maps}
 
 
@@ -146,6 +145,7 @@ _{\mathclap{\text{Class weight}}}
 {\sum_{j=1}^{3}\exp\mathbf x^\text{pred}[i, j]}
 }_{\mathclap{\text{3-class cross entropy}}}
 \]
+For training, the Adam algorithm was used and for \textbf{regularization}, the dropout method was used on each layer discarding \(p=10\ \%\)  of all weights.
 \begin{figure}
 	\begin{center}
 			\includegraphics[width=\linewidth,origin=c]{loss2}
@@ -196,7 +196,7 @@ _{\mathclap{\text{Class weight}}}
 	\label{fig:reconstruction-dl}
 \end{figure}
 \begin{itemize}
-	\item Inference is performed on smaller images, for practical reasons.
+	\item Inference is performed on smaller images for practical reasons.
 	\item Quality of predictions near borders are bad, our solution is to add padding and cut away border predictions.
 	\item This results in a smooth unified field prediction, when the smaller images are stitched .
 \end{itemize}
