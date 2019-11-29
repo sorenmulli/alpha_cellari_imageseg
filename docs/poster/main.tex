@@ -83,6 +83,7 @@ The data used in this project is one drone image of a field, which is illustrate
 \begin{figure}
 \centering
 \includegraphics[width=.7\linewidth]{raw-min2}
+\caption{Sugarcane field in Brazil, }
 \end{figure}
 
 
@@ -115,7 +116,6 @@ The skip connections used in SegNet are the max-pooling indices from the encoder
 \texttt{\scriptsize Conv2d}
 \end{equation*}
 
-
 Loss of \(N\) pixels in one-hot \((N \times  3)\) matrix \(\mathbf x^\text{pred}\) with the true classes \(\mathbf c\).
 \[
 L = \underbrace{
@@ -147,6 +147,13 @@ _{\mathclap{\text{Class weight}}}
 %% Hvordan regulariseres netværket
 %% Data transformeringer 
 %% Hyperparametre 
+\section{Reconstruction}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{"Reconstruction DL"}
+	\caption{}
+	\label{fig:reconstruction-dl}
+\end{figure}
 
 
 
