@@ -79,7 +79,7 @@
 \section{The Story to be Told}
 \begin{itemize}
 	\item Agriculture can be made more efficient by using automization to seperate the crops from the weeds and the dirt.
-	\item On this poster, you can expect to learn about the implementation of SegNet for pixelwise crop classification on a drone image. The results of this implementation is also shown as well as how they came to be.
+	\item On this poster, you can expect to learn about the implementation of SegNet for pixelwise crop classification on a drone image. The results of this implementation is also shown as well as the problems with such data.
 \end{itemize}
  
 \section{The Data: Brazilian Sugar Fields}
@@ -87,7 +87,7 @@ The data used in this project is one drone image of a field, which is illustrate
 \begin{figure}
 \centering
 \includegraphics[width=.7\linewidth]{raw-min3}
-\caption{Orthomosaic drone photo of a sugar cane field in Brazil.}
+\caption{Orthomosaic drone photo of a sugar cane field in Brazil \cite{USC}.}
 \end{figure}
 \begin{itemize}
 	\item Labelling of the field is performed by biologist into 3 categories: crops, weeds and soil.
@@ -105,21 +105,19 @@ The data used in this project is one drone image of a field, which is illustrate
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\linewidth]{Encoder-Decoder2}
-	\caption{The structure of the network. Dropout prevents overfitting, batchnorm normalizes, ReLU creates non-linearity and max-pool helps with translational invariance.}
-	\caption{}
+	\caption{The structure of the network. Dropout prevents overfitting, batchnorm normalizes, ReLU creates non-linearity and max-pool helps with translational invariance \cite{Seg}.}
 	\label{fig:Structure}
 \end{figure}
 
-\begin{itemize}
-	\item Same but mirrored encoder and decoder dimensions means ample opportunity for pixel-wise classification!
-\end{itemize}
+Same but mirrored encoder and decoder dimensions means ample opportunity for pixel-wise classification!
+
  
 %\begin{figure}
 %	\centering
 %	\includegraphics[width=1\linewidth]{pool}
 %	\label{fig:maxpool}
 %\end{figure}
-\subsubsection*{Skip Connections}
+\subparagraph{Skip Connections}
 The skip connections used in SegNet are the max-pooling indices from the encoder-layer. These indices are used for the up-sampling in the decoder-layers. The process is illustrated as the following:
 \begin{equation*}\label{key}
 \scriptsize
@@ -129,7 +127,7 @@ The skip connections used in SegNet are the max-pooling indices from the encoder
 \texttt{\scriptsize Conv2d}
 \end{equation*}
 
-Loss of \(N\) pixels in one-hot \((N \times  3)\) matrix \(\mathbf x^\text{pred}\) with the true classes \(\mathbf c\).
+\subparagraph{Loss} of \(N\) pixels in one-hot \((N \times  3)\) matrix \(\mathbf x^\text{pred}\) with the true classes \(\mathbf c\).
 \[
 L = \underbrace{
 \vphantom{\sum_{i}}
@@ -152,7 +150,7 @@ _{\mathclap{\text{Class weight}}}
 	\begin{center}
 			\includegraphics[width=\linewidth,origin=c]{loss2}
 	\end{center}
-	\caption{A plot of the training and evaluation loss as a function of the number of epochs. The validation loss is red and the training loss is blue.}\label{fig:example2}
+	\caption{The training and evaluation loss as a function of the number of epochs. The validation loss is red and the training loss is blue. Not the low degree of overfitting with this implementation with Dropout \(p=0.1\)}\label{fig:example2}
 \end{figure}
 
 %% Hvordan regulariseres netværket
@@ -167,19 +165,19 @@ _{\mathclap{\text{Class weight}}}
 %% Gøre vores F1 score fed og skriftstørrelse 100
 \begin{table}
 	\centering 
-	\begin{tabular}{l|cccc|cccc}
+	\begin{tabular}{l|ccc|ccc|}
 		
-		\rule[-1ex]{0pt}{2.5ex}  & \multicolumn{4}{c|}{Train} &  \multicolumn{4}{c|}{Test} \\ 
+		\rule[-1ex]{0pt}{2.5ex}  & \multicolumn{3}{c|}{Train} &  \multicolumn{3}{c|}{Test} \\ 
 		
-		\rule[-1ex]{0pt}{2.5ex} Metric  & G & C &mIoU&  mF1 & G & C & mIoU& mF1 \\ 
+		\rule[-1ex]{0pt}{2.5ex} Metric  & G & C &  mF1 & G & C &  mF1 \\ 
 		\hline
-		\rule[-1ex]{0pt}{2.5ex} Baseline& 91& 33 &30  &32  &94  &33  &31 &32  \\ 
+		\rule[-1ex]{0pt}{2.5ex} Baseline& 91& 33   &32  &94  &33  &32  \\ 
 		
-		\rule[-1ex]{0pt}{2.5ex} USC. SegNet    &  &  &  &  &  & &   80 &96  \\ 
-		\rule[-1ex]{0pt}{2.5ex} USC. UNet   &  &  &  &  &  & &75 &93  \\ 
-		\rule[-1ex]{0pt}{2.5ex} Cellari DNN   &  &  &  &  &  & & &78  \\ 
+		\rule[-1ex]{0pt}{2.5ex} USC. SegNet    &    &  &  &  & &   96  \\ 
+		\rule[-1ex]{0pt}{2.5ex} USC. UNet   &  &    &  &  & &93  \\ 
+		\rule[-1ex]{0pt}{2.5ex} Cellari DNN   &    &  &  &  &  &78  \\ 
 		\hline 
-		\rule[-1ex]{0pt}{2.5ex} Our SegNet & 97 & 87 & 80 &88  & 98  &80&74&\textbf{84}  \\ 
+		\rule[-1ex]{0pt}{2.5ex} Our SegNet & 97 & 87  &88  & 98  &80&\textbf{84}  \\ 
 	\end{tabular} 
 \caption{Results for different accuracy measures explained below. USC is the first work on the data set \cite{USC.} Note that we don't have access for full results for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as ours.}
 \end{table}
