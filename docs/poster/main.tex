@@ -87,9 +87,13 @@ The data used in this project is one drone image of a field, which is illustrate
 \begin{figure}
 \centering
 \includegraphics[width=.7\linewidth]{raw-min2}
-\caption{Sugarcane field in Brazil, }
+\caption{Orthomosaic drone photo of a sugar cane field in Brazil.}
 \end{figure}
-
+\begin{itemize}
+	\item Labelling of the field is performed by biologist into 3 categories: crops, weeds and soil.
+	\item The goal of our project is to train a neural network that can perform a pixelwise classification on a field.
+	\item Augmentation techniques has been used to expand our data set.
+\end{itemize}
 
 \section{Our SegNet: 1152 Feature Maps}
 
@@ -156,7 +160,11 @@ _{\mathclap{\text{Class weight}}}
 	\caption{}
 	\label{fig:reconstruction-dl}
 \end{figure}
-
+\begin{itemize}
+	\item Inference is performed on smaller images, for practical reasons.
+	\item Quality of predictions near borders are bad, our solution is to add padding and cut away border predictions.
+	\item This results in a smooth unified field prediction, when the smaller images are stitched .
+\end{itemize}
 
 
 \section{Different Metrics, Different Stories}
