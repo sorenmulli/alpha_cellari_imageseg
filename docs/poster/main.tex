@@ -69,7 +69,6 @@
 %===  Make header for poster (title and authors)
 \begin{dtuposterhead} %
 \dtuposterauthor{\normalsize Mads Andersen, Oskar Wiese, Anders Henriksen, Søren Holm, Asger Schultz}
-\dtuposteraffil{\small DTU Compute}
 \dtuposteraffil{\small \texttt{\{s173934, s183917, s183904, s183911, s183912\}@student.dtu.dk}}
 \end{dtuposterhead}
 %
@@ -77,9 +76,9 @@
 %======================================================================
 %===  ... and the rest of the content
 \begin{dtupostercontent}
-\section{Weeds, Crops and Dirt}
+\section{The Story to be Told}
 \begin{itemize}
-	\item Agriculture can be made more efficient by using automization to classify seperate the crops from the weeds and the dirt.
+	\item Agriculture can be made more efficient by using automization to seperate the crops from the weeds and the dirt.
 	\item On this poster, you can expect to learn about the implementation of SegNet for pixelwise crop classification on a drone image. The results of this implementation is also shown as well as how they came to be.
 \end{itemize}
  
@@ -159,18 +158,6 @@ _{\mathclap{\text{Class weight}}}
 %% Hvordan regulariseres netværket
 %% Data transformeringer 
 %% Hyperparametre 
-\section{Reconstruction}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.7\linewidth]{"Reconstruction DL"}
-	\caption{Due to worse quality of border predictions, we have padded the smaller images to increase performance near borders.}
-	\label{fig:reconstruction-dl}
-\end{figure}
-\begin{itemize}
-	\item Inference is performed on smaller images, for practical reasons.
-	\item Quality of predictions near borders are bad, our solution is to add padding and cut away border predictions.
-	\item This results in a smooth unified field prediction, when the smaller images are stitched .
-\end{itemize}
 
 
 \section{Different Metrics, Different Stories}
@@ -200,11 +187,21 @@ _{\mathclap{\text{Class weight}}}
 \begin{itemize}
 	\item \textit{Global accuracy (G):} Simple accuracy over all pixels. Good for smooth prediction but easy to achieve optimize on unbalanced data.
 	\item \textit{Mean class wise accuracy (C):} Naïve mean over class accuracies. What is being optimized for with the loss function.
-	\item \textit{Mean intersect over union (mIoU):} Higher correlated to human classification. Favours regional smoothness over boundary accuracy.
 	\item \textit{Mean F1 score: (mF1)} The benchmark: Penalizes false positives and gives less credit to true negatives and is thus better for unbalanced classes. 
 \end{itemize}
 
-
+\section{Reconstruction}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\linewidth]{"Reconstruction DL"}
+	\caption{Due to worse quality of border predictions, we have padded the smaller images to increase performance near borders.}
+	\label{fig:reconstruction-dl}
+\end{figure}
+\begin{itemize}
+	\item Inference is performed on smaller images, for practical reasons.
+	\item Quality of predictions near borders are bad, our solution is to add padding and cut away border predictions.
+	\item This results in a smooth unified field prediction, when the smaller images are stitched .
+\end{itemize}
 %Kort beskrivelse af resultater 
 
 \begin{figure}
