@@ -1,3 +1,4 @@
+% !TeX spellcheck = en_GB
 %======================================================================
 %===  dtuposter - a class to make posters tha comply with the DTU CI
 %
@@ -8,19 +9,19 @@
 %==========================================
 %===  details and poster setup
 \documentclass[
-%    ,title     = {{Title test}}
+    ,title     = {{Image Segmentation for Smart Agriculture}}
 %    author    = {{Soeren Winkel Holm}}
-%    ,subject   = {{This is the subject of my work}}
+    ,subject   = {{This is the subject of my work}}
 %    ,bgcolor   = dtulightgreen
 %    ,highlight = dtuyellow
 %    ,toplogo   = {{tex_dtu_aqua_b_uk}}
 %    ,botlogo   = {{tex_dtu_bibliotek_b_uk}}
-%    ,papersize = {{a0paper}}
+    ,papersize = {{a1paper}}
 %    ,colcount  = {{1column}}
 %    ,longtitle
 %    ,largecaption
-%    ,draft
-%    ,nocrop
+%    ,final
+    ,nocrop
 %    ,english        % language
 %    ,fleqn          % equations on the left
 ]{dtuposter}
@@ -29,7 +30,8 @@
 %======================================================================
 %===  Continue with packages
 \usepackage[T1]{fontenc}        % special characters
-%
+
+\usepackage[nottoc, numbib]{tocbibind}
 %\usepackage[ansinew]{inputenc}  % Windows
 %\usepackage[applemac]{inputenc} % MacOS
 \usepackage[utf8]{inputenc}    % Unicode, Linux
@@ -66,9 +68,9 @@
 %======================================================================
 %===  Make header for poster (title and authors)
 \begin{dtuposterhead} %
-\dtuposterauthor{Mads Andersen, Oskar Wiese, Anders Henriksen, Søren Holm, Asger Schultz}
-\dtuposteraffil{DTU Compute}
-\dtuposteraffil{\texttt{\{s173934, s183917, s183904, s183911, s183912\}@student.dtu.dk}}
+\dtuposterauthor{\normalsize Mads Andersen, Oskar Wiese, Anders Henriksen, Søren Holm, Asger Schultz}
+\dtuposteraffil{\small DTU Compute}
+\dtuposteraffil{\small \texttt{\{s173934, s183917, s183904, s183911, s183912\}@student.dtu.dk}}
 \end{dtuposterhead}
 %
 %
@@ -147,9 +149,7 @@ _{\mathclap{\text{Class weight}}}
 	\begin{center}
 			\includegraphics[width=\linewidth,origin=c]{loss2}
 	\end{center}
-	\caption{An example caption. Figures can be wrapped in the \texttt{fadebox} 
-		environment to provide them with a white background. Note that you have to align the 
-		figure again.}\label{fig:example2}
+	\caption{A plot of the training and evaluation loss as a function of the number of epochs. The validation loss is red and the training loss is blue.}\label{fig:example2}
 \end{figure}
 
 %% Hvordan regulariseres netværket
@@ -171,23 +171,30 @@ _{\mathclap{\text{Class weight}}}
 %%Tabel med metrics 
 %% Gøre vores F1 score fed og skriftstørrelse 100
 \begin{table}
-	\begin{tabular}{c|cccc|cccc|}
+	\centering 
+	\begin{tabular}{l|cccc|cccc}
 		
 		\rule[-1ex]{0pt}{2.5ex}  & \multicolumn{4}{c|}{Train} &  \multicolumn{4}{c|}{Test} \\ 
 		
-		\rule[-1ex]{0pt}{2.5ex} Metric  & G & C &mIoU&  F1 & G & C & mIoU& mF1 \\ 
+		\rule[-1ex]{0pt}{2.5ex} Metric  & G & C &mIoU&  mF1 & G & C & mIoU& mF1 \\ 
 		\hline
-		\rule[-1ex]{0pt}{2.5ex} Baseline&  33.3 &1.8  &3.4  &33.3  &1.1  &2.2  \\ 
+		\rule[-1ex]{0pt}{2.5ex} Baseline& 91& 33 &30  &32  &94  &33  &31 &32  \\ 
 		
-		\rule[-1ex]{0pt}{2.5ex} USC. SegNet    &  &  &  &  &  &95.9  \\ 
-		\rule[-1ex]{0pt}{2.5ex} USC. UNet   &  &  &  &  &  &92.9  \\ 
-		\rule[-1ex]{0pt}{2.5ex} Cellari DNN   &  &  &  &  &  &77.7  \\ 
+		\rule[-1ex]{0pt}{2.5ex} USC. SegNet    &  &  &  &  &  & &   80 &96  \\ 
+		\rule[-1ex]{0pt}{2.5ex} USC. UNet   &  &  &  &  &  & &75 &93  \\ 
+		\rule[-1ex]{0pt}{2.5ex} Cellari DNN   &  &  &  &  &  & & &78  \\ 
 		\hline 
-		\rule[-1ex]{0pt}{2.5ex} Our SegNet & 96.5&93.6  & 86.9 &97.5  & 90.7  &\textbf{84.6}  \\ 
+		\rule[-1ex]{0pt}{2.5ex} Our SegNet & 97 & 87 & 80 &88  & 98  &80&74&\textbf{84}  \\ 
 	\end{tabular} 
-\caption{Conclusions lala note cellari has not provided more scores note U. SC. does not have same test set}
+\caption{Results for different accuracy measures explained below. USC is the first work on the data set \cite{USC.} Note that we don't have access for full results for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as ours.}
 \end{table}
 
+\begin{itemize}
+	\item \textit{Global accuracy (G):} Simple accuracy over all pixels. Good for smooth prediction but easy to achieve optimize on unbalanced data.
+	\item \textit{Mean class wise accuracy (C):} Naïve mean over class accuracies. What is being optimized for with the loss function.
+	\item \textit{Mean intersect over union (mIoU):} Higher correlated to human classification. Favours regional smoothness over boundary accuracy.
+	\item \textit{Mean F1 score: (mF1)} The benchmark: Penalizes false positives and gives less credit to true negatives and is thus better for unbalanced classes. 
+\end{itemize}
 
 
 %Kort beskrivelse af resultater 
@@ -200,8 +207,7 @@ _{\mathclap{\text{Class weight}}}
 \subfloat{
 \includegraphics[width=.5\linewidth]{anno}	
 }
-\caption{An example caption. This figure supports transparency and looks fine on 
-the coloured background}\label{fig:example}
+\caption{This figure illustrates the target GT(left) as well as the predictions of the trained network(right).}\label{fig:example}
 \end{figure}
 
 
@@ -219,8 +225,14 @@ the coloured background}\label{fig:example}
 \begin{itemize}
 	\item Complications with the task of image segmentation is the limited amount of data available. 
 	\item More data and more advanced data augmentation can lead to a more generalizable and robust model.
-	\item Can lead to an algorithm that can indentify crops and weed on a field and aid farmers in their work.
+	\item Can lead to an algorithm that can indentify crops and weed on a field and aid farmers in their work. 
 \end{itemize}
 
+\begin{thebibliography}{9}
+	\bibitem{Seg} Kendall, Alex et al.: "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation". PAMI, 2017.
+	\bibitem{USC} Wangenheim von, Aldo et al.: "Weed Mapping on Aerial Images". INCoD.LAPIX.01.2019.E.
+\end{thebibliography}
 \end{dtupostercontent}
+
+
 \end{document}
