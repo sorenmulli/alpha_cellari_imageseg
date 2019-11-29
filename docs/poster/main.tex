@@ -30,7 +30,8 @@
 %======================================================================
 %===  Continue with packages
 \usepackage[T1]{fontenc}        % special characters
-%
+
+\usepackage[nottoc, numbib]{tocbibind}
 %\usepackage[ansinew]{inputenc}  % Windows
 %\usepackage[applemac]{inputenc} % MacOS
 \usepackage[utf8]{inputenc}    % Unicode, Linux
@@ -166,7 +167,8 @@ _{\mathclap{\text{Class weight}}}
 %%Tabel med metrics 
 %% Gøre vores F1 score fed og skriftstørrelse 100
 \begin{table}
-	\begin{tabular}{c|cccc|cccc|}
+	\centering 
+	\begin{tabular}{l|cccc|cccc}
 		
 		\rule[-1ex]{0pt}{2.5ex}  & \multicolumn{4}{c|}{Train} &  \multicolumn{4}{c|}{Test} \\ 
 		
@@ -180,7 +182,7 @@ _{\mathclap{\text{Class weight}}}
 		\hline 
 		\rule[-1ex]{0pt}{2.5ex} Our SegNet & 97 & 87 & 80 &88  & 98  &80&74&\textbf{84}  \\ 
 	\end{tabular} 
-\caption{Results for different accuracy measures explained below. Note that we don't have access for full results for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as ours.}
+\caption{Results for different accuracy measures explained below. USC is the first work on the data set \cite{USC.} Note that we don't have access for full results for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as ours.}
 \end{table}
 
 \begin{itemize}
@@ -220,8 +222,14 @@ the coloured background}\label{fig:example}
 \begin{itemize}
 	\item Complications with the task of image segmentation is the limited amount of data available. 
 	\item More data and more advanced data augmentation can lead to a more generalizable and robust model.
-	\item Can lead to an algorithm that can indentify crops and weed on a field and aid farmers in their work.
+	\item Can lead to an algorithm that can indentify crops and weed on a field and aid farmers in their work. 
 \end{itemize}
 
+\begin{thebibliography}{9}
+	\bibitem{Seg} Kendall, Alex et al.: "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation". PAMI, 2017.
+	\bibitem{USC} Wangenheim von, Aldo et al.: "Weed Mapping on Aerial Images". INCoD.LAPIX.01.2019.E.
+\end{thebibliography}
 \end{dtupostercontent}
+
+
 \end{document}

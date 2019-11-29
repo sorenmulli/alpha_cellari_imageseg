@@ -297,7 +297,7 @@
   \ifdtuposter@longtitle%
     \setkomafont{title}{       \normalfont\dtuposter@fs{100}{120}{1}\bfseries\color{\dtuposter@highlight}} % used with title
   \else
-    \setkomafont{title}{       \normalfont\dtuposter@fs{300}{310}{1}\bfseries\color{\dtuposter@highlight}} % used with title
+    \setkomafont{title}{       \normalfont\dtuposter@fs{400}{420}{1}\bfseries\color{\dtuposter@highlight}} % used with title
   \fi
   \setkomafont{minisec}{     \normalfont\dtuposter@fs{ 60}{ 70}{1}\bfseries} % used for authors
   \setkomafont{dictum}{      \normalfont\dtuposter@fs{ 48}{ 60}{1}} % used for affiliation
