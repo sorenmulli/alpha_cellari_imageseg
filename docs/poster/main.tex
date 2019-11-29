@@ -48,7 +48,7 @@
 %           ]{typeface}
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{enumitem}
-\usepackage{amsmath}
+\usepackage{mathtools}
 \setlist{nosep,leftmargin=*}
 %
 % 
@@ -87,8 +87,13 @@
 The data used in this project is one drone image of a field, which is illustrated as the following.
 \begin{figure}
 \centering
-\includegraphics[width=.7\linewidth]{raw-min}
+\includegraphics[width=.7\linewidth]{raw-min2}
 \end{figure}
+\begin{itemize}
+	\item How the image came to be
+	
+	\item 
+\end{itemize}
 
 
 \section{Our SegNet: 1152 Feature Maps}
@@ -103,52 +108,56 @@ The data used in this project is one drone image of a field, which is illustrate
 %% "Skip connections"" + Adam 
 
 \begin{figure}
-	\begin{fadebox}\centering
+	\centering
 	\includegraphics[width=0.8\linewidth]{Structure}
-	\end{fadebox}
 	\caption{}
 	\label{fig:Structure}
 \end{figure}
  
-\begin{figure}
-	\centering
-	\begin{fadebox}
-	\includegraphics[width=1\linewidth]{pool}
-	
-	\end{fadebox}
-	\label{fig:maxpool}
-\end{figure}
-The encoder part of the network creates a rich feature map representing the image content. The more 
-layers of max-pooling there are the more translation invariance for robust 
-classification can be achieved. The boundary detail is very important when 
-dealing with image segmentation. Hence, capturing boundary information in 
-the feature maps of the encoder before upsampling is important. This can 
-simply be done by storing the whole feature map, but due to memory 
-constrains only the maxpooling indices are saved, which is a good 
-approximation of the feature maps. 
-
-
-Loss of \(N\) pixels in one-hot \((N \times  3)\) matrix \(\mathbf x^pred\) with the true classes \(\mathbf c\).
-\[
-L = \frac 1 N \sum_{i=1}^{N} \mathbf{w}[i, c_i]  \cdot 
-\left( 
--\mathbf x^\text{pred}[i, c_i] + \log
-\left(
-\sum_{j=1}^{3}\exp(\mathbf x^\text{pred}[i, j])
-\right)
-\right)
-\]
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=1\linewidth]{pool}
+%	\label{fig:maxpool}
+%\end{figure}
+\begin{equation*}\label{key}
+\scriptsize
+\begin{bmatrix}a&b\\c&d\end{bmatrix} \xrightarrow{\text{\scriptsize M. pool indices}}
+\begin{bmatrix}0&0&0&a\\b&0&0&0\\0&c&0&0\\0&0&d&0\end{bmatrix} 
+\rightarrow 
+\texttt{\scriptsize Conv2d}
+\end{equation*}
 
 \begin{itemize}
 	\item Skip connections
+	\item Feature Maps
 	\item Max-pool
 \end{itemize}
 
 
+
+Loss of \(N\) pixels in one-hot \((N \times  3)\) matrix \(\mathbf x^\text{pred}\) with the true classes \(\mathbf c\).
+\[
+L = \underbrace{
+\vphantom{\sum_{i}}
+\frac 1 N}
+_{\mathllap{\text{Mean over minibatch}}}
+\sum_{\mathclap {i=1}}^{N}
+\underbrace{ 
+\vphantom{\sum_{i}}
+\mathbf{w}[i, c_i]}
+_{\mathclap{\text{Class weight}}}  
+\cdot 
+\underbrace{
+\log 
+\frac
+{-\exp\mathbf x^\text{pred}[i, c_i]}
+{\sum_{j=1}^{3}\exp\mathbf x^\text{pred}[i, j]}
+}_{\mathclap{\text{3-class cross entropy}}}
+\]
 \begin{figure}
-	\begin{fadebox}\begin{center}
+	\begin{center}
 			\includegraphics[width=\linewidth,origin=c]{loss}
-	\end{center}\end{fadebox}
+	\end{center}
 	\caption{An example caption. Figures can be wrapped in the \texttt{fadebox} 
 		environment to provide them with a white background. Note that you have to align the 
 		figure again.}\label{fig:example2}
@@ -165,7 +174,33 @@ L = \frac 1 N \sum_{i=1}^{N} \mathbf{w}[i, c_i]  \cdot
 	\label{fig:reconstruction-dl}
 \end{figure}
 
+\begin{itemize}
+	\item Regularization \\
+		Dropout \\
+		Data Augmentation \\
+		Batch-Normalization
+	
+	\item All about the Hyperparameters
+\end{itemize}
+
+\begin{itemize}
+	\item Class-Imbalance
+	\item Weighted Cross-Entropy
+	
+	\item Accuracy measures \\
+		Global Accuracy \\
+		Mean Class-wise Accuracy \\
+		Jaccard Index \\
+		F1-Score
+\end{itemize}
+
 \section{Different Metrics, Different Stories}
+
+\begin{itemize}
+	\item 
+	
+	\item 
+\end{itemize}
 
 %%Tabel med metrics 
 %% Gøre vores F1 score fed og skriftstørrelse 100
@@ -192,31 +227,36 @@ L = \frac 1 N \sum_{i=1}^{N} \mathbf{w}[i, c_i]  \cdot
 %Kort beskrivelse af resultater 
 
 \begin{figure}
-	\begin{fadebox}\centering
+	\centering
 \subfloat{
-	\includegraphics[width=.5\linewidth]{target}	
+	\includegraphics[width=.5\linewidth]{target2}	
 }
 \subfloat{
-\includegraphics[width=.5\linewidth]{anno}	
+\includegraphics[width=.5\linewidth]{anno2}	
 }
-\end{fadebox}
 \caption{An example caption. This figure supports transparency and looks fine on 
 the coloured background}\label{fig:example}
 \end{figure}
+
+\begin{itemize}
+	\item Reconstruction
+	\item Border Prediction
+\end{itemize}
 
 
 \section{Where Can This Go?}
 % Yderligere arbejde
 %Perspektiv på problemet 
 \begin{itemize}
-	\item Other solutions to the problem
+	\item Competing models in terms of Memory use
 	\item What could be improved?
+	\item Complications of the task
 \end{itemize}
 
 \begin{figure}
-	\begin{fadebox}\begin{center}
+	\begin{center}
 			\includegraphics[width=\linewidth,origin=c]{reconst}
-	\end{center}\end{fadebox}
+	\end{center}
 \end{figure}
 
 

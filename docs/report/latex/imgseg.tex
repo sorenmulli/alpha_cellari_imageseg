@@ -59,6 +59,16 @@ Our data consist of one large, high resolution orthomosaic photo of a sugar cane
 
 \section{Methods}
 Netværket blev initialiseret
+
+The encoder part of the network creates a rich feature map representing the image content. The more 
+layers of max-pooling there are the more translation invariance for robust 
+classification can be achieved. The boundary detail is very important when 
+dealing with image segmentation. Hence, capturing boundary information in 
+the feature maps of the encoder before upsampling is important. This can 
+simply be done by storing the whole feature map, but due to memory 
+constrains only the maxpooling indices are saved, which is a good 
+approximation of the feature maps. 
+
 \\
 \\
 \subsection{Loss function: Quality over quantity}
@@ -101,7 +111,7 @@ Regularization
 		\item Crop each $ 512\times 512 $ to random $ 250\times 250 $
 		\item 50\pro chance of flip T/D and 50\pro chance of flip L/R
 	\end{itemize}
-	\item Batch normalization
+	\item Batch normalization normalizes activations
 	\begin{itemize}
 		\item Faster convergence
 		\item Prevents ReLU from not learning
@@ -112,7 +122,7 @@ Regularization
 Hyperparameters
 \begin{itemize}
 	\item Adaptive learning rate from ADAM optimizer, initialized at $ 2\ctp{-4} $
-	\item Total: 26 conv + batchnorm + ReLU, 5 pool/upsample, 1 softmax
+	\item Total: 26 conv + batchnorm + ReLU with dropout, 5 pool/upsample, 1 softmax
 	\item 14.7 M parameters in encoder -- significantly lower than 134 M in VGG16 because of no fully-connected layers
 	\item Kernel size: $ 3\times 3 $, stride 1, maxpool: $ 2\times 2 $, stride 2
 	\item Corresponding padding of 1 to prevent reduction of image size

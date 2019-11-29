@@ -1,0 +1,134 @@
+2019-11-25 19:15:43.825436	Testing tester
+
+2019-11-25 19:15:53.561323	Loading test data...
+2019-11-25 19:15:54.794352	Done loading test data
+
+2019-11-25 19:15:54.795164	Performing forward passes...
+2019-11-25 19:15:54.796298	Forward passing test image 0
+2019-11-25 19:15:54.803553	Forward passing test image 1
+2019-11-25 19:15:54.809827	Forward passing test image 2
+2019-11-25 19:15:54.816156	Forward passing test image 3
+2019-11-25 19:15:54.822653	Forward passing test image 4
+2019-11-25 19:15:54.829255	Forward passing test image 5
+2019-11-25 19:15:54.836167	Forward passing test image 6
+2019-11-25 19:15:54.842687	Forward passing test image 7
+2019-11-25 19:15:54.849418	Forward passing test image 8
+2019-11-25 19:15:54.855952	Forward passing test image 9
+2019-11-25 19:15:54.862677	Forward passing test image 10
+2019-11-25 19:15:54.868789	Forward passing test image 11
+2019-11-25 19:15:54.875149	Forward passing test image 12
+2019-11-25 19:15:54.889670	Forward passing test image 13
+2019-11-25 19:15:54.904945	Forward passing test image 14
+2019-11-25 19:15:54.920169	Forward passing test image 15
+2019-11-25 19:15:54.935404	Forward passing test image 16
+2019-11-25 19:15:54.950668	Forward passing test image 17
+2019-11-25 19:15:54.965902	Forward passing test image 18
+2019-11-25 19:15:54.981159	Forward passing test image 19
+2019-11-25 19:15:54.996547	Forward passing test image 20
+2019-11-25 19:15:55.011736	Forward passing test image 21
+2019-11-25 19:15:55.026969	Forward passing test image 22
+2019-11-25 19:15:55.042221	Forward passing test image 23
+2019-11-25 19:15:55.057539	Forward passing train image 0
+2019-11-25 19:15:55.072785	Forward passing train image 1
+2019-11-25 19:15:55.088023	Forward passing train image 2
+2019-11-25 19:15:55.103241	Forward passing train image 3
+2019-11-25 19:15:55.118438	Forward passing train image 4
+2019-11-25 19:15:55.133683	Forward passing train image 5
+2019-11-25 19:15:55.148950	Forward passing train image 6
+2019-11-25 19:15:55.164205	Forward passing train image 7
+2019-11-25 19:15:55.179439	Forward passing train image 8
+2019-11-25 19:15:55.194648	Forward passing train image 9
+2019-11-25 19:15:55.209848	Forward passing train image 10
+2019-11-25 19:15:55.225079	Forward passing train image 11
+2019-11-25 19:15:55.240361	Forward passing train image 12
+2019-11-25 19:15:55.255630	Forward passing train image 13
+2019-11-25 19:15:55.270838	Forward passing train image 14
+2019-11-25 19:15:55.286032	Forward passing train image 15
+2019-11-25 19:15:55.301257	Forward passing train image 16
+2019-11-25 19:15:55.316506	Forward passing train image 17
+2019-11-25 19:15:55.331709	Forward passing train image 18
+2019-11-25 19:15:55.346959	Forward passing train image 19
+2019-11-25 19:15:55.362244	Forward passing train image 20
+2019-11-25 19:15:55.377406	Forward passing train image 21
+2019-11-25 19:15:55.392606	Forward passing train image 22
+2019-11-25 19:15:55.407833	Forward passing train image 23
+2019-11-25 19:15:55.423076	Forward passing train image 24
+2019-11-25 19:15:55.438300	Forward passing train image 25
+2019-11-25 19:15:55.453526	Forward passing train image 26
+2019-11-25 19:15:55.468759	Forward passing train image 27
+2019-11-25 19:15:55.483972	Forward passing train image 28
+2019-11-25 19:15:55.499239	Forward passing train image 29
+2019-11-25 19:15:55.514511	Forward passing train image 30
+2019-11-25 19:15:55.529713	Forward passing train image 31
+2019-11-25 19:15:55.544941	Forward passing train image 32
+2019-11-25 19:15:55.560160	Forward passing train image 33
+2019-11-25 19:15:55.575423	Forward passing train image 34
+2019-11-25 19:15:55.590695	Forward passing train image 35
+2019-11-25 19:15:55.605905	Forward passing train image 36
+2019-11-25 19:15:55.621137	Forward passing train image 37
+2019-11-25 19:15:55.636361	Forward passing train image 38
+2019-11-25 19:15:55.651624	Forward passing train image 39
+2019-11-25 19:15:55.666899	Forward passing train image 40
+2019-11-25 19:15:55.682112	Forward passing train image 41
+2019-11-25 19:15:55.697375	Forward passing train image 42
+2019-11-25 19:15:55.712676	Forward passing train image 43
+2019-11-25 19:15:55.727905	Forward passing train image 44
+2019-11-25 19:15:55.743118	Forward passing train image 45
+2019-11-25 19:15:55.758346	Forward passing train image 46
+2019-11-25 19:15:55.773597	Forward passing train image 47
+2019-11-25 19:15:55.788825	Forward passing train image 48
+2019-11-25 19:15:55.804112	Forward passing train image 49
+2019-11-25 19:15:55.819331	Forward passing train image 50
+2019-11-25 19:15:55.834564	Forward passing train image 51
+2019-11-25 19:15:55.849789	Forward passing train image 52
+2019-11-25 19:15:55.865040	Forward passing train image 53
+2019-11-25 19:15:55.880281	Forward passing train image 54
+2019-11-25 19:15:55.895530	Forward passing train image 55
+2019-11-25 19:15:55.910783	Forward passing train image 56
+2019-11-25 19:15:55.926003	Forward passing train image 57
+2019-11-25 19:15:55.941216	Forward passing train image 58
+2019-11-25 19:15:55.956438	Forward passing train image 59
+2019-11-25 19:15:55.971678	Forward passing train image 60
+2019-11-25 19:15:55.986925	Forward passing train image 61
+2019-11-25 19:15:56.002152	Forward passing train image 62
+2019-11-25 19:15:56.017387	Forward passing train image 63
+2019-11-25 19:15:56.032629	Forward passing train image 64
+2019-11-25 19:15:56.047844	Forward passing train image 65
+2019-11-25 19:15:56.063046	Forward passing train image 66
+2019-11-25 19:15:56.078322	Forward passing train image 67
+2019-11-25 19:15:56.093567	Forward passing train image 68
+2019-11-25 19:15:56.108815	Forward passing train image 69
+2019-11-25 19:15:56.124086	Forward passing train image 70
+2019-11-25 19:15:56.139281	Forward passing train image 71
+2019-11-25 19:15:56.154520	Forward passing train image 72
+2019-11-25 19:15:56.169771	Forward passing train image 73
+2019-11-25 19:15:56.185006	Forward passing train image 74
+2019-11-25 19:15:56.200234	Forward passing train image 75
+2019-11-25 19:15:56.215456	Forward passing train image 76
+2019-11-25 19:15:56.230657	Forward passing train image 77
+2019-11-25 19:15:56.245848	Forward passing train image 78
+2019-11-25 19:15:56.261113	Forward passing train image 79
+2019-11-25 19:15:56.276389	Forward passing train image 80
+2019-11-25 19:15:56.291606	Forward passing train image 81
+2019-11-25 19:15:56.306861	Forward passing train image 82
+2019-11-25 19:15:56.322055	Forward passing train image 83
+2019-11-25 19:15:56.337248	Done performing forward passes
+
+2019-11-25 19:15:56.337393	Calculating train accuracy measures...
+2019-11-25 19:16:08.778795	Accuracy measures: Global acc.: 0.9693
+                          	Class acc.: 0.8918
+                          	Mean IoU.: 0.7835
+                          	Bound. F1: 0.8728
+
+2019-11-25 19:16:08.779623	Calculating test accuracy measures...
+2019-11-25 19:16:13.039555	Test accuracy measures: Global acc.: 0.9779
+                          	Class acc.: 0.8554
+                          	Mean IoU.: 0.7528
+                          	Bound. F1: 0.8496
+
+2019-11-25 19:16:13.039851	Reconstructing images...
+2019-11-25 19:16:13.445750	Done reconstructing images
+
+2019-11-25 19:16:13.446453	Saving test images and reconstructions to directory local_data/test...
+2019-11-25 19:16:16.453293	Done saving images and reconstructions
+

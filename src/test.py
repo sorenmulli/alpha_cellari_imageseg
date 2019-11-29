@@ -52,10 +52,10 @@ class Tester:
 		with torch.no_grad():
 			net.eval()
 			for i, x in enumerate(test_x):
-				log("Forward passing test image %i" % i)
+				self.log("Forward passing test image %i" % i)
 				test_output[i] = net(ensure_shape(x)).squeeze()
 			for i, x in enumerate(train_x):
-				log("Forward passing train image %i" % i)
+				self.log("Forward passing train image %i" % i)
 				train_output[i] = net(ensure_shape(x)).squeeze()
 
 		self.log("Done performing forward passes\n")
@@ -99,7 +99,7 @@ class Tester:
 				img_arr = np.ones(
 					(reconstructed[i].shape[0], reconstructed[i].shape[1] * 3 + space * 2, reconstructed[i].shape[2]),
 					dtype=np.uint8
-				) * 255
+				) * 244
 				img_arr[:, :shape[1]] = aerial  # Inserting aerial image
 				img_arr[:, shape[1]+space:shape[1]*2+space] = target  # Inserting ground truth
 				img_arr[:, shape[1]*2+space*2:] = reconstructed[i]  # Inserting reconstructed output
@@ -117,6 +117,6 @@ if __name__ == "__main__":
 	log = Logger("logs/test-tester.log", "Testing tester")
 	json_path = "local_data/prep_out.json"
 	tester = Tester(json_path, log)
-	model = Net.from_model("saved_data/soren_tog_run/model")
+	model = Net.from_model("saved_data/soren_big_run/model")
 	tester.test_model(model, "local_data/test")
 
