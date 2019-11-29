@@ -77,31 +77,18 @@
 \begin{dtupostercontent}
 \section{Weeds, Crops and Dirt}
 
-\begin{itemize}
-	\item Motivation
-	
-	\item In this presentation
-\end{itemize}
  
 \section{The Data: Brazilian Sugar Fields}
 The data used in this project is one drone image of a field, which is illustrated as the following.
 \begin{figure}
 \centering
 \includegraphics[width=.7\linewidth]{raw-min2}
+\caption{Sugarcane field in Brazil, }
 \end{figure}
-\begin{itemize}
-	\item How the image came to be
-	
-	\item 
-\end{itemize}
 
 
 \section{Our SegNet: 1152 Feature Maps}
-\begin{itemize}
-	\item How a CNN works and advantages
-	
-	\item The Encoder-Decoder structure
-\end{itemize}
+
 
 %%Model af netværket 
 %%Encoder-Decoder
@@ -119,6 +106,8 @@ The data used in this project is one drone image of a field, which is illustrate
 %	\includegraphics[width=1\linewidth]{pool}
 %	\label{fig:maxpool}
 %\end{figure}
+\subsubsection*{Skip Connections}
+The skip connections used in SegNet are the max-pooling indices from the encoder-layer. These indices are used for the up-sampling in the decoder-layers. The process is illustrated as the following:
 \begin{equation*}\label{key}
 \scriptsize
 \begin{bmatrix}a&b\\c&d\end{bmatrix} \xrightarrow{\text{\scriptsize M. pool indices}}
@@ -126,14 +115,6 @@ The data used in this project is one drone image of a field, which is illustrate
 \rightarrow 
 \texttt{\scriptsize Conv2d}
 \end{equation*}
-
-\begin{itemize}
-	\item Skip connections
-	\item Feature Maps
-	\item Max-pool
-\end{itemize}
-
-
 
 Loss of \(N\) pixels in one-hot \((N \times  3)\) matrix \(\mathbf x^\text{pred}\) with the true classes \(\mathbf c\).
 \[
@@ -166,34 +147,18 @@ _{\mathclap{\text{Class weight}}}
 %% Hvordan regulariseres netværket
 %% Data transformeringer 
 %% Hyperparametre 
+\section{Reconstruction}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{"Reconstruction DL"}
+	\caption{}
+	\label{fig:reconstruction-dl}
+\end{figure}
 
-\begin{itemize}
-	\item Regularization \\
-		Dropout \\
-		Data Augmentation \\
-		Batch-Normalization
-	
-	\item All about the Hyperparameters
-\end{itemize}
 
-\begin{itemize}
-	\item Class-Imbalance
-	\item Weighted Cross-Entropy
-	
-	\item Accuracy measures \\
-		Global Accuracy \\
-		Mean Class-wise Accuracy \\
-		Jaccard Index \\
-		F1-Score
-\end{itemize}
 
 \section{Different Metrics, Different Stories}
 
-\begin{itemize}
-	\item 
-	
-	\item 
-\end{itemize}
 
 %%Tabel med metrics 
 %% Gøre vores F1 score fed og skriftstørrelse 100
@@ -231,20 +196,11 @@ _{\mathclap{\text{Class weight}}}
 the coloured background}\label{fig:example}
 \end{figure}
 
-\begin{itemize}
-	\item Reconstruction
-	\item Border Prediction
-\end{itemize}
 
 
 \section{Where Can This Go?}
 % Yderligere arbejde
 %Perspektiv på problemet 
-\begin{itemize}
-	\item Competing models in terms of Memory use
-	\item What could be improved?
-	\item Complications of the task
-\end{itemize}
 
 \begin{figure}
 	\begin{center}
@@ -252,6 +208,11 @@ the coloured background}\label{fig:example}
 	\end{center}
 \end{figure}
 
+\begin{itemize}
+	\item Complications with the task of image segmentation is the limited amount of data available. 
+	\item More data and more advanced data augmentation can lead to a more generalizable and robust model.
+	\item Can lead to an algorithm that can indentify crops and weed on a field and aid farmers in their work.
+\end{itemize}
 
 \end{dtupostercontent}
 \end{document}
