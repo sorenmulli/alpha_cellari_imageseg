@@ -81,14 +81,14 @@
 Farmers, and later, biologists, have spent centuries manually seperating crops from weeds to optimize the year's harvest and minimize the amount of pesticides. This agricultural task can be made more efficient by using automatization to separate the crops from the weeds and the dirt.
 \\
 \\
-\indent On this poster, you can expect to learn about the implementation of SegNet for pixelwise crop classification on a drone image. The results of this implementation is also shown as well as the problems with such data and what can be done to improve it for future implementations.
+\indent On this poster, you can expect to learn about the implementation of SegNet for  image segmentation of crops on a drone image. The results of this implementation is also shown as well as the problems with such data and what can be done to improve it for future implementations.
  
 \section{The Data: Brazilian Sugar Fields}
 The data used in this project is one drone image of a field, which is illustrated as the following.
 \begin{figure}
 \centering
 \includegraphics[width=.7\linewidth]{raw-min3}
-\caption{Orthomosaic drone photo of a sugar cane field in Brazil \cite{USC}.}
+\caption{Orthomosaic drone photo of a sugar cane field in Brazil \cite{USC}. We cut the image into subimages of 512x512.}
 \end{figure}
 \begin{itemize}
 	\item Labelling of the field is performed by biologist into 3 categories: crops, weeds and soil.
@@ -105,18 +105,11 @@ The data used in this project is one drone image of a field, which is illustrate
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\linewidth]{Encoder-Decoder2}
-	\caption{The structure of the network. Dropout prevents overfitting, batchnorm normalizes, ReLU creates non-linearity and max-pool helps with translational invariance \cite{Seg}.}
+	\caption{The structure of the SegNet network, image taken from \cite{Seg}. Dropout prevents overfitting, batchnorm normalizes, ReLU creates non-linearity and max-pool helps with translational invariance.}
 	\label{fig:Structure}
 \end{figure}
-
-Same but mirrored encoder and decoder dimensions means ample opportunity for pixel-wise classification!
-
- 
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=1\linewidth]{pool}
-%	\label{fig:maxpool}
-%\end{figure}
+Same but mirrored encoder and decoder dimensions means ample opportunity for pixel-wise classification! 
+\vspace*{-1\baselineskip}
 \subparagraph{Skip Connections}
 The skip connections used in SegNet are the max-pooling indices from the encoder-layer. These indices are used for the up-sampling in the decoder-layers. The process is illustrated as the following:
 \begin{equation*}\label{key}
@@ -126,14 +119,20 @@ The skip connections used in SegNet are the max-pooling indices from the encoder
 \rightarrow 
 \texttt{\scriptsize Conv2d}
 \end{equation*}
-
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=1\linewidth]{pool}
+%	\label{fig:maxpool}
+%\end{figure}
+\vspace*{-1\baselineskip}
 \subparagraph{Loss} of \(N\) pixels in one-hot \((N \times  3)\) matrix \(\mathbf x^\text{pred}\) with the true classes \(\mathbf c\).
 \[
 L = \underbrace{
 \vphantom{\sum_{i}}
-\frac 1 N}
-_{\mathllap{\text{Mean over minibatch}}}
+\frac 1 N
 \sum_{\mathclap {i=1}}^{N}
+}
+_{\mathllap{\text{Mean over minibatch}}}
 \underbrace{ 
 \vphantom{\sum_{i}}
 \mathbf{w}[i, c_i]}
@@ -151,7 +150,7 @@ For training, the Adam algorithm was used and for \textbf{regularization}, the d
 	\begin{center}
 			\includegraphics[width=\linewidth,origin=c]{loss3}
 	\end{center}
-	\caption{The training and evaluation loss as a function of the number of epochs. The validation loss is red and the training loss is blue. Not the low degree of overfitting with this implementation with Dropout \(p=0.1\)}\label{fig:example2}
+	\caption{The training and evaluation loss as a function of the number of epochs. The validation loss is red and the training loss is blue. Note the low degree of overfitting with this implementation with Dropout in each layer \(p=0.1\) and heavy data augmentation.}\label{fig:example2}
 \end{figure}
 
 %% Hvordan regulariseres netværket
@@ -180,13 +179,13 @@ For training, the Adam algorithm was used and for \textbf{regularization}, the d
 		\hline 
 		\rule[-1ex]{0pt}{2.5ex} Our SegNet & 97 & 87  &88  & 98  &80&\textbf{84}  \\ 
 	\end{tabular} 
-\caption{Results for different accuracy measures explained below. USC is the first work on the data set \cite{USC.} Note that we don't have access for full results for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as ours.}
+\caption{Results for different accuracy measures explained below. USC is the first work on the data set \cite{USC}. Note that we don't have access for full results for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as ours.}
 \end{table}
 
 \begin{itemize}
-	\item \textit{Global accuracy (G):} Simple accuracy over all pixels. Good for smooth prediction but easy to achieve optimize on unbalanced data.
-	\item \textit{Mean class wise accuracy (C):} Naïve mean over class accuracies. What is being optimized for with the loss function.
-	\item \textit{Mean F1 score: (mF1)} The benchmark: Penalizes false positives and gives less credit to true negatives and is thus better for unbalanced classes. 
+	\item \textit{Global accuracy (G):} Simple accuracy over all pixels. Good for smooth prediction but too easy to maximize on unbalanced data.
+	\item \textit{Mean class wise accuracy (C):} Naïve mean over class accuracies is what the loss function optimizes for.
+	\item \textit{Mean F1 score: (mF1)} Seen as the  benchmark: Penalizes false positives and gives less credit to true negatives and is thus better for unbalanced classes. 
 \end{itemize}
 
 \section{Reconstruction}
@@ -198,7 +197,7 @@ For training, the Adam algorithm was used and for \textbf{regularization}, the d
 \end{figure}
 \begin{itemize}
 	\item Inference is performed on smaller images for practical reasons.
-	\item Quality of predictions near borders are bad, our solution is to add padding and cut away border predictions.
+	\item Quality of predictions near borders is bad; our solution is to add padding and cut away border predictions.
 	\item This results in a smooth unified field prediction when the smaller images are stitched.
 \end{itemize}
 %Kort beskrivelse af resultater 
@@ -224,12 +223,13 @@ For training, the Adam algorithm was used and for \textbf{regularization}, the d
 	\begin{center}
 			\includegraphics[width=\linewidth,origin=c]{reconst}
 	\end{center}
+	\caption{An example of predictions. The true image (left) has a large portion of weeds (yellow) in the bottom and some crops (green) in the top as can be seen in the biologist ground truth (middle). The SegNet model recreates this test image well (right) but has some noise in the bulk of weeds and connects patches of plants too often. }
 \end{figure}
 
 \begin{itemize}
-	\item Complications with the task of image segmentation is the limited amount of data available. 
-	\item More data and more advanced data augmentation can lead to a more generalizable and robust model.
-	\item Can lead to an algorithm that can identify crops and weed on a field and aid farmers in their work. 
+	\item Complications with the task of image segmentation is the limited amount of data available: Real world images might look very different depending on lighting and angles.
+	\item More data and advanced data augmentation leads to more generalizable and robust models.
+	\item This implementation could then aid farmers in their work and give accurate estimates of weed densities in different parts of the field.
 \end{itemize}
 
 \begin{thebibliography}{9}
