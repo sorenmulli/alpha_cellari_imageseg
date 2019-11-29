@@ -17,7 +17,7 @@ def baseline_computation(json_path, log, nclasses = 3):
 
 	data_loader = DataLoader(json_path, 12)
 	criterion = torch.nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=3)
-
+	
 	baseline_pred = int(torch.argmax(torch.unique(data_loader.train_y, return_counts=True)[1]))
 
 	train_target = torch.cat((data_loader.val_y, data_loader.train_y), dim = 0)

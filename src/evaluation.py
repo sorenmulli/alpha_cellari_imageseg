@@ -22,12 +22,13 @@ def accuracy_measures(
 	y_true, y_pred = y_true_tensor.flatten().detach().cpu().numpy(), y_pred_tensor.flatten().detach().cpu().numpy()
 	voids = y_true == 3
 	y_true, y_pred = y_true[~voids], y_pred[~voids]
-	
+		
 	conf_matrix = confusion_matrix(y_true, y_pred)
 	output = dict()
 
 	if measures['G']:
 		output['G'] = conf_matrix.trace() / conf_matrix.sum() 
+		output['G'] = np.mean(y_true == y_pred)
 	if measures['C']:
 		class_accuracies = conf_matrix.diagonal() / conf_matrix.sum(axis = 1)
 		output['C'] = class_accuracies.mean()
