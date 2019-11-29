@@ -79,7 +79,8 @@
 \begin{dtupostercontent}
 \section{Weeds, Crops and Dirt}
 \begin{itemize}
-	\item On this poster, you can expect to learn about the architecture of the SegNet model
+	\item Agriculture can be made more efficient by using automization to classify seperate the crops from the weeds and the dirt.
+	\item On this poster, you can expect to learn about the implementation of SegNet for pixelwise crop classification on a drone image. The results of this implementation is also shown as well as how they came to be.
 \end{itemize}
  
 \section{The Data: Brazilian Sugar Fields}
@@ -105,9 +106,14 @@ The data used in this project is one drone image of a field, which is illustrate
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\linewidth]{Encoder-Decoder2}
+	\caption{The structure of the network. Dropout prevents overfitting, batchnorm normalizes, ReLU creates non-linearity and max-pool helps with translational invariance.}
 	\caption{}
 	\label{fig:Structure}
 \end{figure}
+
+\begin{itemize}
+	\item Same but mirrored encoder and decoder dimensions means ample opportunity for pixel-wise classification!
+\end{itemize}
  
 %\begin{figure}
 %	\centering
