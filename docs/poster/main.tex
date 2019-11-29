@@ -94,7 +94,7 @@ The data used in this project is one drone image of a field, which is illustrate
 	\item The goal of our project is to train a neural network that can perform a pixelwise classification on a field.
 \end{itemize}
 \subparagraph{Data Augmentation} was used with random croppings to 256x256 images and \(50 \%\) chances of flipping the image both horizontally and vertically as a method for regularization and expanding the limited data set.
-\section{Our SegNet: 1152 Feature Maps}
+\section{Our SegNet: 5760 Feature Maps}
 
 
 %%Model af netværket 
@@ -148,7 +148,7 @@ _{\mathclap{\text{Class weight}}}
 For training, the Adam algorithm was used and for \textbf{regularization}, the dropout method was used on each layer discarding \(p=10\ \%\)  of all weights.
 \begin{figure}
 	\begin{center}
-			\includegraphics[width=\linewidth,origin=c]{loss2}
+			\includegraphics[width=\linewidth,origin=c]{loss3}
 	\end{center}
 	\caption{The training and evaluation loss as a function of the number of epochs. The validation loss is red and the training loss is blue. Not the low degree of overfitting with this implementation with Dropout \(p=0.1\)}\label{fig:example2}
 \end{figure}
