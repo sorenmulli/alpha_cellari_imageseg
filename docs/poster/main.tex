@@ -69,7 +69,6 @@
 %===  Make header for poster (title and authors)
 \begin{dtuposterhead} %
 \dtuposterauthor{\normalsize Mads Andersen, Oskar Wiese, Anders Henriksen, Søren Holm, Asger Schultz}
-\dtuposteraffil{\small DTU Compute}
 \dtuposteraffil{\small \texttt{\{s173934, s183917, s183904, s183911, s183912\}@student.dtu.dk}}
 \end{dtuposterhead}
 %
@@ -200,7 +199,6 @@ _{\mathclap{\text{Class weight}}}
 \begin{itemize}
 	\item \textit{Global accuracy (G):} Simple accuracy over all pixels. Good for smooth prediction but easy to achieve optimize on unbalanced data.
 	\item \textit{Mean class wise accuracy (C):} Naïve mean over class accuracies. What is being optimized for with the loss function.
-	\item \textit{Mean intersect over union (mIoU):} Higher correlated to human classification. Favours regional smoothness over boundary accuracy.
 	\item \textit{Mean F1 score: (mF1)} The benchmark: Penalizes false positives and gives less credit to true negatives and is thus better for unbalanced classes. 
 \end{itemize}
 

@@ -343,7 +343,7 @@
 \newcommand{\dtuposter@drawbg}{ %
   \begin{tikzpicture}[remember picture,overlay] %
     \begin{pgfonlayer}{background}%
-	    % set base node as marker
+%	     set base node as marker
 	    \node [inner sep=0pt,above right] at (current page.north west){ %
 	      \begin{tikzpicture}[remember picture,overlay]%
 		      \draw (\toplogoleft,-\toplogotop) node[inner sep=0pt, below right] {\includegraphics[height=\toplogoheight]{\dtuposter@toplogo}}; %
@@ -460,7 +460,8 @@
 %======================================================================
 %===  Define the new basic environments
 \newenvironment{dtuposterhead}{ %
-  \flushleft {\usekomafont{title} \dtuposter@title  } \par \vspace*{2\baselineskip} %
+{\vspace*{-3.\baselineskip}} \par  
+  \flushleft {\usekomafont{title} \dtuposter@title  } \par \vspace*{.25\baselineskip} %
 }{ %
   \vspace*{2\baselineskip} \par %
 } %
