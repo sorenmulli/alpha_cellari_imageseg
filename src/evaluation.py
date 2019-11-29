@@ -28,7 +28,6 @@ def accuracy_measures(
 
 	if measures['G']:
 		output['G'] = conf_matrix.trace() / conf_matrix.sum() 
-		output['G'] = np.mean(y_true == y_pred)
 	if measures['C']:
 		class_accuracies = conf_matrix.diagonal() / conf_matrix.sum(axis = 1)
 		output['C'] = class_accuracies.mean()
