@@ -92,7 +92,7 @@ Had to use different metrics because
 The metrics \footnote{https://hal.inria.fr/hal-01581525/document}\footnote{
 http://www.bmva.org/bmvc/2013/Papers/paper0032/paper0032.pdf} 
 \begin{itemize}
-	\item Global accuracy: Trivial and  the most important because of class imbalance but is good for smoothness
+	\item Global accuracy: Trivial and  not very important because of class imbalance but is good for smoothness
 	\item Mean class-wise accuracy: Takes class imbalance into account. Is what is being optimized for in the model.
 	\item Mean Intersect over Union: "Jaccard Index".  Found to be better correlated with human classification though still only \(\approx 0.5\). Favours region smoothness highly and not boundary accuracy.
 	\item Harmonic mean of precision and recall. To compare to others with same project. Penalizes false positives and gives less credit to true negatives thus being better for unbalanced classes.
@@ -104,10 +104,10 @@ Regularization
 	\item NN's are prone to overfitting, because they are so flexible
 	\item Prevent overfitting $ \to $ better results on test data
 	\item Three methods
-	\item Dropout: Randomly remove nodes to increase variability. $ p=25\pro $
+	\item Dropout: Randomly remove nodes to increase variability. $ p=10\pro $
 	\item Data augmentation: Increase size of dataset
 	\begin{itemize}
-		\item Crop each $ 512\times 512 $ to random $ 250\times 250 $
+		\item Crop each $ 512\times 512 $ to random $ 256\times 256 $
 		\item 50\pro chance of flip T/D and 50\pro chance of flip L/R
 	\end{itemize}
 	\item Batch normalization normalizes activations

@@ -112,8 +112,6 @@ class Trainer:
 
 		return net
 
-
-
 if __name__ == "__main__":
 	os.chdir(sys.path[0])
 

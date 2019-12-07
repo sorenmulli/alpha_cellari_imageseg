@@ -39,19 +39,19 @@ class Net(nn.Module):
 
 		self.log("Initializing encoding blocks...")
 		
-		self.encoder1 = EncoderBlock(3, 32, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.encoder2 = EncoderBlock(32, 64, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.encoder3 = EncoderBlock(64, 128, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.encoder4 = EncoderBlock(128, 256, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.encoder5 = EncoderBlock(256, 512, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.encoder1 = EncoderBlock(3, 64, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.encoder2 = EncoderBlock(64, 128, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.encoder3 = EncoderBlock(128, 256, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.encoder4 = EncoderBlock(256, 512, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.encoder5 = EncoderBlock(512, 512, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.log("Done initializing encoding blocks\n")
 
 		self.log("Initializing decoder blocks...")
-		self.decoder1 = DecoderBlock(512, 256, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.decoder2 = DecoderBlock(256, 128, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.decoder3 = DecoderBlock(128, 64,  3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.decoder4 = DecoderBlock(64, 32, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.decoder5 = DecoderBlock(32, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.decoder1 = DecoderBlock(512, 512, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.decoder2 = DecoderBlock(512, 256, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.decoder3 = DecoderBlock(256, 128,  3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.decoder4 = DecoderBlock(128, 64, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		self.decoder5 = DecoderBlock(64, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.log("Done initializing decoder blocks\n")
 
 	def forward(self, x):
