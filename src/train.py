@@ -37,9 +37,11 @@ def model_trainer(architecture: dict, learning_rate: float, augmentations: Augme
 	criterion = nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=3)
 	optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
-	LOG(f"Train size: {len(data_loader.train_x)}\nEval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}\n")
+	LOG(f"Augmentations: {AugmentationConfig}")
+	LOG(f"Criterion and optimizer: {criterion}\n{optimizer}")
 	LOG(f"Neural network information\n\t{net}")
-	
+	LOG(f"Train size: {len(data_loader.train_x)}\nEval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}\n")
+	LOG(f"Number of epochs {epochs} with batch size: {batch_size}")
 	full_training_loss = list()
 	full_eval_loss = list()
 	val_iter = list()
