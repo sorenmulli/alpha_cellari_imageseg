@@ -80,16 +80,24 @@ def _standardize(image):
 
 	return image, means, stds
 
-def _target_index(image):
+def _target_index(image: np.ndarray):
 
-	image = image // 255
-
-	# As red, green, and yellow are 100, 010, and 110 respectively, they can be interpreted as binary numbers in reverse
-	# Multiplication with powers of 2 happens along the last axis and transforms them into decimal base
-	image = image @ np.array([1,2,4]) - 1
-	image[image == -1] = 3
+	str_rep = np.apply_along_axis(lambda arr: "".join([f"{int(x):03}" for x in arr]), 2, image).astype(np.str)
+	classes = np.empty(image.shape[:2], dtype=np.uint8)
+	class_no = 0
+	void_class = "0" * 9
+	uniques = np.unique(str_rep)
+	classes_order = np.empty(len(uniques), dtype="<U9")
+	for class_ in uniques:
+		if class_ != void_class:
+			classes[str_rep==class_] = class_no
+			classes_order[class_no] = str(class_)
+			class_no += 1
+		else:
+			classes[str_rep==void_class] = len(uniques) - 1
+			classes_order[-1] = str(void_class)
 	
-	return image
+	return classes, [str(x) for x in classes_order]
 
 def _pad(image, mirror_padding = False, extra_shape = 0):
 
@@ -209,8 +217,8 @@ def _prepare_data():
 	LOG("Done standardizing image\n")
 
 	LOG("Squeezing target images to single channel...")
-	target = _target_index(target)
-	LOG("Done creating target values. %s\nRed:\t0\nGreen:\t1\nYellow:\t2\nVoid:\t3\n" % (target.shape,))
+	target, classes = _target_index(target)
+	LOG("Done creating target values.\nClasses including void (if any) last:\n%s\n" % "\n".join(class_ for class_ in classes))
 
 	LOG("Splitting images...")
 	aerial, split_shape, large_aerial = _split_image(aerial, IMAGE_SHAPE[2])
@@ -270,6 +278,7 @@ def _prepare_data():
 		"large_aerial_path": large_aerial_path,
 		"large_target_path": large_target_path,
 		"sub_imgs_folder": SUB_PATH,
+		"classes": classes,
 		"train_idcs": sorted(train_idcs),
 		"val_idcs": sorted(val_idcs),
 		"test_idcs": sorted(test_idcs),
