@@ -23,22 +23,25 @@ class BlueLayer(nn.Module):
 		x = self.relu(x)
 
 		return x
-#https://stackoverflow.com/questions/49433936/how-to-initialize-weights-in-pytorch
 class EncoderBlock(nn.Module):
 	def __init__(self, in_size, out_size, n_layers, kernel_size, padding, stride, mpool_dim, dropout):
 		super().__init__()
 		
 		layers = []
 
+		#Sets Dropout to zero in all layer expect in final layer
 		layers.append(
-			BlueLayer(in_size, out_size, kernel_size, padding, stride, dropout)
+			BlueLayer(in_size, out_size, kernel_size, padding, stride, 0)
 		)
 		
-		for _ in range(n_layers-1):
+		for _ in range(n_layers-2):
 			layers.append(
-				BlueLayer(out_size, out_size, kernel_size, padding, stride, dropout)
+				BlueLayer(out_size, out_size, kernel_size, padding, stride, 0)
 			)
 		
+		layers.append(
+				BlueLayer(out_size, out_size, kernel_size, padding, stride, dropout)
+			)
 		self.encoder = nn.Sequential(*layers)
 
 		self.mpool = nn.MaxPool2d(*mpool_dim, return_indices = True)
@@ -59,8 +62,9 @@ class DecoderBlock(nn.Module):
 
 		
 		for _ in range(n_layers-1):
+			# Sets Dropout to zero on every layer expect final layer
 			layers.append(
-				BlueLayer(in_size, in_size, kernel_size, padding, stride, dropout)
+				BlueLayer(in_size, in_size, kernel_size, padding, stride, 0)
 			)
 
 		layers.append(
