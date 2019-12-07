@@ -25,12 +25,12 @@ class DataLoader:
 		target = torch.from_numpy(self.load(self.cfg["target_path"]))		
 		
 		
-		self.train_x = aerial[self.cfg["train_idcs"]].float().to(DEVICE)
-		self.train_y = target[self.cfg["train_idcs"]].long().to(DEVICE)
+		self.train_x = aerial[self.cfg["train_idcs"]].float()
+		self.train_y = target[self.cfg["train_idcs"]].long()
 
 
-		self.val_x = aerial[self.cfg["val_idcs"]].float().to(DEVICE)
-		self.val_y = target[self.cfg["val_idcs"]].long().to(DEVICE)
+		self.val_x = aerial[self.cfg["val_idcs"]].float()
+		self.val_y = target[self.cfg["val_idcs"]].long()
 		self.log("Done loading %i images\n" % len(aerial))
 	
 		self.batch_size = batch_size
@@ -62,13 +62,13 @@ class DataLoader:
 		idcs = np.arange(len(self.train_x))
 		np.random.shuffle(idcs)
 		for batch in range(self.n_batches):
-			yield self._generate_batch(
+			yield [x.to(DEVICE) for x in self._generate_batch(
 				idcs[batch*self.batch_size:(batch+1)*self.batch_size]
-			)
+			)]
 	
 	def get_validation(self):
 
-		return self.val_x, self.val_y
+		return self.val_x.to(DEVICE), self.val_y.to(DEVICE)
 	
 	def get_test(self):
 
