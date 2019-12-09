@@ -13,6 +13,7 @@ from forward_passer import full_forward
 from image_reconstructor import ensure_shape
 from logger import get_timestamp, Logger, NullLogger
 from model import Net
+from test import Tester
 
 
 from matplotlib import pyplot as plt 
@@ -47,9 +48,13 @@ class Trainer:
 		criterion = nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=ignore_index)
 		optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
+		self.log(f"Augmentations: {AugmentationConfig}")
+		self.log(f"Criterion and optimizer: {criterion}\n{optimizer}")
+	
 		self.log(f"Train size: {len(data_loader.train_x)}\nEval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}\n")
 		self.log(f"Neural network information\n\t{net}")
-		
+		self.log(f"Number of epochs {epochs} with batch size: {batch_size}")
+	
 		full_training_loss = list()
 		full_eval_loss = list()
 		val_iter = list()
@@ -120,22 +125,27 @@ if __name__ == "__main__":
 		"padding": 1, 
 		"stride": 1,
 		"pool_dims": (2, 2),
-		"probs": 0.25,
+		"probs": 0.4,
 	}
 
 	learning_rate = 2e-4
 
 	augmentations = AugmentationConfig(
 		augments =  [flip_lr, flip_tb],  
-		cropsize = (250, 250), 
+		cropsize = (256, 256), 
 		augment_p = [0.5, 0.5]
 	)
 
 	batch_size = 3
-	epochs = 100
+	epochs = 3000
 
 	logger = Logger("logs/train_run.log", "Running full training loop")
 	trainer = Trainer("local_data/prep_out.json", logger)
 	net = trainer.model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 10, save_every = 1)
 	full_forward(net, None, True, "local_data/full-forward.png")
 	
+	
+	tester = Tester("local_data/prep_out.json", logger)
+
+	tester.test_model(net, "local_data/test")
+
