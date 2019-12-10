@@ -136,7 +136,7 @@ if __name__ == "__main__":
 
 	augmentations = AugmentationConfig(
 		augments =  [flip_lr, flip_tb],  
-		cropsize = (350, 350), 
+		cropsize = (256, 256), 
 		augment_p = [0.5, 0.5]
 	)
 
