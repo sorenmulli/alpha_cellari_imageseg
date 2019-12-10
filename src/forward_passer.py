@@ -13,7 +13,7 @@ from image_reconstructor import ensure_shape, ImageReconstructor
 from model import example_architecture, Net
 from logger import Logger
 
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+DEVICE = torch.device("cuda:7" if torch.cuda.is_available() else "cpu")
 
 def full_forward(net: torch.nn.Module, idcs: np.ndarray = None, perform_stitch = True, save_paths = None, oversample = True):
 
