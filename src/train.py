@@ -129,14 +129,14 @@ if __name__ == "__main__":
 		"padding": 1, 
 		"stride": 1,
 		"pool_dims": (2, 2),
-		"probs": 0.2,
+		"probs": 0.1,
 	}
 
-	learning_rate = 2e-4
+	learning_rate = 1.5e-4
 
 	augmentations = AugmentationConfig(
 		augments =  [flip_lr, flip_tb],  
-		cropsize = (256, 256), 
+		cropsize = (350, 350), 
 		augment_p = [0.5, 0.5]
 	)
 
