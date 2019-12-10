@@ -45,7 +45,9 @@ class Trainer:
 			ignore_index = self.cfg["classes"].index("0"*9)
 		except ValueError:
 			ignore_index = -100
-		criterion = nn.CrossEntropyLoss(weight = class_weight_counter(data_loader.train_y), ignore_index=ignore_index)
+		criterion = nn.CrossEntropyLoss(ignore_index=ignore_index,
+		#weight = class_weight_counter(data_loader.train_y), 
+		)
 		optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
 		self.log(f"Augmentations: {AugmentationConfig}")
@@ -149,6 +151,9 @@ if __name__ == "__main__":
 	logger = Logger("logs/train_run.log", "Running full training loop")
 	trainer = Trainer("local_data/prep_out.json", logger)
 	net = trainer.model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 25, save_every = 500)
+	net.save('model')
+
+
 	full_forward(net, None, True, "local_data/full-forward.png")
 	
 	
