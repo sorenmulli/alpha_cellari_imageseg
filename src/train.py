@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
 	logger = Logger("logs/train_run.log", "Running full training loop")
 	trainer = Trainer("local_data/prep_out.json", logger)
-	net = trainer.model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 10, save_every = 1)
+	net = trainer.model_trainer(architecture, learning_rate, augmentations, epochs, batch_size, val_every = 25, save_every = 500)
 	full_forward(net, None, True, "local_data/full-forward.png")
 	
 	
