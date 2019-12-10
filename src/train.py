@@ -22,7 +22,7 @@ import matplotlib.animation as anim
 from utilities import class_weight_counter
 
 
-DEVICE = torch.device("cuda:1") if torch.cuda.is_available() else torch.device("cpu")
+DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
 class Trainer:
 	

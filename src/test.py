@@ -11,7 +11,7 @@ from image_reconstructor import ensure_shape, ImageReconstructor
 from logger import Logger, NullLogger
 from model import example_architecture, Net
 
-DEVICE = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class Tester:
 
