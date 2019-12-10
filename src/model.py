@@ -18,7 +18,7 @@ example_architecture = {
 }
 
 CPU = torch.device("cpu")
-GPU = torch.device("cuda:7" if torch.cuda.is_available() else "cpu")
+GPU = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 
 class Net(nn.Module):
 
