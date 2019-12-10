@@ -1,6 +1,6 @@
 #!/bin/sh
-##BSUB -q gpuv100
-#BSUB -q gputitanxpascal
+#BSUB -q gpuv100
+##BSUB -q gputitanxpascal
 #BSUB -gpu "num=1"
 #BSUB -J myWork
 #BSUB -n 1
