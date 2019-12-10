@@ -7,6 +7,7 @@
 #BSUB -R "rusage[mem=32GB]"
 #BSUB -o logs/%J.out
 #BSUB -e logs/%J.err
+#BSUB -u s183911@student.dtu.dk
 #BSUB -N
 module load python3/3.6.2
 module load cuda/8.0
