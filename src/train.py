@@ -140,6 +140,9 @@ if __name__ == "__main__":
 		augment_p = [0.5, 0.5]
 	)
 
+	torch.cuda.empty_cache()
+
+
 	batch_size = 3
 	epochs = 3000
 
