@@ -117,6 +117,6 @@ if __name__ == "__main__":
 	log = Logger("logs/test-tester.log", "Testing tester")
 	json_path = "local_data/prep_out.json"
 	tester = Tester(json_path, log)
-	model = Net.from_model("saved_data/soren_big_run/model")
+	model = Net.from_model("saved_data/soren_hpc_standard_run/model")
 	tester.test_model(model, "local_data/test")
 
