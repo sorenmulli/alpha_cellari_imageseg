@@ -107,16 +107,17 @@ class ImageReconstructor:
 		output = output.transpose(0, 2, 3, 1)
 		self.log("Done ensuring shape. Shape: %s\n" % (output.shape, ))
 
-		voids_exist = "0" * 9 in self.cfg["classes"]
-		if voids_exist:
-			self.cfg["classes"][self.cfg["classes"].index("0"*9)] = "255" * 3
 		colours = [np.array([int(x[:3]), int(x[3:6]), int(x[6:])], dtype=np.uint8) for x in self.cfg["classes"]]
+		void_colour = np.array([255, 255, 255], dtype=np.uint8)
 
 		self.log("Determining classes and inserting colours...")
 		classes = np.argmax(output, axis=3)
+		print(classes)
 		reconst = np.zeros_like(output, dtype=np.uint8)
 		for i, class_ in enumerate(colours):
 			reconst[classes==i] = class_
+		if voids is not None:
+			reconst[voids] = void_colour
 		
 		self.log("Done determining classes and inserting colours\n")
 
@@ -134,6 +135,7 @@ if __name__ == "__main__":
 	reconstructor = ImageReconstructor(Logger("logs/test-reconstruction.log", "Reconstructing images from data"))
 	# reconstructor.reconstruct_aerial_from_file(reconstructor.paths[0], 3, 5, 9)
 
-	voids = np.random.randint(2, size=(2, 512, 512), dtype=np.bool)
+	voids = np.zeros((2, 512, 512), dtype=np.bool)
+	voids[:, :100, :100] = 1
 	test_output = np.random.randn(2, 3, 512, 512)
 	reconstructor.reconstruct_output(test_output, voids, None, 0, 1)
