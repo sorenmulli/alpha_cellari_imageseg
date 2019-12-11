@@ -45,6 +45,7 @@ class Trainer:
 			ignore_index = self.cfg["classes"].index("0"*9)
 		except ValueError:
 			ignore_index = -100
+		
 		criterion = nn.CrossEntropyLoss(ignore_index=ignore_index,
 		#weight = class_weight_counter(data_loader.train_y), 
 		)
