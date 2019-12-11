@@ -1,0 +1,723 @@
+2019-12-10 23:10:16.622710	Running full training loop
+
+2019-12-10 23:10:23.985671	Augmentations: <class 'augment.AugmentationConfig'>
+2019-12-10 23:10:23.987564	Criterion and optimizer: CrossEntropyLoss()
+                          	Adam (
+                          	Parameter Group 0
+                          	    amsgrad: False
+                          	    betas: (0.9, 0.999)
+                          	    eps: 1e-08
+                          	    lr: 0.00015
+                          	    weight_decay: 0
+                          	)
+2019-12-10 23:10:24.459053	Train size: 69
+                          	Eval size: 15
+                          	Test size: 24
+
+2019-12-10 23:10:24.461627	Neural network information
+                          		Net(
+                          	  (encoder1): EncoderBlock(
+                          	    (encoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	    (mpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                          	  )
+                          	  (encoder2): EncoderBlock(
+                          	    (encoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	    (mpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                          	  )
+                          	  (encoder3): EncoderBlock(
+                          	    (encoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	    (mpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                          	  )
+                          	  (encoder4): EncoderBlock(
+                          	    (encoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	    (mpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                          	  )
+                          	  (encoder5): EncoderBlock(
+                          	    (encoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	    (mpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                          	  )
+                          	  (decoder1): DecoderBlock(
+                          	    (unpool): MaxUnpool2d(kernel_size=(2, 2), stride=(2, 2), padding=(0, 0))
+                          	    (decoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	  )
+                          	  (decoder2): DecoderBlock(
+                          	    (unpool): MaxUnpool2d(kernel_size=(2, 2), stride=(2, 2), padding=(0, 0))
+                          	    (decoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(512, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	  )
+                          	  (decoder3): DecoderBlock(
+                          	    (unpool): MaxUnpool2d(kernel_size=(2, 2), stride=(2, 2), padding=(0, 0))
+                          	    (decoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(256, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	  )
+                          	  (decoder4): DecoderBlock(
+                          	    (unpool): MaxUnpool2d(kernel_size=(2, 2), stride=(2, 2), padding=(0, 0))
+                          	    (decoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	  )
+                          	  (decoder5): DecoderBlock(
+                          	    (unpool): MaxUnpool2d(kernel_size=(2, 2), stride=(2, 2), padding=(0, 0))
+                          	    (decoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	  )
+                          	)
+2019-12-10 23:10:24.462826	Number of epochs 3000 with batch size: 3
+2019-12-10 23:10:24.768139	Epoch 0: Evaluation loss: 1.1003904342651367
+2019-12-10 23:10:26.894794	Epoch 0: Training loss:   1.100502610206604
+
+2019-12-10 23:11:30.162160	Epoch 25: Evaluation loss: 1.0513391494750977
+2019-12-10 23:11:31.638428	Epoch 25: Training loss:   1.04520583152771
+
+2019-12-10 23:12:32.594736	Epoch 50: Evaluation loss: 0.8912431001663208
+2019-12-10 23:12:34.441387	Epoch 50: Training loss:   0.8902015089988708
+
+2019-12-10 23:13:34.919573	Epoch 75: Evaluation loss: 0.8714925646781921
+2019-12-10 23:13:36.828629	Epoch 75: Training loss:   0.8598359823226929
+
+2019-12-10 23:14:39.709845	Epoch 100: Evaluation loss: 0.876969039440155
+2019-12-10 23:14:41.616619	Epoch 100: Training loss:   0.8721229434013367
+
+2019-12-10 23:15:44.416337	Epoch 125: Evaluation loss: 0.8014614582061768
+2019-12-10 23:15:45.948078	Epoch 125: Training loss:   0.78961181640625
+
+2019-12-10 23:16:46.928385	Epoch 150: Evaluation loss: 0.8468946814537048
+2019-12-10 23:16:48.742319	Epoch 150: Training loss:   0.8354434967041016
+
+2019-12-10 23:17:52.211549	Epoch 175: Evaluation loss: 0.8076501488685608
+2019-12-10 23:17:53.906308	Epoch 175: Training loss:   0.7955820560455322
+
+2019-12-10 23:18:55.658612	Epoch 200: Evaluation loss: 0.7858334183692932
+2019-12-10 23:18:58.571113	Epoch 200: Training loss:   0.777141273021698
+
+2019-12-10 23:20:01.503584	Epoch 225: Evaluation loss: 0.7479077577590942
+2019-12-10 23:20:03.455627	Epoch 225: Training loss:   0.7401798367500305
+
+2019-12-10 23:21:05.229643	Epoch 250: Evaluation loss: 0.7262219786643982
+2019-12-10 23:21:07.010358	Epoch 250: Training loss:   0.7249632477760315
+
+2019-12-10 23:22:11.091272	Epoch 275: Evaluation loss: 0.7507847547531128
+2019-12-10 23:22:12.787246	Epoch 275: Training loss:   0.7401425838470459
+
+2019-12-10 23:23:14.541059	Epoch 300: Evaluation loss: 0.7211083769798279
+2019-12-10 23:23:16.545045	Epoch 300: Training loss:   0.7166955471038818
+
+2019-12-10 23:24:19.612768	Epoch 325: Evaluation loss: 0.7033840417861938
+2019-12-10 23:24:21.514577	Epoch 325: Training loss:   0.6927992701530457
+
+2019-12-10 23:25:23.018635	Epoch 350: Evaluation loss: 0.6959947943687439
+2019-12-10 23:25:24.919956	Epoch 350: Training loss:   0.6877290606498718
+
+2019-12-10 23:26:26.589973	Epoch 375: Evaluation loss: 0.6867467164993286
+2019-12-10 23:26:28.287747	Epoch 375: Training loss:   0.6786857843399048
+
+2019-12-10 23:27:30.968213	Epoch 400: Evaluation loss: 0.7013705372810364
+2019-12-10 23:27:32.655722	Epoch 400: Training loss:   0.6911125183105469
+
+2019-12-10 23:28:36.996051	Epoch 425: Evaluation loss: 0.6694669723510742
+2019-12-10 23:28:38.811687	Epoch 425: Training loss:   0.6624082326889038
+
+2019-12-10 23:29:41.529122	Epoch 450: Evaluation loss: 0.6704610586166382
+2019-12-10 23:29:43.459748	Epoch 450: Training loss:   0.6568591594696045
+
+2019-12-10 23:30:45.314136	Epoch 475: Evaluation loss: 0.6554457545280457
+2019-12-10 23:30:48.214015	Epoch 475: Training loss:   0.6496742367744446
+
+2019-12-10 23:31:50.234974	Saving Network ...
+2019-12-10 23:31:50.866742	Epoch 500: Evaluation loss: 0.6648774743080139
+2019-12-10 23:31:52.591535	Epoch 500: Training loss:   0.6492758989334106
+
+2019-12-10 23:32:54.276517	Epoch 525: Evaluation loss: 0.6474089026451111
+2019-12-10 23:32:56.097877	Epoch 525: Training loss:   0.6379181742668152
+
+2019-12-10 23:33:58.841735	Epoch 550: Evaluation loss: 0.6477087140083313
+2019-12-10 23:34:00.862154	Epoch 550: Training loss:   0.6349433064460754
+
+2019-12-10 23:35:04.015540	Epoch 575: Evaluation loss: 0.643306314945221
+2019-12-10 23:35:05.625119	Epoch 575: Training loss:   0.6306681632995605
+
+2019-12-10 23:36:08.858411	Epoch 600: Evaluation loss: 0.6292600035667419
+2019-12-10 23:36:10.906192	Epoch 600: Training loss:   0.6216813325881958
+
+2019-12-10 23:37:12.977167	Epoch 625: Evaluation loss: 0.623927116394043
+2019-12-10 23:37:14.817522	Epoch 625: Training loss:   0.6135081648826599
+
+2019-12-10 23:38:16.529943	Epoch 650: Evaluation loss: 0.624516487121582
+2019-12-10 23:38:18.165851	Epoch 650: Training loss:   0.6167636513710022
+
+2019-12-10 23:39:19.915672	Epoch 675: Evaluation loss: 0.6167193055152893
+2019-12-10 23:39:21.529053	Epoch 675: Training loss:   0.6068804860115051
+
+2019-12-10 23:40:26.411507	Epoch 700: Evaluation loss: 0.6211782097816467
+2019-12-10 23:40:28.393464	Epoch 700: Training loss:   0.6095361709594727
+
+2019-12-10 23:41:30.022746	Epoch 725: Evaluation loss: 0.6159089803695679
+2019-12-10 23:41:32.982959	Epoch 725: Training loss:   0.6070851683616638
+
+2019-12-10 23:42:36.492550	Epoch 750: Evaluation loss: 0.6318599581718445
+2019-12-10 23:42:38.177344	Epoch 750: Training loss:   0.6215636730194092
+
+2019-12-10 23:43:40.936616	Epoch 775: Evaluation loss: 0.6120980381965637
+2019-12-10 23:43:42.553990	Epoch 775: Training loss:   0.6048222184181213
+
+2019-12-10 23:44:44.454079	Epoch 800: Evaluation loss: 0.6212975382804871
+2019-12-10 23:44:46.935625	Epoch 800: Training loss:   0.6096917986869812
+
+2019-12-10 23:45:49.628884	Epoch 825: Evaluation loss: 0.6064546704292297
+2019-12-10 23:45:51.377692	Epoch 825: Training loss:   0.5991856455802917
+
+2019-12-10 23:46:56.372177	Epoch 850: Evaluation loss: 0.6075713038444519
+2019-12-10 23:46:58.219204	Epoch 850: Training loss:   0.5972241163253784
+
+2019-12-10 23:47:59.871656	Epoch 875: Evaluation loss: 0.6038839817047119
+2019-12-10 23:48:01.806389	Epoch 875: Training loss:   0.5993558168411255
+
+2019-12-10 23:49:05.940152	Epoch 900: Evaluation loss: 0.6056097745895386
+2019-12-10 23:49:07.606776	Epoch 900: Training loss:   0.5974557399749756
+
+2019-12-10 23:50:09.237018	Epoch 925: Evaluation loss: 0.6091769337654114
+2019-12-10 23:50:10.912041	Epoch 925: Training loss:   0.6002364158630371
+
+2019-12-10 23:51:15.103557	Epoch 950: Evaluation loss: 0.6011760234832764
+2019-12-10 23:51:17.020983	Epoch 950: Training loss:   0.5920069217681885
+
+2019-12-10 23:52:18.931866	Epoch 975: Evaluation loss: 0.6021926403045654
+2019-12-10 23:52:22.036928	Epoch 975: Training loss:   0.5968746542930603
+
+2019-12-10 23:53:23.586727	Saving Network ...
+2019-12-10 23:53:24.381235	Epoch 1000: Evaluation loss: 0.6093658208847046
+2019-12-10 23:53:27.225999	Epoch 1000: Training loss:   0.6008358001708984
+
+2019-12-10 23:54:28.884508	Epoch 1025: Evaluation loss: 0.6017645597457886
+2019-12-10 23:54:30.706462	Epoch 1025: Training loss:   0.5939901471138
+
+2019-12-10 23:55:33.274151	Epoch 1050: Evaluation loss: 0.6005353927612305
+2019-12-10 23:55:35.146203	Epoch 1050: Training loss:   0.591342031955719
+
+2019-12-10 23:56:37.048660	Epoch 1075: Evaluation loss: 0.5999029874801636
+2019-12-10 23:56:38.900020	Epoch 1075: Training loss:   0.5913479328155518
+
+2019-12-10 23:57:41.725643	Epoch 1100: Evaluation loss: 0.5967642664909363
+2019-12-10 23:57:43.419534	Epoch 1100: Training loss:   0.5871730446815491
+
+2019-12-10 23:58:46.518335	Epoch 1125: Evaluation loss: 0.5977486968040466
+2019-12-10 23:58:48.296532	Epoch 1125: Training loss:   0.5880215167999268
+
+2019-12-10 23:59:50.043354	Epoch 1150: Evaluation loss: 0.6240650415420532
+2019-12-10 23:59:51.685092	Epoch 1150: Training loss:   0.6093763709068298
+
+2019-12-11 00:00:53.739856	Epoch 1175: Evaluation loss: 0.5978533029556274
+2019-12-11 00:00:55.298582	Epoch 1175: Training loss:   0.5887000560760498
+
+2019-12-11 00:01:58.738574	Epoch 1200: Evaluation loss: 0.6050986051559448
+2019-12-11 00:02:00.518329	Epoch 1200: Training loss:   0.594627857208252
+
+2019-12-11 00:03:05.089650	Epoch 1225: Evaluation loss: 0.5986464619636536
+2019-12-11 00:03:07.899717	Epoch 1225: Training loss:   0.5895692110061646
+
+2019-12-11 00:04:09.863058	Epoch 1250: Evaluation loss: 0.5974885821342468
+2019-12-11 00:04:11.873200	Epoch 1250: Training loss:   0.5892353653907776
+
+2019-12-11 00:05:14.057740	Epoch 1275: Evaluation loss: 0.602109968662262
+2019-12-11 00:05:15.892963	Epoch 1275: Training loss:   0.5921552777290344
+
+2019-12-11 00:06:19.240256	Epoch 1300: Evaluation loss: 0.6288638710975647
+2019-12-11 00:06:20.946242	Epoch 1300: Training loss:   0.6091718077659607
+
+2019-12-11 00:07:22.979764	Epoch 1325: Evaluation loss: 0.6050020456314087
+2019-12-11 00:07:24.755242	Epoch 1325: Training loss:   0.5931704640388489
+
+2019-12-11 00:08:28.789943	Epoch 1350: Evaluation loss: 0.5973135828971863
+2019-12-11 00:08:30.432055	Epoch 1350: Training loss:   0.587054967880249
+
+2019-12-11 00:09:33.154951	Epoch 1375: Evaluation loss: 0.6049091219902039
+2019-12-11 00:09:36.088246	Epoch 1375: Training loss:   0.5938210487365723
+
+2019-12-11 00:10:38.556393	Epoch 1400: Evaluation loss: 0.6034711599349976
+2019-12-11 00:10:40.966760	Epoch 1400: Training loss:   0.5893949866294861
+
+2019-12-11 00:11:41.895082	Epoch 1425: Evaluation loss: 0.5970418453216553
+2019-12-11 00:11:44.800706	Epoch 1425: Training loss:   0.5868272185325623
+
+2019-12-11 00:12:47.947458	Epoch 1450: Evaluation loss: 0.6022586226463318
+2019-12-11 00:12:49.864337	Epoch 1450: Training loss:   0.5915977954864502
+
+2019-12-11 00:13:53.144871	Epoch 1475: Evaluation loss: 0.6034250259399414
+2019-12-11 00:13:55.215461	Epoch 1475: Training loss:   0.594256579875946
+
+2019-12-11 00:14:57.436850	Saving Network ...
+2019-12-11 00:14:58.049380	Epoch 1500: Evaluation loss: 0.5955790877342224
+2019-12-11 00:14:59.871129	Epoch 1500: Training loss:   0.5857141613960266
+
+2019-12-11 00:16:04.376665	Epoch 1525: Evaluation loss: 0.5959511995315552
+2019-12-11 00:16:05.967495	Epoch 1525: Training loss:   0.5887157917022705
+
+2019-12-11 00:17:08.134784	Epoch 1550: Evaluation loss: 0.6031978130340576
+2019-12-11 00:17:10.150243	Epoch 1550: Training loss:   0.5937898755073547
+
+2019-12-11 00:18:14.000251	Epoch 1575: Evaluation loss: 0.6006907224655151
+2019-12-11 00:18:15.720553	Epoch 1575: Training loss:   0.5923770070075989
+
+2019-12-11 00:19:17.591508	Epoch 1600: Evaluation loss: 0.5971638560295105
+2019-12-11 00:19:19.299252	Epoch 1600: Training loss:   0.5892307758331299
+
+2019-12-11 00:20:21.273262	Epoch 1625: Evaluation loss: 0.5935896039009094
+2019-12-11 00:20:22.989761	Epoch 1625: Training loss:   0.584622323513031
+
+2019-12-11 00:21:25.351552	Epoch 1650: Evaluation loss: 0.6238796710968018
+2019-12-11 00:21:27.332714	Epoch 1650: Training loss:   0.6100587248802185
+
+2019-12-11 00:22:28.864969	Epoch 1675: Evaluation loss: 0.5940947532653809
+2019-12-11 00:22:31.796544	Epoch 1675: Training loss:   0.586200475692749
+
+2019-12-11 00:23:35.649506	Epoch 1700: Evaluation loss: 0.5962257385253906
+2019-12-11 00:23:37.272450	Epoch 1700: Training loss:   0.5877092480659485
+
+2019-12-11 00:24:39.848548	Epoch 1725: Evaluation loss: 0.5928278565406799
+2019-12-11 00:24:41.494425	Epoch 1725: Training loss:   0.5855499505996704
+
+2019-12-11 00:25:45.557053	Epoch 1750: Evaluation loss: 0.598264217376709
+2019-12-11 00:25:47.430362	Epoch 1750: Training loss:   0.5906561017036438
+
+2019-12-11 00:26:49.295304	Epoch 1775: Evaluation loss: 0.5919390916824341
+2019-12-11 00:26:51.951062	Epoch 1775: Training loss:   0.5825551152229309
+
+2019-12-11 00:27:55.072756	Epoch 1800: Evaluation loss: 0.5972033739089966
+2019-12-11 00:27:56.875953	Epoch 1800: Training loss:   0.5875673890113831
+
+2019-12-11 00:28:58.937202	Epoch 1825: Evaluation loss: 0.5954330563545227
+2019-12-11 00:29:00.743302	Epoch 1825: Training loss:   0.5853115916252136
+
+2019-12-11 00:30:04.131693	Epoch 1850: Evaluation loss: 0.597071647644043
+2019-12-11 00:30:05.996489	Epoch 1850: Training loss:   0.5883455276489258
+
+2019-12-11 00:31:07.825625	Epoch 1875: Evaluation loss: 0.5959244966506958
+2019-12-11 00:31:09.782322	Epoch 1875: Training loss:   0.5862736105918884
+
+2019-12-11 00:32:13.760522	Epoch 1900: Evaluation loss: 0.5943986773490906
+2019-12-11 00:32:15.592011	Epoch 1900: Training loss:   0.5859142541885376
+
+2019-12-11 00:33:17.619877	Epoch 1925: Evaluation loss: 0.595588207244873
+2019-12-11 00:33:19.422707	Epoch 1925: Training loss:   0.5854659676551819
+
+2019-12-11 00:34:21.148203	Epoch 1950: Evaluation loss: 0.5943799018859863
+2019-12-11 00:34:23.137593	Epoch 1950: Training loss:   0.584992527961731
+
+2019-12-11 00:35:25.717447	Epoch 1975: Evaluation loss: 0.5949089527130127
+2019-12-11 00:35:27.514854	Epoch 1975: Training loss:   0.5852254629135132
+
+2019-12-11 00:36:29.629512	Saving Network ...
+2019-12-11 00:36:30.437162	Epoch 2000: Evaluation loss: 0.594437301158905
+2019-12-11 00:36:32.832064	Epoch 2000: Training loss:   0.5844996571540833
+
+2019-12-11 00:37:36.042908	Epoch 2025: Evaluation loss: 0.5981072187423706
+2019-12-11 00:37:37.725565	Epoch 2025: Training loss:   0.5876373648643494
+
+2019-12-11 00:38:39.457688	Epoch 2050: Evaluation loss: 0.6119357347488403
+2019-12-11 00:38:41.332865	Epoch 2050: Training loss:   0.5993821620941162
+
+2019-12-11 00:39:44.906205	Epoch 2075: Evaluation loss: 0.5946295857429504
+2019-12-11 00:39:46.887766	Epoch 2075: Training loss:   0.586281955242157
+
+2019-12-11 00:40:49.154598	Epoch 2100: Evaluation loss: 0.5909279584884644
+2019-12-11 00:40:51.025291	Epoch 2100: Training loss:   0.5848764181137085
+
+2019-12-11 00:41:55.014822	Epoch 2125: Evaluation loss: 0.5948460698127747
+2019-12-11 00:41:56.707058	Epoch 2125: Training loss:   0.5936675667762756
+
+2019-12-11 00:42:58.616912	Epoch 2150: Evaluation loss: 0.5961881875991821
+2019-12-11 00:43:00.302546	Epoch 2150: Training loss:   0.5868962407112122
+
+2019-12-11 00:44:02.195974	Epoch 2175: Evaluation loss: 0.5947309732437134
+2019-12-11 00:44:03.899403	Epoch 2175: Training loss:   0.5898405313491821
+
+2019-12-11 00:45:06.198617	Epoch 2200: Evaluation loss: 0.5897775292396545
+2019-12-11 00:45:09.264991	Epoch 2200: Training loss:   0.5900179743766785
+
+2019-12-11 00:46:10.254540	Epoch 2225: Evaluation loss: 0.5926235914230347
+2019-12-11 00:46:12.256146	Epoch 2225: Training loss:   0.587903618812561
+
+2019-12-11 00:47:14.289251	Epoch 2250: Evaluation loss: 0.5970032215118408
+2019-12-11 00:47:16.049573	Epoch 2250: Training loss:   0.5858529210090637
+
+2019-12-11 00:48:18.411000	Epoch 2275: Evaluation loss: 0.5914835333824158
+2019-12-11 00:48:21.209239	Epoch 2275: Training loss:   0.5832411646842957
+
+2019-12-11 00:49:24.442609	Epoch 2300: Evaluation loss: 0.5996317267417908
+2019-12-11 00:49:26.053866	Epoch 2300: Training loss:   0.5901829600334167
+
+2019-12-11 00:50:27.701604	Epoch 2325: Evaluation loss: 0.5896925330162048
+2019-12-11 00:50:29.528863	Epoch 2325: Training loss:   0.5825219750404358
+
+2019-12-11 00:51:32.679592	Epoch 2350: Evaluation loss: 0.5914082527160645
+2019-12-11 00:51:34.491311	Epoch 2350: Training loss:   0.5836746096611023
+
+2019-12-11 00:52:37.339517	Epoch 2375: Evaluation loss: 0.596432089805603
+2019-12-11 00:52:39.157546	Epoch 2375: Training loss:   0.5878899693489075
+
+2019-12-11 00:53:41.708307	Epoch 2400: Evaluation loss: 0.5950547456741333
+2019-12-11 00:53:44.063120	Epoch 2400: Training loss:   0.5882760286331177
+
+2019-12-11 00:54:47.596436	Epoch 2425: Evaluation loss: 0.594711184501648
+2019-12-11 00:54:49.253399	Epoch 2425: Training loss:   0.5924451351165771
+
+2019-12-11 00:55:51.132409	Epoch 2450: Evaluation loss: 0.5908885598182678
+2019-12-11 00:55:52.863239	Epoch 2450: Training loss:   0.5800812244415283
+
+2019-12-11 00:56:55.555901	Epoch 2475: Evaluation loss: 0.596762478351593
+2019-12-11 00:56:57.670438	Epoch 2475: Training loss:   0.585565984249115
+
+2019-12-11 00:58:00.619523	Saving Network ...
+2019-12-11 00:58:01.414519	Epoch 2500: Evaluation loss: 0.5927050113677979
+2019-12-11 00:58:03.313988	Epoch 2500: Training loss:   0.583058774471283
+
+2019-12-11 00:59:05.395841	Epoch 2525: Evaluation loss: 0.595714271068573
+2019-12-11 00:59:07.515404	Epoch 2525: Training loss:   0.5857238173484802
+
+2019-12-11 01:00:11.590586	Epoch 2550: Evaluation loss: 0.5930444002151489
+2019-12-11 01:00:13.364922	Epoch 2550: Training loss:   0.5939380526542664
+
+2019-12-11 01:01:15.385675	Epoch 2575: Evaluation loss: 0.5979543924331665
+2019-12-11 01:01:18.263385	Epoch 2575: Training loss:   0.5901134610176086
+
+2019-12-11 01:02:22.557048	Epoch 2600: Evaluation loss: 0.5910261273384094
+2019-12-11 01:02:24.528948	Epoch 2600: Training loss:   0.5822927951812744
+
+2019-12-11 01:03:27.581624	Epoch 2625: Evaluation loss: 0.5936295986175537
+2019-12-11 01:03:29.497564	Epoch 2625: Training loss:   0.581540048122406
+
+2019-12-11 01:04:34.244192	Epoch 2650: Evaluation loss: 0.5910512208938599
+2019-12-11 01:04:36.233913	Epoch 2650: Training loss:   0.5810448527336121
+
+2019-12-11 01:05:38.872452	Epoch 2675: Evaluation loss: 0.5928895473480225
+2019-12-11 01:05:40.806702	Epoch 2675: Training loss:   0.5842680335044861
+
+2019-12-11 01:06:43.487746	Epoch 2700: Evaluation loss: 0.5913317203521729
+2019-12-11 01:06:45.441824	Epoch 2700: Training loss:   0.5848380327224731
+
+2019-12-11 01:07:49.315121	Epoch 2725: Evaluation loss: 0.5913588404655457
+2019-12-11 01:07:51.015532	Epoch 2725: Training loss:   0.5816697478294373
+
+2019-12-11 01:08:53.523353	Epoch 2750: Evaluation loss: 0.5889545679092407
+2019-12-11 01:08:55.273385	Epoch 2750: Training loss:   0.5792173147201538
+
+2019-12-11 01:09:59.424628	Epoch 2775: Evaluation loss: 0.594746470451355
+2019-12-11 01:10:01.110177	Epoch 2775: Training loss:   0.5843665599822998
+
+2019-12-11 01:11:03.067740	Epoch 2800: Evaluation loss: 0.5941149592399597
+2019-12-11 01:11:04.986047	Epoch 2800: Training loss:   0.5842924118041992
+
+2019-12-11 01:12:09.641787	Epoch 2825: Evaluation loss: 0.5911514163017273
+2019-12-11 01:12:11.394851	Epoch 2825: Training loss:   0.5815358757972717
+
+2019-12-11 01:13:13.555203	Epoch 2850: Evaluation loss: 0.5952940583229065
+2019-12-11 01:13:15.121962	Epoch 2850: Training loss:   0.5849047303199768
+
+2019-12-11 01:14:18.991030	Epoch 2875: Evaluation loss: 0.5908286571502686
+2019-12-11 01:14:20.593627	Epoch 2875: Training loss:   0.5797733664512634
+
+2019-12-11 01:15:23.665661	Epoch 2900: Evaluation loss: 0.5975331664085388
+2019-12-11 01:15:25.672586	Epoch 2900: Training loss:   0.5858488082885742
+
+2019-12-11 01:16:28.058060	Epoch 2925: Evaluation loss: 0.5908879041671753
+2019-12-11 01:16:30.212312	Epoch 2925: Training loss:   0.5811552405357361
+
+2019-12-11 01:17:34.136463	Epoch 2950: Evaluation loss: 0.593420684337616
+2019-12-11 01:17:36.153576	Epoch 2950: Training loss:   0.5823150873184204
+
+2019-12-11 01:18:40.052754	Epoch 2975: Evaluation loss: 0.5941404104232788
+2019-12-11 01:18:41.931378	Epoch 2975: Training loss:   0.585097074508667
+
+2019-12-11 01:19:57.579210	Loading test data...
+2019-12-11 01:19:59.111389	Done loading test data
+
+2019-12-11 01:19:59.113292	Performing forward passes...
+2019-12-11 01:19:59.114806	Forward passing test image 0
+2019-12-11 01:19:59.121674	Forward passing test image 1
+2019-12-11 01:19:59.127845	Forward passing test image 2
+2019-12-11 01:19:59.133860	Forward passing test image 3
+2019-12-11 01:19:59.139777	Forward passing test image 4
+2019-12-11 01:19:59.145688	Forward passing test image 5
+2019-12-11 01:19:59.151466	Forward passing test image 6
+2019-12-11 01:19:59.157162	Forward passing test image 7
+2019-12-11 01:19:59.162929	Forward passing test image 8
+2019-12-11 01:19:59.168644	Forward passing test image 9
+2019-12-11 01:19:59.181642	Forward passing test image 10
+2019-12-11 01:19:59.202976	Forward passing test image 11
+2019-12-11 01:19:59.224299	Forward passing test image 12
+2019-12-11 01:19:59.245546	Forward passing test image 13
+2019-12-11 01:19:59.266863	Forward passing test image 14
+2019-12-11 01:19:59.288184	Forward passing test image 15
+2019-12-11 01:19:59.309078	Forward passing test image 16
+2019-12-11 01:19:59.329020	Forward passing test image 17
+2019-12-11 01:19:59.348925	Forward passing test image 18
+2019-12-11 01:19:59.368894	Forward passing test image 19
+2019-12-11 01:19:59.388878	Forward passing test image 20
+2019-12-11 01:19:59.408826	Forward passing test image 21
+2019-12-11 01:19:59.428787	Forward passing test image 22
+2019-12-11 01:19:59.448722	Forward passing test image 23
+2019-12-11 01:19:59.468677	Forward passing train image 0
+2019-12-11 01:19:59.488373	Forward passing train image 1
+2019-12-11 01:19:59.508115	Forward passing train image 2
+2019-12-11 01:19:59.527833	Forward passing train image 3
+2019-12-11 01:19:59.547515	Forward passing train image 4
+2019-12-11 01:19:59.567174	Forward passing train image 5
+2019-12-11 01:19:59.586924	Forward passing train image 6
+2019-12-11 01:19:59.606552	Forward passing train image 7
+2019-12-11 01:19:59.626248	Forward passing train image 8
+2019-12-11 01:19:59.645925	Forward passing train image 9
+2019-12-11 01:19:59.665556	Forward passing train image 10
+2019-12-11 01:19:59.685232	Forward passing train image 11
+2019-12-11 01:19:59.704900	Forward passing train image 12
+2019-12-11 01:19:59.724636	Forward passing train image 13
+2019-12-11 01:19:59.744457	Forward passing train image 14
+2019-12-11 01:19:59.764258	Forward passing train image 15
+2019-12-11 01:19:59.784051	Forward passing train image 16
+2019-12-11 01:19:59.803820	Forward passing train image 17
+2019-12-11 01:19:59.823511	Forward passing train image 18
+2019-12-11 01:19:59.843228	Forward passing train image 19
+2019-12-11 01:19:59.862898	Forward passing train image 20
+2019-12-11 01:19:59.882511	Forward passing train image 21
+2019-12-11 01:19:59.902194	Forward passing train image 22
+2019-12-11 01:19:59.921796	Forward passing train image 23
+2019-12-11 01:19:59.941433	Forward passing train image 24
+2019-12-11 01:19:59.961089	Forward passing train image 25
+2019-12-11 01:19:59.980725	Forward passing train image 26
+2019-12-11 01:20:00.000359	Forward passing train image 27
+2019-12-11 01:20:00.019974	Forward passing train image 28
+2019-12-11 01:20:00.039579	Forward passing train image 29
+2019-12-11 01:20:00.059222	Forward passing train image 30
+2019-12-11 01:20:00.078935	Forward passing train image 31
+2019-12-11 01:20:00.098603	Forward passing train image 32
+2019-12-11 01:20:00.118322	Forward passing train image 33
+2019-12-11 01:20:00.138101	Forward passing train image 34
+2019-12-11 01:20:00.157850	Forward passing train image 35
+2019-12-11 01:20:00.177550	Forward passing train image 36
+2019-12-11 01:20:00.197246	Forward passing train image 37
+2019-12-11 01:20:00.217002	Forward passing train image 38
+2019-12-11 01:20:00.236662	Forward passing train image 39
+2019-12-11 01:20:00.256324	Forward passing train image 40
+2019-12-11 01:20:00.275994	Forward passing train image 41
+2019-12-11 01:20:00.295644	Forward passing train image 42
+2019-12-11 01:20:00.315412	Forward passing train image 43
+2019-12-11 01:20:00.335135	Forward passing train image 44
+2019-12-11 01:20:00.354862	Forward passing train image 45
+2019-12-11 01:20:00.374586	Forward passing train image 46
+2019-12-11 01:20:00.394376	Forward passing train image 47
+2019-12-11 01:20:00.414187	Forward passing train image 48
+2019-12-11 01:20:00.433954	Forward passing train image 49
+2019-12-11 01:20:00.453823	Forward passing train image 50
+2019-12-11 01:20:00.473623	Forward passing train image 51
+2019-12-11 01:20:00.493427	Forward passing train image 52
+2019-12-11 01:20:00.513199	Forward passing train image 53
+2019-12-11 01:20:00.532957	Forward passing train image 54
+2019-12-11 01:20:00.552757	Forward passing train image 55
+2019-12-11 01:20:00.572479	Forward passing train image 56
+2019-12-11 01:20:00.592270	Forward passing train image 57
+2019-12-11 01:20:00.612088	Forward passing train image 58
+2019-12-11 01:20:00.631870	Forward passing train image 59
+2019-12-11 01:20:00.651646	Forward passing train image 60
+2019-12-11 01:20:00.671318	Forward passing train image 61
+2019-12-11 01:20:00.691032	Forward passing train image 62
+2019-12-11 01:20:00.710648	Forward passing train image 63
+2019-12-11 01:20:00.730267	Forward passing train image 64
+2019-12-11 01:20:00.749947	Forward passing train image 65
+2019-12-11 01:20:00.769632	Forward passing train image 66
+2019-12-11 01:20:00.789337	Forward passing train image 67
+2019-12-11 01:20:00.809049	Forward passing train image 68
+2019-12-11 01:20:00.828712	Forward passing train image 69
+2019-12-11 01:20:00.848400	Forward passing train image 70
+2019-12-11 01:20:00.868060	Forward passing train image 71
+2019-12-11 01:20:00.887682	Forward passing train image 72
+2019-12-11 01:20:00.907285	Forward passing train image 73
+2019-12-11 01:20:00.926868	Forward passing train image 74
+2019-12-11 01:20:00.946540	Forward passing train image 75
+2019-12-11 01:20:00.966205	Forward passing train image 76
+2019-12-11 01:20:00.985902	Forward passing train image 77
+2019-12-11 01:20:01.005578	Forward passing train image 78
+2019-12-11 01:20:01.025200	Forward passing train image 79
+2019-12-11 01:20:01.044800	Forward passing train image 80
+2019-12-11 01:20:01.064406	Forward passing train image 81
+2019-12-11 01:20:01.084071	Forward passing train image 82
+2019-12-11 01:20:01.103774	Forward passing train image 83
+2019-12-11 01:20:01.123420	Done performing forward passes
+
+2019-12-11 01:20:01.124762	Calculating train accuracy measures...
+2019-12-11 01:20:12.598002	Accuracy measures: Global acc.: 0.957
+                          	Class acc.: 0.7078
+                          	Mean IoU.: 0.6629
+                          	Bound. F1: 0.7789
+
+2019-12-11 01:20:12.599878	Calculating test accuracy measures...
+2019-12-11 01:20:16.252676	Test accuracy measures: Global acc.: 0.9653
+                          	Class acc.: 0.6107
+                          	Mean IoU.: 0.5737
+                          	Bound. F1: 0.6922
+
+2019-12-11 01:20:16.254359	Reconstructing images...
+2019-12-11 01:20:16.584005	Done reconstructing images
+
+2019-12-11 01:20:16.585097	Saving test images and reconstructions to directory local_data/test...
+2019-12-11 01:20:20.057390	Done saving images and reconstructions
+
