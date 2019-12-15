@@ -10,7 +10,7 @@ import json
 import numpy as np
 from PIL import Image
 import wget
-import os, sys
+import os, sys, glob 
 
 from logger import Logger
 
@@ -19,6 +19,7 @@ EPS = np.finfo("float64").eps
 IMAGE_SHAPE = (512, 512, 3)  # Height, width, channel
 EXTRA_IMAGE_SIZE = 50
 IMAGE_PATHS = ("local_data/raw.png", "local_data/target.png")
+CORN_PATHS = ("saved_data/cornfield_data/images", "saved_data/cornfield_data/annotated")
 SUB_PATH = "local_data/imgs/{type}-{index}.png"
 SPLIT = (.83, .17,)
 
@@ -45,7 +46,7 @@ def _save_images():
 	wget.download(raw_image_url, IMAGE_PATHS[0])
 	wget.download(target_image_url, IMAGE_PATHS[1])
 
-def _load_image(path: str, dtype = np.float64):
+def _load_image(path: str, dtype = np.float64, channels = 3):
 
 	"""
 	Returns the pixel values of train and tests i as an m x n x 3 array
@@ -53,18 +54,23 @@ def _load_image(path: str, dtype = np.float64):
 
 	img = Image.open(path)
 	pixels = np.asarray(img, dtype = dtype)
-	pixels = pixels[:, :, :IMAGE_SHAPE[2]]
-
+	if channels == 3:
+		pixels = pixels[:, :, :IMAGE_SHAPE[2]]
+	
 	return pixels
 
-def _standardize(image):
+def _standardize(image, consider_voids = True):
 
 	"""
 	Standardizes the pixel values of non-void pixels channelwise
 	"""
  
 	# Detects void pixels
-	void_pixels = (image==0).all(axis=2)
+	if consider_voids:
+		void_pixels = (image==0).all(axis=2)
+	else:
+		void_pixels = False
+
 	means = list()
 	stds = list()
 	for i in range(image.shape[2]):
@@ -80,13 +86,20 @@ def _standardize(image):
 
 	return image, means, stds
 
-def _target_index(image: np.ndarray):
+def _target_index(image: np.ndarray, consider_voids = True):
 
 	str_rep = np.apply_along_axis(lambda arr: "".join([f"{int(x):03}" for x in arr]), 2, image).astype(np.str)
 	classes = np.empty(image.shape[:2], dtype=np.uint8)
 	class_no = 0
-	void_class = "0" * 9
+
+	if consider_voids:
+		void_class = "0" * 9
+	else:
+		void_class = None
+	
 	uniques = np.unique(str_rep)
+	print(uniques)
+	raise NotImplemented
 	classes_order = np.empty(len(uniques), dtype="<U9")
 	for class_ in uniques:
 		if class_ != void_class:
@@ -165,20 +178,24 @@ def _find_voids(images: np.ndarray):
 
 	return voids
 
-def _split_data(voids: np.ndarray):
+def _split_data(voids: np.ndarray, already_split = False, cutoff = None, size = None):
 
 	"""
 	voids must be a boolean vector
 	Splits images into train, validation, test, and voids
 	Returns four integer lists, each containing indices of images that belong to the respective category
 	"""
+	if already_split:
+		train_val_idcs = np.arange()
 
-	train_val_idcs = np.where(~(MR_COOL_IDCS | voids))[0]
-	test_idcs = np.where(MR_COOL_IDCS & ~voids)[0]
+	else:
+		train_val_idcs = np.where(~(MR_COOL_IDCS | voids))[0]
+		test_idcs = np.where(MR_COOL_IDCS & ~voids)[0]
 
-	# Calculates size of different sets
-	n_train = int(SPLIT[0] * train_val_idcs.size)
-	np.random.shuffle(train_val_idcs)
+		# Calculates size of different sets
+		n_train = int(SPLIT[0] * train_val_idcs.size)
+		np.random.shuffle(train_val_idcs)
+	
 
 	# Gets arrays of indices
 	# Converts to list so they can be saved in json
@@ -188,8 +205,95 @@ def _split_data(voids: np.ndarray):
 	void_idcs = [int(x) for x in np.where(voids)[0]]
 
 	return train_idcs, val_idcs, test_idcs, void_idcs
+def _prepare_data_corn():
+	LOG("Loading images...")
+	aerial_train = [_load_image(x) for x in glob.glob(f"{CORN_PATHS[0]}/train/*.JPG")]
+	aerial_test = [_load_image(x) for x in glob.glob(f"{CORN_PATHS[0]}/test/*.JPG")]
+	
+	target_train = [_load_image(x, channels = 1) for x in glob.glob(f"{CORN_PATHS[1]}/train/*.png")]
+	target_test = [_load_image(x, channels = 1) for x in glob.glob(f"{CORN_PATHS[1]}/test/*.png")]
+	
+	aerial = np.array(aerial_train + aerial_test)
+	target = np.array(target_train + target_test)
+	
+	LOG("Done loading images\nShapes: %s\n train/test Split: %s\n" % (aerial.shape[1:3], (len(target_train), len(target_test))))
 
-def _prepare_data():
+	LOG("Standardizing aerial image...")
+	aerial, means, stds = _standardize(aerial, consider_voids = False)
+	LOG("Done standardizing images\n")
+
+	LOG("Squeezing target images to single channel...")
+	target, classes = _target_index(target, consider_voids=False) 
+	LOG("Done creating target values.\nClasses including void (if any) last:\n%s\n" % "\n".join(class_ for class_ in classes))
+	print(np.unique(target, return_counts = True))
+
+	raise NotImplementedError
+
+
+	LOG("Transposing images to PyTorch's preferred format...")
+	aerial = np.transpose(aerial, (0, 3, 1, 2))
+	large_aerial = np.transpose(large_aerial, (0, 3, 1, 2))
+	LOG(f"Images transposed. Shape: {aerial.shape}\n")
+
+	LOG("Saving images...")
+	aerial_path = "local_data/aerial_prepared"
+	target_path = "local_data/target_prepared"
+	
+	large_aerial_path = "local_data/large_aerial_prepared"
+	large_target_path = "local_data/large_target_prepared"
+	
+	if USE_NPZ:
+		np.savez_compressed(aerial_path, aerial.astype(np.float64))
+		np.savez_compressed(target_path, target.astype(np.int8))
+		
+		np.savez_compressed(large_aerial_path, large_aerial.astype(np.float64))
+		np.savez_compressed(large_target_path, large_target.astype(np.int8))
+
+	else:
+		np.save(aerial_path, aerial.astype(np.float64))
+		np.save(target_path, target.astype(np.int8))
+
+		np.save(large_aerial_path, large_aerial.astype(np.float64))
+		np.save(large_target_path, large_target.astype(np.int8))
+
+	LOG("Saved aerial images to '%s' and target images to '%s%s'\n" % (
+		aerial_path,
+		target_path,
+		".npz" if USE_NPZ else ".npy"
+	))
+
+	LOG("Splitting images into train, validation, test, and voids...")
+	train_idcs, val_idcs, test_idcs, void_idcs = _split_data(voids)
+	LOG("Done splitting images\nTrain: %i images\nValidation: %i images\nTest: %i images\nVoid: %i images\n"
+		% (len(train_idcs), len(val_idcs), len(test_idcs), len(void_idcs)))
+
+	LOG("Saving data preparation output...")
+	prep_out = {
+		"image_shape": IMAGE_SHAPE,
+		"split_shape": split_shape,
+		"split": SPLIT,
+		"means": means,
+		"stds": stds,
+		"aerial_path": aerial_path,
+		"target_path": target_path,
+		"large_aerial_path": large_aerial_path,
+		"large_target_path": large_target_path,
+		"sub_imgs_folder": SUB_PATH,
+		"classes": classes,
+		"train_idcs": sorted(train_idcs),
+		"val_idcs": sorted(val_idcs),
+		"test_idcs": sorted(test_idcs),
+		"void_idcs": sorted(void_idcs),
+		"extra_image_size": EXTRA_IMAGE_SIZE
+	}
+	json_path = "local_data/prep_out.json"
+	with open(json_path, "w", encoding="utf-8") as f:
+		json.dump(prep_out, f, indent=4)
+	LOG("Done saving output to '%s'\n" % json_path)
+
+	LOG("Done preparing data\n")
+
+def _prepare_data_sugarcane():
 
 	LOG("Downloading images...")
 	_save_images()
@@ -297,4 +401,5 @@ if __name__ == "__main__":
 	os.chdir(sys.path[0])
 	os.makedirs("local_data/imgs", exist_ok = True)
 
-	_prepare_data()
+#	_prepare_data_sugarcane()
+	_prepare_data_corn()
