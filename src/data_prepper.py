@@ -98,8 +98,6 @@ def _target_index(image: np.ndarray, consider_voids = True):
 		void_class = None
 	
 	uniques = np.unique(str_rep)
-	print(uniques)
-	raise NotImplemented
 	classes_order = np.empty(len(uniques), dtype="<U9")
 	for class_ in uniques:
 		if class_ != void_class:
@@ -221,11 +219,12 @@ def _prepare_data_corn():
 	LOG("Standardizing aerial image...")
 	aerial, means, stds = _standardize(aerial, consider_voids = False)
 	LOG("Done standardizing images\n")
+	print(len(np.unique(target)))
 
 	LOG("Squeezing target images to single channel...")
 	target, classes = _target_index(target, consider_voids=False) 
 	LOG("Done creating target values.\nClasses including void (if any) last:\n%s\n" % "\n".join(class_ for class_ in classes))
-	print(np.unique(target, return_counts = True))
+	print(len(np.unique(target)))
 
 	raise NotImplementedError
 
