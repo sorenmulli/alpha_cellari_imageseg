@@ -1,63 +1,78 @@
-% !TeX spellcheck = en_GB
-\documentclass[12pt,fleqn]{article}
-
-\usepackage[english]{babel}
-\usepackage{SpeedyGonzales}
-\usepackage{MediocreMike}
-%\usepackage{Blastoise}
-
-\title{Image Segmentation}
-\author{}
-\date{\today}
-
-\pagestyle{fancy}
-\fancyhf{}
-\lhead{}
-\chead{}
-\rhead{}
-\rfoot{Side \thepage{} af \pageref{LastPage}}
-
-\graphicspath{{Billeder/}}
-\linespread{1.15}
+% Template for ICASSP-2010 paper; to be used with:
+%          mlspconf.sty  - ICASSP/ICIP LaTeX style file adapted for MLSP, and
+%          IEEEbib.bst - IEEE bibliography style file.
+% --------------------------------------------------------------------------
+\documentclass{article}
+\usepackage{amsmath,graphicx,02460}
 
 
-%\numberwithin{equation}{section}
-%\numberwithin{footnote}{section}
-%\numberwithin{figure}{section}
-%\numberwithin{table}{section}
 
+\toappear{02460 Advanced Machine Learning, DTU Compute, Autumn 2019}
+
+
+% Example definitions.
+% --------------------
+\def\x{{\mathbf x}}
+\def\L{{\cal L}}
+
+% Title.
+% ------
+\title{SegNet on Drone Images: Image Segmentation for Smart Agriculture}
+%
+% Single address.
+% ---------------
+\name{			Anders Henriksen, Asger Schultz, Oskar Wiese, 	Mads Andersen,
+	Søren Winkel Holm }
+\address{s183904, s183912, s183917, s173934, s183911}
+%
+% For example:
+% ------------
+%\address{School\\
+%	Department\\
+%	Address}
+%
+% Two addresses (uncomment and modify for two-address case).
+% ----------------------------------------------------------
+%\twoauthors
+%  {A. Author-one, B. Author-two\sthanks{Thanks to XYZ agency for funding.}}
+%	{School A-B\\
+%	Department A-B\\
+%	Address A-B}
+%  {C. Author-three, D. Author-four\sthanks{The fourth author performed the work
+%	while at ...}}
+%	{School C-D\\
+%	Department C-D\\
+%	Address C-D}
+%
 \begin{document}
+%\ninept
+%
 
-%\maketitle
-%\thispagestyle{fancy}
-
-\begin{titlepage}
-	\begin{center}
-		\textsc{\LARGE Image Segmentation}\\
-		[1.0cm]
-		{
-		\large
-		\begin{tabular}{lr}
-			Anders Henriksen&s183904\\
-			Asger Schultz&s183912\\
-			Oskar Wiese&s183917\\
-			Mads Andersen&s173934\\
-
-			Søren Winkel Holm&s183911
-		\end{tabular}
-		}\\
-		[0.5cm]
-		\textsc{\large \today}
-	\end{center}
-\end{titlepage}
-\tableofcontents \newpage
-
-\section{Abstract}
+\maketitle
+%
+\begin{abstract}
+The abstract should appear at the top of the left-hand column of text, about
+0.5 inch (12 mm) below the title area and no more than 3.125 inches (80 mm) in
+length.  Leave a 0.5 inch (12 mm) space between the end of the abstract and the
+beginning of the main text.  The abstract should contain about 100 to 150
+words, and should be identical to the abstract text submitted electronically
+along with the paper cover sheet.  All manuscripts must be in English, printed
+in black ink.
+\end{abstract}
+%
+\begin{keywords}
+One, two, three, four, five
+\end{keywords}
+%
 \section{Introduction}
+\label{sec:intro}
+
 \subsection{Brief overview of data}
 Our data consist of one large, high resolution orthomosaic photo of a sugar cane field formatted as a RGB image. The field has been manually labelled by expert biologist to create a human-ground truth, these labels are represented as a GT-matrix with 3 possible classes. Each pixel is either classified as a crop row (green), weed (yellow), background (red). The large photo is cropped into smaller images and afterwards augmentation techniques are used to gain more data. We will return to the augmentation part later. The images with exclusively black pixels are removed from our data set, and images with some black pixels are ignored when calculating the loss function 
+\section{METHODS}
+\label{sec:format}
 
-\section{Methods}
+
 Netværket blev initialiseret
 
 The encoder part of the network creates a rich feature map representing the image content. The more 
@@ -68,8 +83,6 @@ the feature maps of the encoder before upsampling is important. This can
 simply be done by storing the whole feature map, but due to memory 
 constrains only the maxpooling indices are saved, which is a good 
 approximation of the feature maps. 
-\\
-\\
 \subsection{Loss function: Quality over quantity}
 Multi-class cross entropy because:
 \begin{itemize}
@@ -90,7 +103,7 @@ Had to use different metrics because
 	\item Different metrics important in different fields.
 \end{itemize}
 The metrics \footnote{https://hal.inria.fr/hal-01581525/document}\footnote{
-http://www.bmva.org/bmvc/2013/Papers/paper0032/paper0032.pdf} 
+	http://www.bmva.org/bmvc/2013/Papers/paper0032/paper0032.pdf} 
 \begin{itemize}
 	\item Global accuracy: Trivial and  not very important because of class imbalance but is good for smoothness
 	\item Mean class-wise accuracy: Takes class imbalance into account. Is what is being optimized for in the model.
@@ -104,11 +117,11 @@ Regularization
 	\item NN's are prone to overfitting, because they are so flexible
 	\item Prevent overfitting $ \to $ better results on test data
 	\item Three methods
-	\item Dropout: Randomly remove nodes to increase variability. $ p=10\pro $
+	\item Dropout: Randomly remove nodes to increase variability. $ p=10 \%$
 	\item Data augmentation: Increase size of dataset
 	\begin{itemize}
 		\item Crop each $ 512\times 512 $ to random $ 256\times 256 $
-		\item 50\pro chance of flip T/D and 50\pro chance of flip L/R
+		\item 50\% chance of flip T/D and 50\% chance of flip L/R
 	\end{itemize}
 	\item Batch normalization normalizes activations
 	\begin{itemize}
@@ -120,25 +133,65 @@ Regularization
 \end{itemize}
 Hyperparameters
 \begin{itemize}
-	\item Adaptive learning rate from ADAM optimizer, initialized at $ 2\ctp{-4} $
+	\item Adaptive learning rate from ADAM optimizer, initialized at $ 2\cdot10^{-4} $
 	\item Total: 26 conv + batchnorm + ReLU with dropout, 5 pool/upsample, 1 softmax
 	\item 14.7 M parameters in encoder -- significantly lower than 134 M in VGG16 because of no fully-connected layers
 	\item Kernel size: $ 3\times 3 $, stride 1, maxpool: $ 2\times 2 $, stride 2
 	\item Corresponding padding of 1 to prevent reduction of image size
 \end{itemize}
-\texttt{https://www.analyticsvidhya.com/blog/2018/04/fundamentals-deep-learning-regularization-techniques/}\\
-\texttt{https://medium.com/deeper-learning/glossary-of-deep-learning-batch-normalisation-8266dcd2fa82}
+
 
 
 \subsection{Unification of cropped image predictions}
 In a real-world application of the segmentation a farmer would want a complete and precise segmentation of his whole field at once, such that fertilization and pesticides can be distributed accordingly. However, it turns out that the prediction quality is of less quality near the boarders of the image. Therefore, a naïve stitching of the cropped images leads to a full-blown image prediction with obvious flaws near the boarders between the cropped images. To solve this problem, we have chosen to increase the size of the cropped images, and infer on these enlarged pictured. In the procedure of joining the enlarged cropped pictures the pictures are cropped again, to avoid the near border areas. This is computationally inefficient, but it works, and since the inference time is not that big, it is an alright solution. For industrial purposes, another approach might be beneficial.
 
 
-\section{Results}
 
 
+\section{RESULTS}
+\label{sec:illust}
 
-\section{Discussion}
+% Below is an example of how to insert images. Delete the ``\vspace'' line,
+% uncomment the preceding line ``\centerline...'' and replace ``imageX.ps''
+% with a suitable PostScript file name.
+% -------------------------------------------------------------------------
+%\begin{figure}[htb]
+
+%\begin{minipage}[b]{1.0\linewidth}
+  %\centering
+%  \centerline{\includegraphics[width=8.5cm]{image1}}
+%  \vspace{2.0cm}
+ % \centerline{(a) Result 1}\medskip
+%\end{minipage}
+%
+%\begin{minipage}[b]{.48\linewidth}
+  %\centering
+%  \centerline{\includegraphics[width=4.0cm]{image3}}
+%  \vspace{1.5cm}
+ % \centerline{(b) Results 3}\medskip
+%\end{minipage}
+%\hfill
+%\begin{minipage}[b]{0.48\linewidth}
+  %\centering
+ % \centerline{\includegraphics[width=4.0cm]{image4}}
+%  \vspace{1.5cm}
+ % \centerline{(c) Result 4}\medskip
+%\end{minipage}
+%
+%\caption{Example of placing a figure with experimental results.}
+%\label{fig:res}
+%
+%\end{figure}
+
+% To start a new column (but not a new page) and help balance the last-page
+% column length use \vfill\pagebreak.
+% -------------------------------------------------------------------------
+%\vfill
+%\pagebreak
+
+
+\section{DISCUSSION}
+\label{sec:foot}
 \subsection{Comparison of different image segmentation neural networks}
 \begin{itemize}
 	\item Several competing network structures with high performance in image segmentation. U-net, FCN, DeepLabv1, DeconvNet
@@ -149,28 +202,16 @@ In a real-world application of the segmentation a farmer would want a complete a
 	\item U-Net, (different purpose), skip connections. 
 	\item Main takeaway  
 	\item (Deeplabv-LargeFOV \& FCN)
-	content...
+	
 \end{itemize}
+\cite{seg}
 
 \subsection{Extension of network}
 
+
+\subsection{Conclusion}
+
+\bibliographystyle{IEEEbib}
+\bibliography{refs}
+
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

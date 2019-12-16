@@ -1,0 +1,178 @@
+% !TeX spellcheck = en_GB
+\documentclass[12pt,fleqn]{article}
+
+\usepackage[english]{babel}
+\usepackage{SpeedyGonzales}
+\usepackage{MediocreMike}
+%\usepackage{Blastoise}
+
+\title{Image Segmentation}
+\author{}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{}
+\rhead{}
+\rfoot{Side \thepage{} af \pageref{LastPage}}
+
+\graphicspath{{Billeder/}}
+\linespread{1.15}
+
+
+%\numberwithin{equation}{section}
+%\numberwithin{footnote}{section}
+%\numberwithin{figure}{section}
+%\numberwithin{table}{section}
+
+\begin{document}
+
+%\maketitle
+%\thispagestyle{fancy}
+
+\begin{titlepage}
+	\begin{center}
+		\textsc{\LARGE Image Segmentation}\\
+		[1.0cm]
+		{
+		\large
+		\begin{tabular}{lr}
+			Anders Henriksen&s183904\\
+			Asger Schultz&s183912\\
+			Oskar Wiese&s183917\\
+			Mads Andersen&s173934\\
+
+			Søren Winkel Holm&s183911
+		\end{tabular}
+		}\\
+		[0.5cm]
+		\textsc{\large \today}
+	\end{center}
+\end{titlepage}
+\tableofcontents \newpage
+
+\section{Abstract}
+\section{Introduction}
+\subsection{Brief overview of data}
+Our data consist of one large, high resolution orthomosaic photo of a sugar cane field formatted as a RGB image. The field has been manually labelled by expert biologist to create a human-ground truth, these labels are represented as a GT-matrix with 3 possible classes. Each pixel is either classified as a crop row (green), weed (yellow), background (red). The large photo is cropped into smaller images and afterwards augmentation techniques are used to gain more data. We will return to the augmentation part later. The images with exclusively black pixels are removed from our data set, and images with some black pixels are ignored when calculating the loss function 
+
+\section{Methods}
+Netværket blev initialiseret
+
+The encoder part of the network creates a rich feature map representing the image content. The more 
+layers of max-pooling there are the more translation invariance for robust 
+classification can be achieved. The boundary detail is very important when 
+dealing with image segmentation. Hence, capturing boundary information in 
+the feature maps of the encoder before upsampling is important. This can 
+simply be done by storing the whole feature map, but due to memory 
+constrains only the maxpooling indices are saved, which is a good 
+approximation of the feature maps. 
+\subsection{Loss function: Quality over quantity}
+Multi-class cross entropy because:
+\begin{itemize}
+	\item Softmax Network: Minus log likelihood
+	\item Can be seen as a classic multiclass classifier -- just on a pixel-by-pixel basis.
+\end{itemize}
+Weighted cross entropy because:
+\begin{itemize}
+	\item Unbalanced class distribution: Network has to learn to focus on important pixels: Don't classify everything as dirt.
+	\item Initial tests made the network behave as the baseline: Simple features in early layers got were not penalized enough and learning was not stable.
+	\item Resampling expensive
+\end{itemize}
+\subsection{Metrics}
+Had to use different metrics because
+\begin{itemize}
+	\item Not agreement in Image Segmentation papers.
+	\item Want to get accuracy on a global scale and on a class scale.
+	\item Different metrics important in different fields.
+\end{itemize}
+The metrics \footnote{https://hal.inria.fr/hal-01581525/document}\footnote{
+http://www.bmva.org/bmvc/2013/Papers/paper0032/paper0032.pdf} 
+\begin{itemize}
+	\item Global accuracy: Trivial and  not very important because of class imbalance but is good for smoothness
+	\item Mean class-wise accuracy: Takes class imbalance into account. Is what is being optimized for in the model.
+	\item Mean Intersect over Union: "Jaccard Index".  Found to be better correlated with human classification though still only \(\approx 0.5\). Favours region smoothness highly and not boundary accuracy.
+	\item Harmonic mean of precision and recall. To compare to others with same project. Penalizes false positives and gives less credit to true negatives thus being better for unbalanced classes.
+\end{itemize}
+
+\subsection{Regularization and Hyperparameters}
+Regularization
+\begin{itemize}
+	\item NN's are prone to overfitting, because they are so flexible
+	\item Prevent overfitting $ \to $ better results on test data
+	\item Three methods
+	\item Dropout: Randomly remove nodes to increase variability. $ p=10\pro $
+	\item Data augmentation: Increase size of dataset
+	\begin{itemize}
+		\item Crop each $ 512\times 512 $ to random $ 256\times 256 $
+		\item 50\pro chance of flip T/D and 50\pro chance of flip L/R
+	\end{itemize}
+	\item Batch normalization normalizes activations
+	\begin{itemize}
+		\item Faster convergence
+		\item Prevents ReLU from not learning
+		\item Introduces noise
+		\item Reduces vanishing/exploding gradient problem, as values stay close to 0
+	\end{itemize}
+\end{itemize}
+Hyperparameters
+\begin{itemize}
+	\item Adaptive learning rate from ADAM optimizer, initialized at $ 2\ctp{-4} $
+	\item Total: 26 conv + batchnorm + ReLU with dropout, 5 pool/upsample, 1 softmax
+	\item 14.7 M parameters in encoder -- significantly lower than 134 M in VGG16 because of no fully-connected layers
+	\item Kernel size: $ 3\times 3 $, stride 1, maxpool: $ 2\times 2 $, stride 2
+	\item Corresponding padding of 1 to prevent reduction of image size
+\end{itemize}
+\texttt{https://www.analyticsvidhya.com/blog/2018/04/fundamentals-deep-learning-regularization-techniques/}\\
+\texttt{https://medium.com/deeper-learning/glossary-of-deep-learning-batch-normalisation-8266dcd2fa82}
+
+
+\subsection{Unification of cropped image predictions}
+In a real-world application of the segmentation a farmer would want a complete and precise segmentation of his whole field at once, such that fertilization and pesticides can be distributed accordingly. However, it turns out that the prediction quality is of less quality near the boarders of the image. Therefore, a naïve stitching of the cropped images leads to a full-blown image prediction with obvious flaws near the boarders between the cropped images. To solve this problem, we have chosen to increase the size of the cropped images, and infer on these enlarged pictured. In the procedure of joining the enlarged cropped pictures the pictures are cropped again, to avoid the near border areas. This is computationally inefficient, but it works, and since the inference time is not that big, it is an alright solution. For industrial purposes, another approach might be beneficial.
+
+
+\section{Results}
+
+
+
+\section{Discussion}
+\subsection{Comparison of different image segmentation neural networks}
+\begin{itemize}
+	\item Several competing network structures with high performance in image segmentation. U-net, FCN, DeepLabv1, DeconvNet
+	\item Purpose of SegNet, efficient
+	\item 3 out of the 4 mentioned uses the encoder from the famous VGG16 paper, but differ in decoder.
+	\item FCN, No decoder -> Blocky segmentation, but very efficient in inference time.
+	\item DeconvNet, Deconvolution and fully connected layers. 
+	\item U-Net, (different purpose), skip connections. 
+	\item Main takeaway  
+	\item (Deeplabv-LargeFOV \& FCN)
+
+\end{itemize}
+
+\subsection{Extension of network}
+\begin{thebibliography}{9}
+	\bibitem{Seg} Kendall, Alex et al.: "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation". PAMI, 2017.
+	\bibitem{USC} Wangenheim von, Aldo et al.: "Weed Mapping on Aerial Images". INCoD.LAPIX.01.2019.E.
+\end{thebibliography}
+\section{Appendix}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
