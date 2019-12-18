@@ -86,8 +86,14 @@ def _standardize(image, consider_voids = True):
 
 	return image, means, stds
 
-def _target_index(image: np.ndarray, consider_voids = True):
+def _target_index_corn(image: np.ndarray):
+	uniques = np.unique(image)
+	classes = np.empty_like(image, dtype=np.uint8)
+	for i, unique in enumerate(uniques):
+		classes[image==unique] = i
+	return classes, [f"{int(x):03}" for x in uniques]
 
+def _target_index_sugarcane(image: np.ndarray, consider_voids = True):
 	str_rep = np.apply_along_axis(lambda arr: "".join([f"{int(x):03}" for x in arr]), 2, image).astype(np.str)
 	classes = np.empty(image.shape[:2], dtype=np.uint8)
 	class_no = 0
@@ -203,6 +209,7 @@ def _split_data(voids: np.ndarray, already_split = False, cutoff = None, size = 
 	void_idcs = [int(x) for x in np.where(voids)[0]]
 
 	return train_idcs, val_idcs, test_idcs, void_idcs
+
 def _prepare_data_corn():
 	LOG("Loading images...")
 	aerial_train = [_load_image(x) for x in glob.glob(f"{CORN_PATHS[0]}/train/*.JPG")]
@@ -213,7 +220,6 @@ def _prepare_data_corn():
 	
 	aerial = np.array(aerial_train + aerial_test)
 	target = np.array(target_train + target_test)
-	
 	LOG("Done loading images\nShapes: %s\n train/test Split: %s\n" % (aerial.shape[1:3], (len(target_train), len(target_test))))
 
 	LOG("Standardizing aerial image...")
@@ -222,12 +228,10 @@ def _prepare_data_corn():
 	print(len(np.unique(target)))
 
 	LOG("Squeezing target images to single channel...")
-	target, classes = _target_index(target, consider_voids=False) 
+	target, classes = _target_index_corn(target) 
 	LOG("Done creating target values.\nClasses including void (if any) last:\n%s\n" % "\n".join(class_ for class_ in classes))
-	print(len(np.unique(target)))
 
 	raise NotImplementedError
-
 
 	LOG("Transposing images to PyTorch's preferred format...")
 	aerial = np.transpose(aerial, (0, 3, 1, 2))
@@ -320,7 +324,7 @@ def _prepare_data_sugarcane():
 	LOG("Done standardizing image\n")
 
 	LOG("Squeezing target images to single channel...")
-	target, classes = _target_index(target)
+	target, classes = _target_index_sugarcane(target)
 	LOG("Done creating target values.\nClasses including void (if any) last:\n%s\n" % "\n".join(class_ for class_ in classes))
 
 	LOG("Splitting images...")
@@ -400,5 +404,5 @@ if __name__ == "__main__":
 	os.chdir(sys.path[0])
 	os.makedirs("local_data/imgs", exist_ok = True)
 
-#	_prepare_data_sugarcane()
+	# _prepare_data_sugarcane()
 	_prepare_data_corn()
