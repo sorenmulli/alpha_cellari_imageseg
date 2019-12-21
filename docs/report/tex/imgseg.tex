@@ -143,7 +143,16 @@ Hyperparameters
 
 
 \subsection{Unification of cropped image predictions}
-In a real-world application of the segmentation a farmer would want a complete and precise segmentation of his whole field at once, such that fertilization and pesticides can be distributed accordingly. However, it turns out that the prediction quality is of less quality near the boarders of the image. Therefore, a naïve stitching of the cropped images leads to a full-blown image prediction with obvious flaws near the boarders between the cropped images. To solve this problem, we have chosen to increase the size of the cropped images, and infer on these enlarged pictured. In the procedure of joining the enlarged cropped pictures the pictures are cropped again, to avoid the near border areas. This is computationally inefficient, but it works, and since the inference time is not that big, it is an alright solution. For industrial purposes, another approach might be beneficial.
+In a real-world application of the field classification a farmer would want a complete and precise segmentation of his whole field at once, such that fertilizer and pesticides can be distributed accordingly. To accomplish this, a reconstruction of the smaller image inferences is neccesary. The most straight forward method of combining the smaller images, by simply lining them up next to each other result is a very rough transition between the smaller inferences. This can be seen in the left side of \ref{fig:earlylatereconstruction}. The blocky nature of the field prediction is caused by a convulutional networks lack of information from neighbouring pixel when inference is performed near the borders of an image. Our way of handling the problem was to increase the cropping size and add overlap when performing the inference. At the cost of computational efficiency more information is available near the borders and a smooth field prediction can be archieved. This can be seen in the right side of \ref{fig:earlylatereconstruction}. A visualization of the reconstruction technique can be seen in appendix \ref{reconstruction_technique}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{early_late_reconstruction}
+	\caption{\textbf{Left:} Smaller inferences put next to eachother without use of reconstruction techniques. \textbf{Right:} Reconstruction with padding and overlap between smaller inferences.}
+	\label{fig:earlylatereconstruction}
+\end{figure}
+
+   of doing this  However, it turns out that the prediction quality is of less quality near the boarders of the image. Therefore, a naïve stitching of the cropped images leads to a full-blown image prediction with obvious flaws near the boarders between the cropped images. To solve this problem, we have chosen to increase the size of the cropped images, and infer on these enlarged pictured. In the procedure of joining the enlarged cropped pictures the pictures are cropped again, to avoid the near border areas. This is computationally inefficient, but it works, and since the inference time is not that big, it is an alright solution. For industrial purposes, another approach might be beneficial.
 
 
 
@@ -213,5 +222,15 @@ In a real-world application of the segmentation a farmer would want a complete a
 
 \bibliographystyle{IEEEbib}
 \bibliography{refs}
+
+\subsection{Appendix}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{"reconstruction DL"}
+	\caption{Reconstruction of the smaller inferences into a unified field prediction.}
+	\label{reconstruction_technique}
+\end{figure}
+
+
 
 \end{document}
