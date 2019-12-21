@@ -1,14 +1,14 @@
+% !TeX spellcheck = en_GB
 % Template for ICASSP-2010 paper; to be used with:
 %          mlspconf.sty  - ICASSP/ICIP LaTeX style file adapted for MLSP, and
 %          IEEEbib.bst - IEEE bibliography style file.
 % --------------------------------------------------------------------------
 \documentclass{article}
 \usepackage{amsmath,graphicx,02460}
-
-
+\usepackage{url}
 
 \toappear{02460 Advanced Machine Learning, DTU Compute, Autumn 2019}
-
+\newcommand{\pro}{\ensuremath{\ \%}}
 
 % Example definitions.
 % --------------------
@@ -67,14 +67,45 @@ One, two, three, four, five
 \section{Introduction}
 \label{sec:intro}
 
-\subsection{Brief overview of data}
-Our data consist of one large, high resolution orthomosaic photo of a sugar cane field formatted as a RGB image. The field has been manually labelled by expert biologist to create a human-ground truth, these labels are represented as a GT-matrix with 3 possible classes. Each pixel is either classified as a crop row (green), weed (yellow), background (red). The large photo is cropped into smaller images and afterwards augmentation techniques are used to gain more data. We will return to the augmentation part later. The images with exclusively black pixels are removed from our data set, and images with some black pixels are ignored when calculating the loss function 
+\subsection{Dataset and preprocessing}
+Our dataset consists of two large, high resolution orthomosaic RGB images of a sugar cane field\footnote{Aerial image: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/sugarcane2.png\\
+Ground truth: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/crop6GT.png}.
+The first image consists of several drone images stitched together, with the second image of the same size being the by an expert biologist manually labelled human ground truth.
+The three classes each have a corresponding colour -- crop rows are green, weeds are yellow, and soil is red.
+Void pixels are black.
+
+
 \section{METHODS}
 \label{sec:format}
 
+\subsection{Preprocessing and data augmentation}
+In order to get the most out of the data, preprocessing is needed.
+First, the RGB values of the non-void pixels of the aerial image are standardized, and a matrix is used to represent the ground truth.
+Each entry corresponds to a pixel and contains a number 0-2 for the different classes or 3 for void.
+The images are then padded with black pixels and cropped into smaller $ 512\times 512 $ pixel images.
+Any of these images containing only black pixels are discarded, leaving a total of 108 pairs of aerial photo/ground truth images.
+These are then split into 69 training, 18 validation, and 25 test images.
 
-Netværket blev initialiseret
+In order to increase the effective size of the dataset, we perform aggressive data augmentation.
+When training the network, each pair of aerial photo/ground truth images is randomly cropped into $ 256\times 256 $ pixel images.
+Furthermore, we applied a 50\pro\ chance of performing a top/down flip as well as a 50\pro\ chance of left/right flip to each image pair.
+Even though data augmentation is not as a good as more independent data, it still allows the network to generalize better and overfit less.
 
+\subsection{Regularization}
+Because deep neural networks are so flexible models, regularization is necessary on top of the data augmentation to further reduce overfitting.
+This is done in two ways.
+
+Dropout at 10\pro\ is used after each blue block in the network (see Fig. \ref{fig:arch}).
+This randomly shuts off nodes during training leading to node redundancy and variability, as the same input will vary somewhat in its output, which learns the network to generalize better.
+We experimented with higher dropout, but found that too much would significantly reduce learning.
+
+Batch normalization is applied after each dropout.
+This standardizes the activations, keeping them close to zero.
+As a result, the weights and biases also stay close to zero, which reduces the flexibility of the model, leading to less overfitting.
+Batch normalization also has several other benefits, such as reducing the vanishing gradient problem and allowing for a higher learning rate and thus faster convergence time. \cite{bn}
+\\
+\\
+\subsection{}
 The encoder part of the network creates a rich feature map representing the image content. The more 
 layers of max-pooling there are the more translation invariance for robust 
 classification can be achieved. The boundary detail is very important when 
