@@ -74,6 +74,13 @@ The first image consists of several drone images stitched together, with the sec
 The three classes each have a corresponding colour -- crop rows are green, weeds are yellow, and soil is red.
 Void pixels are black.
 
+\subsection{Motivation}
+Image segmentation and object classification have been a huge talking point in recent years. This is partly due to the wide array of possible applications and the recent interest in machine learning and, in particular, deep learning. One such important application is seperating weeds, crops and dirt in aerial drone images of a field. Applying the SegNet architecture to this field of crop segmentation could allow for smart agriculture that circumvents the many laborious man-hours of manual classification. Using SegNet for this classification could also prove useful in terms of the computational efficiency, as this allows for end-to-end training and makes embedded systems, e.g. in drones, feasible.
+
+\subsection{Goal and application}
+
+
+In the following segments of this paper, the relevant methods, results and discussion will be covered; In section 2, methods such as regularization, data augmentation, metrics and chosen loss function are described. The results are tabulated in section 3. Section 4 is a discussion of the results and accuracy of the reconstruction, a comparison to other similar methods as well as a perspective on the problem. The relevant references are included in section 5.
 
 \section{METHODS}
 \label{sec:format}
