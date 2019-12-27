@@ -7,7 +7,7 @@
 \usepackage{amsmath,graphicx,02460}
 \usepackage{url}
 
-\toappear{02460 Advanced Machine Learning, DTU Compute, Autumn 2019}
+\toappear{02456 Deep Learning, DTU Compute, Autumn 2019}
 \newcommand{\pro}{\ensuremath{\ \%}}
 
 % Example definitions.
@@ -67,17 +67,21 @@ One, two, three, four, five
 \section{Introduction}
 \label{sec:intro}
 
-\subsection{Dataset and preprocessing}
-Our dataset consists of two large, high resolution orthomosaic RGB images of a sugar cane field\footnote{Aerial image: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/sugarcane2.png\\
+\subsection{Dataset and Preprocessing}
+Our primary dataset consists of two large, high resolution orthomosaic RGB images of a sugar cane field\footnote{Aerial image: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/sugarcane2.png\\
 Ground truth: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/crop6GT.png}.
 The first image consists of several drone images stitched together, with the second image of the same size being the by an expert biologist manually labelled human ground truth.
 The three classes each have a corresponding colour -- crop rows are green, weeds are yellow, and soil is red.
 Void pixels are black.
 
+We also used second, smaller dataset from a corn field. \textbf{INSERT LINK}
+We did not use this for hyperparameter optimization or architechtural decisions like this primary dataset.
+Instead, only a train/test split was used to evaluate the network using exact same hyperparameters.
+
 \subsection{Motivation}
 Image segmentation and object classification have been a huge talking point in recent years. This is partly due to the wide array of possible applications and the recent interest in machine learning and, in particular, deep learning. One such important application is seperating weeds, crops and dirt in aerial drone images of a field. Applying the SegNet architecture to this field of crop segmentation could allow for smart agriculture that circumvents the many laborious man-hours of manual classification. Using SegNet for this classification could also prove useful in terms of the computational efficiency, as this allows for end-to-end training and makes embedded systems, e.g. in drones, feasible.
 
-\subsection{Goal and application}
+\subsection{Goal and Application}
 
 
 In the following segments of this paper, the relevant methods, results and discussion will be covered; In section 2, methods such as regularization, data augmentation, metrics and chosen loss function are described. The results are tabulated in section 3. Section 4 is a discussion of the results and accuracy of the reconstruction, a comparison to other similar methods as well as a perspective on the problem. The relevant references are included in section 5.
@@ -85,7 +89,7 @@ In the following segments of this paper, the relevant methods, results and discu
 \section{METHODS}
 \label{sec:format}
 
-\subsection{Preprocessing and data augmentation}
+\subsection{Preprocessing and Data Augmentation}
 In order to get the most out of the data, preprocessing is needed.
 First, the RGB values of the non-void pixels of the aerial image are standardized, and a matrix is used to represent the ground truth.
 Each entry corresponds to a pixel and contains a number 0-2 for the different classes or 3 for void.
@@ -98,8 +102,11 @@ When training the network, each pair of aerial photo/ground truth images is rand
 Furthermore, we applied a 50\pro\ chance of performing a top/down flip as well as a 50\pro\ chance of left/right flip to each image pair.
 Even though data augmentation is not as a good as more independent data, it still allows the network to generalize better and overfit less.
 
+The same preprocessing was applied to the secondary dataset with the only difference being that black pixels were a class, so these were not left out of the training and evaluation.
+We ended up with \textbf{INSERT NUMBER OF IMAGES}
+
 \subsection{Regularization}
-Because deep neural networks are so flexible models, regularization is necessary on top of the data augmentation to further reduce overfitting.
+Because deep neural networks are such highly flexible models, regularization is necessary on top of the data augmentation to further reduce overfitting.
 This is done in two ways.
 
 Dropout at 10\pro\ is used after each blue block in the network (see Fig. \ref{fig:arch}).
@@ -121,7 +128,7 @@ the feature maps of the encoder before upsampling is important. This can
 simply be done by storing the whole feature map, but due to memory 
 constrains only the maxpooling indices are saved, which is a good 
 approximation of the feature maps. 
-\subsection{Loss function: Quality over quantity}
+\subsection{Loss Function: Quality over Quantity}
 Multi-class cross entropy because:
 \begin{itemize}
 	\item Softmax Network: Minus log likelihood
@@ -149,38 +156,21 @@ The metrics \footnote{https://hal.inria.fr/hal-01581525/document}\footnote{
 	\item Harmonic mean of precision and recall. To compare to others with same project. Penalizes false positives and gives less credit to true negatives thus being better for unbalanced classes.
 \end{itemize}
 
-\subsection{Regularization and Hyperparameters}
-Regularization
-\begin{itemize}
-	\item NN's are prone to overfitting, because they are so flexible
-	\item Prevent overfitting $ \to $ better results on test data
-	\item Three methods
-	\item Dropout: Randomly remove nodes to increase variability. $ p=10 \%$
-	\item Data augmentation: Increase size of dataset
-	\begin{itemize}
-		\item Crop each $ 512\times 512 $ to random $ 256\times 256 $
-		\item 50\% chance of flip T/D and 50\% chance of flip L/R
-	\end{itemize}
-	\item Batch normalization normalizes activations
-	\begin{itemize}
-		\item Faster convergence
-		\item Prevents ReLU from not learning
-		\item Introduces noise
-		\item Reduces vanishing/exploding gradient problem, as values stay close to 0
-	\end{itemize}
-\end{itemize}
-Hyperparameters
-\begin{itemize}
-	\item Adaptive learning rate from ADAM optimizer, initialized at $ 2\cdot10^{-4} $
-	\item Total: 26 conv + batchnorm + ReLU with dropout, 5 pool/upsample, 1 softmax
-	\item 14.7 M parameters in encoder -- significantly lower than 134 M in VGG16 because of no fully-connected layers
-	\item Kernel size: $ 3\times 3 $, stride 1, maxpool: $ 2\times 2 $, stride 2
-	\item Corresponding padding of 1 to prevent reduction of image size
-\end{itemize}
+\subsection{Experiments and Reconstruction}
+When training the network, we used the following hyperparameters: Batch size of 3, dropout of 10\pro, and a learning rate of $ 1.5\cdot 10^{-4} $ with the ADAM optimization algorithm.
+For the convolutional layers, kernel size was set to $ 3\times 3 $ and stride to $ 1 $, as deeper network structures tend to learn to better and faster with smaller kernels.
+This is because the receptive field is the same as larger kernels in shallower networks, but the multiple layers allow for learning more complex structures.
+In the encoder part, the first convolutional layer increased the number of channels to 64.
+Thereafter, the first convolutional layer in each block doubled the number of channels, ending at 512.
+In the max pooling layers, we used a $ 2\times 2 $ with a stride of 2, cutting the size of the feature maps to a quarter each time.
+The decoder part exactly mirrored this structure.
+
+The training can be recreated using the Jupyter Notebook in the \texttt{src} folder in the Github repository.
+Because the network takes close to 30 GB of VRAM to train, we have implemented a simpler version of SegNet with fewer layers that takes significantly less memory to train.
+This is controlled using the \texttt{use\_simple} variable, which is set to \texttt{True} by default.
 
 
-
-\subsection{Unification of cropped image predictions}
+\subsection{Unification of Cropped Image Predictions}
 In a real-world application of the field classification a farmer would want a complete and precise segmentation of his whole field at once, such that fertilizer and pesticides can be distributed accordingly. To accomplish this, a reconstruction of the smaller image inferences is neccesary. The most straight forward method of combining the smaller images, by simply lining them up next to each other results in a very rough transition between the smaller inferences. This can be seen in the left side of \ref{fig:earlylatereconstruction}. The blocky nature of the field prediction is caused by a lack of information from neighbouring pixel when inference is performed near the borders of an image. To solve this problem, we have chosen to increase the size of the cropped images and add some overlap, and then infer on these enlarged pictured. In the procedure of joining the enlarged cropped pictures they are cropped again, to avoid the border areas. At the cost of computational efficiency more information is available near the borders and a smooth field prediction can be archieved. This can be seen in the right side of \ref{fig:earlylatereconstruction}. A visualization of the reconstruction technique can be seen in appendix \ref{reconstruction_technique}.
 
 
@@ -239,7 +229,7 @@ In a real-world application of the field classification a farmer would want a co
 
 \section{DISCUSSION}
 \label{sec:foot}
-\subsection{Comparison of different image segmentation neural networks}
+\subsection{Comparison of Different Image Segmentation Neural Networks}
 \begin{itemize}
 	\item Several competing network structures with high performance in image segmentation. U-net, FCN, DeepLabv1, DeconvNet
 	\item Purpose of SegNet, efficient
@@ -250,8 +240,16 @@ In a real-world application of the field classification a farmer would want a co
 	\item Main takeaway  
 	\item (Deeplabv-LargeFOV \& FCN)
 	
-\subsubsection{Draft for comparison}
-Before we move on to a comparison of the leading network architectures in the field of image segmentation, It is important to emphasize that the purpose of SegNet is to be efficient in inference time and memory wise, such that it can be used in embedded systems. For example in drones or in self-driving cars.  Besides SegNet the most acknowledged structures are named U-net, DeepLabv1, DeconvNet and FCN. They have very similar performance and the encoding architecture is almost identical. But they differ in decoding structure and techniques and as a common denominator the SegNet alternatives uses a lot of memory during inference. Among the heavy users of memory are the fully connected layers of the DeconvNet and FCN, and the skip connections in the U-Net. And in comparison, with the other networks, SegNet uses half the memory during inference and comes in second with regard to inference time. The fastest network is the FCN, and this is becaused it does not have a decoder structure, but makes a prediction directly from the output from the encoder, and this leads to blocky predictions.
+\subsubsection{Draft for Comparison}
+Before we move on to a comparison of the leading network architectures in the field of image segmentation, it is important to emphasize that the purpose of SegNet is to be efficient in inference time and memory wise, such that it can be used in embedded systems, for instance in drones or in self-driving cars.
+Besides SegNet, the most acknowledged structures are named U-net, DeepLabv1, DeconvNet and FCN.
+They have very similar performance and the encoding architecture is almost identical.
+However, they differ in decoding structure and techniques, and as a common denominator the SegNet alternatives use a lot of memory during inference.
+Among the heavy users of memory are the fully connected layers of the DeconvNet and FCN, and the skip connections in the U-Net.
+SegNet uses about half the memory during inference as compared to the other structures and comes in second with regard to inference time.
+The fastest network is the FCN, and this is becaused it does not have a decoder structure, but makes a prediction directly from the output from the encoder, and this leads to blocky predictions.
+The speed of SegNet comes in part from the lack of fully connected layers.
+The encoder part of the network has only 14.7 million parameters compared to partially fully connected structures that tend to have well over 100 million. \cite{seg}
 
 \subsection{Potential in SegNet}
 The architecture of SegNet allows for an easy and fast end to end training of the network. As a consequence of this SegNet is easily modified into other use cases without much technical effort. Because of the low memory usage and the speed of which the inference takes place SegNet could prove to be a good choice for self-driving cars and drones. However, it can be challenging and costful to acquire labelled data as this typically involves professionals manually doing the labelling. In our project we only have a single field image, which is probably not representative of similar fields under different circumstances such as lighting, type of crop and season. (The robustness of our network has been tested by running inference on a different data set and with XXX result (EKSILD DATA?)  The robustness of the network can be enhances by different augmentation techniques that is problem dependant. There exits a vast amount of different techniques and some have proved useful in medical imaging, whereas other are preferred in other problem settings.
