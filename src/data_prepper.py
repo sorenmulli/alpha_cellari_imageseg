@@ -59,30 +59,39 @@ def _load_image(path: str, dtype = np.float64, channels = 3):
 	
 	return pixels
 
-def _standardize(image, consider_voids = True):
+def _standardize(image, for_corn = False):
 
 	"""
 	Standardizes the pixel values of non-void pixels channelwise
 	"""
  
 	# Detects void pixels
-	if consider_voids:
+	if for_corn:
 		void_pixels = (image==0).all(axis=2)
 	else:
 		void_pixels = False
 
 	means = list()
 	stds = list()
-	for i in range(image.shape[2]):
-		# Singles out channel
-		# Changing this will also change image, as they point to the same object
-		im_channel = image[:, :, i]
-		# Standardizes non-void pixels
-		mean = im_channel[~void_pixels].mean()
-		std = im_channel[~void_pixels].std() + EPS
-		means.append(mean)
-		stds.append(std)
-		im_channel[~void_pixels] = (im_channel[~void_pixels] - mean) / std
+	if for_corn:
+		for i in range(image.shape[3]):
+			im_channel = image[:, :, :, i]
+			mean = im_channel.mean()
+			std = im_channel.std() + EPS
+			means.append(mean)
+			stds.append(std)
+			im_channel = (im_channel - mean) / std
+	else:
+		for i in range(image.shape[2]):
+			# Singles out channel
+			# Changing this will also change image, as they point to the same object
+			im_channel = image[:, :, i]
+			# Standardizes non-void pixels
+			mean = im_channel[~void_pixels].mean()
+			std = im_channel[~void_pixels].std() + EPS
+			means.append(mean)
+			stds.append(std)
+			im_channel[~void_pixels] = (im_channel[~void_pixels] - mean) / std
 
 	return image, means, stds
 
@@ -227,7 +236,7 @@ def _prepare_data_corn():
 	LOG("Done loading images\nShapes: %s\n train/test Split: %s\n" % (aerial.shape[1:3], (len(target_train), len(target_test))))
 
 	LOG("Standardizing aerial image...")
-	aerial, means, stds = _standardize(aerial, consider_voids = False)
+	aerial, means, stds = _standardize(aerial, for_corn = True)
 	LOG("Done standardizing images\n")
 
 	LOG("Squeezing target images to single channel...")
