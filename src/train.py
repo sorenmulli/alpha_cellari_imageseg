@@ -68,36 +68,37 @@ class Trainer:
 				net.save(f"local_data/wip_model_epoch{epoch_idx}")
 
 			if epoch_idx % val_every == 0:
-				with torch.no_grad():
-					net.eval()
+				if len(self.cfg["val_idcs"]) != 0:
+					with torch.no_grad():
+						net.eval()
 
-					val_data, val_target = data_loader.get_validation()
-					val_output = net(val_data)
+						val_data, val_target = data_loader.get_validation()
+						val_output = net(val_data)
 
-					evalution_loss = criterion(val_output, val_target)
-					
-					full_eval_loss.append(float(evalution_loss))
-					del val_data
-					del val_target
-					self.log(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
+						evalution_loss = criterion(val_output, val_target)
+						
+						full_eval_loss.append(float(evalution_loss))
+						del val_data
+						del val_target
+						self.log(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
 
-					#Overwrite name 
-					val_data, val_target = data_loader.train_x, data_loader.train_y
-					val_output = net(val_data)
+						#Overwrite name 
+						val_data, val_target = data_loader.train_x, data_loader.train_y
+						val_output = net(val_data)
 
-					training_loss = criterion(val_output, val_target)
-					full_training_loss.append(float(training_loss))
-					del val_data
-					del val_target
+						training_loss = criterion(val_output, val_target)
+						full_training_loss.append(float(training_loss))
+						del val_data
+						del val_target
 
-					self.log(f"Epoch {epoch_idx}: Training loss:   {float(training_loss)}\n")
-					
-					val_iter.append(epoch_idx)
+						self.log(f"Epoch {epoch_idx}: Training loss:   {float(training_loss)}\n")
+						
+						val_iter.append(epoch_idx)
 
-					torch.cuda.empty_cache()
-					
-			if with_accuracies_print:
-				self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, val_output)))
+						torch.cuda.empty_cache()
+						
+				if with_accuracies_print:
+					self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, val_output)))
 
 			net.train()
 			for batch_data, batch_target in data_loader.generate_epoch():
