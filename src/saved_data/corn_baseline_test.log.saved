@@ -1,0 +1,12 @@
+2019-12-28 16:30:59.018404	Evaluating Baseline
+
+2019-12-28 16:31:05.300109	Training accuracy measures: Global acc.: 0.3925
+                          	Class acc.: 0.3333
+                          	Mean IoU.: 0.1308
+                          	Bound. F1: 0.1879
+
+2019-12-28 16:31:06.241630	Test accuracy measures: Global acc.: 0.3193
+                          	Class acc.: 0.3333
+                          	Mean IoU.: 0.1064
+                          	Bound. F1: 0.1613
+
