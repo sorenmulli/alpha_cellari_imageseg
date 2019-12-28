@@ -47,7 +47,7 @@ class Trainer:
 			ignore_index = -100
 		
 		criterion = nn.CrossEntropyLoss(ignore_index=ignore_index,
-		#weight = class_weight_counter(data_loader.train_y), 
+		weight = class_weight_counter(data_loader.train_y), 
 		)
 		optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
@@ -155,7 +155,7 @@ if __name__ == "__main__":
 	net.save('model')
 
 
-	full_forward(net, None, True, "local_data/full-forward.png")
+	#full_forward(net, None, True, "local_data/full-forward.png")
 	
 	
 	tester = Tester("local_data/prep_out.json", logger)
