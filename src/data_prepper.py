@@ -404,5 +404,5 @@ if __name__ == "__main__":
 	os.chdir(sys.path[0])
 	os.makedirs("local_data/imgs", exist_ok = True)
 
-	# _prepare_data_sugarcane()
-	_prepare_data_corn()
+	_prepare_data_sugarcane()
+	#_prepare_data_corn()
