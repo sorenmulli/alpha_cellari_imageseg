@@ -166,6 +166,8 @@ The metric which is being seen as the main performance metric is the F1-score: T
 
 Both F1 and MIoU are calculated for each of the three classes and are then averaged to get the final score. Both of them favour region smoothness higher than boundary accuracy compared to semantic accuracy measures such as the Berkeley contour matching score \cite{seg}.
 
+To estimate generalization performance, the models are compared by their performance on the \textit{test data set} which is kept separate from the training and validation data and is pre-divided for both data sets consisting of approximately \( 20\%\) of the images.  It is noted that this simple hold out evaluation method does not claim to give an accurate estimate of generalization error on \textit{any} data set but can statistically only be seen as an evaluation of the performance on the used data sets. 
+
 \subsection{Experiments and Reconstruction}
 When training the network, we used the following hyperparameters: Batch size of 3, dropout of 10\pro, and a learning rate of $ 1.5\cdot 10^{-4} $ with the ADAM optimization algorithm.
 For the convolutional layers, kernel size was set to $ 3\times 3 $ and stride to $ 1 $, as deeper network structures tend to learn to better and faster with smaller kernels.
@@ -176,7 +178,7 @@ In the max pooling layers, we used a $ 2\times 2 $ with a stride of 2, cutting t
 The decoder part exactly mirrored this structure.
 
 The training can be recreated using the Jupyter Notebook in the \texttt{src} folder in the Github repository.
-Because training the network takes close to 30 GB of VRAM to train, we have implemented a simpler version of SegNet with fewer layers that takes significantly less memory to train.
+Because training the network takes close to 30 GB of VRAM, we have implemented a simpler version of SegNet with fewer layers that takes significantly less memory to train.
 This is controlled using the \texttt{use\_simple} variable, which is set to \texttt{True} by default.
 
 
@@ -238,6 +240,18 @@ In a real-world application of the field classification a farmer would want a co
 
 
 \section{DISCUSSION}
+
+\subsection{Performance of Networks: Loss and Size matter}
+Søren: Interpretation of experiment results
+
+\begin{itemize}
+\item Comments on network performance compared to competitors + speculation on why not as high
+\item Comments  on results of performance between the models
+\item Comments on results of performance between the data sets
+\item Comment on low overfitting: data augmentation
+\end{itemize}
+
+
 \label{sec:foot}
 \subsection{Comparison of Different Image Segmentation Neural Networks}
 \begin{itemize}
