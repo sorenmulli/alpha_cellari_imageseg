@@ -38,16 +38,17 @@ class Trainer:
 		
 		augmenter = Augmenter(augment_cfg=augmentations)
 		data_loader = DataLoader(self.json_path, batch_size, augment = augmenter)
-
 		net = Net(architecture).to(DEVICE)
 
 		try:
 			ignore_index = self.cfg["classes"].index("0"*9)
 		except ValueError:
 			ignore_index = -100
-		
+
+		if len(self.cfg["void_idcs"]) == 0:
+			ignore_index = -100
 		criterion = nn.CrossEntropyLoss(ignore_index=ignore_index,
-		weight = class_weight_counter(data_loader.train_y), 
+		weight = class_weight_counter(data_loader.train_y, ignore_last_class= False), 
 		)
 		optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 

@@ -4,10 +4,13 @@ from logger import Logger
 
 import evaluation
 
-def class_weight_counter(y: torch.Tensor):
+def class_weight_counter(y: torch.Tensor, ignore_last_class = True):
 	_, counts = torch.unique(y, return_counts = True)
 	partitions = 1- counts.float() / torch.sum(counts)
-	return partitions[:-1]
+	if ignore_last_class:
+		return partitions[:-1]
+	else:
+		return partitions
 
 def softmax_output_to_prediction(output: torch.Tensor):
 	### Assumes that it receives images of shape: (image #, class #,  height, width)
