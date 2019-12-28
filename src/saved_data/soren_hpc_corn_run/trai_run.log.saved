@@ -1,0 +1,274 @@
+2019-12-28 18:13:32.220934	Running full training loop
+
+2019-12-28 18:13:41.827221	Augmentations: <class 'augment.AugmentationConfig'>
+2019-12-28 18:13:41.838255	Criterion and optimizer: CrossEntropyLoss()
+                          	Adam (
+                          	Parameter Group 0
+                          	    amsgrad: False
+                          	    betas: (0.9, 0.999)
+                          	    eps: 1e-08
+                          	    lr: 0.00015
+                          	    weight_decay: 0
+                          	)
+2019-12-28 18:13:41.920912	Train size: 20
+                          	Eval size: 0
+                          	Test size: 4
+
+2019-12-28 18:13:41.923021	Neural network information
+                          		Net(
+                          	  (encoder1): EncoderBlock(
+                          	    (encoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	    (mpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                          	  )
+                          	  (encoder2): EncoderBlock(
+                          	    (encoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	    (mpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                          	  )
+                          	  (encoder3): EncoderBlock(
+                          	    (encoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	    (mpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                          	  )
+                          	  (encoder4): EncoderBlock(
+                          	    (encoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	    (mpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                          	  )
+                          	  (encoder5): EncoderBlock(
+                          	    (encoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	    (mpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                          	  )
+                          	  (decoder1): DecoderBlock(
+                          	    (unpool): MaxUnpool2d(kernel_size=(2, 2), stride=(2, 2), padding=(0, 0))
+                          	    (decoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	  )
+                          	  (decoder2): DecoderBlock(
+                          	    (unpool): MaxUnpool2d(kernel_size=(2, 2), stride=(2, 2), padding=(0, 0))
+                          	    (decoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(512, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	  )
+                          	  (decoder3): DecoderBlock(
+                          	    (unpool): MaxUnpool2d(kernel_size=(2, 2), stride=(2, 2), padding=(0, 0))
+                          	    (decoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (2): BlueLayer(
+                          	        (convolutional): Conv2d(256, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	  )
+                          	  (decoder4): DecoderBlock(
+                          	    (unpool): MaxUnpool2d(kernel_size=(2, 2), stride=(2, 2), padding=(0, 0))
+                          	    (decoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	  )
+                          	  (decoder5): DecoderBlock(
+                          	    (unpool): MaxUnpool2d(kernel_size=(2, 2), stride=(2, 2), padding=(0, 0))
+                          	    (decoder): Sequential(
+                          	      (0): BlueLayer(
+                          	        (convolutional): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0, inplace=False)
+                          	        (bnorm): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	      (1): BlueLayer(
+                          	        (convolutional): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                          	        (dropout): Dropout(p=0.1, inplace=False)
+                          	        (bnorm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                          	        (relu): ReLU()
+                          	      )
+                          	    )
+                          	  )
+                          	)
+2019-12-28 18:13:41.924573	Number of epochs 3000 with batch size: 3
+2019-12-28 18:20:52.552588	Saving Network ...
+2019-12-28 18:28:10.815416	Saving Network ...
+2019-12-28 18:35:29.799793	Saving Network ...
+2019-12-28 18:42:47.332418	Saving Network ...
+2019-12-28 18:50:04.364403	Saving Network ...
+2019-12-28 18:57:22.856288	Loading test data...
+2019-12-28 18:57:23.288667	Done loading test data
+
+2019-12-28 18:57:23.292801	Performing forward passes...
+2019-12-28 18:57:23.295434	Forward passing test image 0
+2019-12-28 18:57:23.307584	Forward passing test image 1
+2019-12-28 18:57:23.312937	Forward passing test image 2
+2019-12-28 18:57:23.318057	Forward passing test image 3
+2019-12-28 18:57:23.322962	Forward passing train image 0
+2019-12-28 18:57:23.327674	Forward passing train image 1
+2019-12-28 18:57:23.332525	Forward passing train image 2
+2019-12-28 18:57:23.337371	Forward passing train image 3
+2019-12-28 18:57:23.342495	Forward passing train image 4
+2019-12-28 18:57:23.347416	Forward passing train image 5
+2019-12-28 18:57:23.356087	Forward passing train image 6
+2019-12-28 18:57:23.374852	Forward passing train image 7
+2019-12-28 18:57:23.393631	Forward passing train image 8
+2019-12-28 18:57:23.412333	Forward passing train image 9
+2019-12-28 18:57:23.431240	Forward passing train image 10
+2019-12-28 18:57:23.450130	Forward passing train image 11
+2019-12-28 18:57:23.469054	Forward passing train image 12
+2019-12-28 18:57:23.487968	Forward passing train image 13
+2019-12-28 18:57:23.506801	Forward passing train image 14
+2019-12-28 18:57:23.525654	Forward passing train image 15
+2019-12-28 18:57:23.544499	Forward passing train image 16
+2019-12-28 18:57:23.563267	Forward passing train image 17
+2019-12-28 18:57:23.582099	Forward passing train image 18
+2019-12-28 18:57:23.600956	Forward passing train image 19
+2019-12-28 18:57:23.619872	Done performing forward passes
+
+2019-12-28 18:57:23.621022	Calculating train accuracy measures...
+2019-12-28 18:57:27.694899	Accuracy measures: Global acc.: 0.7938
+                          	Class acc.: 0.7819
+                          	Mean IoU.: 0.6505
+                          	Bound. F1: 0.7877
+
+2019-12-28 18:57:27.696748	Calculating test accuracy measures...
+2019-12-28 18:57:28.459897	Test accuracy measures: Global acc.: 0.3518
+                          	Class acc.: 0.3556
+                          	Mean IoU.: 0.2069
+                          	Bound. F1: 0.3398
+
+2019-12-28 18:57:28.461191	Reconstructing images...
