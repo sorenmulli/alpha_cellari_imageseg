@@ -191,6 +191,7 @@ def _split_data(voids: np.ndarray, already_split = False, cutoff = None, size = 
 	"""
 	if already_split:
 		train_val_idcs = np.arange(cutoff)
+		n_train = cutoff 
 		test_idcs = np.arange(cutoff, size)
 
 
@@ -199,9 +200,9 @@ def _split_data(voids: np.ndarray, already_split = False, cutoff = None, size = 
 		train_val_idcs = np.where(~(MR_COOL_IDCS | voids))[0]
 		test_idcs = np.where(MR_COOL_IDCS & ~voids)[0]
 
-	# Calculates size of different sets
-	n_train = int(SPLIT[0] * train_val_idcs.size)
-	np.random.shuffle(train_val_idcs)
+		# Calculates size of different sets
+		n_train = int(SPLIT[0] * train_val_idcs.size)
+		np.random.shuffle(train_val_idcs)
 	
 
 	# Gets arrays of indices
