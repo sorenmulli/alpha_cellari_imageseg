@@ -156,20 +156,15 @@ _{\mathclap{\text{Class weight}}}
 \] 
 To test the importance of this frequency balancing for this data set, another training experiment was set up without weighting of the cross entropy loss.
 \subsection{Evaluation Metrics: Finding the Important Story}
-Had to use different metrics because
-\begin{itemize}
-	\item Not agreement in Image Segmentation papers.
-	\item Want to get accuracy on a global scale and on a class scale.
-	\item Different metrics important in different fields.
-\end{itemize}
-The metrics \footnote{https://hal.inria.fr/hal-01581525/document}\footnote{
-	http://www.bmva.org/bmvc/2013/Papers/paper0032/paper0032.pdf} 
-\begin{itemize}
-	\item Global accuracy: Trivial and  not very important because of class imbalance but is good for smoothness
-	\item Mean class-wise accuracy: Takes class imbalance into account. Is what is being optimized for in the model.
-	\item Mean Intersect over Union: "Jaccard Index".  Found to be better correlated with human classification though still only \(\approx 0.5\). Favours region smoothness highly and not boundary accuracy.
-	\item Harmonic mean of precision and recall. To compare to others with same project. Penalizes false positives and gives less credit to true negatives thus being better for unbalanced classes.
-\end{itemize}
+In the compared image segmentation literature no single accuracy measure can be described  as the canonical metric resulting in a number of metrics being compared \cite{eval, Metric}.  A collection of different metrics are usable as the performance difference on global and local scale is relevant. 
+%	\item Different metrics important in different fields.
+Four simple accuracy measures are used here to mirror the SegNet paper \cite{seg} though more complex measures which fit better with human evaluation exist \cite{eval}. 
+
+The simple global accuracy, the frequency of correct classifications, is not the most meaningful measure for class imbalanced data sets such as this (where the baseline achieves \(>90\%\)) but is in the literature noted to be important for a smooth classification \cite{seg}. Another simple measure is the mean of the accuracies of model on the three classes. This measure is still a naïve accuracy measure but is the metric which is being optimized for in the weighted cross entropy loss. 
+
+The metric which is being seen as the main performance metric is the F1-score: The harmonic mean of precision of recall. This is used for comparison to other groups with same project and because this metric penalizes false positives and gives less credit to true negatives thus being better for unbalanced classes \cite{Metric}. A related score is the Mean Intersect over Union (MIoU), also known as the Jaccard Index, which penalizes false positives harder and is found to be better correlated to human evaluation though only \(\sim 0.5\) \cite{eval}. 
+
+Both F1 and MIoU are calculated for each of the three classes and are then averaged to get the final score. Both of them favour region smoothness higher than boundary accuracy compared to semantic accuracy measures such as the Berkeley contour matching score \cite{seg}.
 
 \subsection{Experiments and Reconstruction}
 When training the network, we used the following hyperparameters: Batch size of 3, dropout of 10\pro, and a learning rate of $ 1.5\cdot 10^{-4} $ with the ADAM optimization algorithm.
