@@ -6,7 +6,7 @@
 \documentclass{article}
 \usepackage{amsmath,graphicx,02460}
 \usepackage{url}
-
+\usepackage{mathtools}
 \toappear{02456 Deep Learning, DTU Compute, Autumn 2019}
 \newcommand{\pro}{\ensuremath{\ \%}}
 
@@ -128,19 +128,34 @@ the feature maps of the encoder before upsampling is important. This can
 simply be done by storing the whole feature map, but due to memory 
 constrains only the maxpooling indices are saved, which is a good 
 approximation of the feature maps. 
-\subsection{Loss Function: Quality over Quantity}
-Multi-class cross entropy because:
-\begin{itemize}
-	\item Softmax Network: Minus log likelihood
-	\item Can be seen as a classic multiclass classifier -- just on a pixel-by-pixel basis.
-\end{itemize}
-Weighted cross entropy because:
-\begin{itemize}
-	\item Unbalanced class distribution: Network has to learn to focus on important pixels: Don't classify everything as dirt.
-	\item Initial tests made the network behave as the baseline: Simple features in early layers got were not penalized enough and learning was not stable.
-	\item Resampling expensive
-\end{itemize}
-\subsection{Metrics}
+\subsection{Training: Learning from Quality over Quantity}
+For training, finding the optimal weights of the network, the widely used Adam optimizer  was implemented because the addition of momentum to the efficient and effective Stochatic Gradient Descent algorithm is shown to giver faster convergence in a wide range of computer vision tasks \cite{Adam}. The training was done in 3000 epochs each consisting of mini batches of size 3.
+
+A more interesting choice was the loss function. It was clear that 3-class cross entropy should be used as this function, for a Softmax network such as SegNet, can be seen as the following the maximum likelihood principle and implementing minus log likelihood loss. The direct implementation of this, however, failed to consider a deep issue in Image Segmentation which had considerable effect on this limited data set: \textit{class imbalance}. 
+In this data set, there is \(\sim 93 \%\) pixels belonging to the \textit{dirt}-class which arguably is the least interesting and initial tests saw the network behave too much as a baseline; simple features in early layers which classified almost everything as dirt were not penalized enough and learning was not stable. 
+
+As resampling an image data set is computationally expensive and it was desired that the network learned to focus on important pixels, it was chosen the main training experiment of this report should use \textit{weighted cross entropy} where each class is weighted by \(1-\nu\); where \(\nu\) is its frequency thus focusing more on the classes crops and weeds than in the vanilla cross entropy. The implemented loss of \(N\) pixels in a one-hot encoded \((N \times  3)\) output matrix \(\mathbf X^\text{pred}\) with the true classes \(\mathbf c\) was then:
+\[
+L = \underbrace{
+	\vphantom{\sum_{i}}
+	\frac 1 N
+	\sum_{\mathclap {i=1}}^{N}
+}
+_{\mathllap{\text{Mean over minibatch}}}
+\underbrace{ 
+	\vphantom{\sum_{i}}
+	\mathbf{w}[i, c_i]}
+_{\mathclap{\text{Class weight}}}  
+\cdot 
+\underbrace{
+	\log 
+	\frac
+	{-\exp\mathbf X^\text{pred}[i, c_i]}
+	{\sum_{j=1}^{3}\exp\mathbf X^\text{pred}[i, j]}
+}_{\mathclap{\text{3-class cross entropy}}}
+\] 
+To test the importance of this frequency balancing for this data set, another training experiment was set up without weighting of the cross entropy loss.
+\subsection{Evaluation Metrics: Finding the Important Story}
 Had to use different metrics because
 \begin{itemize}
 	\item Not agreement in Image Segmentation papers.
@@ -166,7 +181,7 @@ In the max pooling layers, we used a $ 2\times 2 $ with a stride of 2, cutting t
 The decoder part exactly mirrored this structure.
 
 The training can be recreated using the Jupyter Notebook in the \texttt{src} folder in the Github repository.
-Because the network takes close to 30 GB of VRAM to train, we have implemented a simpler version of SegNet with fewer layers that takes significantly less memory to train.
+Because training the network takes close to 30 GB of VRAM to train, we have implemented a simpler version of SegNet with fewer layers that takes significantly less memory to train.
 This is controlled using the \texttt{use\_simple} variable, which is set to \texttt{True} by default.
 
 
@@ -261,11 +276,14 @@ The architecture of SegNet allows for an easy and fast end to end training of th
 
 \subsection{Conclusion}
 
-\bibliographystyle{IEEEbib}
-\bibliography{refs}
+
  
 \subsection{Summary}
 The purpose of this project has been build an efficient neural network architecture for semantic pixel-wise segmentation on a crop field. The neural network has to be efficient especially in terms of memory usage and time during inference, such that it can be used in embedded system such as drones are cars. The architecture implemented goes under the name SegNet \ref{SEGNETREFERENCE}, and it consists of an encoder and a corresponding decoder network and ends with a pixelwise classification layer. The purpose of the encoder is to reduce the dimensionallity and extracts the useful information in the image thereby creating a dense feature maps that can be classified. This procedure is performed by using blocks of convolutional layers, each block ending with a max pooling layer. The decoder has to upsample the low-resolution feature map back into full input resolution, such that a precise pixelwise classification can take place. During the encoding procedure only the most characteristic (Replace with another term) information is extracted with max pooling layers, and local information is lost . This local information is neccesary for a precise classification and therefor SegNet uses max-pooling indices as skip connections to retain this local information. During the upsampling these max pooling indices are used to create a sparse feature map and afterwards convolutional layers are use to create more dense feature maps. The use of max pooling indices are a very efficient way of storing local information with only a slight loss of accuracy. Our results show that ------xx----. Conclusion ----x----.
+
+
+\bibliographystyle{IEEEbib}
+\bibliography{refs}
 \subsection{Appendix}
 \begin{figure}
 	\centering
