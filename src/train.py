@@ -50,7 +50,7 @@ class Trainer:
 		
 		
 		criterion = nn.CrossEntropyLoss(ignore_index=ignore_index,
-			weight = class_weight_counter(data_loader.train_y), 
+			weight = class_weight_counter(data_loader.train_y, ignore_last_class = False), 
 		)
 		optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
