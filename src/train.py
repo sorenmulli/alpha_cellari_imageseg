@@ -49,7 +49,6 @@ class Trainer:
 			ignore_index = -100
 		
 		class_weights = class_weight_counter(data_loader.train_y)
-		self.log("class weights", class_weights)
 		criterion = nn.CrossEntropyLoss(ignore_index=ignore_index,
 			weight = class_weights, 
 		)
