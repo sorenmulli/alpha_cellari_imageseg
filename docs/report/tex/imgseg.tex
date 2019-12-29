@@ -69,19 +69,19 @@ One, two, three, four, five
 \section{Introduction}
 \label{sec:intro}
 
+\subsection{Motivation}
+Image segmentation and object classification have been a huge talking point in recent years. This is partly due to the wide array of possible applications and the recent interest in machine learning and, in particular, deep learning. One such important application is seperating weeds, crops and dirt in aerial drone images of a field. Applying the SegNet architecture to this field of crop segmentation could allow for smart agriculture that circumvents the many laborious man-hours of manual classification. Using SegNet for this classification could also prove useful in terms of the computational efficiency, as this allows for end-to-end training and makes embedded systems, e.g. in drones, feasible.
+
 \subsection{Dataset and Preprocessing}
-Our primary dataset consists of two large, high resolution orthomosaic RGB images of a sugar cane field\footnote{Aerial image: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/sugarcane2.png\\
+The primary dataset in question consists of two large, high resolution orthomosaic RGB images of a sugar cane field\footnote{Aerial image: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/sugarcane2.png\\
 Ground truth: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/crop6GT.png}.
-The first image consists of several drone images stitched together, with the second image of the same size being the by an expert biologist manually labelled human ground truth.
+The first image consists of several drone images stitched together, with the second image of the same size being the manually labelled human ground truth, labelled by an expert biologist.
 The three classes each have a corresponding colour -- crop rows are green, weeds are yellow, and soil is red.
 Void pixels are black.
 
 We also used second, smaller dataset from a corn field. \textbf{INSERT LINK}
 We did not use this for hyperparameter optimization or architechtural decisions like this primary dataset.
-Instead, only a train/test split was used to evaluate the network using exact same hyperparameters.
-
-\subsection{Motivation}
-Image segmentation and object classification have been a huge talking point in recent years. This is partly due to the wide array of possible applications and the recent interest in machine learning and, in particular, deep learning. One such important application is seperating weeds, crops and dirt in aerial drone images of a field. Applying the SegNet architecture to this field of crop segmentation could allow for smart agriculture that circumvents the many laborious man-hours of manual classification. Using SegNet for this classification could also prove useful in terms of the computational efficiency, as this allows for end-to-end training and makes embedded systems, e.g. in drones, feasible.
+Instead, only a train/test split was used to evaluate the network using the exact same hyperparameters.
 
 \subsection{Goal and Application}
 
@@ -205,8 +205,8 @@ In a real-world application of the field classification a farmer would want a co
 
 \begin{table}[h]
 	\centering
-	\caption*{\textbf{Train results}}
 	\begin{tabular}{l r r r r}
+		\textbf{Train results} & & & & \\
 		\toprule
 		Method  &  Global acc.  &  Class acc.  &  Mean IoU  &  Bounded F1 \\ \midrule
 		Baseline  &  0.91  &  0.33  &  n/a  &  0.32 \\
@@ -220,8 +220,8 @@ In a real-world application of the field classification a farmer would want a co
 
 \begin{table}[h]
 	\centering
-	\caption*{\textbf{Test results}}
 	\begin{tabular}{l r r r r}
+		\textbf{Test results} & & & & \\
 		\toprule
 		Method  &  Global acc.  &  Class acc.  &  Mean IoU  &  Bounded F1 \\ \midrule
 		Baseline  &  0.94  &  0.33  &  n/a  &  0.32 \\
