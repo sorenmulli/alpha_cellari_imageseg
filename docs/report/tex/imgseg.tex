@@ -77,7 +77,7 @@ The three classes each have a corresponding colour -- crop rows are green, weeds
 Void pixels are black.
 
 We also used second, smaller dataset from a corn field. \textbf{INSERT LINK}
-We did not use this for hyperparameter optimization or architechtural decisions like this primary dataset.
+We did not perform any hyperparameter optimization or architechtural decisions based on this dataset.
 Instead, only a train/test split was used to evaluate the network using exact same hyperparameters.
 
 \subsection{Motivation}
@@ -179,7 +179,7 @@ Thereafter, the first convolutional layer in each block doubled the number of ch
 In the max pooling layers, we used a $ 2\times 2 $ with a stride of 2, cutting the size of the feature maps to a quarter each time.
 The decoder part exactly mirrored this structure.
 
-The training can be recreated using the Jupyter Notebook in the \texttt{src} folder in the Github repository.
+The training can be recreated using the Jupyter Notebook at \texttt{src/image-segmentation.ipynb} folder in the Github repository.
 Because training the network takes close to 30 GB of VRAM, we have implemented a simpler version of SegNet with fewer layers that takes significantly less memory to train.
 This is controlled using the \texttt{use\_simple} variable, which is set to \texttt{True} by default.
 
@@ -205,6 +205,7 @@ In a real-world application of the field classification a farmer would want a co
 
 \begin{table}[h]
 	\centering
+	\scriptsize
 	\caption*{\textbf{Train results}}
 	\begin{tabular}{l r r r r}
 		\toprule
@@ -220,6 +221,7 @@ In a real-world application of the field classification a farmer would want a co
 
 \begin{table}[h]
 	\centering
+	\scriptsize
 	\caption*{\textbf{Test results}}
 	\begin{tabular}{l r r r r}
 		\toprule
@@ -327,6 +329,7 @@ Søren: Interpretation of experiment results
 	\item U-Net, (different purpose), skip connections. 
 	\item Main takeaway  
 	\item (Deeplabv-LargeFOV \& FCN)
+\end{itemize}
 	
 \subsubsection{Draft for Comparison}
 Before we move on to a comparison of the leading network architectures in the field of image segmentation, it is important to emphasize that the purpose of SegNet is to be efficient in inference time and memory wise, such that it can be used in embedded systems, for instance in drones or in self-driving cars.
@@ -340,9 +343,7 @@ The speed of SegNet comes in part from the lack of fully connected layers.
 The encoder part of the network has only 14.7 million parameters compared to partially fully connected structures that tend to have well over 100 million. \cite{seg}
 
 \subsection{Potential in SegNet}
-The architecture of SegNet allows for an easy and fast end to end training of the network. As a consequence of this SegNet is easily modified into other use cases without much technical effort. Because of the low memory usage and the speed of which the inference takes place SegNet could prove to be a good choice for self-driving cars and drones. However, it can be challenging and costful to acquire labelled data as this typically involves professionals manually doing the labelling. In our project we only have a single field image, which is probably not representative of similar fields under different circumstances such as lighting, type of crop and season. (The robustness of our network has been tested by running inference on a different data set and with XXX result (EKSILD DATA?)  The robustness of the network can be enhances by different augmentation techniques that is problem dependant. There exits a vast amount of different techniques and some have proved useful in medical imaging, whereas other are preferred in other problem settings.
-\end{itemize}
-\cite{seg}
+The architecture of SegNet allows for an easy and fast end to end training of the network. As a consequence of this SegNet is easily modified into other use cases without much technical effort. Because of the low memory usage and the speed of which the inference takes place SegNet could prove to be a good choice for self-driving cars and drones. However, it can be challenging and costful to acquire labelled data as this typically involves professionals manually doing the labelling. In our project we only have a single field image, which is probably not representative of similar fields under different circumstances such as lighting, type of crop and season. (The robustness of our network has been tested by running inference on a different data set and with XXX result (EKSILD DATA?)  The robustness of the network can be enhances by different augmentation techniques that is problem dependant. There exits a vast amount of different techniques and some have proved useful in medical imaging, whereas other are preferred in other problem settings. \cite{seg}
 
 \subsection{Extension of network}
 
