@@ -45,14 +45,12 @@ class Trainer:
 		except ValueError:
 			ignore_index = -100
 		
-		ignore_last_class = True 
 		if len(self.cfg["void_idcs"]) == 0:
 			ignore_index = -100
-			ignore_last_class = False 
 		
 		
 		criterion = nn.CrossEntropyLoss(ignore_index=ignore_index,
-			weight = class_weight_counter(data_loader.train_y, ignore_last_class= ignore_last_class), 
+			weight = class_weight_counter(data_loader.train_y), 
 		)
 		optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
