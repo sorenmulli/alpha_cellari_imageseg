@@ -208,12 +208,12 @@ In a real-world application of the field classification a farmer would want a co
 \section{RESULTS}
 \label{sec:illust}
 
-\begin{table}[h]
+\begin{table}[!htb]
 	\centering
 	\begin{tabular}{l r r r r}
 		\textbf{Train results} & & & & \\
 		\toprule
-		Method  &  Global acc.  &  Class acc.  &  Mean IoU  &  Bounded F1 \\ \midrule
+		Method  &  G.acc.  &  C.acc.  &  Mean IoU  &  B.F1 \\ \midrule
 		Baseline  &  0.91  &  0.33  &  n/a  &  0.32 \\
 		Standard  &  0.97  &  0.90  &  0.80  &  0.88 \\
 		Simpleloss  &  0.96  &  0.71  &  0.66  &  0.78 \\
@@ -223,12 +223,12 @@ In a real-world application of the field classification a farmer would want a co
 	\end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[!htb]
 	\centering
 	\begin{tabular}{l r r r r}
 		\textbf{Test results} & & & & \\
 		\toprule
-		Method  &  Global acc.  &  Class acc.  &  Mean IoU  &  Bounded F1 \\ \midrule
+		Method  &  G.acc.  &  C.acc.  &  Mean IoU  &  B.F1 \\ \midrule
 		Baseline  &  0.94  &  0.33  &  n/a  &  0.32 \\
 		Standard  &  0.98  &  0.86  &  0.75  &  0.85 \\
 		Simpleloss  &  0.97  &  0.61  &  0.57  &  0.69 \\
@@ -241,6 +241,7 @@ In a real-world application of the field classification a farmer would want a co
 		\bottomrule
 	\end{tabular}
 \end{table}
+\noindent Above, the G.acc. refers to global accuracy, C.acc to class accuracy and B.F1 to bounded F1-score.
 
 \begin{figure}[!htb]
 	\centering
