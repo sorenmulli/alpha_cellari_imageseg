@@ -13,7 +13,7 @@ from forward_passer import full_forward
 from image_reconstructor import ensure_shape
 from logger import get_timestamp, Logger, NullLogger
 from model import Net
-from test import Tester
+from model_test import Tester
 
 
 from matplotlib import pyplot as plt 
@@ -48,7 +48,7 @@ class Trainer:
 		if len(self.cfg["void_idcs"]) == 0:
 			ignore_index = -100
 		criterion = nn.CrossEntropyLoss(ignore_index=ignore_index,
-		weight = class_weight_counter(data_loader.train_y, ignore_last_class= False), 
+			weight = class_weight_counter(data_loader.train_y, ignore_last_class= False), 
 		)
 		optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
