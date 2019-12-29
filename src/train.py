@@ -97,11 +97,11 @@ class Trainer:
 						
 						val_iter.append(epoch_idx)
 
-						torch.cuda.empty_cache()
 						
 				if with_accuracies_print:
 					self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, val_output)))
 
+			torch.cuda.empty_cache()
 			net.train()
 			for batch_data, batch_target in data_loader.generate_epoch():
 				#targets = torch.argmax(batch_target, dim = 1, keepdim = True).squeeze()
