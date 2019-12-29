@@ -7,6 +7,8 @@
 \usepackage{amsmath,graphicx,02460}
 \usepackage{url}
 \usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{caption}
 \toappear{02456 Deep Learning, DTU Compute, Autumn 2019}
 \newcommand{\pro}{\ensuremath{\ \%}}
 
@@ -200,6 +202,49 @@ In a real-world application of the field classification a farmer would want a co
 
 \section{RESULTS}
 \label{sec:illust}
+
+\begin{table}[h]
+	\centering
+	\caption*{\textbf{Train results}}
+	\begin{tabular}{l r r r r}
+		\toprule
+		Method  &  Global acc.  &  Class acc.  &  Mean IoU  &  Bounded F1 \\ \midrule
+		Baseline  &  0.91  &  0.33  &  n/a  &  0.32 \\
+		Standard  &  0.97  &  0.90  &  0.80  &  0.88 \\
+		Simpleloss  &  0.96  &  0.71  &  0.66  &  0.78 \\
+		Corn Baseline  &  0.39  &  0.33  &  0.13  &  0.19 \\
+		Corn Results  &  0.79  &  0.78  &  0.65  &  0.79 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption*{\textbf{Test results}}
+	\begin{tabular}{l r r r r}
+		\toprule
+		Method  &  Global acc.  &  Class acc.  &  Mean IoU  &  Bounded F1 \\ \midrule
+		Baseline  &  0.94  &  0.33  &  n/a  &  0.32 \\
+		Standard  &  0.98  &  0.86  &  0.75  &  0.85 \\
+		Simpleloss  &  0.97  &  0.61  &  0.57  &  0.69 \\
+		Corn Baseline  &  0.32  &  0.33  &  0.11  &  0.16 \\
+		Corn Results  &  0.35  &  0.36  &  0.21  &  0.34 \\
+		\midrule
+		SegNet  &  n/a  &  n/a  &  n/a  &  0.96 \\
+		UNet  &  n/a  &  n/a  &  n/a  &  0.93 \\
+		Cellari  &  n/a  &  n/a  &  n/a  &  0.78 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.9\linewidth]{../../poster/loss}
+	\caption{}
+	\label{fig:loss}
+\end{figure}
+
+
 % STANDARD BASELINE, CELLARIO AND COMPARED RESULTS LIGGER STADIG I POSTER
 
 %STANDARD
