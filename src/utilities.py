@@ -9,10 +9,8 @@ def class_weight_counter(y: torch.Tensor, ignore_last_class = True):
 	partitions = 1- counts.float() / torch.sum(counts)
 
 	if ignore_last_class:
-		print("par", partitions[:-1])
 		return partitions[:-1]
 	else:
-		print("par", partitions)
 
 		return partitions
 
