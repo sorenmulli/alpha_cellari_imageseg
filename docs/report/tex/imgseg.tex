@@ -51,17 +51,11 @@
 \maketitle
 %
 \begin{abstract}
-The abstract should appear at the top of the left-hand column of text, about
-0.5 inch (12 mm) below the title area and no more than 3.125 inches (80 mm) in
-length.  Leave a 0.5 inch (12 mm) space between the end of the abstract and the
-beginning of the main text.  The abstract should contain about 100 to 150
-words, and should be identical to the abstract text submitted electronically
-along with the paper cover sheet.  All manuscripts must be in English, printed
-in black ink.
+Identifying crops, weeds and dirt in a typical field is a major task for a farmer. An image segmentation task, where the goal is to classify where in the field there are crops, weed and soil based on drone images of a field, can speed up and automate the time consuming task for a farmer. In this paper, we present an implementation of the deep network: SegNet and a strategy for training. The purpose is to build an efficient deep network: both memory wise and during inference. The architecture consists of an auto-encoder format, where the max-pooling indices are used as skip connections. Several advanced data augmentation techniques is used to train the network to classify crops, weed and soil in a drone image of a suger cane field in Colombia. In conclusion, the deep network is able to classify the crops, weed and soil and obtains a harmonic mean of precision and recall at $ 84 \% $.
 \end{abstract}
 %
 \begin{keywords}
-One, two, three, four, five
+Deep Network, Image Segmentation, Ground Truth Segmentation, SegNet, Data Augmentation
 \end{keywords}
 %
 \section{Introduction}
@@ -105,9 +99,22 @@ Even though data augmentation is not as a good as more independent data, it stil
 The same preprocessing was applied to the secondary dataset with the only difference being that black pixels were a class, so these were not left out of the training and evaluation.
 We ended up with \textbf{INSERT NUMBER OF IMAGES}
 
+\subsection{The Model}
+
+\subsubsection*{SegNet}
+%
+The SegNet model architecture utilizes convolutional neural networks (CNN). CNN's work by convolving over an image with a kernel. The kernel size, stride and padding are all adjustable parameters that help to fit the kernel to a specific image dimension or keep the dimensions of the image constant. 
+%Encoder / Decoder  
+SegNet's model architecture has an encoder-decoder structure. The encoder create dense feature maps which allow for translational invariance, and the decoder learns to seperate the classes. The model consists of a total of ten blocks which either have two or three convolutional layers. Encoder blocks ends with a max-pooling layer whereas decoder blocks starts with an un-pooling layer. Every encoder and decoder block has applied dropout to prevent overfitting, batchnorm for normalization, ReLU for non-linearity and max-pool for translational invariance. The last layer is a softmax layer, which allows an evaluation of the prediction of the model. The dimensions of the encoder and decoder blocks are equal and mirrored. Thus, the dimension of the input and output are the same. \\
+%Skip connections 
+ The encoder part of the network creates a rich feature map representing the image content. The boundary detail is very important when dealing with image segmentation. Hence, apprehending boundary information in the feature maps of the encoder before upsampling is important. This can simply be done by storing the whole feature map, but will be very memory inefficient. Therefore, skip connections between each encoder and decoder block are introduced by storing only the max-pooling indices from each max-pooling layer. Its been shown in the literature, that storing the max pooling indices is a good approximation of the actual feature map \cite{seg}. 
+
+
+
+
 \subsection{Regularization}
 Because deep neural networks are such highly flexible models, regularization is necessary on top of the data augmentation to further reduce overfitting.
-This is done in two ways.
+This is done in the following two ways.
 
 Dropout at 10\pro\ is used after each blue block in the network (see Fig. \ref{fig:arch}).
 This randomly shuts off nodes during training leading to node redundancy and variability, as the same input will vary somewhat in its output, which learns the network to generalize better.
@@ -118,7 +125,35 @@ This standardizes the activations, keeping them close to zero.
 As a result, the weights and biases also stay close to zero, which reduces the flexibility of the model, leading to less overfitting.
 Batch normalization also has several other benefits, such as reducing the vanishing gradient problem and allowing for a higher learning rate and thus faster convergence time. \cite{bn}
 \\
-\\
+
+\subsection{Loss Function: Quality over Quantity}
+Multi-class cross entropy because:
+\begin{itemize}
+	\item Softmax Network: Minus log likelihood
+	\item Can be seen as a classic multiclass classifier -- just on a pixel-by-pixel basis.
+\end{itemize}
+Weighted cross entropy because:
+\begin{itemize}
+	\item Unbalanced class distribution: Network has to learn to focus on important pixels: Don't classify everything as dirt.
+	\item Initial tests made the network behave as the baseline: Simple features in early layers got were not penalized enough and learning was not stable.
+	\item Resampling expensive
+\end{itemize}
+\subsection{Metrics}
+Had to use different metrics because
+\begin{itemize}
+	\item Not agreement in Image Segmentation papers.
+	\item Want to get accuracy on a global scale and on a class scale.
+	\item Different metrics important in different fields.
+\end{itemize}
+The metrics \footnote{https://hal.inria.fr/hal-01581525/document}\footnote{
+	http://www.bmva.org/bmvc/2013/Papers/paper0032/paper0032.pdf} 
+\begin{itemize}
+	\item Global accuracy: Trivial and  not very important because of class imbalance but is good for smoothness
+	\item Mean class-wise accuracy: Takes class imbalance into account. Is what is being optimized for in the model.
+	\item Mean Intersect over Union: "Jaccard Index".  Found to be better correlated with human classification though still only \(\approx 0.5\). Favours region smoothness highly and not boundary accuracy.
+	\item Harmonic mean of precision and recall. To compare to others with same project. Penalizes false positives and gives less credit to true negatives thus being better for unbalanced classes.
+\end{itemize}
+
 \subsection{}
 The encoder part of the network creates a rich feature map representing the image content. The more 
 layers of max-pooling there are the more translation invariance for robust 
@@ -283,13 +318,15 @@ Søren: Interpretation of experiment results
 	\item Main takeaway  
 	\item (Deeplabv-LargeFOV \& FCN)
 	
-\subsubsection{Leading architectures in the image segmentation field}
-In the field of image segmentation there are several different neural network architectures that excel in different types of problems. Among the most acknowledged architectures are U-net, DeepLabv1, DeconvNet and FCN. All of these networks differ in several ways and it is important to emphasize that each network is designed to excel in a specific branch of image segmentation. U-net is as an example designed for medical image segmentation, whereas SegNet is designed such that it can be used in embedded systems. Each branch of problems has its own challenges and limitations. Therefore it is necessary to apply problem-specific methods to optimally segment the images. As mentioned earlier the purpose of SegNet is to be efficient in inference time and memory-wise, such that it can be used in embedded systems. And these two aspects are the ones we are interested in comparing SegNet and the other architectures. 
-SegNet and its competitors have a quite similar performance in terms of accuracy on both road map scenes and the benchmark dataset known as SUN RGB-D, which is an indoor scene segmentation challenge \cite{seg}. 
-With respect to the architecture of the encoder of the competing networks, SegNet and three of the four competitors (FCN, DeconvNet, U-net) have an almost topologically identical encoder as the one from the well known VGG16 network. One important difference between SegNet and the three others is that SegNet is without the final fully connected layers, which decreases the amount of trainable parameters with almost 90\% \cite{seg}. 
-All of the networks differ in decoding structure and techniques that is applied, and as a common denominator for FCN, DeconvNet and DeepLab-LargeFov are nearly twice as much memory during inference used. Among the heavy users of memory are the fully connected layers of the DeconvNet and FCN, and the skip connections in the U-Net. In comparrison with the same 3 structures does SegNet come in second only bested by DeepLab-LargeFOV with respect to inference time.
- 
- 
+\subsubsection{Draft for Comparison}
+Before we move on to a comparison of the leading network architectures in the field of image segmentation, it is important to emphasize that the purpose of SegNet is to be efficient in inference time and memory wise, such that it can be used in embedded systems, for instance in drones or in self-driving cars.
+Besides SegNet, the most acknowledged structures are named U-net, DeepLabv1, DeconvNet and FCN.
+They have very similar performance and the encoding architecture is almost identical.
+However, they differ in decoding structure and techniques, and as a common denominator the SegNet alternatives use a lot of memory during inference.
+Among the heavy users of memory are the fully connected layers of the DeconvNet and FCN, and the skip connections in the U-Net.
+SegNet uses about half the memory during inference as compared to the other structures and comes in second with regard to inference time.
+The fastest network is the FCN, and this is becaused it does not have a decoder structure, but makes a prediction directly from the output from the encoder, and this leads to blocky predictions.
+The speed of SegNet comes in part from the lack of fully connected layers.
 The encoder part of the network has only 14.7 million parameters compared to partially fully connected structures that tend to have well over 100 million. \cite{seg}
 
 \subsection{Potential in SegNet}
