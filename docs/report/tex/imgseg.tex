@@ -82,6 +82,11 @@ Void pixels are black.
 We also used second, smaller dataset from a corn field. \textbf{INSERT LINK}
 We did not use this for hyperparameter optimization or architechtural decisions like this primary dataset.
 Instead, only a train/test split was used to evaluate the network using the exact same hyperparameters.
+We did not perform any hyperparameter optimization or architechtural decisions based on this dataset.
+Instead, only a train/test split was used to evaluate the network using exact same hyperparameters.
+
+\subsection{Motivation}
+Image segmentation and object classification have been a huge talking point in recent years. This is partly due to the wide array of possible applications and the recent interest in machine learning and, in particular, deep learning. One such important application is seperating weeds, crops and dirt in aerial drone images of a field. Applying the SegNet architecture to this field of crop segmentation could allow for smart agriculture that circumvents the many laborious man-hours of manual classification. Using SegNet for this classification could also prove useful in terms of the computational efficiency, as this allows for end-to-end training and makes embedded systems, e.g. in drones, feasible.
 
 \subsection{Goal and Application}
 
@@ -179,7 +184,7 @@ Thereafter, the first convolutional layer in each block doubled the number of ch
 In the max pooling layers, we used a $ 2\times 2 $ with a stride of 2, cutting the size of the feature maps to a quarter each time.
 The decoder part exactly mirrored this structure.
 
-The training can be recreated using the Jupyter Notebook in the \texttt{src} folder in the Github repository.
+The training can be recreated using the Jupyter Notebook at \texttt{src/image-segmentation.ipynb} folder in the Github repository.
 Because training the network takes close to 30 GB of VRAM, we have implemented a simpler version of SegNet with fewer layers that takes significantly less memory to train.
 This is controlled using the \texttt{use\_simple} variable, which is set to \texttt{True} by default.
 
@@ -327,6 +332,7 @@ Søren: Interpretation of experiment results
 	\item U-Net, (different purpose), skip connections. 
 	\item Main takeaway  
 	\item (Deeplabv-LargeFOV \& FCN)
+\end{itemize}
 	
 \subsubsection{Draft for Comparison}
 Before we move on to a comparison of the leading network architectures in the field of image segmentation, it is important to emphasize that the purpose of SegNet is to be efficient in inference time and memory wise, such that it can be used in embedded systems, for instance in drones or in self-driving cars.
@@ -340,9 +346,7 @@ The speed of SegNet comes in part from the lack of fully connected layers.
 The encoder part of the network has only 14.7 million parameters compared to partially fully connected structures that tend to have well over 100 million. \cite{seg}
 
 \subsection{Potential in SegNet}
-The architecture of SegNet allows for an easy and fast end to end training of the network. As a consequence of this SegNet is easily modified into other use cases without much technical effort. Because of the low memory usage and the speed of which the inference takes place SegNet could prove to be a good choice for self-driving cars and drones. However, it can be challenging and costful to acquire labelled data as this typically involves professionals manually doing the labelling. In our project we only have a single field image, which is probably not representative of similar fields under different circumstances such as lighting, type of crop and season. (The robustness of our network has been tested by running inference on a different data set and with XXX result (EKSILD DATA?)  The robustness of the network can be enhances by different augmentation techniques that is problem dependant. There exits a vast amount of different techniques and some have proved useful in medical imaging, whereas other are preferred in other problem settings.
-\end{itemize}
-\cite{seg}
+The architecture of SegNet allows for an easy and fast end to end training of the network. As a consequence of this SegNet is easily modified into other use cases without much technical effort. Because of the low memory usage and the speed of which the inference takes place SegNet could prove to be a good choice for self-driving cars and drones. However, it can be challenging and costful to acquire labelled data as this typically involves professionals manually doing the labelling. In our project we only have a single field image, which is probably not representative of similar fields under different circumstances such as lighting, type of crop and season. (The robustness of our network has been tested by running inference on a different data set and with XXX result (EKSILD DATA?)  The robustness of the network can be enhances by different augmentation techniques that is problem dependant. There exits a vast amount of different techniques and some have proved useful in medical imaging, whereas other are preferred in other problem settings. \cite{seg}
 
 \subsection{Extension of network}
 
