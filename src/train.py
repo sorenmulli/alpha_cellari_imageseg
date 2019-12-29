@@ -52,7 +52,7 @@ class Trainer:
 		)
 		optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
-		self.log(f"Augmentations: {AugmentationConfig}")
+#		self.log(f"Augmentations: {AugmentationConfig}")
 		self.log(f"Criterion and optimizer: {criterion}\n{optimizer}")
 	
 		self.log(f"Train size: {len(data_loader.train_x)}\nEval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}\n")
