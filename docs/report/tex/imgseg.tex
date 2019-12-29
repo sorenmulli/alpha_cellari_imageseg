@@ -51,17 +51,11 @@
 \maketitle
 %
 \begin{abstract}
-The abstract should appear at the top of the left-hand column of text, about
-0.5 inch (12 mm) below the title area and no more than 3.125 inches (80 mm) in
-length.  Leave a 0.5 inch (12 mm) space between the end of the abstract and the
-beginning of the main text.  The abstract should contain about 100 to 150
-words, and should be identical to the abstract text submitted electronically
-along with the paper cover sheet.  All manuscripts must be in English, printed
-in black ink.
+Identifying crops, weeds and dirt in a typical field is a major task for a farmer. An image segmentation task, where the goal is to classify where in the field there are crops, weed and soil based on drone images of a field, can speed up and automate the time consuming task for a farmer. In this paper, we present an implementation of the deep network: SegNet and a strategy for training. The purpose is to build an efficient deep network: both memory wise and during inference. The architecture consists of an auto-encoder format, where the max-pooling indices are used as skip connections. Several advanced data augmentation techniques is used to train the network to classify crops, weed and soil in a drone image of a suger cane field in Colombia. In conclusion, the deep network is able to classify the crops, weed and soil and obtains a harmonic mean of precision and recall at $ 84 \% $.
 \end{abstract}
 %
 \begin{keywords}
-One, two, three, four, five
+Deep Network, Image Segmentation, Ground Truth Segmentation, SegNet, Data Augmentation
 \end{keywords}
 %
 \section{Introduction}
@@ -105,9 +99,21 @@ Even though data augmentation is not as a good as more independent data, it stil
 The same preprocessing was applied to the secondary dataset with the only difference being that black pixels were a class, so these were not left out of the training and evaluation.
 We ended up with \textbf{INSERT NUMBER OF IMAGES}
 
+\subsection{The Model}
+
+\subsubsection*{SegNet}
+
+%Encoder / Decoder 
+The architecture of the network has an hourglass shape.
+%Skip connections 
+ The encoder part of the network creates a rich feature map representing the image content. The boundary detail is very important when dealing with image segmentation. Hence, capturing boundary information in the feature maps of the encoder before upsampling is important. This can simply be done by storing the whole feature map, but will be very memory inefficient. Therefore, skip connections between each encoder and decoder block are introduced by storing only the max-pooling indices. Its been shown in the literature, that storing the max pooling indices is a good approximation of the actual feature map, \ref ? \textbf{Har vi en bibtekkk??}. 
+
+
+
+
 \subsection{Regularization}
 Because deep neural networks are such highly flexible models, regularization is necessary on top of the data augmentation to further reduce overfitting.
-This is done in two ways.
+This is done in the following two ways.
 
 Dropout at 10\pro\ is used after each blue block in the network (see Fig. \ref{fig:arch}).
 This randomly shuts off nodes during training leading to node redundancy and variability, as the same input will vary somewhat in its output, which learns the network to generalize better.
@@ -118,16 +124,7 @@ This standardizes the activations, keeping them close to zero.
 As a result, the weights and biases also stay close to zero, which reduces the flexibility of the model, leading to less overfitting.
 Batch normalization also has several other benefits, such as reducing the vanishing gradient problem and allowing for a higher learning rate and thus faster convergence time. \cite{bn}
 \\
-\\
-\subsection{}
-The encoder part of the network creates a rich feature map representing the image content. The more 
-layers of max-pooling there are the more translation invariance for robust 
-classification can be achieved. The boundary detail is very important when 
-dealing with image segmentation. Hence, capturing boundary information in 
-the feature maps of the encoder before upsampling is important. This can 
-simply be done by storing the whole feature map, but due to memory 
-constrains only the maxpooling indices are saved, which is a good 
-approximation of the feature maps. 
+
 \subsection{Loss Function: Quality over Quantity}
 Multi-class cross entropy because:
 \begin{itemize}
