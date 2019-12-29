@@ -13,7 +13,7 @@ from forward_passer import full_forward
 from image_reconstructor import ensure_shape
 from logger import get_timestamp, Logger, NullLogger
 from model import Net
-from test import Tester
+from model_test import Tester
 
 
 from matplotlib import pyplot as plt 
@@ -38,7 +38,6 @@ class Trainer:
 		
 		augmenter = Augmenter(augment_cfg=augmentations)
 		data_loader = DataLoader(self.json_path, batch_size, augment = augmenter)
-
 		net = Net(architecture).to(DEVICE)
 
 		try:
@@ -46,12 +45,16 @@ class Trainer:
 		except ValueError:
 			ignore_index = -100
 		
+		if len(self.cfg["void_idcs"]) == 0:
+			ignore_index = -100
+		
+		class_weights = class_weight_counter(data_loader.train_y)
 		criterion = nn.CrossEntropyLoss(ignore_index=ignore_index,
-		#weight = class_weight_counter(data_loader.train_y), 
+			weight = class_weights, 
 		)
 		optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
-		self.log(f"Augmentations: {AugmentationConfig}")
+#		self.log(f"Augmentations: {AugmentationConfig}")
 		self.log(f"Criterion and optimizer: {criterion}\n{optimizer}")
 	
 		self.log(f"Train size: {len(data_loader.train_x)}\nEval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}\n")
@@ -67,37 +70,38 @@ class Trainer:
 				net.save(f"local_data/wip_model_epoch{epoch_idx}")
 
 			if epoch_idx % val_every == 0:
-				with torch.no_grad():
-					net.eval()
+				if len(self.cfg["val_idcs"]) != 0:
+					with torch.no_grad():
+						net.eval()
 
-					val_data, val_target = data_loader.get_validation()
-					val_output = net(val_data)
+						val_data, val_target = data_loader.get_validation()
+						val_output = net(val_data)
 
-					evalution_loss = criterion(val_output, val_target)
-					
-					full_eval_loss.append(float(evalution_loss))
-					del val_data
-					del val_target
-					self.log(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
+						evalution_loss = criterion(val_output, val_target)
+						
+						full_eval_loss.append(float(evalution_loss))
+						del val_data
+						del val_target
+						self.log(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
 
-					#Overwrite name 
-					val_data, val_target = data_loader.train_x, data_loader.train_y
-					val_output = net(val_data)
+						#Overwrite name 
+						val_data, val_target = data_loader.train_x, data_loader.train_y
+						val_output = net(val_data)
 
-					training_loss = criterion(val_output, val_target)
-					full_training_loss.append(float(training_loss))
-					del val_data
-					del val_target
+						training_loss = criterion(val_output, val_target)
+						full_training_loss.append(float(training_loss))
+						del val_data
+						del val_target
 
-					self.log(f"Epoch {epoch_idx}: Training loss:   {float(training_loss)}\n")
-					
-					val_iter.append(epoch_idx)
+						self.log(f"Epoch {epoch_idx}: Training loss:   {float(training_loss)}\n")
+						
+						val_iter.append(epoch_idx)
 
-					torch.cuda.empty_cache()
-					
-			if with_accuracies_print:
-				self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, val_output)))
+						
+				if with_accuracies_print:
+					self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, val_output)))
 
+			torch.cuda.empty_cache()
 			net.train()
 			for batch_data, batch_target in data_loader.generate_epoch():
 				#targets = torch.argmax(batch_target, dim = 1, keepdim = True).squeeze()
@@ -155,7 +159,7 @@ if __name__ == "__main__":
 	net.save('model')
 
 
-	full_forward(net, None, True, "local_data/full-forward.png")
+	#full_forward(net, None, True, "local_data/full-forward.png")
 	
 	
 	tester = Tester("local_data/prep_out.json", logger)

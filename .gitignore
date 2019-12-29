@@ -385,3 +385,5 @@ venv.bak/
 src/.vscode/settings.json
 docs/report/latex/imgseg.pdf
 docs/poster/main.pdf
+docs/report/tex/imgseg.pdf
+.vscode/*

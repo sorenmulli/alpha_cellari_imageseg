@@ -59,30 +59,39 @@ def _load_image(path: str, dtype = np.float64, channels = 3):
 	
 	return pixels
 
-def _standardize(image, consider_voids = True):
+def _standardize(image, for_corn = False):
 
 	"""
 	Standardizes the pixel values of non-void pixels channelwise
 	"""
  
 	# Detects void pixels
-	if consider_voids:
+	if for_corn:
 		void_pixels = (image==0).all(axis=2)
 	else:
 		void_pixels = False
 
 	means = list()
 	stds = list()
-	for i in range(image.shape[2]):
-		# Singles out channel
-		# Changing this will also change image, as they point to the same object
-		im_channel = image[:, :, i]
-		# Standardizes non-void pixels
-		mean = im_channel[~void_pixels].mean()
-		std = im_channel[~void_pixels].std() + EPS
-		means.append(mean)
-		stds.append(std)
-		im_channel[~void_pixels] = (im_channel[~void_pixels] - mean) / std
+	if for_corn:
+		for i in range(image.shape[3]):
+			im_channel = image[:, :, :, i]
+			mean = im_channel.mean()
+			std = im_channel.std() + EPS
+			means.append(mean)
+			stds.append(std)
+			im_channel = (im_channel - mean) / std
+	else:
+		for i in range(image.shape[2]):
+			# Singles out channel
+			# Changing this will also change image, as they point to the same object
+			im_channel = image[:, :, i]
+			# Standardizes non-void pixels
+			mean = im_channel[~void_pixels].mean()
+			std = im_channel[~void_pixels].std() + EPS
+			means.append(mean)
+			stds.append(std)
+			im_channel[~void_pixels] = (im_channel[~void_pixels] - mean) / std
 
 	return image, means, stds
 
@@ -190,7 +199,11 @@ def _split_data(voids: np.ndarray, already_split = False, cutoff = None, size = 
 	Returns four integer lists, each containing indices of images that belong to the respective category
 	"""
 	if already_split:
-		train_val_idcs = np.arange()
+		train_val_idcs = np.arange(cutoff)
+		n_train = cutoff 
+		test_idcs = np.arange(cutoff, size)
+
+
 
 	else:
 		train_val_idcs = np.where(~(MR_COOL_IDCS | voids))[0]
@@ -206,7 +219,7 @@ def _split_data(voids: np.ndarray, already_split = False, cutoff = None, size = 
 	train_idcs = [int(x) for x in train_val_idcs[:n_train]]
 	val_idcs = [int(x) for x in train_val_idcs[n_train:]]
 	test_idcs = [int(x) for x in test_idcs]
-	void_idcs = [int(x) for x in np.where(voids)[0]]
+	void_idcs = np.array([]) if voids is None else  [int(x) for x in np.where(voids)[0]]
 
 	return train_idcs, val_idcs, test_idcs, void_idcs
 
@@ -223,41 +236,31 @@ def _prepare_data_corn():
 	LOG("Done loading images\nShapes: %s\n train/test Split: %s\n" % (aerial.shape[1:3], (len(target_train), len(target_test))))
 
 	LOG("Standardizing aerial image...")
-	aerial, means, stds = _standardize(aerial, consider_voids = False)
+	aerial, means, stds = _standardize(aerial, for_corn = True)
 	LOG("Done standardizing images\n")
-	print(len(np.unique(target)))
 
 	LOG("Squeezing target images to single channel...")
 	target, classes = _target_index_corn(target) 
 	LOG("Done creating target values.\nClasses including void (if any) last:\n%s\n" % "\n".join(class_ for class_ in classes))
 
-	raise NotImplementedError
-
 	LOG("Transposing images to PyTorch's preferred format...")
 	aerial = np.transpose(aerial, (0, 3, 1, 2))
-	large_aerial = np.transpose(large_aerial, (0, 3, 1, 2))
 	LOG(f"Images transposed. Shape: {aerial.shape}\n")
 
 	LOG("Saving images...")
 	aerial_path = "local_data/aerial_prepared"
 	target_path = "local_data/target_prepared"
 	
-	large_aerial_path = "local_data/large_aerial_prepared"
-	large_target_path = "local_data/large_target_prepared"
 	
 	if USE_NPZ:
 		np.savez_compressed(aerial_path, aerial.astype(np.float64))
 		np.savez_compressed(target_path, target.astype(np.int8))
 		
-		np.savez_compressed(large_aerial_path, large_aerial.astype(np.float64))
-		np.savez_compressed(large_target_path, large_target.astype(np.int8))
 
 	else:
 		np.save(aerial_path, aerial.astype(np.float64))
 		np.save(target_path, target.astype(np.int8))
 
-		np.save(large_aerial_path, large_aerial.astype(np.float64))
-		np.save(large_target_path, large_target.astype(np.int8))
 
 	LOG("Saved aerial images to '%s' and target images to '%s%s'\n" % (
 		aerial_path,
@@ -266,21 +269,18 @@ def _prepare_data_corn():
 	))
 
 	LOG("Splitting images into train, validation, test, and voids...")
-	train_idcs, val_idcs, test_idcs, void_idcs = _split_data(voids)
+	train_idcs, val_idcs, test_idcs, void_idcs = _split_data(None, already_split=True, cutoff = len(target_train), size =  len(target))
 	LOG("Done splitting images\nTrain: %i images\nValidation: %i images\nTest: %i images\nVoid: %i images\n"
 		% (len(train_idcs), len(val_idcs), len(test_idcs), len(void_idcs)))
 
 	LOG("Saving data preparation output...")
 	prep_out = {
 		"image_shape": IMAGE_SHAPE,
-		"split_shape": split_shape,
 		"split": SPLIT,
 		"means": means,
 		"stds": stds,
 		"aerial_path": aerial_path,
 		"target_path": target_path,
-		"large_aerial_path": large_aerial_path,
-		"large_target_path": large_target_path,
 		"sub_imgs_folder": SUB_PATH,
 		"classes": classes,
 		"train_idcs": sorted(train_idcs),
@@ -404,5 +404,5 @@ if __name__ == "__main__":
 	os.chdir(sys.path[0])
 	os.makedirs("local_data/imgs", exist_ok = True)
 
-	# _prepare_data_sugarcane()
-	_prepare_data_corn()
+	_prepare_data_sugarcane()
+	#_prepare_data_corn()

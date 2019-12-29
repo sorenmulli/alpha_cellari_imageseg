@@ -6,7 +6,7 @@
 \documentclass{article}
 \usepackage{amsmath,graphicx,02460}
 \usepackage{url}
-
+\usepackage{mathtools}
 \toappear{02456 Deep Learning, DTU Compute, Autumn 2019}
 \newcommand{\pro}{\ensuremath{\ \%}}
 
@@ -23,7 +23,7 @@
 % ---------------
 \name{			Anders Henriksen, Asger Schultz, Oskar Wiese, 	Mads Andersen,
 	Søren Winkel Holm }
-\address{s183904, s183912, s183917, s173934, s183911}
+\address{\{s183904, s183912, s183917, s173934, s183911\}@student.dtu.dk}
 %
 % For example:
 % ------------
@@ -152,6 +152,55 @@ The metrics \footnote{https://hal.inria.fr/hal-01581525/document}\footnote{
 	\item Mean Intersect over Union: "Jaccard Index".  Found to be better correlated with human classification though still only \(\approx 0.5\). Favours region smoothness highly and not boundary accuracy.
 	\item Harmonic mean of precision and recall. To compare to others with same project. Penalizes false positives and gives less credit to true negatives thus being better for unbalanced classes.
 \end{itemize}
+\\
+\subsection{}
+The encoder part of the network creates a rich feature map representing the image content. The more 
+layers of max-pooling there are the more translation invariance for robust 
+classification can be achieved. The boundary detail is very important when 
+dealing with image segmentation. Hence, capturing boundary information in 
+the feature maps of the encoder before upsampling is important. This can 
+simply be done by storing the whole feature map, but due to memory 
+constrains only the maxpooling indices are saved, which is a good 
+approximation of the feature maps. 
+\subsection{Training: Learning from Quality over Quantity}
+For training, finding the optimal weights of the network, the widely used Adam optimizer  was implemented because the addition of momentum to the efficient and effective Stochatic Gradient Descent algorithm is shown to giver faster convergence in a wide range of computer vision tasks \cite{Adam}. The training was done in 3000 epochs each consisting of mini batches of size 3.
+
+A more interesting choice was the loss function. It was clear that 3-class cross entropy should be used as this function, for a Softmax network such as SegNet, can be seen as the following the maximum likelihood principle and implementing minus log likelihood loss. The direct implementation of this, however, failed to consider a deep issue in Image Segmentation which had considerable effect on this limited data set: \textit{class imbalance}. 
+In this data set, there is \(\sim 93 \%\) pixels belonging to the \textit{dirt}-class which arguably is the least interesting and initial tests saw the network behave too much as a baseline; simple features in early layers which classified almost everything as dirt were not penalized enough and learning was not stable. 
+
+As resampling an image data set is computationally expensive and it was desired that the network learned to focus on important pixels, it was chosen the main training experiment of this report should use \textit{weighted cross entropy} where each class is weighted by \(1-\nu\); where \(\nu\) is its frequency thus focusing more on the classes crops and weeds than in the vanilla cross entropy. The implemented loss of \(N\) pixels in a one-hot encoded \((N \times  3)\) output matrix \(\mathbf X^\text{pred}\) with the true classes \(\mathbf c\) was then:
+\[
+L = \underbrace{
+	\vphantom{\sum_{i}}
+	\frac 1 N
+	\sum_{\mathclap {i=1}}^{N}
+}
+_{\mathllap{\text{Mean over minibatch}}}
+\underbrace{ 
+	\vphantom{\sum_{i}}
+	\mathbf{w}[i, c_i]}
+_{\mathclap{\text{Class weight}}}  
+\cdot 
+\underbrace{
+	\log 
+	\frac
+	{-\exp\mathbf X^\text{pred}[i, c_i]}
+	{\sum_{j=1}^{3}\exp\mathbf X^\text{pred}[i, j]}
+}_{\mathclap{\text{3-class cross entropy}}}
+\] 
+To test the importance of this frequency balancing for this data set, another training experiment was set up without weighting of the cross entropy loss.
+\subsection{Evaluation Metrics: Finding the Important Story}
+In the compared image segmentation literature no single accuracy measure can be described  as the canonical metric resulting in a number of metrics being compared \cite{eval, Metric}.  A collection of different metrics are usable as the performance difference on global and local scale is relevant. 
+%	\item Different metrics important in different fields.
+Four simple accuracy measures are used here to mirror the SegNet paper \cite{seg} though more complex measures which fit better with human evaluation exist \cite{eval}. 
+
+The simple global accuracy, the frequency of correct classifications, is not the most meaningful measure for class imbalanced data sets such as this (where the baseline achieves \(>90\%\)) but is in the literature noted to be important for a smooth classification \cite{seg}. Another simple measure is the mean of the accuracies of model on the three classes. This measure is still a naïve accuracy measure but is the metric which is being optimized for in the weighted cross entropy loss. 
+
+The metric which is being seen as the main performance metric is the F1-score: The harmonic mean of precision of recall. This is used for comparison to other groups with same project and because this metric penalizes false positives and gives less credit to true negatives thus being better for unbalanced classes \cite{Metric}. A related score is the Mean Intersect over Union (MIoU), also known as the Jaccard Index, which penalizes false positives harder and is found to be better correlated to human evaluation though only \(\sim 0.5\) \cite{eval}. 
+
+Both F1 and MIoU are calculated for each of the three classes and are then averaged to get the final score. Both of them favour region smoothness higher than boundary accuracy compared to semantic accuracy measures such as the Berkeley contour matching score \cite{seg}.
+
+To estimate generalization performance, the models are compared by their performance on the \textit{test data set} which is kept separate from the training and validation data and is pre-divided for both data sets consisting of approximately \( 20\%\) of the images.  It is noted that this simple hold out evaluation method does not claim to give an accurate estimate of generalization error on \textit{any} data set but can statistically only be seen as an evaluation of the performance on the used data sets. 
 
 \subsection{Experiments and Reconstruction}
 When training the network, we used the following hyperparameters: Batch size of 3, dropout of 10\pro, and a learning rate of $ 1.5\cdot 10^{-4} $ with the ADAM optimization algorithm.
@@ -163,12 +212,13 @@ In the max pooling layers, we used a $ 2\times 2 $ with a stride of 2, cutting t
 The decoder part exactly mirrored this structure.
 
 The training can be recreated using the Jupyter Notebook in the \texttt{src} folder in the Github repository.
-Because the network takes close to 30 GB of VRAM to train, we have implemented a simpler version of SegNet with fewer layers that takes significantly less memory to train.
+Because training the network takes close to 30 GB of VRAM, we have implemented a simpler version of SegNet with fewer layers that takes significantly less memory to train.
 This is controlled using the \texttt{use\_simple} variable, which is set to \texttt{True} by default.
 
 
 \subsection{Unification of Cropped Image Predictions}
-In a real-world application of the field classification a farmer would want a complete and precise segmentation of his whole field at once, such that fertilizer and pesticides can be distributed accordingly. To accomplish this, a reconstruction of the smaller image inferences is neccesary. The most straight forward method of combining the smaller images, by simply lining them up next to each other results in a very rough transition between the smaller inferences. This can be seen in the left side of \ref{fig:earlylatereconstruction}. The blocky nature of the field prediction is caused by a lack of information from neighbouring pixel when inference is performed near the borders of an image. To solve this problem, we have chosen to increase the size of the cropped images and add some overlap, and then infer on these enlarged pictured. In the procedure of joining the enlarged cropped pictures they are cropped again, to avoid the border areas. At the cost of computational efficiency more information is available near the borders and a smooth field prediction can be archieved. This can be seen in the right side of \ref{fig:earlylatereconstruction}. A visualization of the reconstruction technique can be seen in appendix \ref{reconstruction_technique}.
+In a real-world application of the field classification a farmer would want a complete and precise segmentation of his whole field at once, such that fertilizer and pesticides can be distributed accordingly. To accomplish this, a reconstruction of the smaller image inferences is neccesary. The most straight forward method of combining the smaller images, by simply lining them up next to each other results in a very rough transition between the smaller inferences. This can be seen in the left side of figure \ref{fig:earlylatereconstruction}. The blocky nature of the field prediction is caused by a lack of information from neighbouring pixel when inference is performed near the borders of an image. To solve this problem, we have chosen to increase the size of the cropped images and add some overlap, and then infer on these enlarged pictured. In the procedure of joining the enlarged cropped pictures they are cropped again, to avoid the border areas. At the cost of computational efficiency more information is available near the borders and a smooth transition between the smaller inferences can be achieved. This can be seen in the right side of figure \ref{fig:earlylatereconstruction}. A visualization of the reconstruction technique can be seen in appendix \ref{reconstruction_technique}.
+
 
 
 \begin{figure}
@@ -184,47 +234,77 @@ In a real-world application of the field classification a farmer would want a co
 
 \section{RESULTS}
 \label{sec:illust}
+% STANDARD BASELINE, CELLARIO AND COMPARED RESULTS LIGGER STADIG I POSTER
 
-% Below is an example of how to insert images. Delete the ``\vspace'' line,
-% uncomment the preceding line ``\centerline...'' and replace ``imageX.ps''
-% with a suitable PostScript file name.
-% -------------------------------------------------------------------------
-%\begin{figure}[htb]
+%STANDARD
 
-%\begin{minipage}[b]{1.0\linewidth}
-  %\centering
-%  \centerline{\includegraphics[width=8.5cm]{image1}}
-%  \vspace{2.0cm}
- % \centerline{(a) Result 1}\medskip
-%\end{minipage}
+%2019-12-10 22:31:52.335662	Calculating train accuracy measures...
+%2019-12-10 22:32:04.165629	Accuracy measures: Global acc.: 0.9706
+%Class acc.: 0.8993
+%Mean IoU.: 0.7967
+%Bound. F1: 0.8818
 %
-%\begin{minipage}[b]{.48\linewidth}
-  %\centering
-%  \centerline{\includegraphics[width=4.0cm]{image3}}
-%  \vspace{1.5cm}
- % \centerline{(b) Results 3}\medskip
-%\end{minipage}
-%\hfill
-%\begin{minipage}[b]{0.48\linewidth}
-  %\centering
- % \centerline{\includegraphics[width=4.0cm]{image4}}
-%  \vspace{1.5cm}
- % \centerline{(c) Result 4}\medskip
-%\end{minipage}
-%
-%\caption{Example of placing a figure with experimental results.}
-%\label{fig:res}
-%
-%\end{figure}
+%2019-12-10 22:32:04.167743	Calculating test accuracy measures...
+%2019-12-10 22:32:08.005059	Test accuracy measures: Global acc.: 0.9768
+%Class acc.: 0.8585
+%Mean IoU.: 0.7541
+%Bound. F1: 0.851
 
-% To start a new column (but not a new page) and help balance the last-page
-% column length use \vfill\pagebreak.
-% -------------------------------------------------------------------------
-%\vfill
-%\pagebreak
+%SIMPLELOSS
+%2019-12-11 01:20:01.124762	Calculating train accuracy measures...
+%2019-12-11 01:20:12.598002	Accuracy measures: Global acc.: 0.957
+%Class acc.: 0.7078
+%Mean IoU.: 0.6629
+%Bound. F1: 0.7789
+%
+%2019-12-11 01:20:12.599878	Calculating test accuracy measures...
+%2019-12-11 01:20:16.252676	Test accuracy measures: Global acc.: 0.9653
+%Class acc.: 0.6107
+%Mean IoU.: 0.5737
+%Bound. F1: 0.6922
+
+
+%CORN BASELINE 
+%2019-12-28 16:30:59.018404	Evaluating Baseline
+
+%2019-12-28 16:31:05.300109	Training accuracy measures: Global %acc.: 0.3925
+%Class acc.: 0.3333
+%Mean IoU.: 0.1308
+%Bound. F1: 0.1879
+
+%2019-12-28 16:31:06.241630	Test accuracy measures: Global %acc.: 0.3193
+%Class acc.: 0.3333
+%Mean IoU.: 0.1064
+%Bound. F1: 0.1613
+
+
+%CORN RESULTS
+
+%2019-12-28 18:57:27.694899	Accuracy measures: Global acc.: 0.7938
+%Class acc.: 0.7819
+%Mean IoU.: 0.6505
+%Bound. F1: 0.7877
+%
+
+%2019-12-28 18:57:28.459897	Test accuracy measures: Global acc.: 0.3518
+%Class acc.: 0.3556
+%Mean IoU.: 0.2069
+%Bound. F1: 0.3398
 
 
 \section{DISCUSSION}
+
+\subsection{Performance of Networks: Loss and Size matter}
+Søren: Interpretation of experiment results
+
+\begin{itemize}
+\item Comments on network performance compared to competitors + speculation on why not as high
+\item Comments  on results of performance between the models
+\item Comments on results of performance between the data sets
+\item Comment on low overfitting: data augmentation
+\end{itemize}
+
+
 \label{sec:foot}
 \subsection{Comparison of Different Image Segmentation Neural Networks}
 \begin{itemize}
@@ -258,13 +338,16 @@ The architecture of SegNet allows for an easy and fast end to end training of th
 
 \subsection{Conclusion}
 
-\bibliographystyle{IEEEbib}
-\bibliography{refs}
+
  
 \subsection{Summary}
 The purpose of this project has been build an efficient neural network architecture for semantic pixel-wise segmentation on a crop field. The neural network has to be efficient especially in terms of memory usage and time during inference, such that it can be used in embedded system such as drones are cars. The architecture implemented goes under the name SegNet \ref{SEGNETREFERENCE}, and it consists of an encoder and a corresponding decoder network and ends with a pixelwise classification layer. The purpose of the encoder is to reduce the dimensionallity and extracts the useful information in the image thereby creating a dense feature maps that can be classified. This procedure is performed by using blocks of convolutional layers, each block ending with a max pooling layer. The decoder has to upsample the low-resolution feature map back into full input resolution, such that a precise pixelwise classification can take place. During the encoding procedure only the most characteristic (Replace with another term) information is extracted with max pooling layers, and local information is lost . This local information is neccesary for a precise classification and therefor SegNet uses max-pooling indices as skip connections to retain this local information. During the upsampling these max pooling indices are used to create a sparse feature map and afterwards convolutional layers are use to create more dense feature maps. The use of max pooling indices are a very efficient way of storing local information with only a slight loss of accuracy. Our results show that ------xx----. Conclusion ----x----.
+
+
+\bibliographystyle{IEEEbib}
+\bibliography{refs}
 \subsection{Appendix}
-\begin{figure}
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.7\linewidth]{"reconstruction DL"}
 	\caption{Reconstruction of the smaller inferences into a unified field prediction.}
