@@ -45,17 +45,18 @@ class Net(nn.Module):
 		
 		self.encoder1 = EncoderBlock(3, 64, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.encoder2 = EncoderBlock(64, 128, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.encoder3 = EncoderBlock(128, 256, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		if not self.simple:
+			self.encoder3 = EncoderBlock(128, 256, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 			self.encoder4 = EncoderBlock(256, 512, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 			self.encoder5 = EncoderBlock(512, 512, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		
 		self.log("Done initializing encoding blocks\n")
 
 		self.log("Initializing decoder blocks...")
 		if not self.simple:
 			self.decoder1 = DecoderBlock(512, 512, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 			self.decoder2 = DecoderBlock(512, 256, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
-		self.decoder3 = DecoderBlock(256, 128,  3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+			self.decoder3 = DecoderBlock(256, 128,  3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.decoder4 = DecoderBlock(128, 64, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.decoder5 = DecoderBlock(64, 3, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.log("Done initializing decoder blocks\n")
@@ -65,8 +66,8 @@ class Net(nn.Module):
 		self.log("Forwarding through encoder blocks...")
 		x, ind1, size1 = self.encoder1(x)
 		x, ind2, size2 = self.encoder2(x)
-		x, ind3, size3 = self.encoder3(x)
 		if not self.simple:
+			x, ind3, size3 = self.encoder3(x)
 			x, ind4, size4 = self.encoder4(x)
 			x, ind5, size5 = self.encoder5(x)
 		self.log("Done forwarding through encoder blocks. Shape: %s" % (x.shape,))
@@ -75,7 +76,7 @@ class Net(nn.Module):
 		if not self.simple:
 			x = self.decoder1(x, ind5, size5)
 			x = self.decoder2(x, ind4, size4)
-		x = self.decoder3(x, ind3, size3)
+			x = self.decoder3(x, ind3, size3)
 		x = self.decoder4(x, ind2, size2)
 		x = self.decoder5(x, ind1, size1)
 
