@@ -46,9 +46,11 @@ class Net(nn.Module):
 		self.encoder1 = EncoderBlock(3, 64, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.encoder2 = EncoderBlock(64, 128, 2, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 		self.encoder3 = EncoderBlock(128, 256, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		
 		if not self.simple:
 			self.encoder4 = EncoderBlock(256, 512, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
 			self.encoder5 = EncoderBlock(512, 512, 3, self.kernel_size, self.padding, self.stride, self.pool_dims, self.probs)
+		
 		self.log("Done initializing encoding blocks\n")
 
 		self.log("Initializing decoder blocks...")
@@ -66,6 +68,7 @@ class Net(nn.Module):
 		x, ind1, size1 = self.encoder1(x)
 		x, ind2, size2 = self.encoder2(x)
 		x, ind3, size3 = self.encoder3(x)
+
 		if not self.simple:
 			x, ind4, size4 = self.encoder4(x)
 			x, ind5, size5 = self.encoder5(x)
