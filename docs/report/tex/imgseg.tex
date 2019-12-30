@@ -107,6 +107,14 @@ Even though data augmentation is not as a good as more independent data, it stil
 
 The same preprocessing was applied to the secondary dataset with the only difference being that black pixels were a class, so these were not left out of the training and evaluation.
 We ended up with \textbf{INSERT NUMBER OF IMAGES}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.5\linewidth]{../../poster/raw-min3}
+	\caption{}
+	\label{fig:raw-min2}
+\end{figure}
+
+
 
 \subsection{Regularization}
 Because deep neural networks are such highly flexible models, regularization is necessary on top of the data augmentation to further reduce overfitting.
@@ -120,8 +128,12 @@ Batch normalization is applied after each dropout.
 This standardizes the activations, keeping them close to zero.
 As a result, the weights and biases also stay close to zero, which reduces the flexibility of the model, leading to less overfitting.
 Batch normalization also has several other benefits, such as reducing the vanishing gradient problem and allowing for a higher learning rate and thus faster convergence time. \cite{bn}
-\\
-\\
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../../poster/Encoder-Decoder2}
+	\caption{}
+	\label{fig:encoder-decoder2}
+\end{figure}
 \subsection{}
 The encoder part of the network creates a rich feature map representing the image content. The more 
 layers of max-pooling there are the more translation invariance for robust 
@@ -131,6 +143,13 @@ the feature maps of the encoder before upsampling is important. This can
 simply be done by storing the whole feature map, but due to memory 
 constrains only the maxpooling indices are saved, which is a good 
 approximation of the feature maps. 
+\begin{equation*}\label{key}
+\scriptsize
+\begin{bmatrix}a&b\\c&d\end{bmatrix} \xrightarrow{\text{\scriptsize M. pool indices}}
+\begin{bmatrix}0&0&0&a\\b&0&0&0\\0&c&0&0\\0&0&d&0\end{bmatrix} 
+\rightarrow 
+\texttt{\scriptsize Conv2d}
+\end{equation*}
 \subsection{Training: Learning from Quality over Quantity}
 For training, finding the optimal weights of the network, the widely used Adam optimizer  was implemented because the addition of momentum to the efficient and effective Stochatic Gradient Descent algorithm is shown to giver faster convergence in a wide range of computer vision tasks \cite{Adam}. The training was done in 3000 epochs each consisting of mini batches of size 3.
 
@@ -190,7 +209,7 @@ In a real-world application of the field classification a farmer would want a co
 
 
 
-\begin{figure}
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.9\linewidth]{early_late_reconstruction2}
 	\caption{\textbf{Left:} Smaller inferences put next to eachother without use of reconstruction techniques. \textbf{Right:} Reconstruction with padding and overlap between smaller inferences.}
@@ -319,17 +338,24 @@ For data augmentation, this project chose to use flipping and random cropping he
 
 The motivation for this data augmentation choice was mainly because of computational limits in training but it also resulted in no discernable trace of overfitting as can be seen from figure \eqref{fig:loss} and the minor differences in train and the limited differences in test and train results.
 
-This indicates that controlling the size of random croppings is another regularization parameter usable for balancing the bias/variance-tradeoff of image segmentation tasks.
- 
-For MIoU, the measure which is closest linked with human evaluation \cite{eval}, the differences between this reports main network and the other implementations more slight. 
-\\
-\\
+This indicates that controlling the size of random croppings is another regularization parameter usable for balancing the bias/variance-tradeoff of image segmentation tasks. For MIoU, the measure which is closest linked with human evaluation \cite{eval}, the differences between this reports main network and the other implementations more slight. 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{../../poster/reconst}
+	\caption{An example of predictions. The true image (left) has a large portion of weeds (yellow) in the bottom and some crops (green) in the top as can be seen in the biologist ground truth (middle). The SegNet model recreates this test image well (right) but has some noise in the bulk of weeds and connects patches of plants too often. }
+	\label{fig:reconst}
+\end{figure}
+
+\noindent
 The test of the \textbf{loss function} gives clear results: The difference of 0.16 in test F1 score is assumed to be significant and the results for the unweighted cross entropy loss functions seem to fit the expected:
 There is virtually no difference in the global accuracy -- for which the simple loss function optimizes -- showing that learning has occurred.
 The large differences in the class-balanced accuracy measures indicate that, when all classes are of importance, the frequency weighted cross entropy loss should be used  for unbalanced data.
 \\
 \\
-The test of the small, novel \textbf{corn field data} set gives disappointing results: Only a 
+The test of the performance of the same, main SegNet model on the small, novel \textbf{corn field data} set gives disappointing results: Only a test F1 score of 0.34 which outperforms the baseline but tells a story of overfitting with a train F1 of 0.79 on this small data set of 20 512x512 train images.
+ The data augmentation technique of heavy random croppings does not have the same regularizing effect on such a limited data set. 
+Another problem might be that the cornfield data has a much nearer zoom level than the main sugar cane field.
+This might not fit well with the model's field of view which is partially a product of the choice of kernel size of 3x3, max pool of 2x2 and other hyper parameters.
 
 \label{sec:foot}
 \subsection{Comparison of Different Image Segmentation Neural Networks}
