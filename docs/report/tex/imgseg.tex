@@ -114,8 +114,31 @@ We ended up with \textbf{INSERT NUMBER OF IMAGES}
 	\label{fig:raw-min2}
 \end{figure}
 
+\subsection{The Model}
+%
+The SegNet model architecture utilizes convolutional neural networks (CNN). CNN's work by convolving over an image with a kernel. The kernel size, stride and padding are all adjustable parameters that help to fit the kernel to a specific image dimension or keep the dimensions of the image constant. 
+%Encoder / Decoder  
+SegNet's model architecture has an encoder-decoder structure. The encoder create dense feature maps which allow for translational invariance, and the decoder learns to seperate the classes. The model consists of a total of ten blocks which either have two or three convolutional layers. Encoder blocks ends with a max-pooling layer whereas decoder blocks starts with an un-pooling layer. Every encoder and decoder block has applied dropout to prevent overfitting, batchnorm for normalization, ReLU for non-linearity and max-pool for translational invariance. The last layer is a softmax layer, which allows an evaluation of the prediction of the model. The dimensions of the encoder and decoder blocks are equal and mirrored. Thus, the dimension of the input and output are the same.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../../poster/Encoder-Decoder2}
+	\caption{Visual illustration of the SegNet model architecture}
+	\label{fig:encoder-decoder2}
+\end{figure}
+ \\
+%Skip connections 
+The encoder part of the network creates a rich feature map representing the image content. The boundary detail is very important when dealing with image segmentation. Hence, apprehending boundary information in the feature maps of the encoder before upsampling is important. This can simply be done by storing the whole feature map, but will be very memory inefficient. Therefore, skip connections between each encoder and decoder block are introduced by storing only the max-pooling indices from each max-pooling layer. Its been shown in the literature, that storing the max pooling indices is a good approximation of the actual feature map \cite{seg}. 
 
-
+\begin{figure}
+	\caption{An illustration of upsampling with max-pooling indices as skip connections}
+\begin{equation*}\label{key}
+\scriptsize
+\begin{bmatrix}a&b\\c&d\end{bmatrix} \xrightarrow{\text{\scriptsize M. pool indices}}
+\begin{bmatrix}0&0&0&a\\b&0&0&0\\0&c&0&0\\0&0&d&0\end{bmatrix} 
+\rightarrow 
+\texttt{\scriptsize Conv2d}
+\end{equation*}
+\end{figure}
 \subsection{Regularization}
 Because deep neural networks are such highly flexible models, regularization is necessary on top of the data augmentation to further reduce overfitting.
 This is done in two ways.
@@ -128,28 +151,7 @@ Batch normalization is applied after each dropout.
 This standardizes the activations, keeping them close to zero.
 As a result, the weights and biases also stay close to zero, which reduces the flexibility of the model, leading to less overfitting.
 Batch normalization also has several other benefits, such as reducing the vanishing gradient problem and allowing for a higher learning rate and thus faster convergence time. \cite{bn}
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.7\linewidth]{../../poster/Encoder-Decoder2}
-	\caption{}
-	\label{fig:encoder-decoder2}
-\end{figure}
-\subsection{}
-The encoder part of the network creates a rich feature map representing the image content. The more 
-layers of max-pooling there are the more translation invariance for robust 
-classification can be achieved. The boundary detail is very important when 
-dealing with image segmentation. Hence, capturing boundary information in 
-the feature maps of the encoder before upsampling is important. This can 
-simply be done by storing the whole feature map, but due to memory 
-constrains only the maxpooling indices are saved, which is a good 
-approximation of the feature maps. 
-\begin{equation*}\label{key}
-\scriptsize
-\begin{bmatrix}a&b\\c&d\end{bmatrix} \xrightarrow{\text{\scriptsize M. pool indices}}
-\begin{bmatrix}0&0&0&a\\b&0&0&0\\0&c&0&0\\0&0&d&0\end{bmatrix} 
-\rightarrow 
-\texttt{\scriptsize Conv2d}
-\end{equation*}
+
 \subsection{Training: Learning from Quality over Quantity}
 For training, finding the optimal weights of the network, the widely used Adam optimizer  was implemented because the addition of momentum to the efficient and effective Stochatic Gradient Descent algorithm is shown to giver faster convergence in a wide range of computer vision tasks \cite{Adam}. The training was done in 3000 epochs each consisting of mini batches of size 3.
 
