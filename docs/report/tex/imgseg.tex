@@ -339,16 +339,17 @@ Søren: Interpretation of experiment results
 	\item (Deeplabv-LargeFOV \& FCN)
 \end{itemize}
 	
-\subsubsection{Draft for Comparison}
-Before we move on to a comparison of the leading network architectures in the field of image segmentation, it is important to emphasize that the purpose of SegNet is to be efficient in inference time and memory wise, such that it can be used in embedded systems, for instance in drones or in self-driving cars.
-Besides SegNet, the most acknowledged structures are named U-net, DeepLabv1, DeconvNet and FCN.
-They have very similar performance and the encoding architecture is almost identical.
-However, they differ in decoding structure and techniques, and as a common denominator the SegNet alternatives use a lot of memory during inference.
-Among the heavy users of memory are the fully connected layers of the DeconvNet and FCN, and the skip connections in the U-Net.
-SegNet uses about half the memory during inference as compared to the other structures and comes in second with regard to inference time.
-The fastest network is the FCN, and this is becaused it does not have a decoder structure, but makes a prediction directly from the output from the encoder, and this leads to blocky predictions.
-The speed of SegNet comes in part from the lack of fully connected layers.
+\subsubsection{Leading architectures in the image segmentation field}
+In the field of image segmentation there are several different neural network architectures that excel in different types of problems. Among the most acknowledged architectures are U-net, DeepLabv1, DeconvNet and FCN. 
+All of these networks differ in several ways and it is important to emphasize that each network is designed to excel in a specific branch of image segmentation. U-net is as an example designed for medical image segmentation, whereas SegNet is designed such that it can be used in embedded systems. Each branch of problems has its own challenges and limitations. Therefore it is necessary to apply problem-specific methods to optimally segment the images. 
+As mentioned earlier the purpose of SegNet is to be efficient in inference time and memory-wise, such that it can be used in embedded systems. And these two aspects are the ones we are interested in comparing SegNet and the other architectures. 
+SegNet and its competitors have a quite similar performance in terms of accuracy on both road map scenes and the benchmark dataset known as SUN RGB-D, which is an indoor scene segmentation challenge \cite{seg}. 
+With respect to the architecture of the encoder of the competing networks, SegNet and three of the four competitors (FCN, DeconvNet, U-net) have an almost topologically identical encoder as the one from the well known VGG16 network. One important difference between SegNet and the three others is that SegNet is without the final fully connected layers, which decreases the amount of trainable parameters with almost 90\% \cite{seg}. 
+All of the networks differ in decoding structure and techniques that is applied, and as a common denominator for FCN, DeconvNet and DeepLab-LargeFov are nearly twice as much memory during inference used. Among the heavy users of memory are the fully connected layers of the DeconvNet and FCN, and the skip connections in the U-Net. In comparrison with the same 3 structures does SegNet come in second only bested by DeepLab-LargeFOV with respect to inference time.
+
+
 The encoder part of the network has only 14.7 million parameters compared to partially fully connected structures that tend to have well over 100 million. \cite{seg}
+
 
 \subsection{Potential in SegNet}
 The architecture of SegNet allows for an easy and fast end to end training of the network. As a consequence of this SegNet is easily modified into other use cases without much technical effort. Because of the low memory usage and the speed of which the inference takes place SegNet could prove to be a good choice for self-driving cars and drones. However, it can be challenging and costful to acquire labelled data as this typically involves professionals manually doing the labelling. In our project we only have a single field image, which is probably not representative of similar fields under different circumstances such as lighting, type of crop and season. (The robustness of our network has been tested by running inference on a different data set and with XXX result (EKSILD DATA?)  The robustness of the network can be enhances by different augmentation techniques that is problem dependant. There exits a vast amount of different techniques and some have proved useful in medical imaging, whereas other are preferred in other problem settings. \cite{seg}
