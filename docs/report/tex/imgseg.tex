@@ -16,6 +16,8 @@
 % --------------------
 \def\x{{\mathbf x}}
 \def\L{{\cal L}}
+\usepackage{fancyhdr}
+\pagestyle{plain}
 
 % Title.
 % ------
@@ -53,7 +55,7 @@
 \maketitle
 %
 \begin{abstract}
- Identifying crops, weeds and dirt in a typical field is a major task for a farmer. An image segmentation task, where the goal is to classify where in the field there are crops, weed and soil based on drone images of a field, can speed up and automate the time consuming task for a farmer. In this paper, we present an implementation of the deep network: SegNet and a strategy for training. The purpose is to build an efficient deep network: both memory wise and during inference. The architecture consists of an auto-encoder format, where the max-pooling indices are used as skip connections. Several advanced data augmentation techniques is used to train the network to classify crops, weed and soil in a drone image of a suger cane field in Colombia. In conclusion, the deep network is able to classify the crops, weed and soil and obtains a F1-score at $ 84 \% $. 
+ Identifying crops, weeds and dirt in a typical field is a major task for a farmer. An image segmentation task, where the goal is to classify where in the field there are crops, weed and soil based on drone images of a field, can speed up and automate the time consuming task for a farmer. In this paper, we present an implementation of the deep network: SegNet and a strategy for training. The purpose is to build an efficient deep network: both memory wise and during inference. The architecture consists of an auto-encoder format, where the max-pooling indices are used as skip connections. Several advanced data augmentation techniques is used to train the network to classify crops, weed and soil in a drone image of a suger cane field in Colombia. In conclusion, the deep network is able to classify the crops, weed and soil and obtains a F1-score at $ 85 \% $. 
 \end{abstract}
 %
 \begin{keywords}
@@ -309,22 +311,25 @@ Note that we don't have access for full results for other implementations and, i
 \section{DISCUSSION}
 
 \subsection{Performance of Networks: Loss and Size matter}
-The main performance benchmark for this test of the SegNet implementation is the test F1-score on the Brazil sugar cane data set: \textbf{85\%}. This score is seen as acceptable as it reaches a score which generally seen as high for image segmentation where human agreement of segmentation is often limited \cite{eval}.  It also clearly outperforms the baseline score of 0.32\% but fails to reach the performance of other Deep Neural Networks: The Cellari DNN and the Universidad de Catarina implementations are 3-11 \% points above. 
+The main performance benchmark for this test of the SegNet implementation is the test F1-score on the Brazil sugar cane data set: \textbf{85\%}.
+This score is seen as acceptable as it reaches a score which generally seen as high for image segmentation where human agreement of segmentation is often limited \cite{eval}.  It also clearly outperforms the baseline score of 0.32\% but fails to reach the performance of other Deep Neural Networks: The Cellari DNN and the Universidad de Catarina implementations are 3-11 \% points higher. 
 
-These differences can be due to data augmentation practises and hyper parameter optimization as the hyper parameters for these implementations could not be accessed. For data augmentation, this project chose to use flipping and random cropping heavily and the forceful croppings from 512x512 to 350x350 (halving the number of pixels) might have limited the learning of the model as less data was accessible for each parameter update. 
+These differences can be due to data augmentation practises and hyper parameter optimization as the hyper parameters for these implementations could not be accessed.
+For data augmentation, this project chose to use flipping and random cropping heavily and the forceful croppings from 512x512 to 350x350 (halving the number of pixels) might have limited the learning of the model as less data was accessible for each parameter update. 
 
-The motivation for this data augmentation choice was mainly because of computational limits in training but it also resulted in no discernable trace of overfitting as can be seen from figure \eqref{fig:loss} and the minor differences in train and the limited differences in test and train results. For MIoU, the measure which is closest linked with human evaluation \cite{eval}, the differences between the main network and the other implementations more slight. 
+The motivation for this data augmentation choice was mainly because of computational limits in training but it also resulted in no discernable trace of overfitting as can be seen from figure \eqref{fig:loss} and the minor differences in train and the limited differences in test and train results.
 
-
-Søren: Interpretation of experiment results
-
-\begin{itemize}
-\item Comments on network performance compared to competitors + speculation on why not as high
-\item Comments  on results of performance between the models
-\item Comments on results of performance between the data sets
-\item Comment on low overfitting: data augmentation
-\end{itemize}
-
+This indicates that controlling the size of random croppings is another regularization parameter usable for balancing the bias/variance-tradeoff of image segmentation tasks.
+ 
+For MIoU, the measure which is closest linked with human evaluation \cite{eval}, the differences between this reports main network and the other implementations more slight. 
+\\
+\\
+The test of the \textbf{loss function} gives clear results: The difference of 0.16 in test F1 score is assumed to be significant and the results for the unweighted cross entropy loss functions seem to fit the expected:
+There is virtually no difference in the global accuracy -- for which the simple loss function optimizes -- showing that learning has occurred.
+The large differences in the class-balanced accuracy measures indicate that, when all classes are of importance, the frequency weighted cross entropy loss should be used  for unbalanced data.
+\\
+\\
+The test of the small, novel \textbf{corn field data} set gives disappointing results: Only a 
 
 \label{sec:foot}
 \subsection{Comparison of Different Image Segmentation Neural Networks}
