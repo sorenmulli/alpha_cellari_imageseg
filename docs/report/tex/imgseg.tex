@@ -1131,18 +1131,6 @@ This might not fit well with the model's field of view which is partially a prod
 
 \label{sec:foot}
 \subsection{Comparison of Different Image Segmentation Neural Networks}
-\begin{itemize}
-	\item Several competing network structures with high performance in image segmentation. U-net, FCN, DeepLabv1, DeconvNet
-	\item Purpose of SegNet, efficient
-	\item 3 out of the 4 mentioned uses the encoder from the famous VGG16 paper, but differ in decoder.
-	\item FCN, No decoder -> Blocky segmentation, but very efficient in inference time.
-	\item DeconvNet, Deconvolution and fully connected layers. 
-	\item U-Net, (different purpose), skip connections. 
-	\item Main takeaway  
-	\item (Deeplabv-LargeFOV \& FCN)
-\end{itemize}
-	
-\subsubsection{Leading architectures in the image segmentation field}
 In the field of image segmentation there are several different neural network architectures that excel in different types of problems. Among the most acknowledged architectures are U-net, DeepLabv1, DeconvNet and FCN. 
 All of these networks differ in several ways and it is important to emphasize that each network is designed to excel in a specific branch of image segmentation. U-net is as an example designed for medical image segmentation, whereas SegNet is designed such that it can be used in embedded systems. Each branch of problems has its own challenges and limitations. Therefore it is necessary to apply problem-specific methods to optimally segment the images. 
 As mentioned earlier the purpose of SegNet is to be efficient in inference time and memory-wise, such that it can be used in embedded systems. And these two aspects are the ones we are interested in comparing SegNet and the other architectures. 
