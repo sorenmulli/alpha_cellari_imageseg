@@ -76,7 +76,7 @@ The first image consists of several drone images stitched together, with the sec
 The three classes each have a corresponding colour -- crop rows are green, weeds are yellow, and soil is red.
 Void pixels are black.
 
-We also used second, smaller dataset from a corn field. \textbf{INSERT LINK}
+We also used second, smaller dataset from a corn field.
 We did not use this for hyperparameter optimization or architechtural decisions like this primary dataset.
 Instead, only a train/test split was used to evaluate the network using the exact same hyperparameters.
 We did not perform any hyperparameter optimization or architechtural decisions based on this dataset.
@@ -104,7 +104,7 @@ Furthermore, we applied a 50\pro\ chance of performing a top/down flip as well a
 Even though data augmentation is not as a good as more independent data, it still allows the network to generalize better and overfit less.
 
 The same preprocessing was applied to the secondary dataset with the only difference being that black pixels were a class, so these were not left out of the training and evaluation.
-We ended up with \textbf{INSERT NUMBER OF IMAGES}
+We ended up with 20 train and 4 test images.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.5\linewidth]{../../poster/raw-min3}
