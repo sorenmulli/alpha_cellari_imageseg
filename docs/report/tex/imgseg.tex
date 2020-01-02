@@ -56,11 +56,20 @@
 \maketitle
 %
 \begin{abstract}
- Identifying crops, weeds and dirt in a typical field is a major task for a farmer. An image segmentation task, where the goal is to classify where in the field there are crops, weed and soil based on drone images of a field, can speed up and automate the time consuming task for a farmer. In this paper, we present an implementation of the deep neural network: SegNet and a strategy for training. The purpose is to build an efficient deep neural network: both memory and time wise during inference. The architecture consists of an auto-encoder format, where max-pooling indices are used as skip connections. To show the efficiency of SegNet, a brief comparison of SegNet and other leading image segmentation architectures is included. The comparison focuses on the trade-off between memory usage and accuracy and shows that with half the memory usage during inference SegNet only has a slight loss of accuracy. To expand the limited data set several advanced data augmentation techniques is used to improve the training of the network, such that it can classify crops, weed and soil in a drone image of a sugarcane field in Brazil. In conclusion, the deep network is able to classify the crops, weed and soil and obtains a F1-score at $ 85 \% $. 
+Identifying crops, weeds and unplanted dirt in a field is a major task in agriculture when making decisions aboout fertilization and pesticides.
+A solution to the image segmentation task where the goal is to classify the locations  of are crops, weed and soil based on drone images of a field, can speed up and improve this time consuming task for a farmer. 
+In this paper, we solve the problem with Deep Learning, presenting an implementation of the deep neural network: SegNet and a strategy for training.
+The purpose is to build an efficient deep neural network: both memory and time wise during inference. 
+The architecture consists of an auto-encoder format, where max-pooling indices are used as skip connections.
+%To show the efficiency of SegNet, a brief comparison of SegNet and other leading image segmentation architectures is included. 
+%The comparison focuses on the trade-off between memory usage and accuracy and shows that with half the memory usage during inference SegNet only has a slight loss of accuracy.
+To expand the limited data set several data augmentation techniques is used to improve the training of the network and a number of classic deep learning regularization techniques help with segmenting a sugar cane field from Brazil.
+In conclusion, the deep network is able to classify the crops, weed and soil and obtains a F1-score at $ 85 \% $ with low overfitting which we attribute to the data augmentation.
+It is found that using frequency weighted cross entropy loss for training is crucial for this class unbalanced data set and that this direct method does not sustain its' performance on a significantly smaller data sets. 
 \end{abstract}
 %
 \begin{keywords}
-One, two, three, four, five
+Machine learning, Deep learning, Image Segmentation, SegNet, Smart agriculture, Drone imaging
 \end{keywords}
 %
 \section{Introduction}
