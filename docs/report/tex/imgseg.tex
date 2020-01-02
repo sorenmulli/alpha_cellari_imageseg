@@ -56,8 +56,8 @@
 \maketitle
 %
 \begin{abstract}
-Identifying crops, weeds and unplanted dirt in a field is a major task in agriculture when making decisions aboout fertilization and pesticides.
-A solution to the image segmentation task where the goal is to classify the locations  of are crops, weed and soil based on drone images of a field, can speed up and improve this time consuming task for a farmer. 
+Identifying crops, weeds and unplanted dirt in a field is a major task in agriculture and the identification is crucial when making decisions about fertilization and pesticides.
+A solution to the image segmentation task where the goal is to classify the locations  of crops, weed and soil based on drone images of a field, can speed up and improve this time consuming task for a farmer. 
 In this paper, we solve the problem with Deep Learning, presenting an implementation of the deep neural network: SegNet and a strategy for training.
 The purpose is to build an efficient deep neural network: both memory and time wise during inference. 
 The architecture consists of an auto-encoder format, where max-pooling indices are used as skip connections.
@@ -76,15 +76,15 @@ Machine learning, Deep learning, Image Segmentation, SegNet, Smart agriculture, 
 \label{sec:intro}
 
 \subsection{Deep Learning and Precision Agriculture}
-Image segmentation and object classification have received a lot of attention in recent years
+Image segmentation and object classification have received a lot of attention in recent years.
 This is partly due to the wide array of possible applications and the recent interest in machine learning and, in particular, deep learning.
-One such important application is separating weeds, crops and dirt in aerial drone images of a field. Applying the SegNet architecture to this field of crop segmentation could open up for for smart agriculture that allows a farmer to localize the use of fertilizer and pesticides with positive environmental and economic consequences.
+One such important application is separating weeds, crops and dirt in aerial drone images of a field. Applying the SegNet architecture to this field of crop segmentation could open up for smart agriculture that allows a farmer to localize the use of fertilizer and pesticides with positive environmental and economic consequences.
 Using the deep learning architecture \textit{SegNet} for this classification could prove useful in terms of the computational efficiency, as this more memory efficient model allows for end-to-end training and makes embedded systems, e.g. in drones, feasible.
 
 \subsection{Challenges of Image Segmentation}
 Accurate image segmentation has been pursued for a number of computer vision, tasks including medical images and autonomous vehicles \cite{seg}.
-Here, the typical problems include the classic deep learning challenge of generalizability as the training the deep networks must converge to a  model which is robust to the variance in the population of images.
-In computer vision, this is particulary challenging as photographic data has a notorious \textit{long tail} of rare images in the image population which challenges the generalizability model and must be addressed by regularization in multiple forms \cite{long}.   
+Here, the typical problems include the classic deep learning challenge of generalizability as the training of the deep networks must converge to a  model which is robust to the variance in the population of images.
+In computer vision, this is particularly challenging as photographic data has a notorious \textit{long tail} of rare images in the image population which challenges the generalizability model and must be addressed by regularization in multiple forms \cite{long}.   
 
 In image segmentation, this problem of robust, generalizable models can be even more difficult as the classes that are to be predicted often have very different frequencies of occurence: Some -- often background classes like \textit{dirt} in this task -- are very prevalent while other classes appear rarely among the pixels but are still important to the task. 
 This imbalance must be addressed in the training and evaluation for effective segmentation also for this task which contains 3 classes: \textit{weeds}, \textit{crops} and \textit{dirt}.
@@ -96,7 +96,7 @@ The first image consists of several drone images stitched together, with the sec
 The three classes each have a corresponding colour -- crop rows are green, weeds are yellow, and soil is red.
 Void pixels (not part of the field) are black.
 
-We also used a second, smaller data set from a danish corn field. This consisted already cut-out images: 20 for training and 4 for testing.
+We also used a second, smaller data set from a Danish corn field. This data set consists of already cut-out images: 20 for training and 4 for testing.
 We did not use this for hyper parameter optimization or architectural decisions like this primary dataset.
 Instead, only a train/test split was used to evaluate the network using the exact same hyper parameters. 
 
