@@ -89,7 +89,7 @@ In computer vision, this is particularly challenging as photographic data has a 
 In image segmentation, this problem of robust, generalizable models can be even more difficult as the classes that are to be predicted often have very different frequencies of occurence: Some -- often background classes like \textit{dirt} in this task -- are very prevalent while other classes appear rarely among the pixels but are still important to the task. 
 This imbalance must be addressed in the training and evaluation for effective segmentation also for this task which contains 3 classes: \textit{weeds}, \textit{crops} and \textit{dirt}.
 \subsection{The Data: Brazilian Sugar Canes and Danish Corn}
-The primary dataset in question consists of two large, high resolution orthomosaic RGB images of a Brazilian sugar cane field\footnote{Aerial image: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/sugarcane2.png\\
+The primary data set in question consists of two large, high resolution orthomosaic RGB images of a Brazilian sugar cane field\footnote{Aerial image: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/sugarcane2.png\\
 Ground truth: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/crop6GT.png} \cite{brazil}.
 The first image consists of several drone images stitched together, with the second image of the same size being the manually labelled human ground truth, labelled by an expert biologist.
 The three classes each have a corresponding colour -- crop rows are green, weeds are yellow, and soil is red.
@@ -108,8 +108,8 @@ Instead, only a train/test split was used to evaluate the network using the exac
 \label{sec:format}
 \textit{All code is available at \url{github.com/sorenmulli/alpha_cellari_imageseg}}.
 \subsection{Preprocessing and Data Augmentation}
-In order to use deep learning on the images and get the most effective learning out of the data, preprocessing is needed.
-First, the RGB values of the non-void pixels of the aerial image are standardized to zero mean and 1 standard deviation, and a matrix is used to represent the biologists' ground truth.
+In order to use a deep neural network on the images and get the most effective learning out of the data, preprocessing is needed.
+First, the RGB values of the non-void pixels of the aerial image are standardized to zero mean and one standard deviation, and a matrix is used to represent the biologists' ground truth.
 This target matrix has is set up such that each entry corresponds to a pixel in the image and contains the numbers 0, 1, 2 for the different classes in the task or 3 for a void pixel.
 The images are then padded with black pixels and cropped into smaller $ 512\times 512 $ pixel images.
 Any of these images containing only black pixels are discarded, leaving a total of 108 pairs of aerial photo/ground truth images.
@@ -131,14 +131,14 @@ Here, we ended up with 20 train and 4 test images.
 
 \subsection{The Model: SegNet}
 %
-The model used for this task is the Deep Neural Network SegNet which is built and tested for Image Segmentation \cite{seg}.
+The model used for this task is the Deep Neural Network SegNet which is built for Image Segmentation \cite{seg}.
 The SegNet model architecture utilizes convolutional neural networks (CNN). 
-CNN's work by convolving over an image with learned kernels which should correspond to features that are usable for the task.
-The kernel size, stride and padding are all adjustable parameters that help to fit the kernel to a specific image dimension or, as in the case of SegNet, keep the dimensions of the image constant . 
+CNN's work by convolving over an image with learned kernels which should correspond to features that are characteristic for the objects.
+The kernel size, stride and padding are all adjustable parameters that help to fit the kernel to a specific image dimension or, as in the case of SegNet, keep the dimensions of the image constant. 
 
 
 %Encoder / Decoder  
-SegNet's model architecture has an encoder-decoder structure. The encoder create dense feature maps which allow for translational invariance, and the decoder learns to seperate the classes.
+SegNet's model architecture has an encoder-decoder structure. The encoder creates dense feature maps with the most vital information and by using max pooling layers achieves translational invariance over small spatial shift in the incoming image, and the decoder learns to upsample and separate the classes.
 The model consists of a total of ten blocks which either have two or three convolutional layers. Encoder blocks ends with a max-pooling layer whereas decoder blocks starts with an upsampling layer also called  un-pooling.
 Every encoder and decoder block has applied Dropout for regularization, Batch Normalization for normalization of the activations, ReLU for non-linearity and Max Pooling for translational invariance.
 The last layer is a softmax layer, which allows for probabilistic predictions from the model and evaluation of these. The dimensions of the encoder and decoder blocks are equal and mirrored. Thus, the input and output dimensions are the same as is needed for image segmentation where each pixel is to be classified.
