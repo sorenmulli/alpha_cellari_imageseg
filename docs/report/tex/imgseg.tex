@@ -107,7 +107,7 @@ Instead, only a train/test split was used to evaluate the network using the exac
 
 \section{METHODS}
 \label{sec:format}
-\textit{All code is available at \url{github.com/sorenmulli/alpha_cellari_imageseg}. To reproduce the main results, the Jupyter Notebook} \texttt{image-segmentation.ipynb} \textit{from the folder \texttt{/src} can be run.}
+\textit{All code is available at \url{github.com/sorenmulli/alpha_cellari_imageseg}}.
 \subsection{Preprocessing and Data Augmentation}
 In order to use a deep neural network on the images and get the most effective learning out of the data, preprocessing is needed.
 First, the RGB values of the non-void pixels of the aerial image are standardized to zero mean and one standard deviation, and a matrix is used to represent the biologists' ground truth.
@@ -249,9 +249,6 @@ This reconstruction method results in a very rough transition between the smalle
 The blocky nature of the field prediction is caused by a lack of information from neighbouring pixel, when inference is performed near the borders of an image. 
 To solve this problem, the cropping size of the field into smaller images is increased and some overlap is added. This corresponds to adding padding pixels from the original field.
 In the procedure of joining the enlarged images they are cropped again, to avoid the border areas. At the cost of computational efficiency more information is available near the borders and a smooth transition between the smaller inferences can be achieved. This can be seen in the right side of figure \ref{fig:earlylatereconstruction}. A visualization of the reconstruction technique can be seen in appendix \ref{reconstruction_technique}.
-
-
-
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\linewidth]{early_late_reconstruction2}
@@ -259,10 +256,7 @@ In the procedure of joining the enlarged images they are cropped again, to avoid
 	\label{fig:earlylatereconstruction}
 \end{figure}
 
-
-
-
-
+\vspace*{-.75cm}
 \section{RESULTS}
 \label{sec:illust}
 
@@ -370,7 +364,7 @@ Note that we don't have access to all accuracy measures for other implementation
 %Class acc.: 0.3556
 %Mean IoU.: 0.2069
 %Bound. F1: 0.3398
-
+\vspace*{-.5cm}
 
 \section{DISCUSSION}
 
@@ -400,29 +394,36 @@ The large differences in the class-balanced accuracy measures indicate that, whe
 The test of the performance of the same, main SegNet model on the small, novel \textbf{corn field data} set gives disappointing results: Only a test F1 score of 0.34 which outperforms the baseline but tells a story of overfitting with a train F1 of 0.79 on this small data set of 20 512x512 train images.
  The data augmentation technique of heavy random croppings does not have the same regularizing effect on such a limited data set. 
 Another problem might be that the cornfield data has a much nearer zoom level than the main sugar cane field.
-This might not fit well with the model's field of view which is partially a product of the choice of kernel size of 3x3, max pool of 2x2 and other hyper parameters. Examples of images of the cornfield can be seen in the appendix in figure \ref{fig:corn} and can be compared to the left image in figure \ref{fig:reconst}.
-
-\label{sec:foot}
-\subsection{Comparison of Different Image Segmentation Neural Networks}
+This might not fit well with the model's field of view which is partially a product of the choice of kernel size of 3x3, max pool of 2x2 and other hyper parameters. An examples of the images of the cornfield can be seen in the appendix in figure \ref{fig:corn} and can be compared to the left image in figure \ref{fig:reconst}.
+\subsection{Comparison of Image Segmentation Deep Models}
 In the field of image segmentation there are several different neural network architectures that excel in different types of problems. Among the most acknowledged architectures are U-net, DeepLabv1, DeconvNet and FCN. 
-All of these networks differ in several ways and it is important to emphasize that each network is designed to excel in a specific branch of image segmentation. U-net is as an example designed for medical image segmentation, whereas SegNet is designed such that it can be used in embedded systems. Each branch of problems has its own challenges and limitations. Therefore it is necessary to apply problem-specific methods to optimally segment the images. 
+All of these networks differ in several ways and it is important to emphasize that each network is designed to excel in a specific branch of image segmentation. U-net is as an example designed for medical image segmentation, whereas SegNet is designed such that it can be used in embedded systems such as autonomous vehicles. Each branch of problems has its own challenges and limitations. Therefore it is necessary to apply problem-specific methods to optimally segment the images. 
+
+
 As mentioned earlier the purpose of SegNet is to be efficient in inference time and memory-wise, such that it can be used in embedded systems. And these two aspects are the ones we are interested in comparing SegNet and the other architectures. 
 SegNet and its competitors have a quite similar performance in terms of accuracy on both road map scenes and the benchmark dataset known as SUN RGB-D, which is an indoor scene segmentation challenge \cite{seg}. 
 With respect to the architecture all of these networks have a general structure like the one SegNet has with both an encoder and a decoder. The encoder of the competing networks (SegNet and three of the four competitors FCN, DeconvNet, U-net) have an almost topologically identical encoder, which originates from the well known VGG16 network \cite{VGG16}. One important difference between SegNet and the three other networks is that SegNet is without the final fully connected layers of the original VGG16 network, which decreases the amount of trainable parameters with almost 90\% \cite{seg}. 
-All of the networks differ in decoding structure and techniques that is applied, and as a common denominator for FCN, DeconvNet and DeepLab-LargeFov they use nearly twice as much memory during inference. Among the heavy users of memory are the fully connected layers of the DeconvNet and FCN, and the full resolution feature maps that is used as skip connections in the U-Net. In comparison with the same 3 structures SegNet come in second only bested by DeepLab-LargeFOV with respect to inference time.
+
+
+All of the networks differ in decoding structure and techniques that are applied, and as a common denominator for FCN, DeconvNet and DeepLab-LargeFov they use nearly twice as much memory during inference. Among the heavy users of memory are the fully connected layers of the DeconvNet and FCN, and the full resolution feature maps that is used as skip connections in the U-Net. In comparison with the same 3 structures SegNet come in second only bested by DeepLab-LargeFOV with respect to inference time.
 
 
 The encoder part of the network has only 14.7 million parameters compared to partially fully connected structures that tend to have well over 100 million. \cite{seg}
 
 
-\subsection{Potential in SegNet}
-The architecture of SegNet allows for an easy and fast end to end training of the network. As a consequence of this SegNet is easily modified into other use cases without much technical effort. Because of the low memory usage and the speed of which the inference takes place SegNet could prove to be a good choice for self-driving cars and drones. However, it can be challenging and costful to acquire labelled data as this typically involves professionals manually doing the labelling. In our project we only have a single field image, which is not representative of similar fields under different circumstances such as lighting, type of crop and season. The best way of increasing the robustness is to expand the data set, but another cheaper method is by using different augmentation techniques. There exits a vast amount of different techniques and some have proved useful to some problems whereas other augmentation are preferred in other problem settings. For this project random cropping, flipping have been used to increase robustness.
+\subsection{Potential of SegNet}
+The architecture of SegNet allows for an easy and fast end to end training of the network. As a consequence of this SegNet is easily modified into other use cases without much technical effort. Because of the low memory usage and the speed of which the inference takes place SegNet could prove to be a good choice for self-driving cars and drones. However, it can be challenging and costful to acquire labelled data as this typically involves professionals manually doing the labelling. For this project, the laborous process of annotating images resulted in the source of the Danish corn field data set only producing 24 images which were too few for this implementation.
 
-\subsection{Extension of network}
+For the main implementation trained on the Brazil Sugar Cane data set, there was only access to a single field image, which is not representative of similar fields under different circumstances such as lighting, type of crop and season. The best way of increasing the robustness is to expand the data set, but another cheaper method is by using different augmentation techniques. There exits a vast amount of different techniques and many of them are problem-specific. 
+
+It must also be noted that the resulting inference (the entire inference is added in figure \ref{fig:inf} in the appendix) might be very usable for precision agriculture as it can give precise local information about density of crops and weeds but for other problems such as medical imaging -- where boundary detail is crucial for segmenting different objects of the same class -- the model needs extension to achieve accuracy.  Current, commercial implementations of image segmentation for precision agriculture (such as the start-up \textit{taranis}\footnote{From \url{http://www.taranis.ag/}: "Taranis uses sophisticated computer vision, data science and deep learning algorithms to effectively monitor fields (...) and can detect when a weed emerges."  }) exist and use similar deep learning techniques \cite{brazil}.
+
+
 
 
 \subsection{Conclusion}
 The purpose of this project has been to build an efficient neural network architecture for semantic pixel-wise segmentation on a crop field. The neural network implemented goes under the name SegNet, and it has been designed to be efficient in terms of memory usage and time during inference, such that it can be used in embedded system. The architecture consists of an encoder and a corresponding decoder network and ends with a pixel-wise classification layer. The purpose of the encoder is to reduce the dimensionality and extracts the useful information in the image thereby creating a dense feature maps that can be classified. This procedure is performed by using blocks of convolutional layers, each block ending with a max pooling layer. The decoder has to upsample the low-resolution feature map back into full input resolution, such that a precise pixel-wise classification can take place. During the encoding procedure only the most characteristic information is extracted with max pooling layers, and local information is lost. This local information is necessary for a precise classification and therefore SegNet uses max-pooling indices as skip connections to retain this local information. During the upsampling these max pooling indices are used to create a sparse feature map and afterwards convolutional layers are use to create more dense feature maps. The use of max pooling indices are a very efficient way of storing local information with only a slight loss of accuracy. Our results show that ------xx----. Conclusion ----x----.
+%The purpose of this project has been to build an efficient neural network architecture for semantic pixel-wise segmentation on a crop field. The neural network implemented goes under the name SegNet, and it has been designed to be efficient in terms of memory usage and time during inference, such that it can be used in embedded system. The architecture consists of an encoder and a corresponding decoder network and ends with a pixel-wise classification layer. The purpose of the encoder is to reduce the dimensionality and extracts the useful information in the image thereby creating a dense feature maps that can be classified. This procedure is performed by using blocks of convolutional layers, each block ending with a max pooling layer. The decoder has to upsample the low-resolution feature map back into full input resolution, such that a precise pixel-wise classification can take place. During the encoding procedure only the most characteristic information is extracted with max pooling layers, and local information is lost. This local information is necessary for a precise classification and therefore SegNet uses max-pooling indices as skip connections to retain this local information. During the upsampling these max pooling indices are used to create a sparse feature map and afterwards convolutional layers are use to create more dense feature maps. The use of max pooling indices are a very efficient way of storing local information with only a slight loss of accuracy. Our results show that ------xx----. Conclusion ----x----.
 
 
 \bibliographystyle{IEEEbib}
@@ -431,7 +432,7 @@ The purpose of this project has been to build an efficient neural network archit
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.7\linewidth]{"reconstruction DL"}
-	\caption{Reconstruction of the smaller inferences into a unified field prediction.}
+	\caption{Illustration of an example of reconstruction of the smaller inferences into a unified field prediction by padding extra boundary data for inference and removing it for unification. This results in a smooth segmentation.}
 	\label{reconstruction_technique}
 \end{figure}
 
@@ -440,6 +441,14 @@ The purpose of this project has been to build an efficient neural network archit
 	\includegraphics[width=0.7\linewidth]{"corn.JPG"}
 	\caption{Example of a training image from the smaller Danish cornfield data set}
 	\label{fig:corn}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+%	\includegraphics[width=0.7\linewidth]{anno2}
+	\caption{The resulting image segmentation of the model trained in the main experiment when using described the reconstruction process. When zooming in, it can be seen that the segmentation is smooth but that larger groups of weeds or crops are often connected and are not segmented individually. }
+	\label{fig:inf}
 \end{figure}
 
 \end{document}
