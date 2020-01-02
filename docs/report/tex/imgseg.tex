@@ -12,6 +12,7 @@
 \usepackage{caption}
 \toappear{02456 Deep Learning, DTU Compute, Autumn 2019}
 \newcommand{\pro}{\ensuremath{\ \%}}
+\usepackage{endnotes}
 
 \expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks%  save the current one
 	\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
@@ -64,7 +65,7 @@
 \maketitle
 %
 \begin{abstract}
-Identifying crops, weeds and unplanted dirt in a field is a major task in agriculture and the identification is crucial when making decisions about fertilization and pesticides.
+Identifying crops, weeds and unplanted soil in a field is a major task in agriculture and the identification is crucial when making decisions about fertilization and pesticides.
 A solution to the image segmentation task, where the goal is to classify the locations  of crops, weed and soil based on drone images of a field, can speed up and improve this time consuming task for a farmer. 
 In this paper, we solve the problem with Deep Learning, presenting an implementation of the deep neural network: SegNet and a strategy for training.
 The purpose is to build an efficient deep neural network: both memory and time wise during inference. 
@@ -72,7 +73,7 @@ The architecture consists of an auto-encoder format, where max-pooling indices a
 %To show the efficiency of SegNet, a brief comparison of SegNet and other leading image segmentation architectures is included. 
 %The comparison focuses on the trade-off between memory usage and accuracy and shows that with half the memory usage during inference SegNet only has a slight loss of accuracy.
 To expand the limited dataset several data augmentation techniques are used to improve the training of the network and a number of classic deep learning regularization techniques help with segmenting a sugar cane field from Brazil.
-In conclusion, the deep network is able to classify the crops, weed and soil and obtains a F1-score at $ 85 \% $ with low overfitting which we attribute to the data augmentation.
+In conclusion, the deep network is able to classify the crops, weed and soil and obtains a F1-score at $ 85\ \% $ with low overfitting which we attribute to the data augmentation.
 It is found that using frequency weighted cross entropy loss for training is crucial for this class unbalanced dataset and that this direct method does not sustain its' performance on a significantly smaller datasets. 
 \end{abstract}
 %
@@ -86,8 +87,8 @@ Machine learning, Deep learning, Image Segmentation, SegNet, Smart agriculture, 
 \subsection{Deep Learning and Precision Agriculture}
 Image segmentation and object classification have received a lot of attention in recent years.
 This is partly due to the wide array of possible applications and the recent interest in machine learning and, in particular, deep learning.
-One such important application is separating weeds, crops and dirt in aerial drone images of a field.
-Applying the SegNet architecture to this field of crop segmentation could open up for smart agriculture that allows a farmer to localize the use of fertilizer and pesticides with positive environmental and economic consequences.
+One such important application is separating weeds, crops and soil in aerial drone images of a field.
+Applying the SegNet architecture to this field of crop segmentation could open up for smart agriculture that allows a farmer to localize the use of fertilizer and pesticides with positive environmental and financial consequences.
 Using the deep learning architecture \textit{SegNet} for this classification could prove useful in terms of the computational efficiency, as this more memory efficient model allows for end-to-end training and makes embedded systems, e.g. in drones, feasible.
 
 \subsection{Challenges of Image Segmentation}
@@ -95,10 +96,10 @@ Accurate image segmentation has been pursued for a number of computer vision tas
 Here, the typical problems include the classic deep learning challenge of generalizability as the training of the deep networks must converge to a  model which is robust to the variance in the population of images.
 In computer vision, this is particularly challenging as photographic data has a notoriously long tail of rare images in the image population that challenge the generalizability of the model and must be addressed by regularization in multiple forms \cite{long}.   
 
-In image segmentation, this problem of robust, generalizable models can be even more difficult as the classes that are to be predicted often have very different frequencies of occurence: Some -- often background classes like dirt in this task -- are very prevalent while other classes appear rarely among the pixels but are still important to the task. 
-This imbalance must be addressed in the training and evaluation for effective segmentation also for this task which contains 3 classes: weeds, crops, and dirt.
+In image segmentation, this problem of robust, generalizable models can be even more difficult as the classes that are to be predicted often have very different frequencies of occurence: Some -- often background classes like soil in this task -- are very prevalent while other classes appear rarely among the pixels but are still important to the task. 
+This imbalance must be addressed in the training and evaluation for effective segmentation also for this task which contains 3 classes: weeds, crops, and soil.
 \subsection{The Data: Brazilian Sugar Canes and Danish Corn}
-The primary data set in question consists of two large, high resolution orthomosaic RGB images of a Brazilian sugar cane field\(^\text{Note 1}\) \cite{brazil}.
+The primary dataset consists of two large, high resolution orthomosaic RGB images of a Brazilian sugar cane field\(^\text{Note 1}\) \cite{brazil}.
 The first image consists of several drone images stitched together, with the second image of the same size being the manually labelled human ground truth, labelled by an expert biologist.
 The three classes each have a corresponding colour -- crop rows are green, weeds are yellow, and soil is red.
 Void pixels (not part of the field) are black.
@@ -138,7 +139,7 @@ The same preprocessing was applied to the secondary dataset with the only differ
 
 \subsection{The Model: SegNet}
 %
-The model used for this task is the Deep Neural Network SegNet which is built for image segmentation \cite{seg}.
+The model used for this task is the deep neural network SegNet which is built for image segmentation \cite{seg}.
 The SegNet model architecture utilizes convolutional neural networks (CNN). 
 CNN's work by convolving over an image with learned kernels which should correspond to features that are characteristic for the objects.
 The kernel size, stride and padding are all adjustable parameters that help to fit the kernel to a specific image dimension or, as in the case of SegNet, keep the dimensions of the image constant. 
@@ -193,12 +194,12 @@ Batch normalization also has a number of other benefits, such as reducing the va
 
 \subsection{Training: Learning from Quality over Quantity}
 For training -- finding the optimal weights of the network -- the widely used ADAM optimizer was implemented because the addition of momentum to the efficient and effective stochastic gradient descent algorithm is shown to give faster convergence in a wide range of computer vision tasks \cite{Adam}.
-The network was trained for 4000 epochs each consisting of mini batches of size 3.
+The network was trained for 3000 epochs each consisting of mini batches of size 3.
 
 A less obvious choice was the loss function.
 It was clear that 3-class cross entropy should be used for criterion as this, for a softmax network such as SegNet, can be seen as following the maximum likelihood principle and implementing minus logarithmic likelihood loss.
 The direct implementation of this, however, failed to consider a deep issue in image segmentation which had considerable effect on this limited dataset: class imbalance. 
-In the main dataset, \(\sim 93 \%\) of pixels belong to the dirt-class which arguably is the least interesting and initial tests saw the network behave too much as a baseline; simple features in early layers which classified almost everything as dirt were not penalized enough and learning was not stable. 
+In the main dataset, \(\sim 93 \%\) of pixels belong to the soil-class which arguably is the least interesting and initial tests saw the network behave too much as a baseline; simple features in early layers which classified almost everything as soil were not penalized enough and learning was not stable. 
 
 As resampling an image dataset is computationally expensive and it was desired that the network learned to focus on important pixels, it was chosen the main training experiment of this report should use \textit{weighted cross entropy} where each class is weighted by \(w_i = 1-\nu_i\) where \(\nu_i\) is the frequency of class \textit{i} thus focusing more on the classes crops and weeds than in the vanilla cross entropy. The implemented loss of \(N\) pixels in a one-hot encoded \((N \times  3)\) output matrix \(\mathbf X^\text{pred}\) with the true classes \(\mathbf c\) was then:
 \[
@@ -235,7 +236,7 @@ Both F1 and MIoU are calculated for each of the three classes and are then avera
 To estimate generalization performance, the models are compared by their performance on the test dataset which is kept separate from the training and validation data and is pre-divided for both datasets consisting of approximately \( 20\%\) of the images.
 It is noted that this simple hold out evaluation method does not claim to give an accurate estimate of generalization error on \textit{any} dataset but can statistically only be seen as an evaluation of the performance on the used datasets. 
 
-\subsection{Three Experiments and Their Hyper Parameters}
+\subsection{Three Experiments and Their Hyperparameters}
 When training the network, we used the following hyperparameters: Batch size of 3, dropout of 10\pro, and a learning rate of $ 1.5\cdot 10^{-4} $ with the ADAM optimization algorithm.
 For the convolutional layers, kernel size was set to $ 3\times 3 $ and stride to $ 1 $, as deeper network structures with smaller kernels tend to learn to better and faster.
 This is because the effective receptive field of smaller stacked kernels is the same as larger kernels in shallower networks, but the multiple stacked layers allow for learning more complex structures.
@@ -271,6 +272,11 @@ A visualization of the reconstruction technique can be seen in appendix \ref{rec
 \vspace*{-.75cm}
 \section{RESULTS}
 \label{sec:illust}
+In the following, the G.acc. refers to global accuracy, C.acc to class accuracy and F1 to the F1-score.
+
+The baseline is construced by predicting most prevalent class.
+USC is the first work on the dataset from Universidad de Catarina \cite{brazil} and Cellari is the work from the project supervisor \url{https://cellari.io}.
+Note that we don't have access to all accuracy measures for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as the one used for this project.
 
 \begin{table}[!htb]
 	\centering
@@ -278,7 +284,7 @@ A visualization of the reconstruction technique can be seen in appendix \ref{rec
 		\textbf{Train results} & & & & \\
 		\toprule
 		Method  &  G.acc.  &  C.acc.  &  Mean IoU  &  F1 \\ \midrule
-		Baseline  &  0.91  &  0.33  &  n/a  &  0.32 \\
+		Baseline  &  0.91  &  0.33  &  0.30  &  0.32 \\
 		\textbf{Main SegNet}  &  0.97  &  0.90  &  0.80  &  0.88 \\
 		Unweighted loss   &  0.96  &  0.71  &  0.66  &  0.78 \\
 		\midrule 
@@ -294,7 +300,7 @@ A visualization of the reconstruction technique can be seen in appendix \ref{rec
 		\textbf{Test results} & & & & \\
 		\toprule
 		Method  &  G.acc.  &  C.acc.  &  Mean IoU  &  F1 \\ \midrule
-		Baseline  &  0.94  &  0.33  &  n/a  &  0.32 \\
+		Baseline  &  0.94  &  0.33  &  0.31  &  0.32 \\
 		\textbf{Main SegNet}  &  0.98  &  0.86  &  0.75  & \textbf{ 0.85} \\
 		Unweighted loss  &  0.97  &  0.61  &  0.57  &  0.69 \\
 		\midrule
@@ -307,15 +313,10 @@ A visualization of the reconstruction technique can be seen in appendix \ref{rec
 		\bottomrule
 	\end{tabular}
 \end{table}
-\noindent Above, the G.acc. refers to global accuracy, C.acc to class accuracy and F1 to the F1-score.
-\noindent
-The baseline is construced by predicting most prevalent class.
-USC is the first work on the dataset from Universidad de Catarina \cite{brazil} and Cellari is the work from the project supervisor \url{https://cellari.io}.
-Note that we don't have access to all accuracy measures for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as the one used for this project.
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.9\linewidth]{../../poster/loss}
-	\caption{The loss curve of the main SegNet implementation on the Brazil dataset with the blue curve corresponding to training loss and the red corresponding to validation loss. Both loss values are computed after each epoch and in {evaluation mode} (without the usual effect of Dropout and Batch Normalization). Note the low degree of overfitting and the relatively stable convergence. }
+	\includegraphics[width=0.9\linewidth]{loss}
+	\caption{The loss curve of the main SegNet implementation on the Brazil dataset with the blue curve corresponding to training loss and the red corresponding to validation loss. Both loss values are computed after each epoch and in {evaluation mode} (without the usual effect of dropout and batch normalization). Note the low degree of overfitting and the relatively stable convergence. }
 	\label{fig:loss}
 \end{figure}
 
@@ -385,7 +386,7 @@ The main performance benchmark for this test of the SegNet implementation is the
 This score is seen as acceptable as it reaches a score which generally seen as high for image segmentation where human agreement of segmentation is often limited \cite{eval}.  It also clearly outperforms the baseline score of 0.32 but fails to reach the performance of other Deep Neural Networks: The Cellari DNN and the Universidad de Catarina implementations are 3-11 \% points higher respectively. 
 
 These differences can be due to data augmentation practises and hyper parameter optimization as the hyper parameters for these implementations could not be accessed.
-For data augmentation, this project chose to use flipping and random cropping heavily and the forceful croppings from 512x512 to 350x350 (effectively halving the number of pixels for each epoch) might have limited the learning of the model as less data was accessible for each parameter update. 
+For data augmentation, this project chose to use flipping and random cropping heavily and the forceful croppings from $ 512\times 512 $ to $ 350\times 350 $ (effectively halving the number of pixels for each epoch) might have limited the learning of the model as less data was accessible for each parameter update. 
 
 The motivation for this data augmentation choice was mainly because of computational limits in training but it also resulted in no discernable trace of overfitting as can be seen from figure \ref{fig:loss} and the minor differences in train and the limited differences in test and train results.
 
@@ -396,21 +397,19 @@ This indicates that controlling the size of random croppings is another regulari
 	\caption{An example of predictions. The true image (left) has a large portion of weeds (yellow) in the bottom and some crops (green) in the top as can be seen in the biologist ground truth (middle). The SegNet model recreates this test image well (right) but has some noise in the bulk of weeds and connects patches of plants too often. }
 	\label{fig:reconst}
 \end{figure}
-
 \noindent
 The test of the \textbf{loss function} gives clear results: The difference of 0.16 in test F1 score is assumed to be significant and the results for the unweighted cross entropy loss functions seem to fit the expected:
 There is virtually no difference in the global accuracy -- for which the simple loss function optimizes -- showing that learning has occurred.
 The large differences in the class-balanced accuracy measures indicate that, when all classes are of importance, the frequency weighted cross entropy loss should be used  for unbalanced data.
 \\
 \\
-The test of the performance of the same, main SegNet model on the small, novel \textbf{corn field data} set gives disappointing results: Only a test F1 score of 0.34 which outperforms the baseline but tells a story of overfitting with a train F1 of 0.79 on this small dataset of 20 512x512 train images.
+The test of the performance of the same, main SegNet model on the small, novel \textbf{corn field data} set gives disappointing results: Only a test F1 score of 0.34 which outperforms the baseline but tells a story of overfitting with a train F1 of 0.79 on this small dataset of 20 $ 512\times 512  $ train images.
  The data augmentation technique of heavy random croppings does not have the same regularizing effect on such a limited dataset. 
 Another problem might be that the cornfield data has a much nearer zoom level than the main sugar cane field.
-This might not fit well with the model's field of view which is partially a product of the choice of kernel size of 3x3, max pool of 2x2 and other hyper parameters. An examples of the images of the cornfield can be seen in the appendix in figure \ref{fig:corn} and can be compared to the left image in figure \ref{fig:reconst}.
+This might not fit well with the model's field of view which is partially a product of the choice of kernel size of $ 3\times 3 $, max pool of $ 2\times 2 $ and other hyper parameters. An examples of the images of the cornfield can be seen in the appendix in figure \ref{fig:corn} and can be compared to the left image in figure \ref{fig:reconst}.
 \subsection{Comparison of Image Segmentation Deep Models}
 In the field of image segmentation there are several different neural network architectures that excel in different types of problems. Among the most acknowledged architectures are U-net, DeepLabv1, DeconvNet and FCN. 
 All of these networks differ in several ways and it is important to emphasize that each network is designed to excel in a specific branch of image segmentation. U-net is as an example designed for medical image segmentation, whereas SegNet is designed such that it can be used in embedded systems such as autonomous vehicles. Each branch of problems has its own challenges and limitations. Therefore it is necessary to apply problem-specific methods to optimally segment the images. 
-
 
 As mentioned earlier the purpose of SegNet is to be efficient in inference time and memory-wise, such that it can be used in embedded systems. And these two aspects are the ones we are interested in comparing SegNet and the other architectures. 
 SegNet and its competitors have a quite similar performance in terms of accuracy on both road map scenes and the benchmark dataset known as SUN RGB-D, which is an indoor scene segmentation challenge \cite{seg}. 
@@ -436,10 +435,9 @@ The neural network implemented goes under the name SegNet, and it has been desig
 The architecture consists of an encoder and a corresponding decoder network and ends with a pixel-wise classification layer. 
 The encoder extracts local information which is passed on to the decoder which upsamples to the classifications using the maximum pooling indices from the encoder layers thus resulting in a memory efficient model suitable for drone imaging.
 
-The results show that SegNet is effective on the Brazil sugar cane dataset with an F1-score of 85\% though other implementations superseded this, suggesting that further hyper parameter optimization and  data augmentation techniques are to be explored. It was noted that the model generalized well to the testing data, probably due to the data augmentation, but that differing conditions of new data affects generalizability.
+The results show that SegNet is effective on the Brazil sugar cane dataset with an F1-score of 85\ \% though other implementations superseded this, suggesting that further hyper parameter optimization and  data augmentation techniques are to be explored. It was noted that the model generalized well to the testing data, probably due to the data augmentation, but that differing conditions of new data affects generalizability.
 
-
-It was learned that adressing class imbalance between the \textit{dirt} class and weed and crops by weighting the cross entropy loss was important for high performance and that this Deep Learning model required more than the 20 images from the corn dataset to give accurate results.
+It was learned that adressing class imbalance between the soil class and weed and crops by weighting the cross entropy loss was important for high performance and that this Deep Learning model required more than the 20 images from the corn dataset to give accurate results.
 
 In general, SegNet is seen as a promising model for precision agriculture  as long as issues as overfitting and class imbalance are suitably adressed. 
 \newpage
