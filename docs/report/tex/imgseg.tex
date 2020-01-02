@@ -13,6 +13,14 @@
 \toappear{02456 Deep Learning, DTU Compute, Autumn 2019}
 \newcommand{\pro}{\ensuremath{\ \%}}
 
+\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks%  save the current one
+	\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
+	\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t%
+	\do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D%
+	\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N%
+	\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X%
+	\do\Y\do\Z}
+
 % Example definitions.
 % --------------------
 \def\x{{\mathbf x}}
@@ -106,7 +114,7 @@ Instead, only a train/test split was used to evaluate the network using the exac
 
 \section{METHODS}
 \label{sec:format}
-\textit{All code is available at \url{https://github.com/sorenmulli/alpha_cellari_imageseg}}.
+\textit{All code is available at\\ \url{https://github.com/sorenmulli/alpha_cellari_imageseg}}.
 \subsection{Preprocessing and Data Augmentation}
 In order to use a deep neural network on the images and get the most effective learning out of the data, preprocessing is needed.
 First, the RGB values of the non-void pixels of the aerial image are standardized to zero mean and one standard deviation, and a matrix is used to represent the biologists' ground truth.
@@ -297,7 +305,7 @@ In the procedure of joining the enlarged images they are cropped again, to avoid
 \noindent Above, the G.acc. refers to global accuracy, C.acc to class accuracy and F1 to the F1-score.
 
 The baseline is construced by predicting most prevalent class.
-USC is the first work on the data set from Universidad de Catarina \cite{brazil} and Cellari is the work from the project supervisor \url{cellari.io}.
+USC is the first work on the data set from Universidad de Catarina \cite{brazil} and Cellari is the work from the project supervisor \url{https://cellari.io}.
 Note that we don't have access to all accuracy measures for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as the one used for this project.
 \begin{figure}[!htb]
 	\centering
