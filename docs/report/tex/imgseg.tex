@@ -134,12 +134,12 @@ Here, we ended up with 20 train and 4 test images.
 %
 The model used for this task is the Deep Neural Network SegNet which is built for Image Segmentation \cite{seg}.
 The SegNet model architecture utilizes convolutional neural networks (CNN). 
-CNN's work by convolving over an image with learned kernels which should correspond to features that are characteristic for the task.
+CNN's work by convolving over an image with learned kernels which should correspond to features that are characteristic for the objects.
 The kernel size, stride and padding are all adjustable parameters that help to fit the kernel to a specific image dimension or, as in the case of SegNet, keep the dimensions of the image constant. 
 
 
 %Encoder / Decoder  
-SegNet's model architecture has an encoder-decoder structure. The encoder creates dense feature maps with the most vital information and by using max pooling layers achieves translational invariance over small spatial shift in the incoming image, and the decoder learns to upsample and seperate the classes.
+SegNet's model architecture has an encoder-decoder structure. The encoder creates dense feature maps with the most vital information and by using max pooling layers achieves translational invariance over small spatial shift in the incoming image, and the decoder learns to upsample and separate the classes.
 The model consists of a total of ten blocks which either have two or three convolutional layers. Encoder blocks ends with a max-pooling layer whereas decoder blocks starts with an upsampling layer also called  un-pooling.
 Every encoder and decoder block has applied Dropout for regularization, Batch Normalization for normalization of the activations, ReLU for non-linearity and Max Pooling for translational invariance.
 The last layer is a softmax layer, which allows for probabilistic predictions from the model and evaluation of these. The dimensions of the encoder and decoder blocks are equal and mirrored. Thus, the input and output dimensions are the same as is needed for image segmentation where each pixel is to be classified.
