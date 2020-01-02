@@ -12,7 +12,9 @@
 \usepackage{caption}
 \toappear{02456 Deep Learning, DTU Compute, Autumn 2019}
 \newcommand{\pro}{\ensuremath{\ \%}}
+
 \usepackage{endnotes}
+\let\footnote=\endnote
 
 \expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks%  save the current one
 	\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
@@ -99,7 +101,9 @@ In computer vision, this is particularly challenging as photographic data has a 
 In image segmentation, this problem of robust, generalizable models can be even more difficult as the classes that are to be predicted often have very different frequencies of occurence: Some -- often background classes like soil in this task -- are very prevalent while other classes appear rarely among the pixels but are still important to the task. 
 This imbalance must be addressed in the training and evaluation for effective segmentation also for this task which contains 3 classes: weeds, crops, and soil.
 \subsection{The Data: Brazilian Sugar Canes and Danish Corn}
-The primary dataset consists of two large, high resolution orthomosaic RGB images of a Brazilian sugar cane field\(^\text{Note 1}\) \cite{brazil}.
+The primary dataset consists of two large, high resolution orthomosaic RGB images of a Brazilian sugar cane field\footnote{URL's from where the datasets were downloaded:
+		Aerial image:\url{ http://www.lapix.ufsc.br/wp-content/uploads/2019/05/sugarcane2.png}
+		Ground truth:\url{ http://www.lapix.ufsc.br/wp-content/uploads/2019/05/crop6GT.png}} \cite{brazil}.
 The first image consists of several drone images stitched together, with the second image of the same size being the manually labelled human ground truth, labelled by an expert biologist.
 The three classes each have a corresponding colour -- crop rows are green, weeds are yellow, and soil is red.
 Void pixels (not part of the field) are black.
@@ -427,7 +431,7 @@ The architecture of SegNet allows for an easy and fast end to end training of th
 
 For the main implementation trained on the Brazil Sugar Cane dataset, there was only access to a single field image, which is not representative of similar fields under different circumstances such as lighting, type of crop and season. The best way of increasing the robustness is to expand the dataset, but another cheaper method is by using different augmentation techniques. There exits a vast amount of different techniques and many of them are problem-specific. 
 
-It must also be noted that the resulting inference (the entire inference is added in figure \ref{fig:inf} in the appendix) might be very usable for precision agriculture as it can give precise local information about density of crops and weeds but for other problems such as medical imaging -- where boundary detail is crucial for segmenting different objects of the same class -- the model needs extension to achieve accuracy.  Current, commercial implementations of image segmentation for precision agriculture (such as the start-up \textit{taranis}\(^\text{Note 2}\)) exist and use similar deep learning techniques \cite{brazil}.
+It must also be noted that the resulting inference (the entire inference is added in figure \ref{fig:inf} in the appendix) might be very usable for precision agriculture as it can give precise local information about density of crops and weeds but for other problems such as medical imaging -- where boundary detail is crucial for segmenting different objects of the same class -- the model needs extension to achieve accuracy.  Current, commercial implementations of image segmentation for precision agriculture (such as the start-up \textit{taranis}\footnote{From \url{http://www.taranis.ag}, 2/01-20: "Taranis uses sophisticated computer vision, data science and deep learning algorithms to effectively monitor fields (...) and can detect when a weed emerges." }) exist and use similar deep learning techniques \cite{brazil}.
 %\vspace*{-.5cm}
 \subsection{Conclusion}
 The purpose of this project has been to build an efficient neural network architecture for semantic pixel-wise segmentation on a field. 
@@ -447,14 +451,15 @@ In general, SegNet is seen as a promising model for precision agriculture  as lo
 \bibliographystyle{IEEEbib}
 \bibliography{refs}
 
+\theendnotes
 \appendix
+
 \section{Figures}
-\footnotetext[1]{Aerial image: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/sugarcane2.png\\
-		Ground truth: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/crop6GT.png}
-\footnotetext[2]{From \url{http://www.taranis.ag}, 2/01-20: "Taranis uses sophisticated computer vision, data science and deep learning algorithms to effectively monitor fields (...) and can detect when a weed emerges."  }
+
+
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{"reconstruction DL"}
+	\includegraphics[width=0.6\linewidth]{"reconstruction DL"}
 	\caption{Illustration of an example of reconstruction of the smaller inferences into a unified field prediction by padding extra boundary data for inference and removing it for unification. This results in a smooth segmentation.}
 	\label{reconstruction_technique}
 \end{figure}
