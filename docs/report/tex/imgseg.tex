@@ -172,26 +172,26 @@ It has been argued and exemplified in earlier tests, that storing the max poolin
 
 
 
-\subsection{Regularization}
+\subsection{Regularization: Dropout and Batch Normalization}
 Because deep neural networks are such highly flexible models, regularization is necessary on top of the data augmentation to further reduce overfitting.
 This is done in two ways.
 
-Dropout at 10\pro\ is used after each blue block in the network (see Fig. \ref{fig:arch}).
-This randomly shuts off nodes during training leading to node redundancy and variability, as the same input will vary somewhat in its output, which learns the network to generalize better.
-We experimented with higher dropout, but found that too much would significantly reduce learning.
+Dropout at 10\pro\ is used after each blue block in the network (see Fig. \ref{fig:encoder-decoder2}).
+This procedure randomly shuts off nodes during training leading to node redundancy and variability, as the same input will vary somewhat in its output, which forces the network to be more robust.
+We experimented with higher dropout, but found that too high values would significantly reduce learning.
 
 Batch normalization is applied after each dropout.
 This standardizes the activations, keeping them close to zero.
 As a result, the weights and biases also stay close to zero, which reduces the flexibility of the model, leading to less overfitting.
-Batch normalization also has several other benefits, such as reducing the vanishing gradient problem and allowing for a higher learning rate and thus faster convergence time. \cite{bn}
+Batch normalization also has several other benefits, such as reducing the vanishing gradient problem and allowing for a higher learning rate and thus faster convergence time \cite{bn}. 
 
 \subsection{Training: Learning from Quality over Quantity}
-For training, finding the optimal weights of the network, the widely used Adam optimizer  was implemented because the addition of momentum to the efficient and effective Stochatic Gradient Descent algorithm is shown to giver faster convergence in a wide range of computer vision tasks \cite{Adam}. The training was done in 3000 epochs each consisting of mini batches of size 3.
+For training -- finding the optimal weights of the network -- the widely used Adam optimizer  was implemented because the addition of momentum to the efficient and effective Stochatic Gradient Descent algorithm is shown to giver faster convergence in a wide range of computer vision tasks \cite{Adam}. The training was done in 3000 epochs each consisting of mini batches of size 3.
 
-A more interesting choice was the loss function. It was clear that 3-class cross entropy should be used as this function, for a Softmax network such as SegNet, can be seen as the following the maximum likelihood principle and implementing minus log likelihood loss. The direct implementation of this, however, failed to consider a deep issue in Image Segmentation which had considerable effect on this limited data set: \textit{class imbalance}. 
-In this data set, there is \(\sim 93 \%\) pixels belonging to the \textit{dirt}-class which arguably is the least interesting and initial tests saw the network behave too much as a baseline; simple features in early layers which classified almost everything as dirt were not penalized enough and learning was not stable. 
+A less obvious choice was the loss function. It was clear that 3-class cross entropy should be used for criterion as this, for a Softmax network such as SegNet, can be seen as following the maximum likelihood principle and implementing minus logarithmic likelihood loss. The direct implementation of this, however, failed to consider a deep issue in Image Segmentation which had considerable effect on this limited data set: \textit{class imbalance}. 
+In the main data set, there is \(\sim 93 \%\) pixels belonging to the \textit{dirt}-class which arguably is the least interesting and initial tests saw the network behave too much as a baseline; simple features in early layers which classified almost everything as dirt were not penalized enough and learning was not stable. 
 
-As resampling an image data set is computationally expensive and it was desired that the network learned to focus on important pixels, it was chosen the main training experiment of this report should use \textit{weighted cross entropy} where each class is weighted by \(1-\nu\); where \(\nu\) is its frequency thus focusing more on the classes crops and weeds than in the vanilla cross entropy. The implemented loss of \(N\) pixels in a one-hot encoded \((N \times  3)\) output matrix \(\mathbf X^\text{pred}\) with the true classes \(\mathbf c\) was then:
+As resampling an image data set is computationally expensive and it was desired that the network learned to focus on important pixels, it was chosen the main training experiment of this report should use \textit{weighted cross entropy} where each class is weighted by \(w_i = 1-\nu_i\) where \(\nu_i\) is the frequency of class \textit{i} thus focusing more on the classes crops and weeds than in the vanilla cross entropy. The implemented loss of \(N\) pixels in a one-hot encoded \((N \times  3)\) output matrix \(\mathbf X^\text{pred}\) with the true classes \(\mathbf c\) was then:
 \[
 L = \underbrace{
 	\vphantom{\sum_{i}}
@@ -213,11 +213,11 @@ _{\mathclap{\text{Class weight}}}
 \] 
 To test the importance of this frequency balancing for this data set, another training experiment was set up without weighting of the cross entropy loss.
 \subsection{Evaluation Metrics: Finding the Important Story}
-In the compared image segmentation literature no single accuracy measure can be described  as the canonical metric resulting in a number of metrics being compared \cite{eval, Metric}.  A collection of different metrics are usable as the performance difference on global and local scale is relevant. 
+In the compared image segmentation literature no single accuracy measure can be described  as the canonical metric resulting in a number of metrics being compared \cite{eval, Metric}.  A collection of different metrics are usable as the performance of the image segmentation both the global and the local scale is relevant. 
 %	\item Different metrics important in different fields.
 Four simple accuracy measures are used here to mirror the SegNet paper \cite{seg} though more complex measures which fit better with human evaluation exist \cite{eval}. 
 
-The simple global accuracy, the frequency of correct classifications, is not the most meaningful measure for class imbalanced data sets such as this (where the baseline achieves \(>90\%\)) but is in the literature noted to be important for a smooth classification \cite{seg}. Another simple measure is the mean of the accuracies of model on the three classes. This measure is still a naïve accuracy measure but is the metric which is being optimized for in the weighted cross entropy loss. 
+The simple global accuracy, the frequency of correct classifications, is not the most meaningful measure for class imbalanced data sets such as this (the baseline achieves \(>90\%\) on this metric) but is in the literature noted to be important for a smooth classification \cite{seg}. Another simple measure is the mean of the accuracies of model on the three classes. This measure is still a naïve accuracy measure but is the metric which is being optimized for in the weighted cross entropy loss. 
 
 The metric which is being seen as the main performance metric is the F1-score: The harmonic mean of precision of recall. This is used for comparison to other groups with same project and because this metric penalizes false positives and gives less credit to true negatives thus being better for unbalanced classes \cite{Metric}. A related score is the Mean Intersect over Union (MIoU), also known as the Jaccard Index, which penalizes false positives harder and is found to be better correlated to human evaluation though only \(\sim 0.5\) \cite{eval}. 
 
@@ -225,14 +225,16 @@ Both F1 and MIoU are calculated for each of the three classes and are then avera
 
 To estimate generalization performance, the models are compared by their performance on the \textit{test data set} which is kept separate from the training and validation data and is pre-divided for both data sets consisting of approximately \( 20\%\) of the images.  It is noted that this simple hold out evaluation method does not claim to give an accurate estimate of generalization error on \textit{any} data set but can statistically only be seen as an evaluation of the performance on the used data sets. 
 
-\subsection{Experiments and Reconstruction}
+\subsection{Three Experiments and Their Hyper Parameters}
 When training the network, we used the following hyperparameters: Batch size of 3, dropout of 10\pro, and a learning rate of $ 1.5\cdot 10^{-4} $ with the ADAM optimization algorithm.
-For the convolutional layers, kernel size was set to $ 3\times 3 $ and stride to $ 1 $, as deeper network structures tend to learn to better and faster with smaller kernels.
+For the convolutional layers, kernel size was set to $ 3\times 3 $ and stride to $ 1 $, as deeper network structures with smaller kernels tend to learn to better and faster.
 This is because the receptive field is the same as larger kernels in shallower networks, but the multiple layers allow for learning more complex structures.
 In the encoder part, the first convolutional layer increased the number of channels to 64.
 Thereafter, the first convolutional layer in each block doubled the number of channels, ending at 512.
 In the max pooling layers, we used a $ 2\times 2 $ with a stride of 2, cutting the size of the feature maps to a quarter each time.
 The decoder part exactly mirrored this structure.
+
+Three experiments with these hyper parameters were run: One called the \textit{main} experiment was run using the Brazil Sugar Cane data set and the class frequency weighted cross entropy loss.  The second was run with the same data and hyper parameters but with vanilla cross entropy loss to test the effect of class frequency balancing. The third was run with the same hyper parameters and class frequency weighting but using the smaller Danish Corn data set.
 
 The training can be recreated using the Jupyter Notebook at \texttt{src/image-segmentation.ipynb} folder in the Github repository.
 Because training the network takes close to 30 GB of VRAM, we have implemented a simpler version of SegNet with fewer layers that takes significantly less memory to train.
@@ -240,7 +242,10 @@ This is controlled using the \texttt{use\_simple} variable, which is set to \tex
 
 
 \subsection{Unification of Cropped Image Predictions}
-In a real-world application of field classification a farmer would want a complete and precise segmentation of his/her whole field at once. such that fertilizer and pesticides can be distributed accordingly. To accomplish this, a reconstruction of the smaller image inferences is necessary. The most straight forward method of combining the smaller images is by lining them up next to each other. This reconstruction method results in a very rough transition between the smaller inferences. An illustration of this can be seen in the left side of figure \ref{fig:earlylatereconstruction}.
+In a real-world application of field classification a farmer would want a complete and precise segmentation of the whole field at once such that fertilizer and pesticides can be distributed accordingly.
+To accomplish this, a reconstruction of the 112 smaller image inferences into a large image is necessary.
+The most straight forward method of combining the smaller images is by lining them up next to each other.
+This reconstruction method results in a very rough transition between the smaller inferences. An illustration of this can be seen in the left side of figure \ref{fig:earlylatereconstruction}.
 The blocky nature of the field prediction is caused by a lack of information from neighbouring pixel, when inference is performed near the borders of an image. 
 To solve this problem, the cropping size of the field into smaller images is increased and some overlap is added. This corresponds to adding padding pixels from the original field.
 In the procedure of joining the enlarged images they are cropped again, to avoid the border areas. At the cost of computational efficiency more information is available near the borders and a smooth transition between the smaller inferences can be achieved. This can be seen in the right side of figure \ref{fig:earlylatereconstruction}. A visualization of the reconstruction technique can be seen in appendix \ref{reconstruction_technique}.
@@ -250,7 +255,7 @@ In the procedure of joining the enlarged images they are cropped again, to avoid
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\linewidth]{early_late_reconstruction2}
-	\caption{\textbf{Left:} Smaller inferences put next to eachother without use of reconstruction techniques. \textbf{Right:} Reconstruction with padding and overlap between smaller inferences.}
+	\caption{\textbf{Left:} Smaller inferences put next to eachother without use of reconstruction techniques. \textbf{Right:} Reconstruction with padding and overlap between smaller inferences. Note that the border between the four images is visible in the left image but not in the right.}
 	\label{fig:earlylatereconstruction}
 \end{figure}
 
@@ -268,11 +273,11 @@ In the procedure of joining the enlarged images they are cropped again, to avoid
 		\toprule
 		Method  &  G.acc.  &  C.acc.  &  Mean IoU  &  F1 \\ \midrule
 		Baseline  &  0.91  &  0.33  &  n/a  &  0.32 \\
-		\textbf{Standard}  &  0.97  &  0.90  &  0.80  &  0.88 \\
-		Simple loss   &  0.96  &  0.71  &  0.66  &  0.78 \\
+		\textbf{Main SegNet}  &  0.97  &  0.90  &  0.80  &  0.88 \\
+		Unweighted loss   &  0.96  &  0.71  &  0.66  &  0.78 \\
 		\midrule 
 		Corn Baseline  &  0.39  &  0.33  &  0.13  &  0.19 \\
-		Corn Results  &  0.79  &  0.78  &  0.65  &  0.79 \\
+		Corn SegNet  &  0.79  &  0.78  &  0.65  &  0.79 \\
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -284,25 +289,27 @@ In the procedure of joining the enlarged images they are cropped again, to avoid
 		\toprule
 		Method  &  G.acc.  &  C.acc.  &  Mean IoU  &  F1 \\ \midrule
 		Baseline  &  0.94  &  0.33  &  n/a  &  0.32 \\
-		\textbf{Standard}  &  0.98  &  0.86  &  0.75  & \textbf{ 0.85} \\
-		Simple loss  &  0.97  &  0.61  &  0.57  &  0.69 \\
+		\textbf{Main SegNet}  &  0.98  &  0.86  &  0.75  & \textbf{ 0.85} \\
+		Unweighted loss  &  0.97  &  0.61  &  0.57  &  0.69 \\
 		\midrule
 		USC SegNet  &  n/a  &  n/a  &  0.79  &  0.96 \\
 		USC UNet  &  n/a  &  n/a  &  0.75  &  0.93 \\
 		Cellari DNN  &  n/a  &  n/a  &  n/a  &  0.88 \\
 		\midrule 
 		Corn Baseline  &  0.32  &  0.33  &  0.11  &  0.16 \\
-		Corn Results  &  0.35  &  0.36  &  0.21  &  0.34 \\
+		Corn SegNet   &  0.35  &  0.36  &  0.21  &  0.34 \\
 		\bottomrule
 	\end{tabular}
 \end{table}
-\noindent Above, the G.acc. refers to global accuracy, C.acc to class accuracy and B.F1 to the F1-score.
-USC is the first work on the data set \cite{brazil} and Cellari is the work from the procet supervisor \url{cellari.io}.
-Note that we don't have access for full results for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as the one used for this project.
+\noindent Above, the G.acc. refers to global accuracy, C.acc to class accuracy and F1 to the F1-score.
+
+The baseline is construced by predicting most prevalent class.
+USC is the first work on the data set from Universidad de Catarina \cite{brazil} and Cellari is the work from the project supervisor \url{cellari.io}.
+Note that we don't have access to all accuracy measures for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as the one used for this project.
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\linewidth]{../../poster/loss}
-	\caption{}
+	\caption{The loss curve of the main SegNet implementation on the Brtazil data set with the blue curve corresponding to training loss and the red corresponding to validation loss. Both loss values are computed after each epoch and in {evaluation mode} (without the usual effect of Dropout and Batch Normalization). Note the low degree of overfitting and the relatively stable convergence. }
 	\label{fig:loss}
 \end{figure}
 
@@ -369,14 +376,14 @@ Note that we don't have access for full results for other implementations and, i
 
 \subsection{Performance of Networks: Loss and Size matter}
 The main performance benchmark for this test of the SegNet implementation is the test F1-score on the Brazil sugar cane data set: \textbf{85\%}.
-This score is seen as acceptable as it reaches a score which generally seen as high for image segmentation where human agreement of segmentation is often limited \cite{eval}.  It also clearly outperforms the baseline score of 0.32\% but fails to reach the performance of other Deep Neural Networks: The Cellari DNN and the Universidad de Catarina implementations are 3-11 \% points higher. 
+This score is seen as acceptable as it reaches a score which generally seen as high for image segmentation where human agreement of segmentation is often limited \cite{eval}.  It also clearly outperforms the baseline score of 0.32 but fails to reach the performance of other Deep Neural Networks: The Cellari DNN and the Universidad de Catarina implementations are 3-11 \% points higher. 
 
 These differences can be due to data augmentation practises and hyper parameter optimization as the hyper parameters for these implementations could not be accessed.
-For data augmentation, this project chose to use flipping and random cropping heavily and the forceful croppings from 512x512 to 350x350 (halving the number of pixels) might have limited the learning of the model as less data was accessible for each parameter update. 
+For data augmentation, this project chose to use flipping and random cropping heavily and the forceful croppings from 512x512 to 350x350 (effectively halving the number of pixels for each epoch) might have limited the learning of the model as less data was accessible for each parameter update. 
 
-The motivation for this data augmentation choice was mainly because of computational limits in training but it also resulted in no discernable trace of overfitting as can be seen from figure \eqref{fig:loss} and the minor differences in train and the limited differences in test and train results.
+The motivation for this data augmentation choice was mainly because of computational limits in training but it also resulted in no discernable trace of overfitting as can be seen from figure \ref{fig:loss} and the minor differences in train and the limited differences in test and train results.
 
-This indicates that controlling the size of random croppings is another regularization parameter usable for balancing the bias/variance-tradeoff of image segmentation tasks. For MIoU, the measure which is closest linked with human evaluation \cite{eval}, the differences between this reports main network and the other implementations more slight. 
+This indicates that controlling the size of random croppings is another regularization parameter usable for balancing the bias/variance-tradeoff of image segmentation tasks. For MIoU, the measure which is closest linked with human evaluation \cite{eval}, the differences between this reports' main network and the other implementations were more slight. 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{../../poster/reconst}
