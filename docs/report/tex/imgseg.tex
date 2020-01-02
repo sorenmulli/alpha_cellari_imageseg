@@ -69,32 +69,41 @@ It is found that using frequency weighted cross entropy loss for training is cru
 \end{abstract}
 %
 \begin{keywords}
-Machine learning, Deep learning, Image Segmentation, SegNet, Smart agriculture, Drone imaging
+Machine learning, Deep learning, Image Segmentation, SegNet, Smart agriculture, Drone imaging, Precision agriculture, Computer vision
 \end{keywords}
 %
 \section{Introduction}
 \label{sec:intro}
 
-\subsection{Motivation}
-Image segmentation and object classification have received a lot of attention in recent years. This is partly due to the wide array of possible applications and the recent interest in machine learning and, in particular, deep learning. One such important application is separating weeds, crops and dirt in aerial drone images of a field. Applying the SegNet architecture to this field of crop segmentation could allow for smart agriculture that circumvents the many laborious man-hours of manual classification. Using SegNet for this classification could also prove useful in terms of the computational efficiency, as this allows for end-to-end training and makes embedded systems, e.g. in drones, feasible.
+\subsection{Deep Learning and Precision Agriculture}
+Image segmentation and object classification have received a lot of attention in recent years
+This is partly due to the wide array of possible applications and the recent interest in machine learning and, in particular, deep learning.
+One such important application is separating weeds, crops and dirt in aerial drone images of a field. Applying the SegNet architecture to this field of crop segmentation could open up for for smart agriculture that allows a farmer to localize the use of fertilizer and pesticides with positive environmental and economic consequences.
+Using the deep learning architecture \textit{SegNet} for this classification could prove useful in terms of the computational efficiency, as this more memory efficient model allows for end-to-end training and makes embedded systems, e.g. in drones, feasible.
 
-\subsection{Dataset and Preprocessing}
-The primary dataset in question consists of two large, high resolution orthomosaic RGB images of a sugar cane field\footnote{Aerial image: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/sugarcane2.png\\
-Ground truth: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/crop6GT.png}.
+\subsection{Challenges of Image Segmentation}
+Accurate image segmentation has been pursued for a number of computer vision, tasks including medical images and autonomous vehicles \cite{seg}.
+Here, the typical problems include the classic deep learning challenge of generalizability as the training the deep networks must converge to a  model which is robust to the variance in the population of images.
+In computer vision, this is particulary challenging as photographic data has a notorious \textit{long tail} of rare images in the image population which challenges the generalizability model and must be addressed by regularization in multiple forms \cite{long}.   
+
+In image segmentation, this problem of robust, generalizable models can be even more difficult as the classes that are to be predicted often have very different frequencies of occurence: Some -- often background classes like \textit{dirt} in this task -- are very prevalent while other classes appear rarely among the pixels but are still important to the task. 
+This imbalance must be addressed in the training and evaluation for effective segmentation.
+
+\subsection{The Data: Brazilian Sugar Canes and Danish Corn}
+The primary dataset in question consists of two large, high resolution orthomosaic RGB images of a brazilian sugar cane field\footnote{Aerial image: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/sugarcane2.png\\
+Ground truth: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/crop6GT.png} \cite{brazil}.
 The first image consists of several drone images stitched together, with the second image of the same size being the manually labelled human ground truth, labelled by an expert biologist.
 The three classes each have a corresponding colour -- crop rows are green, weeds are yellow, and soil is red.
-Void pixels are black.
+Void pixels (not part of the field) are black.
 
-We also used second, smaller dataset from a corn field.
-We did not use this for hyperparameter optimization or architechtural decisions like this primary dataset.
-Instead, only a train/test split was used to evaluate the network using the exact same hyperparameters.
-We did not perform any hyperparameter optimization or architechtural decisions based on this dataset.
-Instead, only a train/test split was used to evaluate the network using exact same hyperparameters.
-
-\subsection{Goal and Application}
+We also used a second, smaller data set from a danish corn field. This consisted already cut-out images: 20 for training and 4 for testing.
+We did not use this for hyper parameter optimization or architectural decisions like this primary dataset.
+Instead, only a train/test split was used to evaluate the network using the exact same hyper parameters. 
 
 
-In the following segments of this paper, the relevant methods, results and discussion will be covered; In section 2, methods such as regularization, data augmentation, metrics and chosen loss function are described. The results are tabulated in section 3. Section 4 is a discussion of the results and accuracy of the reconstruction, a comparison to other similar methods as well as a perspective on the problem. The relevant references are included in section 5.
+
+
+%In the following segments of this paper, the relevant methods, results and discussion will be covered; In section 2, methods such as regularization, data augmentation, metrics and chosen loss function are described. The results are tabulated in section 3. Section 4 is a discussion of the results and accuracy of the reconstruction, a comparison to other similar methods as well as a perspective on the problem. The relevant references are included in section 5.
 
 \section{METHODS}
 \label{sec:format}
