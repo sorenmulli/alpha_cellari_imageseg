@@ -279,7 +279,7 @@ A visualization of the reconstruction technique can be seen in appendix \ref{rec
 In the following, the G.acc. refers to global accuracy, C.acc to class accuracy and F1 to the F1-score.
 
 The baseline is construced by predicting most prevalent class.
-USC is the first work on the dataset from Universidad de Catarina \cite{brazil} and Cellari is the work from the project supervisor \url{https://cellari.io}.
+USC is the first work on the dataset from Universidad de Catarina \cite{brazil} and Cellari is the work from the project supervisor \url{cellari.io}.
 Note that we don't have access to all accuracy measures for other implementations and, importantly, that the USC. implementations do not have the same train/test-split as the one used for this project.
 
 \begin{table}[!htb]
@@ -320,7 +320,7 @@ Note that we don't have access to all accuracy measures for other implementation
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\linewidth]{loss}
-	\caption{The loss curve of the main SegNet implementation on the Brazil dataset with the blue curve corresponding to training loss and the red corresponding to validation loss. Both loss values are computed after each epoch and in {evaluation mode} (without the usual effect of dropout and batch normalization). Note the low degree of overfitting and the relatively stable convergence. }
+	\caption{The loss curve of the main SegNet implementation on the Brazil dataset with the blue curve corresponding to training loss and the red corresponding to validation loss. Both loss values are computed after 25 epochs and in {evaluation mode} (without the usual effect of dropout and batch normalization). Note the low degree of overfitting and the relatively stable convergence with some spikes that are probably due to the limited size of dataset and the fact that this evaluation loss is only computed for each 25'th epoch.}
 	\label{fig:loss}
 \end{figure}
 
