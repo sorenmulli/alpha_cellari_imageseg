@@ -6,7 +6,7 @@
 % --------------------------------------------------------------------------
 \documentclass{article}
 \usepackage{amsmath,graphicx,02460}
-\usepackage{url}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 \usepackage{mathtools}
 \usepackage{booktabs}
 \usepackage{caption}
@@ -106,7 +106,7 @@ Instead, only a train/test split was used to evaluate the network using the exac
 
 \section{METHODS}
 \label{sec:format}
-\textit{All code is available at \url{github.com/sorenmulli/alpha_cellari_imageseg}}.
+\textit{All code is available at \url{https://github.com/sorenmulli/alpha_cellari_imageseg}}.
 \subsection{Preprocessing and Data Augmentation}
 In order to use a deep neural network on the images and get the most effective learning out of the data, preprocessing is needed.
 First, the RGB values of the non-void pixels of the aerial image are standardized to zero mean and one standard deviation, and a matrix is used to represent the biologists' ground truth.
@@ -444,7 +444,7 @@ In general, SegNet is seen as a promising model for precision agriculture  as lo
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{"corn.JPG"}
+	\includegraphics[width=0.7\linewidth]{corn}
 	\caption{Example of a training image from the smaller Danish cornfield data set}
 	\label{fig:corn}
 \end{figure}
