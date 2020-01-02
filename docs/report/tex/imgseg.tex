@@ -228,13 +228,13 @@ To estimate generalization performance, the models are compared by their perform
 \subsection{Three Experiments and Their Hyper Parameters}
 When training the network, we used the following hyperparameters: Batch size of 3, dropout of 10\pro, and a learning rate of $ 1.5\cdot 10^{-4} $ with the ADAM optimization algorithm.
 For the convolutional layers, kernel size was set to $ 3\times 3 $ and stride to $ 1 $, as deeper network structures with smaller kernels tend to learn to better and faster.
-This is because the receptive field is the same as larger kernels in shallower networks, but the multiple layers allow for learning more complex structures.
+This is because the effective receptive field of smaller stacked kernels is the same as larger kernels in shallower networks, but the multiple stacked layers allow for learning more complex structures.
 In the encoder part, the first convolutional layer increased the number of channels to 64.
 Thereafter, the first convolutional layer in each block doubled the number of channels, ending at 512.
 In the max pooling layers, we used a $ 2\times 2 $ with a stride of 2, cutting the size of the feature maps to a quarter each time.
 The decoder part exactly mirrored this structure.
 
-Three experiments with these hyper parameters were run: One called the \textit{main} experiment was run using the Brazil Sugar Cane data set and the class frequency weighted cross entropy loss.  The second was run with the same data and hyper parameters but with vanilla cross entropy loss to test the effect of class frequency balancing. The third was run with the same hyper parameters and class frequency weighting but using the smaller Danish Corn data set.
+Three experiments with these hyperparameters were run: One called the \textit{main} experiment was run using the Brazil Sugar Cane data set and the class frequency weighted cross entropy loss.  The second was run with the same data and hyperparameters but with vanilla cross entropy loss to test the effect of class frequency balancing. The third was run with the same hyperparameters and class frequency weighting but using the smaller Danish Corn data set.
 
 The training can be recreated using the Jupyter Notebook at \texttt{src/image-segmentation.ipynb} folder in the Github repository.
 Because training the network takes close to 30 GB of VRAM, we have implemented a simpler version of SegNet with fewer layers that takes significantly less memory to train.
@@ -408,7 +408,7 @@ With respect to the architecture all of these networks have a general structure 
 All of the networks differ in decoding structure and techniques that are applied, and as a common denominator for FCN, DeconvNet and DeepLab-LargeFov they use nearly twice as much memory during inference. Among the heavy users of memory are the fully connected layers of the DeconvNet and FCN, and the full resolution feature maps that is used as skip connections in the U-Net. In comparison with the same 3 structures SegNet come in second only bested by DeepLab-LargeFOV with respect to inference time.
 
 
-The encoder part of the network has only 14.7 million parameters compared to partially fully connected structures that tend to have well over 100 million. \cite{seg}
+%The encoder part of the network has only 14.7 million parameters compared to partially fully connected structures that tend to have well over 100 million. \cite{seg}
 
 
 \subsection{Potential of SegNet}
