@@ -87,7 +87,7 @@ Here, the typical problems include the classic deep learning challenge of genera
 In computer vision, this is particulary challenging as photographic data has a notorious \textit{long tail} of rare images in the image population which challenges the generalizability model and must be addressed by regularization in multiple forms \cite{long}.   
 
 In image segmentation, this problem of robust, generalizable models can be even more difficult as the classes that are to be predicted often have very different frequencies of occurence: Some -- often background classes like \textit{dirt} in this task -- are very prevalent while other classes appear rarely among the pixels but are still important to the task. 
-This imbalance must be addressed in the training and evaluation for effective segmentation.
+This imbalance must be addressed in the training and evaluation for effective segmentation also for this task which contains 3 classes: \textit{weeds}, \textit{crops} and \textit{dirt}.
 
 \subsection{The Data: Brazilian Sugar Canes and Danish Corn}
 The primary dataset in question consists of two large, high resolution orthomosaic RGB images of a brazilian sugar cane field\footnote{Aerial image: http://www.lapix.ufsc.br/wp-content/uploads/2019/05\\/sugarcane2.png\\
@@ -107,11 +107,11 @@ Instead, only a train/test split was used to evaluate the network using the exac
 
 \section{METHODS}
 \label{sec:format}
-
+\textit{All code is available at \url{github.com/sorenmulli/alpha_cellari_imageseg}. To reproduce the main results, the Jupyter Notebook} \texttt{image-segmentation.ipynb} \textit{from the folder \texttt{/src} can be run.}
 \subsection{Preprocessing and Data Augmentation}
-In order to get the most out of the data, preprocessing is needed.
-First, the RGB values of the non-void pixels of the aerial image are standardized, and a matrix is used to represent the ground truth.
-Each entry corresponds to a pixel and contains a number 0-2 for the different classes or 3 for void.
+In order to use deep learning on the images and get the most effective learning out of the data, preprocessing is needed.
+First, the RGB values of the non-void pixels of the aerial image are standardized to zero mean and 1 standard deviation, and a matrix is used to represent the biologists' ground truth.
+This target matrix has Each entry corresponds to a pixel and contains a number 0-2 for the different classes or 3 for void.
 The images are then padded with black pixels and cropped into smaller $ 512\times 512 $ pixel images.
 Any of these images containing only black pixels are discarded, leaving a total of 108 pairs of aerial photo/ground truth images.
 These are then split into 69 training, 18 validation, and 25 test images.
