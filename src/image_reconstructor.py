@@ -112,7 +112,6 @@ class ImageReconstructor:
 
 		self.log("Determining classes and inserting colours...")
 		classes = np.argmax(output, axis=3)
-		print(classes)
 		reconst = np.zeros_like(output, dtype=np.uint8)
 		for i, class_ in enumerate(colours):
 			reconst[classes==i] = class_
