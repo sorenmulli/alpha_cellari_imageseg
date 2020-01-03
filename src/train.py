@@ -34,7 +34,7 @@ class Trainer:
 		self.log = logger
 
 	def model_trainer(self, architecture: dict, learning_rate: float, augmentations: AugmentationConfig, epochs: int,
-			batch_size: int, val_every: int = 1, with_plot: bool = True, with_accuracies_print: bool = False, save_every: int = 100):
+			batch_size: int, val_every: int = 1, with_loss = True, with_plot: bool = True, with_accuracies_print: bool = False, save_every: int = 100):
 		
 		augmenter = Augmenter(augment_cfg=augmentations)
 		data_loader = DataLoader(self.json_path, batch_size, augment = augmenter)
@@ -54,7 +54,7 @@ class Trainer:
 		)
 		optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
-#		self.log(f"Augmentations: {AugmentationConfig}")
+		self.log(f"Augmentations: {augmentations.__dict__}")
 		self.log(f"Criterion and optimizer: {criterion}\n{optimizer}")
 	
 		self.log(f"Train size: {len(data_loader.train_x)}\nEval size: {len(data_loader.val_x)}\nTest size: {len(data_loader.get_test()[0])}\n")
@@ -69,14 +69,13 @@ class Trainer:
 				self.log("Saving Network ...")
 				net.save(f"local_data/wip_model_epoch{epoch_idx}")
 
-			if epoch_idx % val_every == 0:
+			if epoch_idx % val_every == 0 and with_loss:
 				if len(self.cfg["val_idcs"]) != 0:
 					with torch.no_grad():
 						net.eval()
 
 						val_data, val_target = data_loader.get_validation()
 						val_output = net(val_data)
-
 						evalution_loss = criterion(val_output, val_target)
 						
 						full_eval_loss.append(float(evalution_loss))
@@ -84,7 +83,7 @@ class Trainer:
 						del val_target
 						self.log(f"Epoch {epoch_idx}: Evaluation loss: {float(evalution_loss)}")
 
-						#Overwrite name 
+						#Overwrite name
 						val_data, val_target = data_loader.train_x, data_loader.train_y
 						val_output = net(val_data)
 
@@ -97,10 +96,9 @@ class Trainer:
 						
 						val_iter.append(epoch_idx)
 
-						
 				if with_accuracies_print:
 					self.log("Accuracy measures: Global acc.: {G:.4}\nClass acc.: {C:.4}\nMean IoU.: {mIoU:.4}\nBound. F1: {BF:.4}\n".format(**accuracy_measures(val_target, val_output)))
-
+			
 			torch.cuda.empty_cache()
 			net.train()
 			for batch_data, batch_target in data_loader.generate_epoch():
@@ -113,7 +111,7 @@ class Trainer:
 				optimizer.step()
 				torch.cuda.empty_cache()		
 
-		if with_plot:
+		if with_plot and with_loss:
 			plt.figure(figsize=(19.2, 10.8))
 			plt.plot(val_iter, full_eval_loss, 'r', label="Validation loss")
 			plt.plot(val_iter, full_training_loss, 'b', label="Training loss")
@@ -137,6 +135,7 @@ if __name__ == "__main__":
 		"stride": 1,
 		"pool_dims": (2, 2),
 		"probs": 0.1,
+		"reduce_complexity": True
 	}
 
 	learning_rate = 1.5e-4
